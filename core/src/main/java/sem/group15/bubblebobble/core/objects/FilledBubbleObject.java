@@ -7,19 +7,19 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Created by TUDelft SID on 7-9-2015.
  */
-public class FilledBubble extends FloatingObject {
+public class FilledBubbleObject extends FloatingObject {
 
     protected float duration;
 
-    protected FilledBubble(Rectangle size, Texture texture, float xPosition, float yPosition) {
+    protected FilledBubbleObject(Rectangle size, Texture texture, float xPosition, float yPosition) {
         super(size, texture, xPosition, yPosition);
     }
 
 
     /**
-     * This updates the FilledBubble after a game loop has passed.
+     * This updates the FilledBubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
-     * The initial speed of the FilledBubble is FOR THE MOMENT 50.
+     * The initial speed of the FilledBubbleObject is FOR THE MOMENT 50.
      * @param elapsed
      */
     public  void update(float elapsed) {
@@ -37,8 +37,8 @@ public class FilledBubble extends FloatingObject {
     }
 
     /**
-     * This handles the collision for this FilledBubble. It should only be used to update this object, not the other.
-     * If the FilledBubble collides with an ImmutableObject, the y speed should change to 0 and the x speed should
+     * This handles the collision for this FilledBubbleObject. It should only be used to update this object, not the other.
+     * If the FilledBubbleObject collides with an ImmutableObject, the y speed should change to 0 and the x speed should
      * change to either the right or left.
      * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
      *                 GameObject.)
