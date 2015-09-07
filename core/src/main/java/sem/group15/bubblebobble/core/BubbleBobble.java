@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import sem.group15.bubblebobble.core.objects.PlayerObject;
 import sem.group15.bubblebobble.core.objects.TestObject;
 
 public class BubbleBobble implements ApplicationListener {
@@ -20,7 +21,7 @@ public class BubbleBobble implements ApplicationListener {
 		This is there to check if the drawing process works.
 		 */
 		controller.addGameObject(new TestObject(50f,50f));
-		controller.addGameObject(new TestObject(250f, 250f));
+		controller.addGameObject(new PlayerObject(250f, 250f));
 	}
 
 	@Override
