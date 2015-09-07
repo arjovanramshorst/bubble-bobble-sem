@@ -11,8 +11,8 @@ public abstract class FloatingObject extends GameObject{
     protected float ySpeed;
     protected float xSpeed;
     protected float timeFromFired;
-    protected FloatingObject(Rectangle size, Texture texture, float xPosition, float yPosition) {
-        super(size, texture, xPosition, yPosition);
+    protected FloatingObject(Rectangle location, Texture texture) {
+        super(location, texture);
     }
 
 

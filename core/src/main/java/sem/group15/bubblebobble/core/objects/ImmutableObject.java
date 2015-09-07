@@ -8,8 +8,8 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public abstract class ImmutableObject extends GameObject {
 
-    protected ImmutableObject(Rectangle size, Texture texture, float xPosition, float yPosition) {
-        super(size, texture, xPosition, yPosition);
+    protected ImmutableObject(Rectangle size, Texture texture) {
+        super(size, texture);
     }
 
 

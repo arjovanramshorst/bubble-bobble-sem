@@ -4,23 +4,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
-import java.util.List;
-
 /**
  * Created by arjo on 6-9-15.
  */
 public abstract class GameObject {
 
-    protected Rectangle size;
+    protected Rectangle location;
     protected Texture texture;
-    protected float xPosition;
-    protected float yPosition;
 
-    protected GameObject(Rectangle size, Texture texture, float xPosition, float yPosition) {
-        this.size = size;
+    protected GameObject(Rectangle location, Texture texture) {
+        this.location = location;
         this.texture = texture;
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
     }
 
     /**

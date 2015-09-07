@@ -11,8 +11,8 @@ public class FilledBubbleObject extends FloatingObject {
 
     protected float duration;
 
-    protected FilledBubbleObject(Rectangle size, Texture texture, float xPosition, float yPosition) {
-        super(size, texture, xPosition, yPosition);
+    protected FilledBubbleObject(Rectangle location, Texture texture) {
+        super(location, texture);
     }
 
 

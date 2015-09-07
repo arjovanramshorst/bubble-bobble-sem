@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class PlayerObject extends GravityObject {
 
     public PlayerObject(float xPosition, float yPosition) {
-        super(new Rectangle(), new Texture(Gdx.files.internal("aqua-ball.png")), xPosition, yPosition);
+        super(new Rectangle(32,32,xPosition,yPosition), new Texture(Gdx.files.internal("aqua-ball.png")));
     }
 
     @Override
@@ -30,8 +30,8 @@ public class PlayerObject extends GravityObject {
             currentSpeedY = 300;
         }
 
-        xPosition += currentSpeedX * elapsed;
-        yPosition += currentSpeedY * elapsed;
+        location.x += currentSpeedX * elapsed;
+        location.y += currentSpeedY * elapsed;
     }
 
     @Override
@@ -43,13 +43,13 @@ public class PlayerObject extends GravityObject {
     protected void handleCollision(GameObject other) {
         super.handleCollision(other);
         if(other instanceof ImmutableObject) {
-            //xPosition = other.xPosition - this.size.getWidth();
+
         }
 
     }
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        spriteBatch.draw(texture, xPosition, yPosition);
+        spriteBatch.draw(texture, location.x, location.y);
     }
 }
