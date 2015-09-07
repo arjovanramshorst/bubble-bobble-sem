@@ -16,39 +16,34 @@ public class BubbleObject extends FloatingObject {
     }
 
     /**
-     * This updates this object after a game loop has passed. This updates all the variables, like location or speed,
-     * depending on the kind of subclass this is.
-     * @param elapsed time elapsed since last gameloop.
+     * This updates the BubbleObject after a game loop has passed.
+     * This updates the location, speed and lasting-duration.
+     * The initial speed of the FilledBubble is FOR THE MOMENT 50.
+     * @param elapsed
      */
     public  void update(float elapsed) {
         xSpeed = 0;
         ySpeed = 75;
-
-
-
-
     }
 
     /**
-     * Checks the List of all objects that are currently on screen for collisions. (Only checks collisions for GameObjects
-     * that are necessary for this GameObject.)
-     *
-     * TO THINK ABOUT: Possible to check all collisions only one way and then handle them for both objects. Probably by
-     * using int startingPoint in the LogicController. If a collision is found, this should call both this Objects'
-     * handleCollision method, and the collided object.
-     *
-     * ALSO: I'm not sure if this should happen in this object, or in the logicController. That might be a better place.
+     * This methods checks if the bubble collides with another object.
      * @param other Object that needs to be checked for a collision.
      */
+
     public  void checkCollision(GameObject other) {
 
     }
 
+
     /**
-     * This handles the collision for this object. It should only be used to update this object, not the other.
+     * This handles the collision for this bubble. It should only be used to update this object, not the other.
+     * If the bubble collides with an ImmutableObject, the y speed should change to 0 and the x speed should
+     * change to either the right or left.
      * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
+
     protected  void handleCollision(GameObject collided) {
         if (collided instanceof ImmutableObject) {
             // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.

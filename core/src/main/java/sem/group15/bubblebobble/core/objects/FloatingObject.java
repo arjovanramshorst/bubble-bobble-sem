@@ -15,6 +15,7 @@ public abstract class FloatingObject extends GameObject{
         super(size, texture, xPosition, yPosition);
     }
 
+
     public void update (float elapsed) {
         timeFromFired = 0;
 

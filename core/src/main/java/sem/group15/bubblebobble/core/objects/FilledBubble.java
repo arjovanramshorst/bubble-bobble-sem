@@ -9,31 +9,27 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class FilledBubble extends FloatingObject {
 
-
+    protected float duration;
 
     protected FilledBubble(Rectangle size, Texture texture, float xPosition, float yPosition) {
         super(size, texture, xPosition, yPosition);
     }
 
+
     /**
-     * This updates this object after a game loop has passed. This updates all the variables, like location or speed,
-     * depending on the kind of subclass this is.
-     * @param elapsed time elapsed since last gameloop.
+     * This updates the FilledBubble after a game loop has passed.
+     * This updates the location, speed and lasting-duration.
+     * The initial speed of the FilledBubble is FOR THE MOMENT 50.
+     * @param elapsed
      */
     public  void update(float elapsed) {
         xSpeed = 0;
         ySpeed = 50;
+        duration = 0;
     }
 
     /**
-     * Checks the List of all objects that are currently on screen for collisions. (Only checks collisions for GameObjects
-     * that are necessary for this GameObject.)
-     *
-     * TO THINK ABOUT: Possible to check all collisions only one way and then handle them for both objects. Probably by
-     * using int startingPoint in the LogicController. If a collision is found, this should call both this Objects'
-     * handleCollision method, and the collided object.
-     *
-     * ALSO: I'm not sure if this should happen in this object, or in the logicController. That might be a better place.
+     * This methods checks if the bubble collides with another object.
      * @param other Object that needs to be checked for a collision.
      */
     public  void checkCollision(GameObject other) {
@@ -41,7 +37,9 @@ public class FilledBubble extends FloatingObject {
     }
 
     /**
-     * This handles the collision for this object. It should only be used to update this object, not the other.
+     * This handles the collision for this FilledBubble. It should only be used to update this object, not the other.
+     * If the FilledBubble collides with an ImmutableObject, the y speed should change to 0 and the x speed should
+     * change to either the right or left.
      * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
