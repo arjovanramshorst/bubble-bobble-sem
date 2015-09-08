@@ -13,8 +13,8 @@ public abstract class GravityObject extends GameObject {
     protected float currentSpeedX;
     protected float currentSpeedY;
 
-    protected GravityObject(Rectangle size, Texture texture, float xPosition, float yPosition) {
-        super(size, texture, xPosition, yPosition);
+    protected GravityObject(Rectangle location, Texture texture) {
+        super(location, texture);
         this.currentSpeedX = 0;
         this.currentSpeedY = 0;
         this.timeSinceLastFloorContact = 0;

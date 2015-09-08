@@ -11,8 +11,8 @@ public class BubbleObject extends FloatingObject {
 
 
 
-    protected BubbleObject(Rectangle size, Texture texture, float xPosition, float yPosition) {
-        super(size, texture, xPosition, yPosition);
+    protected BubbleObject(Rectangle location, Texture texture) {
+        super(location, texture);
     }
 
     /**
