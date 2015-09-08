@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.BubbleBobble;
 
 /**
  * Created by TUDelft SID on 8-9-2015.
@@ -18,6 +19,13 @@ public class EnemyObject extends GravityObject{
         super(new Rectangle(32,32,xPosition,yPosition), new Texture(Gdx.files.internal("aqua-ball.png")));
     }
 
+    public EnemyObject(float xPosition, float yPosition, Texture texture) {
+        super(
+                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
+                texture
+        );
+    }
+
     @Override
     public void update(float elapsed) {
         super.update(elapsed);
@@ -26,22 +34,22 @@ public class EnemyObject extends GravityObject{
             currentSpeedX = 100;
         } else {
             currentSpeedX = -1 * currentSpeedX;
+            wallCollision = false;
         }
 
         location.x += currentSpeedX * elapsed;
         location.y += currentSpeedY * elapsed;
     }
 
-
-
-    public void checkCollision(GameObject other) {
-
-    }
-
     @Override
     public void handleCollision(GameObject other) { 
         super.handleCollision(other);
+        //wallobject
         if(other instanceof ImmutableObject) {
+            if (location.overlaps(other.getBody())) {
+                wallCollision = true;
+            }
+
 
         }
 
