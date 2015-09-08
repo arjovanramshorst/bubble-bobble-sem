@@ -39,7 +39,8 @@ public class LogicController {
     private void checkCollisions() {
         for(int i = 0; i < gameObjects.size() - 1; i++) {
             for(int i2 = i+1; i2 < gameObjects.size(); i2++) {
-                gameObjects.get(i).checkCollision(gameObjects.get(i2));
+                gameObjects.get(i).handleCollision(gameObjects.get(i2));
+                gameObjects.get(i2).handleCollision(gameObjects.get(i));
             }
         }
     }

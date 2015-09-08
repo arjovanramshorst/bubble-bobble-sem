@@ -26,15 +26,6 @@ public class BubbleObject extends FloatingObject {
         ySpeed = 75;
     }
 
-    /**
-     * This methods checks if the bubble collides with another object.
-     * @param other Object that needs to be checked for a collision.
-     */
-
-    public  void checkCollision(GameObject other) {
-
-    }
-
 
     /**
      * This handles the collision for this bubble. It should only be used to update this object, not the other.
@@ -43,8 +34,7 @@ public class BubbleObject extends FloatingObject {
      * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
-
-    protected  void handleCollision(GameObject collided) {
+    public void handleCollision(GameObject collided) {
         if (collided instanceof ImmutableObject) {
             // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
         }
