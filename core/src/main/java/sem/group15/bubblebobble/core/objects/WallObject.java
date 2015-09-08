@@ -25,15 +25,15 @@ public class WallObject extends ImmutableObject{
     }
 
     /**
-     * walls dont need to be updated?
+     * Necessary method, since every not abstract subclass of GameObject needs this method. Might be needed in the
+     * future.
      * @param elapsed time elapsed since last gameloop.
      */
     public void update(float elapsed){
 
     }
 
-    public void checkCollision(GameObject other){
-    }
+
 
     public void handleCollision(GameObject collided){
 
