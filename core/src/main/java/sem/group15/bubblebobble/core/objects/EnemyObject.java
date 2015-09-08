@@ -33,7 +33,7 @@ public class EnemyObject extends GravityObject{
     }
 
 
-    @Override
+
     public void checkCollision(GameObject other) {
 
     }
