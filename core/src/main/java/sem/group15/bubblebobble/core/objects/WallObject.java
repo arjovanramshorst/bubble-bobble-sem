@@ -9,8 +9,6 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class WallObject extends ImmutableObject{
 
-    private float locX, locY;
-
     /**
      * Create wall object with given x,y coordinates
      * and texture
@@ -20,8 +18,6 @@ public class WallObject extends ImmutableObject{
      */
     public WallObject(float x, float y, Texture texture){
         super(new Rectangle(x, y, 32, 32), texture);
-        locX = x;
-        locY = y;
     }
 
     /**
@@ -44,7 +40,7 @@ public class WallObject extends ImmutableObject{
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     public void draw(SpriteBatch spriteBatch){
-        spriteBatch.draw(texture, locX, locY);
+        spriteBatch.draw(texture, location.x, location.y);
     }
 
 }
