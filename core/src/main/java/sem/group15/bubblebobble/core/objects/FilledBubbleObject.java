@@ -1,5 +1,6 @@
 package sem.group15.bubblebobble.core.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -9,10 +10,10 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class FilledBubbleObject extends FloatingObject {
 
-    protected float duration;
-
-    protected FilledBubbleObject(Rectangle location, Texture texture) {
-        super(location, texture);
+    public FilledBubbleObject(float xPosition, float yPosition) {
+        super(new Rectangle(32,32,xPosition,yPosition), new Texture(Gdx.files.internal("aqua-ball.png")));
+        ySpeed = 50;
+        xSpeed = 0;
     }
 
 
@@ -23,9 +24,7 @@ public class FilledBubbleObject extends FloatingObject {
      * @param elapsed
      */
     public  void update(float elapsed) {
-        xSpeed = 0;
-        ySpeed = 50;
-        duration = 0;
+        location.y += ySpeed * elapsed;
     }
 
     /**
@@ -59,7 +58,7 @@ public class FilledBubbleObject extends FloatingObject {
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     public  void draw(SpriteBatch spriteBatch) {
-
+        spriteBatch.draw(texture, location.x, location.y);
     }
 
 }

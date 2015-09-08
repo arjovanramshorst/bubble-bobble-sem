@@ -19,7 +19,7 @@ public class BubbleObject extends FloatingObject {
      * @param direction 1 if player is look right, -1 if player is looking left.
      */
     public BubbleObject(float xPosition, float yPosition, int direction) {
-        super(new Rectangle(32,32,xPosition,yPosition), new Texture(Gdx.files.internal("bubble-empty.png")));
+        super(new Rectangle(32,32,xPosition,yPosition), new Texture(Gdx.files.internal("aqua-ball.png")));
         xSpeed = 600 * direction;
         ySpeed = 0;
     }

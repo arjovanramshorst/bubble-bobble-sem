@@ -7,6 +7,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.*;
 import sem.group15.bubblebobble.core.objects.BubbleObject;
+import sem.group15.bubblebobble.core.objects.FilledBubbleObject;
 import sem.group15.bubblebobble.core.objects.PlayerObject;
 
 import java.awt.*;
@@ -21,7 +22,7 @@ public class BubbleBobble implements ApplicationListener {
 		controller = new LogicController();
 
 		controller.addGameObject(new PlayerObject(250f, 250f));
-		controller.addGameObject(new BubbleObject(100f, 100f, 1));
+		controller.addGameObject(new FilledBubbleObject(100f, 100f));
 	}
 
 	@Override
