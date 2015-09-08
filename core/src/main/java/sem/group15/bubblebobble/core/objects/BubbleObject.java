@@ -18,7 +18,7 @@ public class BubbleObject extends FloatingObject {
     /**
      * This updates the BubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
-     * The initial speed of the FilledBubble is FOR THE MOMENT 50.
+     * The initial speed of the BubbleObject is FOR THE MOMENT 50.
      * @param elapsed
      */
     public  void update(float elapsed) {
