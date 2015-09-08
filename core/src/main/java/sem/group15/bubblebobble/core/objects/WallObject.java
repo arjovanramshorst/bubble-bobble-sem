@@ -19,8 +19,8 @@ public class WallObject extends ImmutableObject{
      */
     public WallObject(float x, float y){
         super(
-                new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE)
-                , new Texture(Gdx.files.internal("sprite_wall_brick.png"))
+                new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
+                new Texture(Gdx.files.internal("sprite_wall_brick.png"))
         );
     }
 
