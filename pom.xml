@@ -16,6 +16,8 @@
 	</properties>
 	<dependencyManagement>
 		<dependencies>
+
+
 			<!-- core dependencies -->
 			<dependency>
 				<groupId>com.badlogicgames.gdx</groupId>
@@ -44,6 +46,7 @@
 				<classifier>natives-armeabi-v7a</classifier>
 				<scope>provided</scope>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
