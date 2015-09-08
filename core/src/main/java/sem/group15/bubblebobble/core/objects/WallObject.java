@@ -1,8 +1,10 @@
 package sem.group15.bubblebobble.core.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.BubbleBobble;
 
 /**
  * Created by woute on 9/8/2015.
@@ -14,10 +16,12 @@ public class WallObject extends ImmutableObject{
      * and texture
      * @param x x coordinate from the bottom left corner
      * @param y y coordinate from the bottom left corner
-     * @param texture texture for the wall sprite
      */
-    public WallObject(float x, float y, Texture texture){
-        super(new Rectangle(x, y, 32, 32), texture);
+    public WallObject(float x, float y){
+        super(
+                new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE)
+                , new Texture(Gdx.files.internal("sprite_wall_brick.png"))
+        );
     }
 
     /**
