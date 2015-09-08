@@ -18,21 +18,12 @@ public class BubbleObject extends FloatingObject {
     /**
      * This updates the BubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
-     * The initial speed of the FilledBubble is FOR THE MOMENT 50.
+     * The initial speed of the BubbleObject is FOR THE MOMENT 50.
      * @param elapsed
      */
     public  void update(float elapsed) {
         xSpeed = 0;
         ySpeed = 75;
-    }
-
-    /**
-     * This methods checks if the bubble collides with another object.
-     * @param other Object that needs to be checked for a collision.
-     */
-
-    public  void checkCollision(GameObject other) {
-
     }
 
 
@@ -43,8 +34,7 @@ public class BubbleObject extends FloatingObject {
      * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
-
-    protected  void handleCollision(GameObject collided) {
+    public void handleCollision(GameObject collided) {
         if (collided instanceof ImmutableObject) {
             // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
         }

@@ -7,6 +7,9 @@ import com.badlogic.gdx.math.Rectangle;
  * Created by arjo on 7-9-15.
  */
 public abstract class GravityObject extends GameObject {
+    private final int GRAVITY_SPEED = 100;
+    private final int MAX_GRAVITY_SPEED = -300;
+
 
     protected float timeSinceLastFloorContact;
 
@@ -20,14 +23,28 @@ public abstract class GravityObject extends GameObject {
         this.timeSinceLastFloorContact = 0;
     }
 
+    /**
+     * Updates the vertical speed. Just as real gravity, this is based on the time that has passed since last
+     * floorcontact. Also, there is a max speed.
+     * @param elapsed time elapsed since last gameloop.
+     */
     public void update(float elapsed) {
         timeSinceLastFloorContact += elapsed;
-        currentSpeedY = Math.max(currentSpeedY - (100 * timeSinceLastFloorContact * timeSinceLastFloorContact), -300);
+        currentSpeedY = Math.max(
+                currentSpeedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
+                MAX_GRAVITY_SPEED
+        );
     }
 
-    protected void handleCollision(GameObject other) {
-        if (other instanceof ImmutableObject) {
-
+    /**
+     *
+     * @param other
+     */
+    public void handleCollision(GameObject other) {
+        if (other instanceof FloorObject) {
+            if(location.overlaps(other.getBody()) && currentSpeedY < 0) {
+                location.y = other.getBody().getY() + other.getBody().getHeight();
+            }
         }
     }
 }

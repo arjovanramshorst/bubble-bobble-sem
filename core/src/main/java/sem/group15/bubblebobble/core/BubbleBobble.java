@@ -8,6 +8,9 @@ import com.badlogic.gdx.Gdx;
 import sem.group15.bubblebobble.core.objects.PlayerObject;
 
 public class BubbleBobble implements ApplicationListener {
+	public static final int SPRITE_SIZE = 32;
+
+
 	LogicController controller;
 	SpriteBatch batch;
 
