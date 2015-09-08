@@ -37,13 +37,15 @@ public abstract class GravityObject extends GameObject {
     }
 
     /**
+     * Checks if this object collides with another object, and handles that collision if necessary.
      *
-     * @param other
+     * @param other Object that needs to be checked for collision.
      */
     public void handleCollision(GameObject other) {
         if (other instanceof FloorObject) {
             if(location.overlaps(other.getBody()) && currentSpeedY < 0) {
                 location.y = other.getBody().getY() + other.getBody().getHeight();
+                currentSpeedY = 0;
             }
         }
     }

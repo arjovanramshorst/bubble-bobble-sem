@@ -12,5 +12,4 @@ public abstract class ImmutableObject extends GameObject {
         super(size, texture);
     }
 
-
 }
