@@ -36,5 +36,5 @@ public class GravityObjectTest {
         player.handleCollision(floor);
         assertEquals((float)BubbleBobble.SPRITE_SIZE + 2,player.getBody().y, 0.01);
     }
-    
+
 }
