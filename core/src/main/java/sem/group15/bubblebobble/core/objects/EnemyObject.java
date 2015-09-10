@@ -16,11 +16,11 @@ public class EnemyObject extends GravityObject {
     protected boolean wallCollision;
     private int direction;
 
-//    public EnemyObject(float xPosition, float yPosition) {
-//        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("aqua-ball.png")));
-//        Random rand = new Random();
-//        direction = rand.nextInt(2);
-//    }
+    public EnemyObject(float xPosition, float yPosition) {
+        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("aqua-ball.png")));
+        Random rand = new Random();
+        direction = rand.nextInt(2);
+    }
 
     public EnemyObject(float xPosition, float yPosition, Texture texture) {
         super(
