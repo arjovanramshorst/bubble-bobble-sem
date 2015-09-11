@@ -36,7 +36,7 @@ public class BubbleBobble implements ApplicationListener {
 
 		}
 		for(int i=0;i<4;i++) {
-			controller.addGameObject(new FloorObject(200+SPRITE_SIZE*1, 200));
+			controller.addGameObject(new FloorObject(200+SPRITE_SIZE*i, 200-SPRITE_SIZE*i));
 		}
 
 		controller.addGameObject(new PlayerObject(250f, 250f));

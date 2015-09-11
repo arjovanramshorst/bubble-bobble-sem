@@ -17,7 +17,7 @@ public class PlayerObject extends GravityObject {
     public PlayerObject(float xPosition, float yPosition) {
         super(
                 new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE),
-                new Texture(Gdx.files.internal("aqua-ball.png"))
+                new Texture(Gdx.files.internal("playerSprite.png"))
         );
         isAlive = true;
     }
@@ -39,9 +39,10 @@ public class PlayerObject extends GravityObject {
         } else {
             currentSpeedX = 0;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.UP) && currentSpeedY <= 0) {
+        if(Gdx.input.isKeyPressed(Input.Keys.UP) &&canJump) {
             timeSinceLastFloorContact = 0;
             currentSpeedY = 300;
+            canJump=false;
         }
 
         location.x += currentSpeedX * elapsed;

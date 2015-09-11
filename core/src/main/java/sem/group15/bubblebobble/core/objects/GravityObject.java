@@ -12,7 +12,7 @@ public abstract class GravityObject extends GameObject {
 
 
     protected float timeSinceLastFloorContact;
-
+    protected boolean canJump;
     protected float currentSpeedX;
     protected float currentSpeedY;
 
@@ -21,6 +21,7 @@ public abstract class GravityObject extends GameObject {
         this.currentSpeedX = 0;
         this.currentSpeedY = 0;
         this.timeSinceLastFloorContact = 0;
+        canJump=false;
     }
 
     /**
@@ -46,6 +47,8 @@ public abstract class GravityObject extends GameObject {
             if (location.overlaps(other.getBody()) && currentSpeedY < 0) {
                 location.y = other.getBody().getY() + other.getBody().getHeight();
                 currentSpeedY = 0;
+                canJump=true;
+
             }
         }
         if (other instanceof WallObject) {
