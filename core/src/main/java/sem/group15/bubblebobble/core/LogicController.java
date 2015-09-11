@@ -12,6 +12,7 @@ import java.util.List;
 public class LogicController {
     private List<GameObject> gameObjects;
 
+
     public LogicController() {
         gameObjects = new ArrayList<GameObject>();
     }

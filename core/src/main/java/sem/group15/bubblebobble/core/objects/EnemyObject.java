@@ -33,7 +33,7 @@ public class EnemyObject extends GravityObject {
 
     @Override
     public void update(float elapsed) {
-        super.update(elapsed);
+      //  super.update(elapsed);
 
         //0 move left, 1 move right
         if (direction == 0) {
