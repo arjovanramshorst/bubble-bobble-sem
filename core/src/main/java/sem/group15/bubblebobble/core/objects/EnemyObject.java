@@ -14,7 +14,7 @@ import java.util.Random;
 public class EnemyObject extends GravityObject {
 
     protected boolean wallCollision;
-    protected float timeSinceLastWallCollision;
+  //  protected float timeSinceLastWallCollision;
 
     /**
      * Creates an EnemyObject with position (X,Y) on the grid.
@@ -31,7 +31,7 @@ public class EnemyObject extends GravityObject {
         } else {
             currentSpeedX = -100;
         }
-        this.timeSinceLastWallCollision = 0;
+      //  this.timeSinceLastWallCollision = 0;
     }
 
     /**
@@ -53,7 +53,7 @@ public class EnemyObject extends GravityObject {
         } else {
             currentSpeedX = -100;
         }
-        this.timeSinceLastWallCollision = 0;
+      //  this.timeSinceLastWallCollision = 0;
 
     }
 
@@ -66,14 +66,14 @@ public class EnemyObject extends GravityObject {
     public void update(float elapsed) {
         // commented because of gravity interferes with testing purposes atm.
         super.update(elapsed);
-        timeSinceLastWallCollision += elapsed;
+        //timeSinceLastWallCollision += elapsed;
 
 
-        if (wallCollision && timeSinceLastWallCollision < 2) {
+       /* if (wallCollision) {
             currentSpeedX = -1 * currentSpeedX;
             wallCollision = false;
         }
-
+*/
         location.x += currentSpeedX * elapsed;
         location.y += currentSpeedY * elapsed;
     }
@@ -86,9 +86,18 @@ public class EnemyObject extends GravityObject {
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
         //wallobject
+        
         if (other instanceof WallObject) {
             if (location.overlaps(other.getBody())) {
-                wallCollision = true;
+                if(location.x>other.getBody().getX()){
+                    location.x = other.getBody().getX() + other.getBody().getWidth();
+
+                }
+                else{
+                    location.x = other.getBody().getX() - other.getBody().getWidth();
+
+                }
+                currentSpeedX = -1*currentSpeedX;
             }
         }
     }
