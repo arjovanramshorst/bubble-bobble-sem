@@ -61,6 +61,8 @@ public class BubbleObject extends FloatingObject {
      */
     public void handleCollision(GameObject collided) {
         if (collided instanceof ImmutableObject) {
+            ySpeed = 0;
+
             // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
         }
 

@@ -18,30 +18,17 @@ public class EnemyObjectTest {
         Gdx.input = mock(Input.class);
     }
 
-    @Test
-    public void testHorizontalSpeed() throws Exception {
-        EnemyObject enemy = new EnemyObject(0, BubbleBobble.SPRITE_SIZE -2, null);
-        enemy.setDirection(1);
-        enemy.update(0.1f);
-        assertEquals(100, enemy.currentSpeedX, 1);
-    }
-
-    @Test
-    public void testHorizontalSpeed2() throws Exception {
-        EnemyObject enemy = new EnemyObject(0, BubbleBobble.SPRITE_SIZE -2, null);
-        enemy.setDirection(0);
-        enemy.update(0.1f);
-        assertEquals(-100, enemy.currentSpeedX, 1);
-    }
-
-
+    /**
+     * Test if a collision with a wall is handeled accordingly.
+     * The speed should change with -1.
+     */
     @Test
     public void testHandleCollisionWall() {
-       EnemyObject enemy = new EnemyObject(0, BubbleBobble.SPRITE_SIZE -2, null);
-       WallObject wall = new WallObject(0,0, null);
-       enemy.setDirection(0);
-       enemy.handleCollision(wall);
-       enemy.update(0.1f);
-       assertEquals(100, enemy.currentSpeedX, 1);
+        EnemyObject enemy = new EnemyObject(0, BubbleBobble.SPRITE_SIZE -2, null);
+        ImmutableObject wall = new WallObject(0,0, null);
+        float speed = enemy.currentSpeedX;
+        enemy.handleCollision(wall);
+        enemy.update(0.1f);
+        assertEquals(-1*speed, enemy.currentSpeedX, 1);
     }
 }

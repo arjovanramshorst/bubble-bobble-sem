@@ -14,33 +14,55 @@ import java.util.Random;
 public class EnemyObject extends GravityObject {
 
     protected boolean wallCollision;
-    private int direction;
 
+    /**
+     * Creates an EnemyObject with position (X,Y) on the grid.
+     * @param xPosition
+     * @param yPosition
+     */
     public EnemyObject(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("aqua-ball.png")));
-        Random rand = new Random();
-        direction = rand.nextInt(2);
+        //Generates random integer between 1 and 2.
+        int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
+        assert (random == 1 || random == 2);
+        if (random == 1) {
+            currentSpeedX = 100;
+        } else {
+            currentSpeedX = -100;
+        }
     }
 
+    /**
+     * Creates an EnemyObject used only for testing purposes.
+     * @param xPosition
+     * @param yPosition
+     * @param texture
+     */
     public EnemyObject(float xPosition, float yPosition, Texture texture) {
         super(
                 new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
                 texture
         );
-        Random rand = new Random();
-        direction = rand.nextInt(2);
+        //Generates random integer between 1 and 2.
+        int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
+        assert (random == 1 || random == 2);
+        if (random == 1) {
+            currentSpeedX = 100;
+        } else {
+            currentSpeedX = -100;
+        }
     }
 
+
+    /**
+     * If the enemy collides with a wall, the direction should change in the opposite direction.
+     * @param elapsed time elapsed since last gameloop.
+     */
     @Override
     public void update(float elapsed) {
+        // commented because of gravity interferes with testing purposes atm.
       //  super.update(elapsed);
 
-        //0 move left, 1 move right
-        if (direction == 0) {
-            currentSpeedX = -100;
-        } else {
-            currentSpeedX = 100;
-        }
 
         if (wallCollision) {
             currentSpeedX = -1 * currentSpeedX;
@@ -51,6 +73,10 @@ public class EnemyObject extends GravityObject {
         location.y += currentSpeedY * elapsed;
     }
 
+    /**
+     * Handles collisions with other objects. If there is a WallCollision set the attribute wallCollision to true.
+     * @param other Object that needs to be checked for collision.
+     */
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
@@ -62,14 +88,13 @@ public class EnemyObject extends GravityObject {
         }
     }
 
+    /**
+     * Draws the sprite at the correct location.
+     * @param spriteBatch SpriteBatch that the sprites need to be added to.
+     */
     @Override
     public void draw(SpriteBatch spriteBatch) {
         spriteBatch.draw(texture, location.x, location.y);
     }
 
-    public void setDirection(int value) {
-        if (value == 1 || value == 0) {
-            direction = value;
-        }
-    }
 }
