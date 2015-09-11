@@ -75,6 +75,11 @@ public class PlayerObject extends GravityObject {
     public boolean isAlive() {
         return isAlive;
     }
+
+    public int getDirection(){
+        return (int) currentSpeedX;
+
+    }
 }
 
 

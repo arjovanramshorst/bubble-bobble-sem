@@ -1,7 +1,11 @@
 package sem.group15.bubblebobble.core;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import sem.group15.bubblebobble.core.objects.BubbleObject;
 import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.PlayerObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +15,16 @@ import java.util.List;
  */
 public class LogicController {
     private List<GameObject> gameObjects;
+    private PlayerObject player;
 
 
     public LogicController() {
         gameObjects = new ArrayList<GameObject>();
     }
 
+    public void setPlayer(PlayerObject _player){
+        player=_player;
+    }
     public void readMap(String filename) {
         // TODO: Implement levelparser;
     }
@@ -35,6 +43,9 @@ public class LogicController {
         for(GameObject object : gameObjects) {
             object.update(elapsed);
         }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            addGameObject(new BubbleObject(player.getBody().getX(), player.getBody().getY(),player.getDirection()));
     }
 
     private void checkCollisions() {

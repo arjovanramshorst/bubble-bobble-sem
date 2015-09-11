@@ -22,7 +22,13 @@ public class BubbleBobble implements ApplicationListener {
 		batch = new SpriteBatch();
 		controller = new LogicController();
 
-		//Temporary Map setup
+        PlayerObject player=new PlayerObject(250f, 250f);
+
+        controller.addGameObject(player);
+        controller.setPlayer(player);
+
+
+        //Temporary Map setup
 		for (int i=0; i<30; i++) {
 			//floor
 			controller.addGameObject(new FloorObject(i * SPRITE_SIZE, 0));
@@ -39,7 +45,6 @@ public class BubbleBobble implements ApplicationListener {
 			controller.addGameObject(new FloorObject(200+SPRITE_SIZE*i, 200-SPRITE_SIZE*i));
 		}
 
-		controller.addGameObject(new PlayerObject(250f, 250f));
 		controller.addGameObject(new EnemyObject(100f, 220f));
 	}
 
