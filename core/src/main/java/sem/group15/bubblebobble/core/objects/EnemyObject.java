@@ -22,7 +22,7 @@ public class EnemyObject extends GravityObject {
      * @param yPosition
      */
     public EnemyObject(float xPosition, float yPosition) {
-        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("aqua-ball.png")));
+        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("enemy.png")));
         //Generates random integer between 1 and 2.
         int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
         assert (random == 1 || random == 2);
@@ -86,7 +86,7 @@ public class EnemyObject extends GravityObject {
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
         //wallobject
-        
+
         if (other instanceof WallObject) {
             if (location.overlaps(other.getBody())) {
                 if(location.x>other.getBody().getX()){
