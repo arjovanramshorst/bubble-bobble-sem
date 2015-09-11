@@ -93,7 +93,9 @@ public class PlayerObject extends GravityObject {
     }
 
     public int getDirection(){
-        return (int) currentSpeedX;
+        if (currentSpeedX>0)
+            return 1;
+        return -1;
 
     }
 }

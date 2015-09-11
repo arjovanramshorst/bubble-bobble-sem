@@ -43,7 +43,6 @@ public class LogicController {
         for(GameObject object : gameObjects) {
             object.update(elapsed);
         }
-
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
             addGameObject(new BubbleObject(player.getBody().getX(), player.getBody().getY(),player.getDirection()));
     }

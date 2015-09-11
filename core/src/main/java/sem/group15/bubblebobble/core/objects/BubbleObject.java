@@ -20,7 +20,7 @@ public class BubbleObject extends FloatingObject {
      */
     public BubbleObject(float xPosition, float yPosition, int direction) {
         super(new Rectangle(32,32,xPosition,yPosition), new Texture(Gdx.files.internal("aqua-ball.png")));
-        xSpeed = 600 * direction;
+        xSpeed = 30 * direction;
         ySpeed = 0;
     }
 
