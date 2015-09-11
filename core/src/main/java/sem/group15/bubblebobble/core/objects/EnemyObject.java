@@ -14,6 +14,7 @@ import java.util.Random;
 public class EnemyObject extends GravityObject {
 
     protected boolean wallCollision;
+    protected float timeSinceLastWallCollision;
 
     /**
      * Creates an EnemyObject with position (X,Y) on the grid.
@@ -30,6 +31,7 @@ public class EnemyObject extends GravityObject {
         } else {
             currentSpeedX = -100;
         }
+        this.timeSinceLastWallCollision = 0;
     }
 
     /**
@@ -51,6 +53,8 @@ public class EnemyObject extends GravityObject {
         } else {
             currentSpeedX = -100;
         }
+        this.timeSinceLastWallCollision = 0;
+
     }
 
 
@@ -61,10 +65,11 @@ public class EnemyObject extends GravityObject {
     @Override
     public void update(float elapsed) {
         // commented because of gravity interferes with testing purposes atm.
-      //  super.update(elapsed);
+        super.update(elapsed);
+        timeSinceLastWallCollision += elapsed;
 
 
-        if (wallCollision) {
+        if (wallCollision && timeSinceLastWallCollision < 2) {
             currentSpeedX = -1 * currentSpeedX;
             wallCollision = false;
         }
