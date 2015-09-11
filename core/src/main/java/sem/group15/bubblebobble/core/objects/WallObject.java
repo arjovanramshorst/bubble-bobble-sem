@@ -24,6 +24,12 @@ public class WallObject extends ImmutableObject{
         );
     }
 
+    public WallObject(float x, float y, Texture texture){
+        super(
+                new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),texture
+        );
+    }
+
     /**
      * Necessary method, since every not abstract subclass of GameObject needs this method. Might be needed in the
      * future.

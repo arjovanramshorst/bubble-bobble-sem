@@ -52,11 +52,10 @@ public class EnemyObject extends GravityObject {
     }
 
     @Override
-    //TODO immutableobject veranderen voor wallobject, zit nu nog niet in branch. Ook in test aanpassen.
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
         //wallobject
-        if (other instanceof ImmutableObject) {
+        if (other instanceof WallObject) {
             if (location.overlaps(other.getBody())) {
                 wallCollision = true;
             }
