@@ -52,7 +52,7 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * If the player collides with an enemyObject, set the attribute isAlive to false.
+     * If the player collides with an enemyObject, set the attribute isAliv e to false.
      * @param other Object that needs to be checked for collision.
      */
     @Override
