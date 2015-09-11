@@ -56,6 +56,19 @@ public class PlayerObject extends GravityObject {
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
+        if (other instanceof WallObject) {
+            if (location.overlaps(other.getBody())) {
+                if(location.x>other.getBody().getX()){
+                    location.x = other.getBody().getX() + other.getBody().getWidth();
+
+                }
+                else{
+                    location.x = other.getBody().getX() - other.getBody().getWidth();
+
+                }
+                currentSpeedX = 0;
+            }
+        }
         if (other instanceof EnemyObject) {
             isAlive = false;
         }

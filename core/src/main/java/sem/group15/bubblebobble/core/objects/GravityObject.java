@@ -48,18 +48,5 @@ public abstract class GravityObject extends GameObject {
                 currentSpeedY = 0;
             }
         }
-        if (other instanceof WallObject) {
-            if (location.overlaps(other.getBody())) {
-                if(location.x>other.getBody().getX()){
-                    location.x = other.getBody().getX() + other.getBody().getWidth();
-
-                }
-                else{
-                    location.x = other.getBody().getX() - other.getBody().getWidth();
-
-                }
-                currentSpeedX = 0;
-            }
-        }
     }
 }

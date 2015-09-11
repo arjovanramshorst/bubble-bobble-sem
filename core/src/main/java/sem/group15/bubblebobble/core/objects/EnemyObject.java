@@ -61,7 +61,7 @@ public class EnemyObject extends GravityObject {
     @Override
     public void update(float elapsed) {
         // commented because of gravity interferes with testing purposes atm.
-      //  super.update(elapsed);
+        super.update(elapsed);
 
 
         if (wallCollision) {
