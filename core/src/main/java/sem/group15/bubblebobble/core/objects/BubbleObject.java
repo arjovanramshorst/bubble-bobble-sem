@@ -19,7 +19,7 @@ public class BubbleObject extends FloatingObject {
      * @param direction 1 if player is look right, -1 if player is looking left.
      */
     public BubbleObject(float xPosition, float yPosition, int direction) {
-        super(new Rectangle(xPosition,yPosition,32,32), new Texture(Gdx.files.internal("aqua-ball.png")));
+        super(new Rectangle(xPosition,yPosition,32,32), new Texture(Gdx.files.internal("bubble-empty.png")));
         xSpeed = 600 * direction;
         ySpeed = 0;
     }
@@ -62,8 +62,7 @@ public class BubbleObject extends FloatingObject {
     public void handleCollision(GameObject collided) {
 
 
-        if (collided instanceof ImmutableObject) {
-            getOutOfGame();
+        if (collided instanceof ImmutableObject){
             // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
         }
 
