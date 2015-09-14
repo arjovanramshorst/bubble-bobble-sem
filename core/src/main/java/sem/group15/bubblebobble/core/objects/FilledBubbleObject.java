@@ -12,7 +12,6 @@ public class FilledBubbleObject extends FloatingObject {
 
     public FilledBubbleObject(float xPosition, float yPosition) {
         super(new Rectangle(xPosition,yPosition,32,32), new Texture(Gdx.files.internal("aqua-ball.png")));
-        System.out.println();
         ySpeed = 50;
         xSpeed = 0;
     }
