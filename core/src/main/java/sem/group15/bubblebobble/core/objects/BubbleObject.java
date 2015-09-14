@@ -62,6 +62,20 @@ public class BubbleObject extends FloatingObject {
     public void handleCollision(GameObject collided) {
 
 
+        if (collided instanceof WallObject) {
+                    if (location.overlaps(collided.getBody())) {
+                        if(location.x>collided.getBody().getX()){
+                            location.x = collided.getBody().getX() + collided.getBody().getWidth();
+
+                        }
+                        else{
+                            location.x = collided.getBody().getX() - collided.getBody().getWidth();
+
+                        }
+                    getOutOfGame();
+                }
+        }
+
         if (collided instanceof ImmutableObject){
             // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
         }
