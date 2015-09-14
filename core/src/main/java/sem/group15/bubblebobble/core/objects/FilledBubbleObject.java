@@ -10,10 +10,13 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class FilledBubbleObject extends FloatingObject {
 
+    protected boolean isAlive;
+
     public FilledBubbleObject(float xPosition, float yPosition) {
-        super(new Rectangle(xPosition,yPosition,32,32), new Texture(Gdx.files.internal("aqua-ball.png")));
+        super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("aqua-ball.png")));
         ySpeed = 50;
         xSpeed = 0;
+        isAlive = true;
     }
 
 
@@ -40,9 +43,20 @@ public class FilledBubbleObject extends FloatingObject {
         }
 
         if (collided instanceof PlayerObject) {
+            if (location.overlaps(collided.getBody())) {
+                isAlive = false;
+            }
             // dispose + add to score.
         }
 
+    }
+
+    /**
+     * Checks if the player is still alive
+     * @return
+     */
+    public boolean isAlive() {
+        return isAlive;
     }
 
     /**
