@@ -38,17 +38,17 @@ public class FilledBubbleObject extends FloatingObject {
      *                 GameObject.)
      */
     public  void handleCollision(GameObject collided) {
-        if (collided instanceof ImmutableObject) {
-            // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
-        }
+        if (location.overlaps(collided.getBody())) {
+            if (collided instanceof ImmutableObject) {
+                // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
+                ySpeed = 0;
+            }
 
-        if (collided instanceof PlayerObject) {
-            if (location.overlaps(collided.getBody())) {
+            //TODO: deleting object and adding score in LogicControler
+            if (collided instanceof PlayerObject) {
                 isAlive = false;
             }
-            // dispose + add to score.
         }
-
     }
 
     /**
