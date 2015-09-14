@@ -42,6 +42,8 @@ public class BubbleObject extends FloatingObject {
 
         location.x += xSpeed * elapsed;
         location.y += ySpeed * elapsed;
+
+
     }
 
     /**
