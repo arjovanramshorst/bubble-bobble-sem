@@ -44,7 +44,8 @@ public class LogicController {
         for(GameObject object : gameObjects) {
             object.update(elapsed);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && timeTilLastShot > .5f) {
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && timeTilLastShot > .1f) {
             addGameObject(new BubbleObject(player.getBody().getX(), player.getBody().getY(), player.getDirection()));
             timeTilLastShot = 0;
         }else{
