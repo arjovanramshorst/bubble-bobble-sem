@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class FilledBubbleObject extends FloatingObject {
 
     public FilledBubbleObject(float xPosition, float yPosition) {
-        super(new Rectangle(32,32,xPosition,yPosition), new Texture(Gdx.files.internal("aqua-ball.png")));
+        super(new Rectangle(xPosition,yPosition,32,32), new Texture(Gdx.files.internal("aqua-ball.png")));
         ySpeed = 50;
         xSpeed = 0;
     }
