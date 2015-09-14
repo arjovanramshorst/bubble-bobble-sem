@@ -12,6 +12,7 @@ import sem.group15.bubblebobble.core.BubbleBobble;
  */
 public class PlayerObject extends GravityObject {
 
+    public int score;
     protected boolean isAlive;
 
     public PlayerObject(float xPosition, float yPosition) {
@@ -20,6 +21,7 @@ public class PlayerObject extends GravityObject {
                 new Texture(Gdx.files.internal("playerSprite.png"))
         );
         isAlive = true;
+        score = 0;
     }
     public PlayerObject(float xPosition, float yPosition, Texture texture) {
         super(
@@ -27,6 +29,7 @@ public class PlayerObject extends GravityObject {
                 texture
         );
         isAlive = true;
+        score = 0;
     }
 
     @Override

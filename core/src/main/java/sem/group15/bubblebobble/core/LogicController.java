@@ -2,6 +2,7 @@ package sem.group15.bubblebobble.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.objects.BubbleObject;
 import sem.group15.bubblebobble.core.objects.GameObject;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class LogicController {
     private List<GameObject> gameObjects;
-    private PlayerObject player;
+    public PlayerObject player;
 
 
     public LogicController() {
