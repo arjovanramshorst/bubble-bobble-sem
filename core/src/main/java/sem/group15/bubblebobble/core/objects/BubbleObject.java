@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class BubbleObject extends FloatingObject {
 
     private static final int MINSPEED = 30;
+    protected boolean isAlive;
 
     /**
      * Creates a new Bubble object and it will start to float
@@ -22,6 +23,7 @@ public class BubbleObject extends FloatingObject {
         super(new Rectangle(xPosition,yPosition,32,32), new Texture(Gdx.files.internal("bubble-empty.png")));
         xSpeed = 600 * direction;
         ySpeed = 0;
+        isAlive = true;
     }
 
     /**
@@ -60,15 +62,25 @@ public class BubbleObject extends FloatingObject {
      *                 GameObject.)
      */
     public void handleCollision(GameObject collided) {
+        if (location.overlaps(collided.getBody())) {
 
+            if (collided instanceof ImmutableObject) {
+                // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
+            }
 
-        if (collided instanceof ImmutableObject){
-            // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
+            if (collided instanceof EnemyObject) {
+                isAlive = false;
+            }
         }
 
-        if (collided instanceof EnemyObject){
-        }
+    }
 
+    /**
+     * Checks if the bubble is still alive
+     * @return
+     */
+    public boolean isAlive() {
+        return isAlive;
     }
 
     /**

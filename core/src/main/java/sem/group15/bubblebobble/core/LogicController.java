@@ -3,10 +3,7 @@ package sem.group15.bubblebobble.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import sem.group15.bubblebobble.core.objects.BubbleObject;
-import sem.group15.bubblebobble.core.objects.FilledBubbleObject;
-import sem.group15.bubblebobble.core.objects.GameObject;
-import sem.group15.bubblebobble.core.objects.PlayerObject;
+import sem.group15.bubblebobble.core.objects.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +72,18 @@ public class LogicController {
             if (!((FilledBubbleObject) gameObjects.get(i)).isAlive()) {
                 gameObjects.remove(gameObjects.get(i));
                 //do what needs to be done when filled bubble is popped (fruit? add score?)
+            }
+        }
+        if (gameObjects.get(i) instanceof EnemyObject){
+            if (!((EnemyObject) gameObjects.get(i)).isAlive()) {
+                FilledBubbleObject filled = new FilledBubbleObject(gameObjects.get(i).getBody().x, gameObjects.get(i).getBody().y);
+                gameObjects.add(filled);
+                gameObjects.remove(gameObjects.get(i));
+            }
+        }
+        if (gameObjects.get(i) instanceof BubbleObject){
+            if (!((BubbleObject) gameObjects.get(i)).isAlive()) {
+                gameObjects.remove(gameObjects.get(i));
             }
         }
     }
