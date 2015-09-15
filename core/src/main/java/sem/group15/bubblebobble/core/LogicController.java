@@ -16,6 +16,7 @@ import java.util.List;
 public class LogicController {
     private List<GameObject> gameObjects;
     private PlayerObject player;
+    private float timeTilLastShot = 1f;
 
 
     public LogicController() {
@@ -43,8 +44,14 @@ public class LogicController {
         for(GameObject object : gameObjects) {
             object.update(elapsed);
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
-            addGameObject(new BubbleObject(player.getBody().getX(), player.getBody().getY(),player.getDirection()));
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && timeTilLastShot > .1f) {
+            addGameObject(new BubbleObject(player.getBody().getX(), player.getBody().getY(), player.getDirection()));
+            timeTilLastShot = 0;
+        }else{
+            timeTilLastShot += elapsed;
+        }
+
     }
 
     private void checkCollisions() {
