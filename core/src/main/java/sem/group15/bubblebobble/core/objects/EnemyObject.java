@@ -15,6 +15,7 @@ public class EnemyObject extends GravityObject {
 
     protected boolean wallCollision;
   //  protected float timeSinceLastWallCollision;
+    protected boolean isAlive;
 
     /**
      * Creates an EnemyObject with position (X,Y) on the grid.
@@ -32,6 +33,7 @@ public class EnemyObject extends GravityObject {
             currentSpeedX = -100;
         }
       //  this.timeSinceLastWallCollision = 0;
+        isAlive = true;
     }
 
     /**
@@ -54,7 +56,7 @@ public class EnemyObject extends GravityObject {
             currentSpeedX = -100;
         }
       //  this.timeSinceLastWallCollision = 0;
-
+        isAlive = true;
     }
 
 
@@ -87,19 +89,32 @@ public class EnemyObject extends GravityObject {
         super.handleCollision(other);
         //wallobject
 
-        if (other instanceof WallObject) {
-            if (location.overlaps(other.getBody())) {
-                if(location.x>other.getBody().getX()){
+        if (location.overlaps(other.getBody())) {
+            if (other instanceof WallObject) {
+
+                if (location.x > other.getBody().getX()) {
                     location.x = other.getBody().getX() + other.getBody().getWidth();
 
-                }
-                else{
+                } else {
                     location.x = other.getBody().getX() - other.getBody().getWidth();
 
                 }
-                currentSpeedX = -1*currentSpeedX;
+                currentSpeedX = -1 * currentSpeedX;
+            }
+
+
+            if (other instanceof BubbleObject) {
+                isAlive = false;
             }
         }
+    }
+
+    /**
+     * Checks if the enemy is still alive
+     * @return
+     */
+    public boolean isAlive() {
+        return isAlive;
     }
 
     /**
