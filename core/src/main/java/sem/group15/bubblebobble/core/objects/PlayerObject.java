@@ -12,6 +12,8 @@ import sem.group15.bubblebobble.core.BubbleBobble;
  */
 public class PlayerObject extends GravityObject {
 
+    private final float MAX_WALL_OVERLAP = 10f;
+
     protected boolean isAlive;
 
     public PlayerObject(float xPosition, float yPosition) {
@@ -39,7 +41,7 @@ public class PlayerObject extends GravityObject {
         } else {
             currentSpeedX = 0;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.UP) &&canJump) {
+        if(Gdx.input.isKeyPressed(Input.Keys.UP) && canJump) {
             timeSinceLastFloorContact = 0;
             currentSpeedY = 300;
             canJump=false;
@@ -64,16 +66,11 @@ public class PlayerObject extends GravityObject {
         }
 
         if (other instanceof WallObject) {
-            if (location.overlaps(other.getBody())) {
-                if(location.x>other.getBody().getX()){
-                    location.x = other.getBody().getX() + other.getBody().getWidth();
-
-                }
-                else{
-                    location.x = other.getBody().getX() - other.getBody().getWidth();
-
-                }
-                currentSpeedX = 0;
+            if(between(overlapLeft(other),0, MAX_WALL_OVERLAP)) {
+                setLeft(other.getRight());
+            }
+            if(between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
+                setRight(other.getLeft());
             }
         }
     }

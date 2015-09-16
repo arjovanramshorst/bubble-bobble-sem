@@ -40,4 +40,75 @@ public abstract class GameObject {
     public Rectangle getBody() {
         return location;
     }
+
+    public float getLeft() {
+        return location.getX();
+    }
+
+    public float getRight() {
+        return location.getX() + location.getWidth();
+    }
+
+    public float getTop() {
+        return location.getY() + location.getHeight();
+    }
+
+    public float getBottom() {
+        return location.getY();
+    }
+
+    public void setLeft(float x) {
+        location.x = x;
+    }
+
+    public void setRight(float x) {
+        location.x = x - location.getWidth();
+    }
+
+    public void setTop(float y) {
+        location.y = y - location.getHeight();
+    }
+
+    public void setBottom(float y) {
+        location.y = y;
+    }
+
+    public boolean collidesWith(GameObject other)
+    {
+        return getBody().overlaps(other.getBody());
+    }
+
+    public float overlapLeft(GameObject other) {
+        float overlap = 0;
+        if(collidesWith(other) && getLeft() < other.getRight()) {
+            overlap = other.getRight() - getLeft();
+        }
+        return overlap;
+    }
+
+    public float overlapRight(GameObject other) {
+        float overlap = 0;
+        if(collidesWith(other) && getRight() > other.getLeft()) {
+            overlap = getRight() - other.getLeft();
+        }
+        return overlap;
+    }
+    public float overlapTop(GameObject other) {
+        float overlap = 0;
+        if(collidesWith(other) && getTop() > other.getBottom()) {
+            overlap = getTop() - other.getBottom();
+        }
+        return overlap;
+    }
+    public float overlapBottom(GameObject other) {
+        float overlap = 0;
+        if(collidesWith(other) && getBottom() < other.getTop()) {
+            overlap = other.getTop() - getBottom();
+        }
+        return overlap;
+    }
+
+    public boolean between(float value, float low, float high) {
+        return (value > low && value < high);
+    }
 }
