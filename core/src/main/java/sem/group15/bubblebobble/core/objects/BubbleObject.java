@@ -54,7 +54,7 @@ public class BubbleObject extends FloatingObject {
         if(Math.abs(xSpeed) > 0) {
             xSpeed = 0;
             ySpeed = 50;
-        } 
+        }
 
 
     }
