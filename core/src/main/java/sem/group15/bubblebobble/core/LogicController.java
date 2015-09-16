@@ -59,12 +59,13 @@ public class LogicController {
     }
 
     private void checkCollisions() {
-        for(int i = 0; i < gameObjects.size() - 1; i++) {
+        for(int i = 0; i < gameObjects.size(); i++) {
             for(int i2 = i+1; i2 < gameObjects.size(); i2++) {
                 gameObjects.get(i).handleCollision(gameObjects.get(i2));
                 gameObjects.get(i2).handleCollision(gameObjects.get(i));
-                checkAlive(i);
+
             }
+            checkAlive(i);
         }
     }
 
@@ -99,19 +100,25 @@ public class LogicController {
             if (!((FilledBubbleObject) gameObjects.get(i)).isAlive()) {
                 gameObjects.remove(gameObjects.get(i));
                 //do what needs to be done when filled bubble is popped (fruit? add score?)
+
             }
+            return;
         }
+
         if (gameObjects.get(i) instanceof EnemyObject){
             if (!((EnemyObject) gameObjects.get(i)).isAlive()) {
                 FilledBubbleObject filled = new FilledBubbleObject(gameObjects.get(i).getBody().x, gameObjects.get(i).getBody().y);
                 gameObjects.add(filled);
                 gameObjects.remove(gameObjects.get(i));
             }
+            return;
         }
+
         if (gameObjects.get(i) instanceof BubbleObject){
             if (!((BubbleObject) gameObjects.get(i)).isAlive()) {
                 gameObjects.remove(gameObjects.get(i));
             }
+            return;
         }
     }
 

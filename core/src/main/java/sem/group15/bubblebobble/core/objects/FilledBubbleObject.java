@@ -13,7 +13,7 @@ public class FilledBubbleObject extends FloatingObject {
     protected boolean isAlive;
 
     public FilledBubbleObject(float xPosition, float yPosition) {
-        super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("aqua-ball.png")));
+        super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("filled-bubble.png")));
         ySpeed = 50;
         xSpeed = 0;
         isAlive = true;
