@@ -10,10 +10,13 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class FilledBubbleObject extends FloatingObject {
 
+    protected boolean isAlive;
+
     public FilledBubbleObject(float xPosition, float yPosition) {
-        super(new Rectangle(xPosition,yPosition,32,32), new Texture(Gdx.files.internal("aqua-ball.png")));
+        super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("aqua-ball.png")));
         ySpeed = 50;
         xSpeed = 0;
+        isAlive = true;
     }
 
 
@@ -35,14 +38,25 @@ public class FilledBubbleObject extends FloatingObject {
      *                 GameObject.)
      */
     public  void handleCollision(GameObject collided) {
-        if (collided instanceof ImmutableObject) {
-            // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
-        }
+        if (location.overlaps(collided.getBody())) {
+            if (collided instanceof ImmutableObject) {
+                // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
+                ySpeed = 0;
+            }
 
-        if (collided instanceof PlayerObject) {
-            // dispose + add to score.
+            //TODO: deleting object and adding score in LogicControler
+            if (collided instanceof PlayerObject) {
+                isAlive = false;
+            }
         }
+    }
 
+    /**
+     * Checks if the player is still alive
+     * @return
+     */
+    public boolean isAlive() {
+        return isAlive;
     }
 
     /**
