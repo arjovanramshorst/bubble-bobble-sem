@@ -40,4 +40,20 @@ public abstract class GameObject {
     public Rectangle getBody() {
         return location;
     }
+
+    public float getLeft() {
+        return location.getX();
+    }
+
+    public float getRight() {
+        return location.getX() + location.getWidth();
+    }
+
+    public float getTop() {
+        return location.getY() + location.getHeight();
+    }
+
+    public float getBottom() {
+        return location.getY();
+    }
 }
