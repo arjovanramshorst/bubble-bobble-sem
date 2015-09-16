@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.objects.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -35,6 +36,8 @@ public class LogicController {
     public void loop(float elapsed, SpriteBatch batch) {
         update(elapsed);
         checkCollisions();
+        handleNewObjects();
+        removeObjects();
         draw(batch);
     }
 
@@ -61,6 +64,27 @@ public class LogicController {
                 gameObjects.get(i).handleCollision(gameObjects.get(i2));
                 gameObjects.get(i2).handleCollision(gameObjects.get(i));
                 checkAlive(i);
+            }
+        }
+    }
+
+    /**
+     * Checks all objects for any new objects that should be added to the gameObjects list.
+     */
+    private void handleNewObjects() {
+        for(GameObject object : gameObjects) {
+            object.addNewObjectsTo(gameObjects);
+        }
+    }
+
+    /**
+     * Removes all objects with remove flag set to true. Used as some sort of garbage collection.
+     */
+    private void removeObjects() {
+        Iterator<GameObject> iter = gameObjects.iterator();
+        while (iter.hasNext()) {
+            if (iter.next().remove()) {
+                iter.remove();
             }
         }
     }

@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by arjo on 6-9-15.
  */
@@ -12,9 +15,22 @@ public abstract class GameObject {
     protected Rectangle location;
     protected Texture texture;
 
+    /**
+     * List that contains items that need to be added to the game. After each cycle this list is cleared.
+     */
+    protected List<GameObject> newObjects;
+
+    /**
+     * If this boolean is set to true, this item will be removed from the List. This is not the same as is alive
+     * or something, it only means that this item can be picked up by the garbage collector.
+     */
+    protected boolean remove;
+
     protected GameObject(Rectangle location, Texture texture) {
         this.location = location;
         this.texture = texture;
+        newObjects = new ArrayList<GameObject>();
+        remove = false;
     }
 
     /**
@@ -110,5 +126,18 @@ public abstract class GameObject {
 
     public boolean between(float value, float low, float high) {
         return (value > low && value < high);
+    }
+
+    public void addNewObjectsTo(List<GameObject> gameObjects) {
+        if(! newObjects.isEmpty()) {
+            for(GameObject object : newObjects) {
+                gameObjects.add(object);
+            }
+            newObjects.clear();
+        }
+    }
+
+    public boolean remove() {
+        return remove;
     }
 }
