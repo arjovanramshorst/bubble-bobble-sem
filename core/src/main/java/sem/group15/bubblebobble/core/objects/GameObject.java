@@ -107,4 +107,8 @@ public abstract class GameObject {
         }
         return overlap;
     }
+
+    public boolean between(float value, float low, float high) {
+        return (value > low && value < high);
+    }
 }

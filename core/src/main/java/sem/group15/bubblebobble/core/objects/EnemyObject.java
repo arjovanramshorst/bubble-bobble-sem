@@ -66,18 +66,8 @@ public class EnemyObject extends GravityObject {
      */
     @Override
     public void update(float elapsed) {
-        // commented because of gravity interferes with testing purposes atm.
         super.update(elapsed);
-        //timeSinceLastWallCollision += elapsed;
-
-
-       /* if (wallCollision) {
-            currentSpeedX = -1 * currentSpeedX;
-            wallCollision = false;
-        }
-*/
         location.x += currentSpeedX * elapsed;
-        location.y += currentSpeedY * elapsed;
     }
 
     /**
@@ -89,23 +79,18 @@ public class EnemyObject extends GravityObject {
         super.handleCollision(other);
         //wallobject
 
-        if (location.overlaps(other.getBody())) {
-            if (other instanceof WallObject) {
-
-                if (location.x > other.getBody().getX()) {
-                    location.x = other.getBody().getX() + other.getBody().getWidth();
-
-                } else {
-                    location.x = other.getBody().getX() - other.getBody().getWidth();
-
-                }
-                currentSpeedX = -1 * currentSpeedX;
+        if(other instanceof WallObject) {
+            if(overlapLeft(other) > 0) {
+                setLeft(other.getRight());
+                currentSpeedX *= -1;
             }
-
-
-            if (other instanceof BubbleObject) {
-                isAlive = false;
+            else if (overlapRight(other) > 0) {
+                setRight(other.getLeft());
+                currentSpeedX *= -1;
             }
+        }
+        if (other instanceof BubbleObject) {
+            isAlive = false;
         }
     }
 

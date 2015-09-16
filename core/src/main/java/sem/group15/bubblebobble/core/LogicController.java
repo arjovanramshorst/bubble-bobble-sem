@@ -43,6 +43,9 @@ public class LogicController {
             object.update(elapsed);
         }
 
+        // TODO: This should not be handled here in my opinion (arjo). Also, continuous shooting should not be possible,
+        // so check for a release after a bubble is fired.
+
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE) && timeTilLastShot > .1f) {
             addGameObject(new BubbleObject(player.getBody().getX(), player.getBody().getY(), player.getDirection()));
             timeTilLastShot = 0;
