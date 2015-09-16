@@ -5,10 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.*;
 import sem.group15.bubblebobble.core.objects.*;
 
-import java.awt.*;
 
 public class BubbleBobble implements ApplicationListener {
 	public static final int SPRITE_SIZE = 32;
@@ -16,12 +14,14 @@ public class BubbleBobble implements ApplicationListener {
 
 	LogicController controller;
 	SpriteBatch batch;
+	Level level;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		controller = new LogicController();
 
+		level = new Level(1);
         PlayerObject player=new PlayerObject(250f, 250f);
 
         controller.addGameObject(player);
