@@ -15,6 +15,10 @@ public abstract class GameObject {
     protected Rectangle location;
     protected Texture texture;
 
+    protected enum Direction {
+        LEFT, RIGHT
+    }
+
     /**
      * List that contains items that need to be added to the game. After each cycle this list is cleared.
      */

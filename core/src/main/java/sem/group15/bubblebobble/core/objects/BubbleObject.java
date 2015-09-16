@@ -11,20 +11,26 @@ import com.badlogic.gdx.math.Rectangle;
 public class BubbleObject extends FloatingObject {
 
     private static final int MINSPEED = 30;
-    protected boolean isAlive;
 
+    private static final int INITIAL_SPEED = 600;
     /**
      * Creates a new Bubble object and it will start to float
      *
      * @param xPosition x position of player who shoots the bubble.
      * @param yPosition y position of player who shoots the bubble.
-     * @param direction 1 if player is look right, -1 if player is looking left.
+     * @param direction Enum, RIGHT or LEFT
      */
-    public BubbleObject(float xPosition, float yPosition, int direction) {
+    public BubbleObject(float xPosition, float yPosition, Direction direction) {
         super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("bubble-empty.png")));
-        xSpeed = 600 * direction;
+        switch (direction) {
+            case LEFT:
+                xSpeed = -1 * INITIAL_SPEED;
+                break;
+            case RIGHT:
+                xSpeed = INITIAL_SPEED;
+                break;
+        }
         ySpeed = 0;
-        isAlive = true;
     }
 
     /**
@@ -77,18 +83,10 @@ public class BubbleObject extends FloatingObject {
             }
 
             if (collided instanceof EnemyObject) {
-                isAlive = false;
+                remove = true;
             }
         }
 
-    }
-
-    /**
-     * Checks if the bubble is still alive
-     * @return
-     */
-    public boolean isAlive() {
-        return isAlive;
     }
 
     /**
