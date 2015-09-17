@@ -48,7 +48,7 @@ public abstract class GravityObject extends GameObject {
             if (between(overlapBottom(other), 0, MAX_DIFF_LANDING) && currentSpeedY < 0) {
                 setBottom(other.getTop());
                 currentSpeedY = 0;
-                canJump=true;
+                canJump = true;
             }
         }
 
