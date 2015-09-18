@@ -2,6 +2,7 @@ package sem.group15.bubblebobble.core;
 
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -16,6 +17,10 @@ public class BubbleBobble implements ApplicationListener {
 
 	LogicController controller;
 	SpriteBatch batch;
+
+    private int score;
+    private String scoreString;
+    BitmapFont bitmapFont;
 
 	@Override
 	public void create () {
@@ -46,6 +51,8 @@ public class BubbleBobble implements ApplicationListener {
 		}
 
 		controller.addGameObject(new EnemyObject(100f, 220f));
+
+        bitmapFont = new BitmapFont();
 	}
 
 	@Override
@@ -58,7 +65,12 @@ public class BubbleBobble implements ApplicationListener {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		controller.loop(Gdx.graphics.getDeltaTime(), batch);
-		batch.end();
+        // draw score on screen
+        bitmapFont.setColor(1, 1, 1, 1);
+        scoreString = "score: " + controller.player.score;
+        bitmapFont.draw(batch, scoreString, 50, 450);
+
+        batch.end();
 	}
 
 	@Override
