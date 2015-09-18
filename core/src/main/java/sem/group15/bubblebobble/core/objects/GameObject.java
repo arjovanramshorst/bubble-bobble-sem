@@ -3,6 +3,7 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

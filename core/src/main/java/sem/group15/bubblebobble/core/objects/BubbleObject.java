@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.Logger;
 
 /**
  * Created by TUDelft SID on 7-9-2015.
@@ -13,6 +14,8 @@ public class BubbleObject extends FloatingObject {
     private static final int MINSPEED = 30;
 
     private static final int INITIAL_SPEED = 600;
+
+    private static final Logger logger = Logger.getLogger(BubbleObject.class.getName());
     /**
      * Creates a new Bubble object and it will start to float
      *
@@ -83,6 +86,7 @@ public class BubbleObject extends FloatingObject {
             }
 
             if (collided instanceof EnemyObject) {
+                logger.log("Bubble touched enemy object.");
                 remove = true;
                 newObjects.add(new FilledBubbleObject(this.getBody().getX(), this.getBody().getY()));
             }

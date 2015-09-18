@@ -68,3 +68,5 @@ buildNumber.properties
 
 ## OS Specific
 .DS_Store
+
+output.log
