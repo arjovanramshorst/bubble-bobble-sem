@@ -15,10 +15,10 @@ public class FloorObject extends ImmutableObject {
 
     private static final Logger logger = Logger.getLogger(FloorObject.class.getName());
 
-    public FloorObject(int locationX, int locationY) {
+    public FloorObject(float locationX, float locationY) {
         super(new Rectangle(locationX, locationY, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("sprite_wall_brick.png")));
     }
-    public FloorObject(int locationX, int locationY, Texture texture) {
+    public FloorObject(float locationX, float locationY, Texture texture) {
         super(
                 new Rectangle(locationX, locationY, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
                 texture

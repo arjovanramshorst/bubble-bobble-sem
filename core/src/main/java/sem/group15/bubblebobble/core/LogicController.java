@@ -23,11 +23,9 @@ public class LogicController {
         gameObjects = new ArrayList<GameObject>();
     }
 
-    public void setPlayer(PlayerObject _player){
-        player=_player;
-    }
-    public void readMap(String filename) {
-        // TODO: Implement levelparser;
+    public void init(int level) {
+        setPlayer();
+        readMap(level);
     }
 
     /**
@@ -35,7 +33,13 @@ public class LogicController {
      * @param object object to be drawn
      */
     public void addGameObject(GameObject object) {
-        gameObjects.add(object);
+        gameObjects.add(object);}
+    private void setPlayer(){
+        this.player = new PlayerObject(200,200);
+        gameObjects.add(this.player);
+    }
+    private void readMap(int level) {
+        gameObjects.addAll((new Level(level)).getMap());
     }
 
     /**
