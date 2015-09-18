@@ -2,6 +2,7 @@ package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -14,6 +15,7 @@ import sem.group15.bubblebobble.core.Logger;
 public class PlayerObject extends GravityObject {
 
     private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
+    private Sound deadSound, jumpSound;
 
     private final float MAX_WALL_OVERLAP = 10f;
 
@@ -34,6 +36,9 @@ public class PlayerObject extends GravityObject {
         textureLeft = new Texture(Gdx.files.internal("playerSprite.png"));
         textureRight = new Texture(Gdx.files.internal("playerSpriteRight.png"));
         textureDead = new Texture(Gdx.files.internal("playerDead.png"));
+        deadSound= Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
+        jumpSound= Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
+
         isAlive = true;
         fired = false;
         direction = Direction.RIGHT;
@@ -73,6 +78,7 @@ public class PlayerObject extends GravityObject {
                 timeSinceLastFloorContact = 0;
                 currentSpeedY = 300;
                 canJump = false;
+                jumpSound.play(1.0f);
             }
         }
             location.x += currentSpeedX * elapsed;
@@ -102,9 +108,10 @@ public class PlayerObject extends GravityObject {
         super.handleCollision(other);
         if(location.overlaps(other.getBody())){
 
-            if (other instanceof EnemyObject) {
+            if (other instanceof EnemyObject&&!isAlive) {
                 logger.log("Player touched EnemyObject.");
                 isAlive = false;
+                deadSound.play(1.0f);
             }
 
             if (other instanceof WallObject) {
