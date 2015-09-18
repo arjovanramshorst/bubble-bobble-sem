@@ -84,6 +84,7 @@ public class BubbleObject extends FloatingObject {
 
             if (collided instanceof EnemyObject) {
                 remove = true;
+                newObjects.add(new FilledBubbleObject(this.getBody().getX(), this.getBody().getY()));
             }
         }
 

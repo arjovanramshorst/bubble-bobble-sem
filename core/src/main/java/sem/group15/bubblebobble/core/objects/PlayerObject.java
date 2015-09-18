@@ -14,6 +14,14 @@ public class PlayerObject extends GravityObject {
 
     private final float MAX_WALL_OVERLAP = 10f;
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public int score;
     protected boolean isAlive;
 
@@ -38,7 +46,7 @@ public class PlayerObject extends GravityObject {
     }
     public PlayerObject(float xPosition, float yPosition, Texture texture) {
         super(
-                new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE),
+                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
                 texture
         );
         isAlive = true;
@@ -93,17 +101,22 @@ public class PlayerObject extends GravityObject {
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
+        if (location.overlaps(other.getBody())) {
 
-        if (other instanceof EnemyObject) {
-            isAlive = false;
-        }
-
-        if (other instanceof WallObject) {
-            if(between(overlapLeft(other),0, MAX_WALL_OVERLAP)) {
-                setLeft(other.getRight());
+            if (other instanceof EnemyObject) {
+                isAlive = false;
             }
-            if(between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
-                setRight(other.getLeft());
+
+            if (other instanceof WallObject) {
+                if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
+                    setLeft(other.getRight());
+                }
+                if (between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
+                    setRight(other.getLeft());
+                }
+            }
+            if (other instanceof FilledBubbleObject) {
+                score += 10;
             }
         }
     }

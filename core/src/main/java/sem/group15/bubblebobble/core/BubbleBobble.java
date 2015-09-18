@@ -18,7 +18,6 @@ public class BubbleBobble implements ApplicationListener {
 	LogicController controller;
 	SpriteBatch batch;
 
-    private int score;
     private String scoreString;
     BitmapFont bitmapFont;
 

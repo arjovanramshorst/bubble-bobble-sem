@@ -42,9 +42,9 @@ public class FilledBubbleObject extends FloatingObject {
                 ySpeed = 0;
             }
 
-            //TODO: deleting object and adding score in LogicControler
             if (collided instanceof PlayerObject) {
                 remove = true;
+
             }
         }
     }
