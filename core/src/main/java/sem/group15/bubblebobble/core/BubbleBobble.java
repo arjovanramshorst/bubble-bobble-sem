@@ -73,7 +73,7 @@ public class BubbleBobble implements ApplicationListener {
         bitmapFont.draw(batch, scoreString, 50, 450);
 
         batch.end();
-		batch.end();
+
 	}
 
 	@Override
