@@ -88,6 +88,7 @@ public class BubbleObject extends FloatingObject {
             if (collided instanceof EnemyObject) {
                 logger.log("Bubble touched enemy object.");
                 remove = true;
+                newObjects.add(new FilledBubbleObject(this.getBody().getX(), this.getBody().getY()));
             }
         }
 
