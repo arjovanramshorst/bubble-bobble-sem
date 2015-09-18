@@ -97,7 +97,6 @@ public class PlayerObject extends GravityObject {
      */
     private void fireBubble() {
         BubbleObject bubble = new BubbleObject(0, getBottom(), direction);
-        logger.log("Player fired a bubble.");
         switch (direction) {
             case LEFT:
                 bubble.setRight(getLeft());
@@ -110,27 +109,31 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * If the player collides with an enemyObject, set the attribute isAlive to false.
+     * If the player collides with an enemyObject, set the attribute isAliv e to false.
      * @param other Object that needs to be checked for collision.
      */
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
+        if(location.overlaps(other.getBody())){
 
-        if (other instanceof EnemyObject && location.overlaps(other.getBody())) {
-            logger.log("Player touched EnemyObject.");
-            isAlive = false;
-        }
+            if (other instanceof EnemyObject) {
+                logger.log("Player touched EnemyObject.");
+                isAlive = false;
+            }
 
-        if (other instanceof WallObject) {
-            if(between(overlapLeft(other),0, MAX_WALL_OVERLAP)) {
-                setLeft(other.getRight());
-                logger.log("Player touched wall on left.");
+            if (other instanceof WallObject) {
+                if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
+                    setLeft(other.getRight());
+                    logger.log("Player touched wall on left.");
+                }
+                if (between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
+                    setRight(other.getLeft());
+                    logger.log("Player touched wall on right.");
+                }
             }
-            if(between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
-                setRight(other.getLeft());
-                logger.log("Player touched wall on right.");
-            }
+            if (other instanceof  FilledBubbleObject)
+                score+=100;
         }
     }
 
