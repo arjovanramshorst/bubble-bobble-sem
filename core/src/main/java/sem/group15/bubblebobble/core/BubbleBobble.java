@@ -2,6 +2,7 @@ package sem.group15.bubblebobble.core;
 
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
