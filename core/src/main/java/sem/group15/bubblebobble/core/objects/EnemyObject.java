@@ -76,14 +76,20 @@ public class EnemyObject extends GravityObject {
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
-        if(other instanceof WallObject) {
-            if(between(overlapLeft(other),0, MAX_WALL_OVERLAP)) {
-                setLeft(other.getRight());
-                currentSpeedX *= -1;
+        if (location.overlaps(other.getBody())) {
+
+            if (other instanceof WallObject) {
+                if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
+                    setLeft(other.getRight());
+                    currentSpeedX *= -1;
+                }
+                if (between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
+                    setRight(other.getLeft());
+                    currentSpeedX *= -1;
+                }
             }
-            if(between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
-                setRight(other.getLeft());
-                currentSpeedX *= -1;
+            if (other instanceof BubbleObject) {
+                remove = true;
             }
         }
     }
