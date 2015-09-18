@@ -10,6 +10,7 @@ import sem.group15.bubblebobble.core.Logger;
 import java.util.Random;
 
 /**
+ * The enemy objects
  * Created by TUDelft SID on 8-9-2015.
  */
 public class EnemyObject extends GravityObject {

@@ -8,6 +8,7 @@ import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
 
 /**
+ * object which the player can jump through from the bottom
  * Created by arjo on 8-9-15.
  */
 public class FloorObject extends ImmutableObject {

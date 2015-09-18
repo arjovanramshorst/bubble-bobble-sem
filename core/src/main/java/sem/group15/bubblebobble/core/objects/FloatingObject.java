@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
 /**
+ *
+ * Abstract class for the different kinds of bubbles
  * Created by TUDelft SID on 7-9-2015.
  */
 public abstract class FloatingObject extends GameObject{
@@ -18,8 +20,10 @@ public abstract class FloatingObject extends GameObject{
     }
 
 
+
+
     public void update (float elapsed) {
-        timeFromFired = 0;
+        timeFromFired += elapsed;
 
     }
 

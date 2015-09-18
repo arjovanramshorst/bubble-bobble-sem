@@ -11,6 +11,9 @@ import sem.group15.bubblebobble.core.objects.*;
 
 import java.awt.*;
 
+/**
+ * ApplicationListener implementation that renders the objects on the screen
+ */
 public class BubbleBobble implements ApplicationListener {
 	public static final int SPRITE_SIZE = 32;
 
@@ -23,6 +26,10 @@ public class BubbleBobble implements ApplicationListener {
     BitmapFont bitmapFont;
 	private static final Logger logger = Logger.getLogger(BubbleBobble.class.getName());
 
+
+	/**
+	 * creates the map and loads the game objects
+	 */
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -57,10 +64,19 @@ public class BubbleBobble implements ApplicationListener {
         bitmapFont = new BitmapFont();
 	}
 
+	/**
+	 * method for resizing the screen
+	 * @param width
+	 * @param height
+	 */
+
 	@Override
 	public void resize (int width, int height) {
 	}
 
+	/**
+	 * render the score on the screen
+	 */
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
@@ -76,14 +92,24 @@ public class BubbleBobble implements ApplicationListener {
 
 	}
 
+	/**
+	 * method that is called when the game is paused
+	 */
 	@Override
 	public void pause () {
 	}
 
+	/**
+	 * method that is called when the game is resumed
+	 */
 	@Override
 	public void resume () {
 	}
 
+
+	/**
+	 * method that is called when the game is disposed
+	 */
 	@Override
 	public void dispose () {
 	}

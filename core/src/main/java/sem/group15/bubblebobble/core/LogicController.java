@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * Overlooking logic class that controls and draws the game objects
  * Created by arjo on 7-9-15.
  */
 public class LogicController {
@@ -29,10 +30,19 @@ public class LogicController {
         // TODO: Implement levelparser;
     }
 
+    /**
+     * add an object to be drawn to the controller
+     * @param object object to be drawn
+     */
     public void addGameObject(GameObject object) {
         gameObjects.add(object);
     }
 
+    /**
+     * MAIN GAME LOOP
+     * @param elapsed time elapsed since last update
+     * @param batch spriteBatch to be drawn
+     */
     public void loop(float elapsed, SpriteBatch batch) {
         update(elapsed);
         checkCollisions();
@@ -41,11 +51,20 @@ public class LogicController {
         draw(batch);
     }
 
+    /**
+     * updates all objects
+     * @param elapsed time elapsed since latest update
+     */
+
     private void update(float elapsed) {
         for(GameObject object : gameObjects) {
             object.update(elapsed);
         }
     }
+
+    /**
+     * check for all collisions and handle them in their respective objects
+     */
 
     private void checkCollisions() {
         for(int i = 0; i < gameObjects.size(); i++) {
@@ -76,6 +95,11 @@ public class LogicController {
             }
         }
     }
+
+    /**
+     * draw all sprites
+     * @param batch spritebatch to be drawn
+     */
 
     private void draw(SpriteBatch batch) {
         for(GameObject object : gameObjects) {

@@ -14,18 +14,18 @@ import sem.group15.bubblebobble.core.Logger;
 public class PlayerObject extends GravityObject {
 
     private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
-
     private final float MAX_WALL_OVERLAP = 10f;
-
     public int score;
     protected boolean isAlive;
-
     private boolean fired;
-
     private Direction direction;
-
     private Texture textureLeft, textureRight,textureDead;
 
+    /**
+     * creates player object with a position
+     * @param xPosition x coordinate
+     * @param yPosition y coordinate
+     */
     public PlayerObject(float xPosition, float yPosition) {
         super(
                 new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE),
@@ -40,6 +40,13 @@ public class PlayerObject extends GravityObject {
 
         score = 0;
     }
+
+    /**
+     * creates player object with a position and texture, mostly used as test method (without texture)
+     * @param xPosition x coordinate
+     * @param yPosition y coordinate
+     * @param texture texture to use
+     */
     public PlayerObject(float xPosition, float yPosition, Texture texture) {
         super(
                 new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
@@ -48,6 +55,11 @@ public class PlayerObject extends GravityObject {
         isAlive = true;
         score = 0;
     }
+
+    /**
+     * updates the player parameters
+     * @param elapsed time elapsed since last gameloop.
+     */
 
     @Override
     public void update(float elapsed) {
@@ -80,6 +92,9 @@ public class PlayerObject extends GravityObject {
 
     }
 
+    /**
+     * method that is called when the player fires a bubble
+     */
     private void fireBubble() {
         BubbleObject bubble = new BubbleObject(0, getBottom(), direction);
         logger.log("Player fired a bubble.");
@@ -119,7 +134,10 @@ public class PlayerObject extends GravityObject {
         }
     }
 
-
+    /**
+     * draws the player, checks for flags to select the right texture
+     * @param spriteBatch SpriteBatch that the sprites need to be added to.
+     */
     @Override
     public void draw(SpriteBatch spriteBatch) {
         if(isAlive) {
