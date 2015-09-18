@@ -24,7 +24,7 @@ public class PlayerObject extends GravityObject {
 
     private Direction direction;
 
-    private Texture textureLeft, textureRight;
+    private Texture textureLeft, textureRight,textureDead;
 
     public PlayerObject(float xPosition, float yPosition) {
         super(
@@ -33,6 +33,7 @@ public class PlayerObject extends GravityObject {
         );
         textureLeft = new Texture(Gdx.files.internal("playerSprite.png"));
         textureRight = new Texture(Gdx.files.internal("playerSpriteRight.png"));
+        textureDead = new Texture(Gdx.files.internal("playerDead.png"));
         isAlive = true;
         fired = false;
         direction = Direction.RIGHT;
@@ -41,7 +42,7 @@ public class PlayerObject extends GravityObject {
     }
     public PlayerObject(float xPosition, float yPosition, Texture texture) {
         super(
-                new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE),
+                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
                 texture
         );
         isAlive = true;
@@ -50,30 +51,33 @@ public class PlayerObject extends GravityObject {
 
     @Override
     public void update(float elapsed) {
-        super.update(elapsed);
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            currentSpeedX = -100;
-            direction = Direction.LEFT;
-        } else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            currentSpeedX = 100;
-            direction = Direction.RIGHT;
-        } else {
-            currentSpeedX = 0;
-        }
-        if(fired) {
-            fired = Gdx.input.isKeyPressed(Input.Keys.SPACE);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            fireBubble();
-            fired = true;
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.UP) && canJump) {
-            timeSinceLastFloorContact = 0;
-            currentSpeedY = 300;
-            canJump=false;
-        }
 
-        location.x += currentSpeedX * elapsed;
-        location.y += currentSpeedY * elapsed;
+        super.update(elapsed);
+        if(isAlive) {
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                currentSpeedX = -100;
+                direction = Direction.LEFT;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                currentSpeedX = 100;
+                direction = Direction.RIGHT;
+            } else {
+                currentSpeedX = 0;
+            }
+            if (fired) {
+                fired = Gdx.input.isKeyPressed(Input.Keys.SPACE);
+            } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                fireBubble();
+                fired = true;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) && canJump) {
+                timeSinceLastFloorContact = 0;
+                currentSpeedY = 300;
+                canJump = false;
+            }
+        }
+            location.x += currentSpeedX * elapsed;
+            location.y += currentSpeedY * elapsed;
+
     }
 
     private void fireBubble() {
@@ -118,14 +122,19 @@ public class PlayerObject extends GravityObject {
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        switch(direction) {
-            case LEFT:
-                spriteBatch.draw(textureLeft, getLeft(),getBottom());
-                break;
-            case RIGHT:
-                spriteBatch.draw(textureRight, getLeft(), getBottom());
-                break;
+        if(isAlive) {
+            switch (direction) {
+                case LEFT:
+                    spriteBatch.draw(textureLeft, getLeft(), getBottom());
+                    break;
+                case RIGHT:
+                    spriteBatch.draw(textureRight, getLeft(), getBottom());
+                    break;
+            }
         }
+        else
+            spriteBatch.draw(textureDead, getLeft(), getBottom());
+
     }
 }
 
