@@ -17,13 +17,17 @@ public class BubbleBobble implements ApplicationListener {
 	LogicController controller;
 	SpriteBatch batch;
 
+	private static final Logger logger = Logger.getLogger(BubbleBobble.class.getName());
+
 	@Override
 	public void create () {
+		logger.log("Creating game.");
 		batch = new SpriteBatch();
 		controller = new LogicController();
 
         PlayerObject player=new PlayerObject(250f, 250f);
 
+		logger.log("Adding objects.");
         controller.addGameObject(player);
         controller.setPlayer(player);
 
@@ -46,6 +50,7 @@ public class BubbleBobble implements ApplicationListener {
 		}
 
 		controller.addGameObject(new EnemyObject(100f, 220f));
+		logger.log("Finished adding objects.");
 	}
 
 	@Override
