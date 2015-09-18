@@ -17,17 +17,18 @@ public class BubbleBobble implements ApplicationListener {
 	LogicController controller;
 	SpriteBatch batch;
 
+    private int score;
+    private String scoreString;
+    BitmapFont bitmapFont;
 	private static final Logger logger = Logger.getLogger(BubbleBobble.class.getName());
 
 	@Override
 	public void create () {
-		logger.log("Creating game.");
 		batch = new SpriteBatch();
 		controller = new LogicController();
 
         PlayerObject player=new PlayerObject(250f, 250f);
 
-		logger.log("Adding objects.");
         controller.addGameObject(player);
         controller.setPlayer(player);
 
@@ -51,6 +52,8 @@ public class BubbleBobble implements ApplicationListener {
 
 		controller.addGameObject(new EnemyObject(100f, 220f));
 		logger.log("Finished adding objects.");
+
+        bitmapFont = new BitmapFont();
 	}
 
 	@Override
@@ -63,6 +66,12 @@ public class BubbleBobble implements ApplicationListener {
 		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		controller.loop(Gdx.graphics.getDeltaTime(), batch);
+        // draw score on screen
+        bitmapFont.setColor(1, 1, 1, 1);
+        scoreString = "score: " + controller.player.score;
+        bitmapFont.draw(batch, scoreString, 50, 450);
+
+        batch.end();
 		batch.end();
 	}
 

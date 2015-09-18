@@ -17,6 +17,7 @@ public class PlayerObject extends GravityObject {
 
     private final float MAX_WALL_OVERLAP = 10f;
 
+    public int score;
     protected boolean isAlive;
 
     private boolean fired;
@@ -36,6 +37,7 @@ public class PlayerObject extends GravityObject {
         fired = false;
         direction = Direction.RIGHT;
 
+        score = 0;
     }
     public PlayerObject(float xPosition, float yPosition, Texture texture) {
         super(
@@ -43,6 +45,7 @@ public class PlayerObject extends GravityObject {
                 texture
         );
         isAlive = true;
+        score = 0;
     }
 
     @Override
