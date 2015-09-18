@@ -6,11 +6,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import sem.group15.bubblebobble.core.Logger;
 
 /**
  * Created by arjo on 7-9-15.
  */
 public class PlayerObject extends GravityObject {
+
+    private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
 
     private final float MAX_WALL_OVERLAP = 10f;
 
@@ -75,6 +78,7 @@ public class PlayerObject extends GravityObject {
 
     private void fireBubble() {
         BubbleObject bubble = new BubbleObject(0, getBottom(), direction);
+        logger.log("Player fired a bubble.");
         switch (direction) {
             case LEFT:
                 bubble.setRight(getLeft());
@@ -87,23 +91,26 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * If the player collides with an enemyObject, set the attribute isAliv e to false.
+     * If the player collides with an enemyObject, set the attribute isAlive to false.
      * @param other Object that needs to be checked for collision.
      */
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
-        if (other instanceof EnemyObject) {
+        if (other instanceof EnemyObject && location.overlaps(other.getBody())) {
+            logger.log("Player touched EnemyObject.");
             isAlive = false;
         }
 
         if (other instanceof WallObject) {
             if(between(overlapLeft(other),0, MAX_WALL_OVERLAP)) {
                 setLeft(other.getRight());
+                logger.log("Player touched wall on left.");
             }
             if(between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
                 setRight(other.getLeft());
+                logger.log("Player touched wall on right.");
             }
         }
     }

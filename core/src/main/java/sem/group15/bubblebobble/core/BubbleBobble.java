@@ -21,6 +21,7 @@ public class BubbleBobble implements ApplicationListener {
     private int score;
     private String scoreString;
     BitmapFont bitmapFont;
+	private static final Logger logger = Logger.getLogger(BubbleBobble.class.getName());
 
 	@Override
 	public void create () {
@@ -51,6 +52,7 @@ public class BubbleBobble implements ApplicationListener {
 		}
 
 		controller.addGameObject(new EnemyObject(100f, 220f));
+		logger.log("Finished adding objects.");
 
         bitmapFont = new BitmapFont();
 	}
@@ -71,6 +73,7 @@ public class BubbleBobble implements ApplicationListener {
         bitmapFont.draw(batch, scoreString, 50, 450);
 
         batch.end();
+
 	}
 
 	@Override

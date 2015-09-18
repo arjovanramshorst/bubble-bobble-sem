@@ -4,12 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.Logger;
 
 /**
  * Created by TUDelft SID on 7-9-2015.
  */
 public class FilledBubbleObject extends FloatingObject {
 
+    private static final Logger logger = Logger.getLogger(FilledBubbleObject.class.getName());
 
     public FilledBubbleObject(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("filled-bubble.png")));

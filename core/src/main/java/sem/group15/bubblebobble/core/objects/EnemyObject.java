@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import sem.group15.bubblebobble.core.Logger;
 
 import java.util.Random;
 
@@ -12,6 +13,8 @@ import java.util.Random;
  * Created by TUDelft SID on 8-9-2015.
  */
 public class EnemyObject extends GravityObject {
+
+    private static final Logger logger = Logger.getLogger(EnemyObject.class.getName());
 
     private final float MAX_WALL_OVERLAP = 10f;
     /**
