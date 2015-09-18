@@ -17,7 +17,6 @@ public class BubbleBobble implements ApplicationListener {
 	SpriteBatch batch;
 	Level level;
 
-    private int score;
     private String scoreString;
     BitmapFont bitmapFont;
 	private static final Logger logger = Logger.getLogger(BubbleBobble.class.getName());
