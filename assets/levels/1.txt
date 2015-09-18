@@ -61,3 +61,6 @@ Floor, 512, 0
 Floor, 544, 0
 Floor, 576, 0
 Floor, 608, 0
+Floor, 96, 30
+Floor, 128, 60
+Floor, 160, 90

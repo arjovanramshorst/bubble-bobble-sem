@@ -108,7 +108,7 @@ public class PlayerObject extends GravityObject {
         super.handleCollision(other);
         if(location.overlaps(other.getBody())){
 
-            if (other instanceof EnemyObject&&!isAlive) {
+            if (other instanceof EnemyObject &&isAlive) {
                 logger.log("Player touched EnemyObject.");
                 isAlive = false;
                 deadSound.play(1.0f);
