@@ -17,6 +17,7 @@ public class EnemyObject extends GravityObject {
     private static final Logger logger = Logger.getLogger(EnemyObject.class.getName());
 
     private final float MAX_WALL_OVERLAP = 10f;
+
     /**
      * Creates an EnemyObject with position (X,Y) on the grid.
      * @param xPosition
