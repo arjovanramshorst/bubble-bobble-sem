@@ -100,21 +100,25 @@ public class PlayerObject extends GravityObject {
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
+        if(location.overlaps(other.getBody())){
 
-        if (other instanceof EnemyObject && location.overlaps(other.getBody())) {
-            logger.log("Player touched EnemyObject.");
-            isAlive = false;
-        }
+            if (other instanceof EnemyObject) {
+                logger.log("Player touched EnemyObject.");
+                isAlive = false;
+            }
 
-        if (other instanceof WallObject) {
-            if(between(overlapLeft(other),0, MAX_WALL_OVERLAP)) {
-                setLeft(other.getRight());
-                logger.log("Player touched wall on left.");
+            if (other instanceof WallObject) {
+                if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
+                    setLeft(other.getRight());
+                    logger.log("Player touched wall on left.");
+                }
+                if (between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
+                    setRight(other.getLeft());
+                    logger.log("Player touched wall on right.");
+                }
             }
-            if(between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
-                setRight(other.getLeft());
-                logger.log("Player touched wall on right.");
-            }
+            if (other instanceof  FilledBubbleObject)
+                score+=100;
         }
     }
 
