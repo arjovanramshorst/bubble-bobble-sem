@@ -25,33 +25,10 @@ public class BubbleBobble implements ApplicationListener {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+
 		controller = new LogicController();
+		controller.init(1);
 
-		level = new Level(1);
-        PlayerObject player=new PlayerObject(250f, 250f);
-
-        controller.addGameObject(player);
-        controller.setPlayer(player);
-
-
-        //Temporary Map setup
-		for (int i=0; i<30; i++) {
-			//floor
-			controller.addGameObject(new FloorObject(i * SPRITE_SIZE, 0));
-			//roof
-			controller.addGameObject(new WallObject( i * SPRITE_SIZE,600));
-			//walls
-			controller.addGameObject(new WallObject( 0,i * SPRITE_SIZE));
-			controller.addGameObject(new WallObject( 600,i * SPRITE_SIZE));
-
-
-
-		}
-		for(int i=0;i<4;i++) {
-			controller.addGameObject(new FloorObject(200+SPRITE_SIZE*i, 200-SPRITE_SIZE*i));
-		}
-
-		controller.addGameObject(new EnemyObject(100f, 220f));
 		logger.log("Finished adding objects.");
 
         bitmapFont = new BitmapFont();

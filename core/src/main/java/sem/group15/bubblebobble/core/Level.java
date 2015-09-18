@@ -1,6 +1,8 @@
 package sem.group15.bubblebobble.core;
 
+import com.badlogic.gdx.Gdx;
 import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.PlayerObject;
 
 import java.util.List;
 
@@ -10,16 +12,15 @@ import java.util.List;
  */
 public class Level {
 
-
     private List<GameObject> map;
 
     public Level(int levelNumber){
         //parse level and get map.
         LevelParser parser = new LevelParser();
         try {
-            map = parser.parse("/D:/DAAN/Studie/bubble-bobble-sem/assets/levels/"+levelNumber+".txt");
-
+            map = parser.parse(Gdx.files.internal("levels/" + levelNumber + ".txt"));
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println("file does not exist");
         }
     }

@@ -1,12 +1,15 @@
 package sem.group15.bubblebobble.core;
 
+import com.badlogic.gdx.files.FileHandle;
 import sem.group15.bubblebobble.core.objects.EnemyObject;
 import sem.group15.bubblebobble.core.objects.FloorObject;
 import sem.group15.bubblebobble.core.objects.GameObject;
 import sem.group15.bubblebobble.core.objects.WallObject;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -34,21 +37,22 @@ public class LevelParser {
 
     }
 
-    public List<GameObject> parse(String filename) throws IOException{
-        Scanner scanner = new Scanner(new File(filename));
+    public List<GameObject> parse(FileHandle file) throws IOException{
         List<GameObject> result = new ArrayList<GameObject>();
-
-
-        while (scanner.hasNext()){
-            String object =  scanner.nextLine();
-            result.add(getObject(object));
+        Scanner sc = new Scanner(file.read());
+        while (sc.hasNext()){
+            String object =  sc.nextLine();
+            try {
+                result.add(getObject(object));
+            } catch(IOException ioe) {
+                ioe.printStackTrace();
+            }
         }
-
         return result;
     }
 
-    private GameObject getObject(String enemyString){
-        String[] enemyArray = enemyString.split(",");
+    private GameObject getObject(String line) throws IOException{
+        String[] enemyArray = line.split(",");
         String objectType = enemyArray[0];
         float xPos = Float.parseFloat(enemyArray[1]);
         float yPos = Float.parseFloat(enemyArray[2]);
@@ -61,7 +65,6 @@ public class LevelParser {
             case "Wall":
                 return new WallObject(xPos,yPos);
         }
-        return null;
+        throw new IOException("String: " + line + " is not a valid object!");
     }
-
 }
