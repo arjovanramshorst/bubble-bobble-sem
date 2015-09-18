@@ -24,11 +24,14 @@ public class EnemyObjectTest {
      */
     @Test
     public void testHandleCollisionWall() {
-        EnemyObject enemy = new EnemyObject(0, BubbleBobble.SPRITE_SIZE -2, null);
-        ImmutableObject wall = new WallObject(0,0, null);
+        ImmutableObject wall2 = new WallObject(0,0, null);
+        EnemyObject enemy = new EnemyObject(BubbleBobble.SPRITE_SIZE, 0, null);
+        ImmutableObject wall = new WallObject(2*BubbleBobble.SPRITE_SIZE,0, null);
         float speed = enemy.currentSpeedX;
+        enemy.update(1/speed);
+        System.out.print(enemy.location.getX());
         enemy.handleCollision(wall);
-        enemy.update(0.1f);
+        enemy.handleCollision(wall2);
         assertEquals(-1*speed, enemy.currentSpeedX, 1);
     }
 }

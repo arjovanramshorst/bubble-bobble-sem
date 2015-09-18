@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import sem.group15.bubblebobble.core.Logger;
 
 import java.util.Random;
 
@@ -13,10 +14,9 @@ import java.util.Random;
  */
 public class EnemyObject extends GravityObject {
 
-    protected boolean wallCollision;
-  //  protected float timeSinceLastWallCollision;
-    protected boolean isAlive;
+    private static final Logger logger = Logger.getLogger(EnemyObject.class.getName());
 
+    private final float MAX_WALL_OVERLAP = 10f;
     /**
      * Creates an EnemyObject with position (X,Y) on the grid.
      * @param xPosition
@@ -32,8 +32,6 @@ public class EnemyObject extends GravityObject {
         } else {
             currentSpeedX = -100;
         }
-      //  this.timeSinceLastWallCollision = 0;
-        isAlive = true;
     }
 
     /**
@@ -55,8 +53,6 @@ public class EnemyObject extends GravityObject {
         } else {
             currentSpeedX = -100;
         }
-      //  this.timeSinceLastWallCollision = 0;
-        isAlive = true;
     }
 
 
@@ -68,6 +64,7 @@ public class EnemyObject extends GravityObject {
     public void update(float elapsed) {
         super.update(elapsed);
         location.x += currentSpeedX * elapsed;
+        location.y += currentSpeedY * elapsed;
     }
 
     /**
@@ -77,29 +74,17 @@ public class EnemyObject extends GravityObject {
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
-        //wallobject
 
         if(other instanceof WallObject) {
-            if(overlapLeft(other) > 0) {
+            if(between(overlapLeft(other),0, MAX_WALL_OVERLAP)) {
                 setLeft(other.getRight());
                 currentSpeedX *= -1;
             }
-            else if (overlapRight(other) > 0) {
+            if(between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
                 setRight(other.getLeft());
                 currentSpeedX *= -1;
             }
         }
-        if (other instanceof BubbleObject) {
-            isAlive = false;
-        }
-    }
-
-    /**
-     * Checks if the enemy is still alive
-     * @return
-     */
-    public boolean isAlive() {
-        return isAlive;
     }
 
     /**

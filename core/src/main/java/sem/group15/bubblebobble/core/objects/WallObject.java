@@ -5,11 +5,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import sem.group15.bubblebobble.core.Logger;
 
 /**
  * Created by woute on 9/8/2015.
  */
 public class WallObject extends ImmutableObject{
+
+    private static final Logger logger = Logger.getLogger(WallObject.class.getName());
 
     /**
      * Create wall object with given x,y coordinates
