@@ -23,7 +23,7 @@ public class PlayerObject extends GravityObject {
     protected boolean isAlive;
     private boolean fired;
     private Direction direction;
-    private Texture textureLeft, textureRight,textureDead;
+    private Texture textureLeft, textureRight, textureDead;
 
     /**
      * creates player object with a position
@@ -32,7 +32,7 @@ public class PlayerObject extends GravityObject {
      */
     public PlayerObject(float xPosition, float yPosition) {
         super(
-                new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE),
+                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
                 null
         );
         textureLeft = new Texture(Gdx.files.internal("playerSprite.png"));
@@ -67,12 +67,11 @@ public class PlayerObject extends GravityObject {
      * updates the player parameters
      * @param elapsed time elapsed since last gameloop.
      */
-
     @Override
     public void update(float elapsed) {
 
         super.update(elapsed);
-        if(isAlive) {
+        if (isAlive) {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 currentSpeedX = -100;
                 direction = Direction.LEFT;
@@ -130,7 +129,6 @@ public class PlayerObject extends GravityObject {
                 isAlive = false;
                 deadSound.play(1.0f);
             }
-
             if (other instanceof WallObject) {
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
@@ -164,7 +162,7 @@ public class PlayerObject extends GravityObject {
      */
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        if(isAlive) {
+        if (isAlive) {
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(textureLeft, getLeft(), getBottom());
@@ -176,7 +174,6 @@ public class PlayerObject extends GravityObject {
         }
         else
             spriteBatch.draw(textureDead, getLeft(), getBottom());
-
     }
 }
 
