@@ -18,6 +18,7 @@ public class GravityObjectTest {
     public void setUp() {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
+
     }
 
     @Test

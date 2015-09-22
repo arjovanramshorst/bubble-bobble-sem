@@ -40,11 +40,9 @@ public class PlayerObject extends GravityObject {
         textureDead = new Texture(Gdx.files.internal("playerDead.png"));
         deadSound= Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
         jumpSound= Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
-
         isAlive = true;
         fired = false;
         direction = Direction.RIGHT;
-
         score = 0;
     }
 
@@ -128,7 +126,7 @@ public class PlayerObject extends GravityObject {
             if (other instanceof EnemyObject &&isAlive) {
                 logger.log("Player touched EnemyObject.");
                 isAlive = false;
-                deadSound.play(1.0f);
+                playDeadSound();
             }
 
             if (other instanceof WallObject) {
@@ -166,6 +164,14 @@ public class PlayerObject extends GravityObject {
             spriteBatch.draw(textureDead, getLeft(), getBottom());
 
     }
+
+    /**
+     * Plays the deadSound when a player dies.
+     */
+    public void playDeadSound() {
+        deadSound.play(1.0f);
+    }
+
 }
 
 
