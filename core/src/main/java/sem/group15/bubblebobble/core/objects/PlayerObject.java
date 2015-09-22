@@ -94,9 +94,21 @@ public class PlayerObject extends GravityObject {
                 canJump = false;
                 jumpSound.play(1.0f);
             }
+        } else {
+            handleDeath(elapsed);
         }
-            location.x += currentSpeedX * elapsed;
-            location.y += currentSpeedY * elapsed;
+        location.x += currentSpeedX * elapsed;
+        location.y += currentSpeedY * elapsed;
+
+    }
+
+    /**
+     * This method handles what happens after the player dies. In the future it might include the logic for
+     * a death animation.
+     * @param elapsed time elapsed since last frame.
+     */
+    private void handleDeath(float elapsed) {
+        currentSpeedX = 0;
 
     }
 
