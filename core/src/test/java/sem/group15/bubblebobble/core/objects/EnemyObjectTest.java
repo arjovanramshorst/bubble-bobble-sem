@@ -19,7 +19,7 @@ public class EnemyObjectTest {
     }
 
     /**
-     * Test if a collision with a wall is handeled accordingly.
+     * Test if a collision with a wall is handled accordingly.
      * The speed should change with -1.
      */
     @Test
@@ -32,6 +32,20 @@ public class EnemyObjectTest {
         System.out.print(enemy.location.getX());
         enemy.handleCollision(wall);
         enemy.handleCollision(wall2);
-        assertEquals(-1*speed, enemy.currentSpeedX, 1);
+        assertEquals(-1 * speed, enemy.currentSpeedX, 1);
+    }
+
+    /**
+     * Test if a collision with a bubble is handled accordingly.
+     */
+    @Test
+    public void testHandleCollisionBubble() {
+        EnemyObject enemy = new EnemyObject(BubbleBobble.SPRITE_SIZE, 0, null);
+        enemy.update(1 / enemy.currentSpeedX);
+        assertFalse(enemy.remove());
+        BubbleObject bubble = new BubbleObject(BubbleBobble.SPRITE_SIZE, 0, GameObject.Direction.RIGHT, null);
+        enemy.update(1 / enemy.currentSpeedX);
+        enemy.handleCollision(bubble);
+        assertTrue(enemy.remove());
     }
 }
