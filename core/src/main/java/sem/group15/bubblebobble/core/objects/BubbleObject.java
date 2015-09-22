@@ -37,6 +37,26 @@ public class BubbleObject extends FloatingObject {
     }
 
     /**
+     * For Testing purposes
+     * @param xPosition
+     * @param yPosition
+     * @param direction
+     * @param texture
+     */
+    public BubbleObject(float xPosition, float yPosition, Direction direction, Texture texture) {
+        super(new Rectangle(xPosition, yPosition, 32, 32), texture);
+        switch (direction) {
+            case LEFT:
+                xSpeed = -1 * INITIAL_SPEED;
+                break;
+            case RIGHT:
+                xSpeed = INITIAL_SPEED;
+                break;
+        }
+        ySpeed = 0;
+    }
+
+    /**
      * This updates the BubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
      * The initial speed of the BubbleObject is FOR THE MOMENT 50.
