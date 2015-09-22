@@ -100,7 +100,7 @@ public class PlayerObject extends GravityObject {
             }
             if (lives == 0)
                 isAlive = false;
-                deadSound.play(1.0f);
+                playDeadSound();
         }
             location.x += currentSpeedX * elapsed;
             location.y += currentSpeedY * elapsed;
@@ -174,6 +174,10 @@ public class PlayerObject extends GravityObject {
         else
             spriteBatch.draw(textureDead, getLeft(), getBottom());
 
+    }
+
+    public void playDeadSound() {
+        deadSound.play(1.0f);
     }
 }
 
