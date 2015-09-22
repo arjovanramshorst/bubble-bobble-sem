@@ -23,7 +23,7 @@ public class PlayerObject extends GravityObject {
     protected boolean isAlive;
     private boolean fired;
     private Direction direction;
-    private Texture textureLeft, textureRight,textureDead;
+    private Texture textureLeft, textureRight, textureDead;
 
     /**
      * creates player object with a position
@@ -32,7 +32,7 @@ public class PlayerObject extends GravityObject {
      */
     public PlayerObject(float xPosition, float yPosition) {
         super(
-                new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE),
+                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
                 null
         );
         textureLeft = new Texture(Gdx.files.internal("playerSprite.png"));
@@ -67,12 +67,11 @@ public class PlayerObject extends GravityObject {
      * updates the player parameters
      * @param elapsed time elapsed since last gameloop.
      */
-
     @Override
     public void update(float elapsed) {
 
         super.update(elapsed);
-        if(isAlive) {
+        if (isAlive) {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 currentSpeedX = -100;
                 direction = Direction.LEFT;
@@ -117,20 +116,20 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * If the player collides with an enemyObject, set the attribute isAliv e to false.
+     * If the player collides with an enemyObject, set the attribute isAlive to false.
+     * If Player collides with a Bubble that is falling onto while holding space, make him stand on it
      * @param other Object that needs to be checked for collision.
      */
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
-        if(location.overlaps(other.getBody())){
+        if (location.overlaps(other.getBody())) {
 
-            if (other instanceof EnemyObject &&isAlive) {
+            if (other instanceof EnemyObject && isAlive) {
                 logger.log("Player touched EnemyObject.");
                 isAlive = false;
                 deadSound.play(1.0f);
             }
-
             if (other instanceof WallObject) {
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
@@ -141,8 +140,12 @@ public class PlayerObject extends GravityObject {
                     logger.log("Player touched wall on right.");
                 }
             }
-            if (other instanceof  FilledBubbleObject)
-                score+=100;
+            if (other instanceof FilledBubbleObject)
+                score += 100;
+        }
+        if (fired && between(overlapBottom(other), 0f, MAX_WALL_OVERLAP) && currentSpeedY < 0){
+            if (other instanceof BubbleObject)
+                location.y = other.getBody().y + BubbleBobble.SPRITE_SIZE;
         }
     }
 
@@ -152,7 +155,7 @@ public class PlayerObject extends GravityObject {
      */
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        if(isAlive) {
+        if (isAlive) {
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(textureLeft, getLeft(), getBottom());
@@ -164,7 +167,6 @@ public class PlayerObject extends GravityObject {
         }
         else
             spriteBatch.draw(textureDead, getLeft(), getBottom());
-
     }
 }
 
