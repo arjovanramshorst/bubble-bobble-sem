@@ -116,7 +116,8 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * If the player collides with an enemyObject, set the attribute isAliv e to false.
+     * If the player collides with an enemyObject, set the attribute isAlive to false.
+     * If Player collides with a Bubble that is falling onto while holding space, make him stand on it
      * @param other Object that needs to be checked for collision.
      */
     @Override
@@ -142,17 +143,9 @@ public class PlayerObject extends GravityObject {
             if (other instanceof FilledBubbleObject)
                 score += 100;
         }
-    }
-
-    /**
-     * Allow the player to ride the bubble by standing ontop of it
-     * @param other Bubble to stand on
-     */
-    public void rideBubble(GameObject other) {
-        if (between(overlapBottom(other), 0f, MAX_WALL_OVERLAP) && currentSpeedY < 0){
-            if (other instanceof BubbleObject){
+        if (fired && between(overlapBottom(other), 0f, MAX_WALL_OVERLAP) && currentSpeedY < 0){
+            if (other instanceof BubbleObject)
                 location.y = other.getBody().y + BubbleBobble.SPRITE_SIZE;
-            }
         }
     }
 
