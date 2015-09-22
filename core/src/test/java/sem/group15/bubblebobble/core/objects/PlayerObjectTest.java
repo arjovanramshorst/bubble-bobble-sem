@@ -25,8 +25,7 @@ public class PlayerObjectTest {
     }
 
     /**
-     * Tests if boolean isAlive turns false when the player collides with an enemy
-     * Also tests if the sound deadSound is played.
+     * Tests if the collision with an enemy is handled accordingly.
      */
     @Test
     public void testHandleCollisionEnemy()  {
@@ -43,7 +42,21 @@ public class PlayerObjectTest {
         assertFalse(player.isAlive);
 
     }
+    
+    /**
+     * Tests if the collision with a filledBubble is handled accordingly.
+     */
+    @Test
+    public void testHandleCollisionFilledBubble() {
+        PlayerObject player = new PlayerObject(0, BubbleBobble.SPRITE_SIZE - 2, null);
+        player.update(0.1f);
+        assertTrue(player.score == 0);
+        FilledBubbleObject filledBubble = new FilledBubbleObject(0, BubbleBobble.SPRITE_SIZE -2, null);
+        player.update(0.1f);
+        player.handleCollision(filledBubble);
+        assertTrue(player.score == 100);
 
+    }
 
 
 }

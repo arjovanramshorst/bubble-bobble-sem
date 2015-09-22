@@ -13,8 +13,25 @@ public class FilledBubbleObject extends FloatingObject {
 
     private static final Logger logger = Logger.getLogger(FilledBubbleObject.class.getName());
 
+    /**
+     * Constructor for the filledBubbleObject.
+     * @param xPosition
+     * @param yPosition
+     */
     public FilledBubbleObject(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("filled-bubble.png")));
+        ySpeed = 50;
+        xSpeed = 0;
+    }
+
+    /**
+     * Constructor for testing purposes.
+     * @param xPosition
+     * @param yPosition
+     * @param texture
+     */
+    public FilledBubbleObject(float xPosition, float yPosition, Texture texture) {
+        super(new Rectangle(xPosition, yPosition, 32, 32), texture);
         ySpeed = 50;
         xSpeed = 0;
     }
