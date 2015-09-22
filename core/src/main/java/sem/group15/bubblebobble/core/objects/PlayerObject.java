@@ -123,9 +123,9 @@ public class PlayerObject extends GravityObject {
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
-        if(location.overlaps(other.getBody())){
+        if (location.overlaps(other.getBody())) {
 
-            if (other instanceof EnemyObject &&isAlive) {
+            if (other instanceof EnemyObject && isAlive) {
                 logger.log("Player touched EnemyObject.");
                 isAlive = false;
                 deadSound.play(1.0f);
@@ -141,8 +141,20 @@ public class PlayerObject extends GravityObject {
                     logger.log("Player touched wall on right.");
                 }
             }
-            if (other instanceof  FilledBubbleObject)
-                score+=100;
+            if (other instanceof FilledBubbleObject)
+                score += 100;
+        }
+    }
+
+    /**
+     * Allow the player to ride the bubble by standing ontop of it
+     * @param other Bubble to stand on
+     */
+    public void rideBubble(GameObject other) {
+        if (between(overlapBottom(other), 0f, MAX_WALL_OVERLAP) && currentSpeedY < 0){
+            if (other instanceof BubbleObject){
+                location.y = other.getBody().y + BubbleBobble.SPRITE_SIZE;
+            }
         }
     }
 
