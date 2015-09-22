@@ -110,6 +110,7 @@ public class BubbleObject extends FloatingObject {
                 remove = true;
                 newObjects.add(new FilledBubbleObject(this.getBody().getX(), this.getBody().getY()));
             }
+
         }
 
     }

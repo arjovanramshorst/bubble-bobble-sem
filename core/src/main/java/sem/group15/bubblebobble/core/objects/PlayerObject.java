@@ -22,6 +22,8 @@ public class PlayerObject extends GravityObject {
     public int score;
     protected boolean isAlive;
     private boolean fired;
+    protected boolean cannotFloat;
+    protected boolean floating;
     private Direction direction;
     private Texture textureLeft, textureRight,textureDead;
 
@@ -68,7 +70,6 @@ public class PlayerObject extends GravityObject {
 
     @Override
     public void update(float elapsed) {
-
         super.update(elapsed);
         if(isAlive) {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -86,12 +87,20 @@ public class PlayerObject extends GravityObject {
                 fireBubble();
                 fired = true;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.UP) && canJump) {
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) && canJump || floating) {
                 timeSinceLastFloorContact = 0;
                 currentSpeedY = 300;
                 canJump = false;
                 jumpSound.play(1.0f);
             }
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.W) && canJump || floating) {
+                timeSinceLastFloorContact = 0;
+                currentSpeedY = 300;
+                canJump = false;
+                jumpSound.play(1.0f);
+                cannotFloat = false;
+            }
+
         }
             location.x += currentSpeedX * elapsed;
             location.y += currentSpeedY * elapsed;
@@ -121,6 +130,7 @@ public class PlayerObject extends GravityObject {
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
+
         if(location.overlaps(other.getBody())){
 
             if (other instanceof EnemyObject &&isAlive) {
@@ -139,8 +149,14 @@ public class PlayerObject extends GravityObject {
                     logger.log("Player touched wall on right.");
                 }
             }
-            if (other instanceof  FilledBubbleObject)
-                score+=100;
+            if (other instanceof  FilledBubbleObject) {
+                score += 100;
+            }
+            if (other instanceof BubbleObject) {
+                if (between(overlapTop(other), 0, 10)) {
+                    canJump = true;
+                }
+            }
         }
     }
 
@@ -172,6 +188,12 @@ public class PlayerObject extends GravityObject {
         deadSound.play(1.0f);
     }
 
+    /**
+     * Set method solely for testing purposes.
+     */
+    public void setCanJumpFalse() {
+        this.canJump = false;
+    }
 }
 
 

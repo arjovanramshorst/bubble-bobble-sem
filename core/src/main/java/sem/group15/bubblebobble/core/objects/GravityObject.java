@@ -11,7 +11,6 @@ public abstract class GravityObject extends GameObject {
     private final int MAX_GRAVITY_SPEED = -300;
     private final float MAX_DIFF_LANDING = 10f;
 
-
     protected float timeSinceLastFloorContact;
     protected boolean canJump;
     protected float currentSpeedX;
@@ -31,9 +30,9 @@ public abstract class GravityObject extends GameObject {
      * @param elapsed time elapsed since last gameloop.
      */
     public void update(float elapsed) {
+
         timeSinceLastFloorContact += elapsed;
-        currentSpeedY = Math.max(
-                currentSpeedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
+        currentSpeedY = Math.max( currentSpeedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
                 MAX_GRAVITY_SPEED
         );
     }

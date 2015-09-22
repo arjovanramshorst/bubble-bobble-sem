@@ -2,7 +2,6 @@ package sem.group15.bubblebobble.core.objects;
 
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import org.junit.Before;
@@ -42,9 +41,9 @@ public class PlayerObjectTest {
         assertFalse(player.isAlive);
 
     }
-    
+
     /**
-     * Tests if the collision with a filledBubble is handled accordingly.
+     * Tests if a collision with a filledBubble is handled accordingly.
      */
     @Test
     public void testHandleCollisionFilledBubble() {
@@ -56,6 +55,21 @@ public class PlayerObjectTest {
         player.handleCollision(filledBubble);
         assertTrue(player.score == 100);
 
+    }
+
+    /**
+     * Tests if a collisionw ith a bubble is handled accordingly.
+     */
+    @Test
+    public void testHandleCollisionBubble() {
+        PlayerObject player = new PlayerObject(0, BubbleBobble.SPRITE_SIZE - 2, null);
+        player.update(0.1f);
+        assertTrue(player.canJump);
+        player.setCanJumpFalse();
+        assertFalse(player.canJump);
+        BubbleObject bubble = new BubbleObject(0, BubbleBobble.SPRITE_SIZE -2, null);
+        player.handleCollision(bubble);
+        assertTrue(player.canJump);
     }
 
 
