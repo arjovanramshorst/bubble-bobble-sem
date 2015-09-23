@@ -151,10 +151,12 @@ public class PlayerObject extends GravityObject {
             }
             if (other instanceof  FilledBubbleObject) {
                 score += 100;
+                logger.log("Player touched filled bubble");
             }
             if (other instanceof BubbleObject) {
-                if (between(overlapTop(other), 0, 10)) {
+                if (between(other.overlapTop(this), 0, 5)) {
                     canJump = true;
+                    logger.log("Player touched bubble");
                 }
             }
         }
@@ -188,12 +190,6 @@ public class PlayerObject extends GravityObject {
         deadSound.play(1.0f);
     }
 
-    /**
-     * Set method solely for testing purposes.
-     */
-    public void setCanJumpFalse() {
-        this.canJump = false;
-    }
 }
 
 

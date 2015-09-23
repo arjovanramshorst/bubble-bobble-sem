@@ -15,6 +15,10 @@ import static org.mockito.Mockito.mock;
  * Created by TUDelft SID on 22-9-2015.
  */
 public class PlayerObjectTest {
+    /**
+     * @playerYco sets the player on top of the bubble.
+     */
+    final int playerYco = 32;
 
     @Before
     public void setUp() {
@@ -62,12 +66,10 @@ public class PlayerObjectTest {
      */
     @Test
     public void testHandleCollisionBubble() {
-        PlayerObject player = new PlayerObject(0, BubbleBobble.SPRITE_SIZE - 2, null);
-        player.update(0.1f);
-        assertTrue(player.canJump);
-        player.setCanJumpFalse();
-        assertFalse(player.canJump);
-        BubbleObject bubble = new BubbleObject(0, BubbleBobble.SPRITE_SIZE - 2 , null);
+        PlayerObject player = new PlayerObject(0, BubbleBobble.SPRITE_SIZE + playerYco , null);
+        assertTrue(!player.canJump);
+        BubbleObject bubble = new BubbleObject(0, BubbleBobble.SPRITE_SIZE, GameObject.Direction.RIGHT, null);
+        player.update(0.01f);
         player.handleCollision(bubble);
         assertTrue(player.canJump);
     }
