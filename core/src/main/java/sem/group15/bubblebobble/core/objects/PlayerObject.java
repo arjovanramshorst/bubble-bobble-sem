@@ -16,6 +16,8 @@ public class PlayerObject extends GravityObject {
 
     private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
 
+    private final int PLAYER_LIVES = 3;
+
     private Sound deadSound, jumpSound;
 
     private final float MAX_WALL_OVERLAP = 10f;
@@ -24,6 +26,8 @@ public class PlayerObject extends GravityObject {
     private boolean fired;
     private Direction direction;
     private Texture textureLeft, textureRight,textureDead;
+    public int lives;
+    public float respawned;
 
     /**
      * creates player object with a position
@@ -46,6 +50,7 @@ public class PlayerObject extends GravityObject {
         direction = Direction.RIGHT;
 
         score = 0;
+        lives = PLAYER_LIVES;
     }
 
     /**
@@ -61,6 +66,7 @@ public class PlayerObject extends GravityObject {
         );
         isAlive = true;
         score = 0;
+        lives = PLAYER_LIVES;
     }
 
     /**
@@ -70,7 +76,6 @@ public class PlayerObject extends GravityObject {
 
     @Override
     public void update(float elapsed) {
-
         super.update(elapsed);
         if(isAlive) {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -94,6 +99,15 @@ public class PlayerObject extends GravityObject {
                 canJump = false;
                 jumpSound.play(1.0f);
             }
+            if (respawned > 0){
+                if (respawned >= elapsed){
+                    respawned = respawned - elapsed;
+                    System.out.println(respawned);
+                }
+                else respawned = 0;
+            }
+            if (lives == 0)
+                isAlive = false;
         }
             location.x += currentSpeedX * elapsed;
             location.y += currentSpeedY * elapsed;
@@ -123,12 +137,16 @@ public class PlayerObject extends GravityObject {
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
-        if(location.overlaps(other.getBody())){
+        if (location.overlaps(other.getBody())){
 
-            if (other instanceof EnemyObject &&isAlive) {
+            if (other instanceof EnemyObject && isAlive && respawned == 0f) {
                 logger.log("Player touched EnemyObject.");
-                isAlive = false;
-                deadSound.play(1.0f);
+                respawned = 5f;
+                lives--;
+                playDeadSound();
+                //respawn location
+                location.x = 200;
+                location.y = 200;
             }
 
             if (other instanceof WallObject) {
@@ -142,7 +160,7 @@ public class PlayerObject extends GravityObject {
                 }
             }
             if (other instanceof  FilledBubbleObject)
-                score+=100;
+                score += 100;
         }
     }
 
@@ -165,6 +183,10 @@ public class PlayerObject extends GravityObject {
         else
             spriteBatch.draw(textureDead, getLeft(), getBottom());
 
+    }
+
+    public void playDeadSound() {
+        deadSound.play(1.0f);
     }
 }
 
