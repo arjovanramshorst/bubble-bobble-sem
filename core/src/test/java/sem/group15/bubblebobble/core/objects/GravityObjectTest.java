@@ -22,12 +22,7 @@ public class GravityObjectTest {
 
     @Test
     public void testHandleCollision() throws Exception {
-        GravityObject player = new PlayerObject(0,BubbleBobble.SPRITE_SIZE - 2, null) {
-            @Override
-        public void playDeadSound() {
-                
-            }
-        };
+        GravityObject player = new PlayerObject(0,BubbleBobble.SPRITE_SIZE - 2, null);
         FloorObject floor = new FloorObject(0,0, null);
         player.update(0.1f);
         player.handleCollision(floor);

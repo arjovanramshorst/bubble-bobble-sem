@@ -27,6 +27,7 @@ public class PlayerObject extends GravityObject {
     private Direction direction;
     private Texture textureLeft, textureRight,textureDead;
     public int lives;
+    public float respawned;
 
     /**
      * creates player object with a position
@@ -98,9 +99,15 @@ public class PlayerObject extends GravityObject {
                 canJump = false;
                 jumpSound.play(1.0f);
             }
+            if (respawned > 0){
+                if (respawned >= elapsed){
+                    respawned = respawned - elapsed;
+                    System.out.println(respawned);
+                }
+                else respawned = 0;
+            }
             if (lives == 0)
                 isAlive = false;
-                playDeadSound();
         }
             location.x += currentSpeedX * elapsed;
             location.y += currentSpeedY * elapsed;
@@ -132,9 +139,11 @@ public class PlayerObject extends GravityObject {
         super.handleCollision(other);
         if (location.overlaps(other.getBody())){
 
-            if (other instanceof EnemyObject && isAlive) {
+            if (other instanceof EnemyObject && isAlive && respawned == 0f) {
                 logger.log("Player touched EnemyObject.");
+                respawned = 5f;
                 lives--;
+                playDeadSound();
                 //respawn location
                 location.x = 200;
                 location.y = 200;
