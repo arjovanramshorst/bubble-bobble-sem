@@ -18,7 +18,7 @@ public class Level {
         //parse level and get map.
         LevelParser parser = new LevelParser();
         try {
-            map = parser.parse(Gdx.files.internal("levels/" + levelNumber + ".txt"));
+            map = parser.parse(Gdx.files.internal("levels/" + levelNumber + ".lvl"));
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("file does not exist");

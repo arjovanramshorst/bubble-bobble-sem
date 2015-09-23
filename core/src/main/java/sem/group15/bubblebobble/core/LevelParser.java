@@ -25,7 +25,7 @@ public class LevelParser {
      0 (enemy type), 200(x location), 100(y location)
      0 (enemy type), 200(x location), 100(y location)
      0 (enemy type), 200(x location), 100(y location)
-     Wall (object type), 200(x location), 100(y location)
+     Wall (object type), 20(x location), 100(y location)
      Wall (object type), 200(x location), 100(y location)
      Wall (object type), 200(x location), 100(y location)
      Wall (object type), 200(x location), 100(y location)
@@ -33,11 +33,8 @@ public class LevelParser {
      Floor (object type), 200(x location), 100(y location)
      Floor (object type), 200(x location), 100(y location)
      */
-    public LevelParser(){
 
-    }
-
-    public List<GameObject> parse(FileHandle file) throws IOException{
+    public static List<GameObject> parse(FileHandle file) throws IOException{
         List<GameObject> result = new ArrayList<GameObject>();
         Scanner sc = new Scanner(file.read());
         while (sc.hasNext()){
@@ -51,11 +48,11 @@ public class LevelParser {
         return result;
     }
 
-    private GameObject getObject(String line) throws IOException{
+    private static GameObject getObject(String line) throws IOException{
         String[] enemyArray = line.split(",");
         String objectType = enemyArray[0];
-        float xPos = Float.parseFloat(enemyArray[1]);
-        float yPos = Float.parseFloat(enemyArray[2]);
+        float xPos = BubbleBobble.SPRITE_SIZE * Float.parseFloat(enemyArray[1]);
+        float yPos = BubbleBobble.SPRITE_SIZE * Float.parseFloat(enemyArray[2]);
 
         switch (objectType) {
             case "Enemy":

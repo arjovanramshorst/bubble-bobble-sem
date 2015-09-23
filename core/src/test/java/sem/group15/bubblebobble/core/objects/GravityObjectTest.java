@@ -27,6 +27,8 @@ public class GravityObjectTest {
         player.update(0.1f);
         player.handleCollision(floor);
         assertEquals((float)BubbleBobble.SPRITE_SIZE,player.getBody().y, 0.01);
+        assertEquals(0, player.timeSinceLastFloorContact, 0.01);
+        assertTrue(player.canJump);
     }
 
     @Test
