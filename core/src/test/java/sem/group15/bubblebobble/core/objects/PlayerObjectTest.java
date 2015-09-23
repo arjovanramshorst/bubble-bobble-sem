@@ -50,7 +50,7 @@ public class PlayerObjectTest {
         PlayerObject player = new PlayerObject(0, BubbleBobble.SPRITE_SIZE - 2, null);
         player.update(0.1f);
         assertTrue(player.score == 0);
-        FilledBubbleObject filledBubble = new FilledBubbleObject(0, BubbleBobble.SPRITE_SIZE -2, null);
+        FilledBubbleObject filledBubble = new FilledBubbleObject(0, BubbleBobble.SPRITE_SIZE - 2 , null);
         player.update(0.1f);
         player.handleCollision(filledBubble);
         assertTrue(player.score == 100);
@@ -67,7 +67,7 @@ public class PlayerObjectTest {
         assertTrue(player.canJump);
         player.setCanJumpFalse();
         assertFalse(player.canJump);
-        BubbleObject bubble = new BubbleObject(0, BubbleBobble.SPRITE_SIZE -2, null);
+        BubbleObject bubble = new BubbleObject(0, BubbleBobble.SPRITE_SIZE - 2 , null);
         player.handleCollision(bubble);
         assertTrue(player.canJump);
     }

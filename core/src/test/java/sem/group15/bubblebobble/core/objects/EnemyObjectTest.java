@@ -10,8 +10,14 @@ import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test class for enemy object.
+ */
 public class EnemyObjectTest {
 
+    /**
+     * Set up mockito
+     */
     @Before
     public void setUp() {
         Gdx.app = mock(Application.class);
@@ -24,11 +30,11 @@ public class EnemyObjectTest {
      */
     @Test
     public void testHandleCollisionWall() {
-        ImmutableObject wall2 = new WallObject(0,0, null);
+        ImmutableObject wall2 = new WallObject(0, 0, null);
         EnemyObject enemy = new EnemyObject(BubbleBobble.SPRITE_SIZE, 0, null);
-        ImmutableObject wall = new WallObject(2*BubbleBobble.SPRITE_SIZE,0, null);
+        ImmutableObject wall = new WallObject(2 * BubbleBobble.SPRITE_SIZE, 0 , null);
         float speed = enemy.currentSpeedX;
-        enemy.update(1/speed);
+        enemy.update(1 / speed);
         System.out.print(enemy.location.getX());
         enemy.handleCollision(wall);
         enemy.handleCollision(wall2);

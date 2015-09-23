@@ -23,19 +23,19 @@ public class GravityObjectTest {
 
     @Test
     public void testHandleCollision() throws Exception {
-        GravityObject player = new PlayerObject(0,BubbleBobble.SPRITE_SIZE - 2, null);
-        FloorObject floor = new FloorObject(0,0, null);
+        GravityObject player = new PlayerObject(0, BubbleBobble.SPRITE_SIZE - 2, null);
+        FloorObject floor = new FloorObject(0, 0 , null);
         player.update(0.1f);
         player.handleCollision(floor);
-        assertEquals((float)BubbleBobble.SPRITE_SIZE,player.getBody().y, 0.01);
+        assertEquals((float) BubbleBobble.SPRITE_SIZE, player.getBody().y, 0.01);
     }
 
     @Test
     public void testHandleCollisionNoCollision() throws Exception {
-        GravityObject player = new PlayerObject(0,BubbleBobble.SPRITE_SIZE + 2, null);
-        FloorObject floor = new FloorObject(0,0, null);
+        GravityObject player = new PlayerObject(0, BubbleBobble.SPRITE_SIZE + 2, null);
+        FloorObject floor = new FloorObject(0, 0, null);
         player.handleCollision(floor);
-        assertEquals((float)BubbleBobble.SPRITE_SIZE + 2,player.getBody().y, 0.01);
+        assertEquals((float) BubbleBobble.SPRITE_SIZE + 2, player.getBody().y, 0.01);
     }
 
 }

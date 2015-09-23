@@ -82,7 +82,7 @@ public class BubbleObject extends FloatingObject {
      */
     public void getOutOfGame() {
 
-        if(Math.abs(xSpeed) > 0) {
+        if ( Math.abs(xSpeed) > 0 ) {
             xSpeed = 0;
             ySpeed = 50;
         }
@@ -100,10 +100,6 @@ public class BubbleObject extends FloatingObject {
      */
     public void handleCollision(GameObject collided) {
         if (location.overlaps(collided.getBody())) {
-
-            if (collided instanceof ImmutableObject) {
-                // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
-            }
 
             if (collided instanceof EnemyObject) {
                 logger.log("Bubble touched enemy object.");
