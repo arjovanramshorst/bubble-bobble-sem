@@ -13,17 +13,21 @@
 - The whole project must be properly documented with java docs.
 - The formatting in the whole project must be fixed.
 - Tools such as checkstyle and pmd must be enabled and working.
+- The player must be able to ride a bubble.
+- The player must be able to warp in a level.
 
 
 **Should haves**
 - Objects falling through the floor when losing focus should be fixed.
 - The memory leak caused by bubbles that are not removed in the system should be fixed.
 - The bug that a player continues to move in the current direction while dead should be fixed.
-- the bug that one bubble can catch multiple enemies at once should be fixed.
+- The bug that one bubble can catch multiple enemies at once should be fixed.
+- The game should have multiple levels.
 
 
 **Would/Won't haves**
 - The game shall save the scores of all of its players using a high-score list with the top ten of names and scores of players with the highest scores.
+- The game shall have a level editor which enables the developer to easily create levels.
 
 ####Non-functional requirements
 - The game shall be playable on Windows (7 or higher), Mac OS X (10.8 and higher), and Linux.
