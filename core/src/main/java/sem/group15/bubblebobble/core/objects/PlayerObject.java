@@ -22,6 +22,8 @@ public class PlayerObject extends GravityObject {
     public int score;
     protected boolean isAlive;
     private boolean fired;
+    protected boolean cannotFloat;
+    protected boolean floating;
     private Direction direction;
     private Texture textureLeft, textureRight,textureDead;
 
@@ -40,11 +42,9 @@ public class PlayerObject extends GravityObject {
         textureDead = new Texture(Gdx.files.internal("playerDead.png"));
         deadSound= Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
         jumpSound= Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
-
         isAlive = true;
         fired = false;
         direction = Direction.RIGHT;
-
         score = 0;
     }
 
@@ -70,7 +70,6 @@ public class PlayerObject extends GravityObject {
 
     @Override
     public void update(float elapsed) {
-
         super.update(elapsed);
         if(isAlive) {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -88,7 +87,7 @@ public class PlayerObject extends GravityObject {
                 fireBubble();
                 fired = true;
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.UP) && canJump) {
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) && canJump || floating) {
                 timeSinceLastFloorContact = 0;
                 currentSpeedY = 300;
                 canJump = false;
@@ -96,6 +95,13 @@ public class PlayerObject extends GravityObject {
             }
         } else {
             handleDeath(elapsed);
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.W) && canJump || floating) {
+                timeSinceLastFloorContact = 0;
+                currentSpeedY = 300;
+                canJump = false;
+                jumpSound.play(1.0f);
+                cannotFloat = false;
+            }
         }
         location.x += currentSpeedX * elapsed;
         location.y += currentSpeedY * elapsed;
@@ -135,12 +141,13 @@ public class PlayerObject extends GravityObject {
     @Override
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
+
         if(location.overlaps(other.getBody())){
 
             if (other instanceof EnemyObject &&isAlive) {
                 logger.log("Player touched EnemyObject.");
                 isAlive = false;
-                deadSound.play(1.0f);
+                playDeadSound();
             }
 
             if (other instanceof WallObject) {
@@ -153,8 +160,16 @@ public class PlayerObject extends GravityObject {
                     logger.log("Player touched wall on right.");
                 }
             }
-            if (other instanceof  FilledBubbleObject)
-                score+=100;
+            if (other instanceof  FilledBubbleObject) {
+                score += 100;
+                logger.log("Player touched filled bubble");
+            }
+            if (other instanceof BubbleObject) {
+                if (between(other.overlapTop(this), 0, 5)) {
+                    canJump = true;
+                    logger.log("Player touched bubble");
+                }
+            }
         }
     }
 
@@ -178,6 +193,14 @@ public class PlayerObject extends GravityObject {
             spriteBatch.draw(textureDead, getLeft(), getBottom());
 
     }
+
+    /**
+     * Plays the deadSound when a player dies.
+     */
+    public void playDeadSound() {
+        deadSound.play(1.0f);
+    }
+
 }
 
 

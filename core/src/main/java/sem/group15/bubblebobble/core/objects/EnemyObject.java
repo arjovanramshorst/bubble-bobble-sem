@@ -21,8 +21,8 @@ public class EnemyObject extends GravityObject {
 
     /**
      * Creates an EnemyObject with position (X,Y) on the grid.
-     * @param xPosition
-     * @param yPosition
+     * @param xPosition x coordinate
+     * @param yPosition y coordinate
      */
     public EnemyObject(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("enemy.png")));
