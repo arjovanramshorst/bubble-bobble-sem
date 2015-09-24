@@ -3,9 +3,10 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
-import sem.group15.bubblebobble.core.BubbleBobble;
+import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
@@ -16,12 +17,28 @@ import static org.junit.Assert.*;
 public class EnemyObjectTest {
 
     /**
+     * Used to set the speed for an enemy.
+     */
+    private float NegativeX = -100;
+
+    /**
+     * Used to set the height and width of objects.
+     */
+    private float size = 33;
+
+
+    private EnemyObject enemy;
+
+    /**
      * Set up mockito
      */
     @Before
     public void setUp() {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
+        enemy = Mockito.mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        enemy.location = new Rectangle(size - 3, 0, size, size);
+        enemy.setHorizontalSpeed(NegativeX);
     }
 
     /**
@@ -30,15 +47,11 @@ public class EnemyObjectTest {
      */
     @Test
     public void testHandleCollisionWall() {
-        ImmutableObject wall2 = new WallObject(0, 0, null);
-        EnemyObject enemy = new EnemyObject(BubbleBobble.SPRITE_SIZE, 0, null);
-        ImmutableObject wall = new WallObject(2 * BubbleBobble.SPRITE_SIZE, 0 , null);
-        float speed = enemy.currentSpeedX;
-        enemy.update(1 / speed);
-        System.out.print(enemy.location.getX());
+        ImmutableObject wall = Mockito.mock(ImmutableObject.class, Mockito.CALLS_REAL_METHODS);
+        wall.location = new Rectangle(0, 0, size, size);
+        enemy.update(1f);
         enemy.handleCollision(wall);
-        enemy.handleCollision(wall2);
-        assertEquals(-1 * speed, enemy.currentSpeedX, 1);
+        assertEquals(NegativeX, enemy.currentSpeedX, 1);
     }
 
     /**
@@ -46,10 +59,10 @@ public class EnemyObjectTest {
      */
     @Test
     public void testHandleCollisionBubble() {
-        EnemyObject enemy = new EnemyObject(BubbleBobble.SPRITE_SIZE, 0, null);
         enemy.update(1 / enemy.currentSpeedX);
         assertFalse(enemy.remove());
-        BubbleObject bubble = new BubbleObject(BubbleBobble.SPRITE_SIZE, 0, GameObject.Direction.RIGHT, null);
+        BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        bubble.location = new Rectangle(0, 0, size, size);
         enemy.update(1 / enemy.currentSpeedX);
         enemy.handleCollision(bubble);
         assertTrue(enemy.remove());
