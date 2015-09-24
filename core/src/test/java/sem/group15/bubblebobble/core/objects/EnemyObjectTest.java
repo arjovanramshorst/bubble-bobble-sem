@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import sem.group15.bubblebobble.core.BubbleBobble;
+
 import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
@@ -15,16 +17,6 @@ import static org.junit.Assert.*;
  * Test class for enemy object.
  */
 public class EnemyObjectTest {
-
-    /**
-     * Used to set the speed for an enemy.
-     */
-    private float NegativeX = -100;
-
-    /**
-     * Used to set the height and width of objects.
-     */
-    private float size = 33;
 
 
     private EnemyObject enemy;
@@ -37,8 +29,8 @@ public class EnemyObjectTest {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
         enemy = Mockito.mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
-        enemy.location = new Rectangle(size - 3, 0, size, size);
-        enemy.setHorizontalSpeed(NegativeX);
+        enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        enemy.setHorizontalSpeed(-100);
     }
 
     /**
@@ -48,10 +40,10 @@ public class EnemyObjectTest {
     @Test
     public void testHandleCollisionWall() {
         ImmutableObject wall = Mockito.mock(ImmutableObject.class, Mockito.CALLS_REAL_METHODS);
-        wall.location = new Rectangle(0, 0, size, size);
+        wall.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.update(1f);
         enemy.handleCollision(wall);
-        assertEquals(NegativeX, enemy.currentSpeedX, 1);
+        assertEquals(-100, enemy.currentSpeedX, 1);
     }
 
     /**
@@ -62,7 +54,7 @@ public class EnemyObjectTest {
         enemy.update(1 / enemy.currentSpeedX);
         assertFalse(enemy.remove());
         BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
-        bubble.location = new Rectangle(0, 0, size, size);
+        bubble.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.update(1 / enemy.currentSpeedX);
         enemy.handleCollision(bubble);
         assertTrue(enemy.remove());

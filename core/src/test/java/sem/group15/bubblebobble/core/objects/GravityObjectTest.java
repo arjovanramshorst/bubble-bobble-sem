@@ -35,7 +35,7 @@ public class GravityObjectTest {
         Gdx.input = mock(Input.class);
         player = mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
         floor = mock(FloorObject.class, Mockito.CALLS_REAL_METHODS);
-        player.location = new Rectangle(0, 1, 1, 1);
+        player.location = new Rectangle(0, 1, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
     }
 
     /**
@@ -45,7 +45,7 @@ public class GravityObjectTest {
      */
     @Test
     public void testHandleCollision() throws Exception {
-        floor.location = new Rectangle(0, 0, 1, 1);
+        floor.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.update(0.1f);
         player.handleCollision(floor);
         assertEquals(0, player.timeSinceLastFloorContact, 0.01);
@@ -59,7 +59,7 @@ public class GravityObjectTest {
     @Test
     public void testHandleCollisionNoCollision() throws Exception {
         player.canJump = false;
-        floor.location = new Rectangle(2, 2, 1, 1);
+        floor.location = new Rectangle(2, 2, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.handleCollision(floor);
         assertFalse(player.canJump);
      }
