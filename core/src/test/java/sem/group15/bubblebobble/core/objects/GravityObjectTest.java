@@ -2,6 +2,7 @@ package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Rectangle;
@@ -33,6 +34,8 @@ public class GravityObjectTest {
     public void setUp() {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
+        Gdx.graphics = mock(Graphics.class);
+        Mockito.doReturn(800).when(Gdx.graphics).getHeight();
         player = mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
         floor = mock(FloorObject.class, Mockito.CALLS_REAL_METHODS);
         player.location = new Rectangle(0, 1, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
@@ -45,6 +48,7 @@ public class GravityObjectTest {
      */
     @Test
     public void testHandleCollision() throws Exception {
+        player.setBottom(BubbleBobble.SPRITE_SIZE);
         floor.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.update(0.1f);
         player.handleCollision(floor);
@@ -64,4 +68,11 @@ public class GravityObjectTest {
         assertFalse(player.canJump);
      }
 
+    @Test
+    public void testWarping() throws Exception{
+        player.setTop(0);
+        assertTrue(player.getBottom() < 0);
+        player.update(0.1f);
+        assertTrue(player.getBottom() > 0);
+    }
 }
