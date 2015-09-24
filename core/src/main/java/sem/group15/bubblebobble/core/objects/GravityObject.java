@@ -1,5 +1,6 @@
 package sem.group15.bubblebobble.core.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
@@ -37,8 +38,9 @@ public abstract class GravityObject extends GameObject {
                 MAX_GRAVITY_SPEED
         );
 
-        if (getBody().y<0)
-            getBody().setY(20* BubbleBobble.SPRITE_SIZE);
+        if (getTop()<0) {
+            setBottom(Gdx.graphics.getHeight());
+        }
     }
 
     /**

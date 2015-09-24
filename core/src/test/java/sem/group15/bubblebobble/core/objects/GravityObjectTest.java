@@ -48,9 +48,5 @@ public class GravityObjectTest {
         assertTrue(player.getBody().getY() < 0);
         player.update(0.1f);
         assertTrue(player.getBody().getY() > 0);
-
-
-
     }
-
 }
