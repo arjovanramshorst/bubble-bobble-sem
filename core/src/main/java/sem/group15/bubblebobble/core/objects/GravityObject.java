@@ -2,6 +2,7 @@ package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.BubbleBobble;
 
 /**
  * Created by arjo on 7-9-15.
@@ -35,6 +36,9 @@ public abstract class GravityObject extends GameObject {
         currentSpeedY = Math.max( currentSpeedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
                 MAX_GRAVITY_SPEED
         );
+
+        if (getBody().y<0)
+            getBody().setY(20* BubbleBobble.SPRITE_SIZE);
     }
 
     /**

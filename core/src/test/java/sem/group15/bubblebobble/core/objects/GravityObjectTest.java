@@ -41,4 +41,16 @@ public class GravityObjectTest {
         assertEquals((float) BubbleBobble.SPRITE_SIZE + 2, player.getBody().y, 0.01);
     }
 
+    @Test
+    public void warpTest() throws Exception{
+        GravityObject player = new PlayerObject(0, 0, null);
+        player.update(0.1f);
+        assertTrue(player.getBody().getY() < 0);
+        player.update(0.1f);
+        assertTrue(player.getBody().getY() > 0);
+
+
+
+    }
+
 }
