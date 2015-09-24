@@ -38,7 +38,7 @@ public abstract class GravityObject extends GameObject {
                 MAX_GRAVITY_SPEED
         );
 
-        if (getTop()<0) {
+        if (getTop() <= 0) {
             setBottom(Gdx.graphics.getHeight());
         }
     }
