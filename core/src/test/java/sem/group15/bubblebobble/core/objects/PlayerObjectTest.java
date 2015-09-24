@@ -8,8 +8,6 @@ import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import sem.group15.bubblebobble.core.BubbleBobble;
-
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
@@ -17,30 +15,46 @@ import static org.mockito.Mockito.mock;
  * Created by TUDelft SID on 22-9-2015.
  */
 public class PlayerObjectTest {
+
+
+    private PlayerObject player;
+
     /**
-     * @playerYco sets the player on top of the bubble.
+     * Used for setting the height, width and location of an object.
      */
-    final int playerYco = 32;
+    final float size = 32;
+
+    /**
+     * Used for setting the speed of the player object.
+     */
+    final float speed = 100;
+
+    /**
+     * Set up the player, the player's location and speed.
+     */
 
     @Before
     public void setUp() {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
-
+        player = mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
+        Mockito.doNothing().when(player).playDeadSound();
+        player.location = new Rectangle(0, 0, size, size);
+        player.currentSpeedX = speed;
     }
 
+    /**
+     * Test if the boolean value isAlive changes when
+     * the player collides with an enemy.
+     */
     @Test
     public void isAliveTest() {
-        PlayerObject player = mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
-        player.location = new Rectangle(0, 0, 32, 32);
-        player.currentSpeedX = 100;
         EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
-        enemy.location = new Rectangle(30, 0, 32, 32);
+        enemy.location = new Rectangle(size - 2, 0, size, size);
         player.handleCollision(enemy);
         assertFalse(player.isAlive);
-        player.update(1 / 60);
+        player.update(1 / speed);
         assertEquals(0, player.currentSpeedX, 0.01);
-
     }
 
     /**
@@ -48,18 +62,13 @@ public class PlayerObjectTest {
      */
     @Test
     public void testHandleCollisionEnemy() {
-        PlayerObject player = new PlayerObject(0, BubbleBobble.SPRITE_SIZE - 2, null) {
-            @Override
-            public void playDeadSound() {
-            }
-        };
         player.update(0.1f);
-        assertTrue(player.isAlive);
-        EnemyObject enemy = new EnemyObject(0, BubbleBobble.SPRITE_SIZE - 2, null);
+        player.isAlive = true;
+        EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        enemy.location = new Rectangle(size - 2, 0, size, size);
         player.update(0.1f);
         player.handleCollision(enemy);
         assertFalse(player.isAlive);
-
     }
 
     /**
@@ -67,10 +76,10 @@ public class PlayerObjectTest {
      */
     @Test
     public void testHandleCollisionFilledBubble() {
-        PlayerObject player = new PlayerObject(0, BubbleBobble.SPRITE_SIZE - 2, null);
         player.update(0.1f);
         assertTrue(player.score == 0);
-        FilledBubbleObject filledBubble = new FilledBubbleObject(0, BubbleBobble.SPRITE_SIZE - 2, null);
+        FilledBubbleObject filledBubble = mock(FilledBubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        filledBubble.location = new Rectangle(size - 2, 0, size, size);
         player.update(0.1f);
         player.handleCollision(filledBubble);
         assertTrue(player.score == 100);
@@ -78,13 +87,13 @@ public class PlayerObjectTest {
     }
 
     /**
-     * Tests if a collisionw ith a bubble is handled accordingly.
+     * Tests if a collision ith a bubble is handled accordingly.
      */
     @Test
     public void testHandleCollisionBubble() {
-        PlayerObject player = new PlayerObject(0, BubbleBobble.SPRITE_SIZE + playerYco, null);
-        assertTrue(!player.canJump);
-        BubbleObject bubble = new BubbleObject(0, BubbleBobble.SPRITE_SIZE, GameObject.Direction.RIGHT, null);
+        player.canJump = false;
+        BubbleObject bubble = mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        bubble.location = new Rectangle(0, 0, size, 1);
         player.update(0.01f);
         player.handleCollision(bubble);
         assertTrue(player.canJump);
