@@ -100,16 +100,20 @@ public class BubbleObject extends FloatingObject {
      *                 GameObject.)
      */
     public void handleCollision(GameObject collided) {
-        if (location.overlaps(collided.getBody())) {
+        if (!remove && location.overlaps(collided.getBody())) {
 
             if (collided instanceof EnemyObject) {
                 logger.log("Bubble touched enemy object.");
                 remove = true;
-                newObjects.add(new FilledBubbleObject(this.getBody().getX(), this.getBody().getY()));
+                makeFilledBubble();
             }
 
         }
 
+    }
+
+    protected void makeFilledBubble() {
+        newObjects.add(new FilledBubbleObject(getLeft(), getBottom()));
     }
 
     /**
