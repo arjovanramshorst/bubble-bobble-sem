@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import sem.group15.bubblebobble.core.Logger;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -19,13 +20,11 @@ import static org.mockito.Mockito.mock;
 public class PlayerObjectTest {
 
 
-    private PlayerObject player;
-
-
     /**
      * Used for setting the speed of the player object.
      */
     final float speed = 100;
+    private PlayerObject player;
 
     /**
      * Set up the player, the player's location and speed.
@@ -36,6 +35,7 @@ public class PlayerObjectTest {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
         player = mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
+        player.setLogger(Logger.getLogger(PlayerObject.class.getName()));
         Mockito.doNothing().when(player).playDeadSound();
         player.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.speedX = speed;

@@ -17,6 +17,11 @@ public abstract class GameObject {
     protected Texture texture;
     protected double speedX;
     protected double speedY;
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
+
     protected Logger logger;
 
     protected enum Direction {
@@ -148,4 +153,6 @@ public abstract class GameObject {
     public boolean remove() {
         return remove;
     }
+
+
 }
