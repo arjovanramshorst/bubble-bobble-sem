@@ -16,7 +16,7 @@ public class PlayerObject extends GravityObject {
 
     private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
 
-    private final int PLAYER_LIVES = 3;
+    public static final int PLAYER_LIVES = 3;
 
     private Sound deadSound, jumpSound;
 
@@ -25,7 +25,7 @@ public class PlayerObject extends GravityObject {
     protected boolean isAlive;
     private boolean fired;
     private Direction direction;
-    private Texture textureLeft, textureRight,textureDead;
+    private Texture textureLeft, textureRight, textureDead;
     public int lives;
     public float respawned;
 
