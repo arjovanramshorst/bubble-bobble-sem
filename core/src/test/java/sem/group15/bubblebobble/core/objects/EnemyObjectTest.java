@@ -86,3 +86,4 @@ public class EnemyObjectTest {
         assertFalse(enemy2.remove());
     }
 }
+
