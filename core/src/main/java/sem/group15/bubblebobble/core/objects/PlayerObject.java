@@ -47,22 +47,7 @@ public class PlayerObject extends GravityObject {
         direction = Direction.RIGHT;
         score = 0;
     }
-
-    /**
-     * creates player object with a position and texture, mostly used as test method (without texture)
-     * @param xPosition x coordinate
-     * @param yPosition y coordinate
-     * @param texture texture to use
-     */
-    public PlayerObject(float xPosition, float yPosition, Texture texture) {
-        super(
-                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
-                texture
-        );
-        isAlive = true;
-        score = 0;
-    }
-
+    
     /**
      * updates the player parameters
      * @param elapsed time elapsed since last gameloop.

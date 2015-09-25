@@ -30,33 +30,11 @@ public class EnemyObject extends GravityObject {
         int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
         assert (random == 1 || random == 2);
         if (random == 1) {
-            currentSpeedX = 100;
+            setHorizontalSpeed(100);
         } else {
-            currentSpeedX = -100;
+            setHorizontalSpeed(-100);
         }
     }
-
-    /**
-     * Creates an EnemyObject used only for testing purposes.
-     * @param xPosition
-     * @param yPosition
-     * @param texture
-     */
-    public EnemyObject(float xPosition, float yPosition, Texture texture) {
-        super(
-                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
-                texture
-        );
-        //Generates random integer between 1 and 2.
-        int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
-        assert (random == 1 || random == 2);
-        if (random == 1) {
-            currentSpeedX = 100;
-        } else {
-            currentSpeedX = -100;
-        }
-    }
-
 
     /**
      * If the enemy collides with a wall, the direction should change in the opposite direction.
@@ -82,11 +60,11 @@ public class EnemyObject extends GravityObject {
             if (other instanceof WallObject) {
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
-                    currentSpeedX *= -1;
+                    setHorizontalSpeed(-1 * currentSpeedX);
                 }
                 if (between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
                     setRight(other.getLeft());
-                    currentSpeedX *= -1;
+                    setHorizontalSpeed(currentSpeedX * -1);
                 }
             }
             if (other instanceof BubbleObject) {
@@ -102,6 +80,15 @@ public class EnemyObject extends GravityObject {
     @Override
     public void draw(SpriteBatch spriteBatch) {
         spriteBatch.draw(texture, location.x, location.y);
+    }
+
+
+    /**
+     * Sets the horizontal speed of the enemy
+     * @param speed the speed in floats.
+     */
+    public void setHorizontalSpeed(float speed) {
+        this.currentSpeedX = speed;
     }
 
 }
