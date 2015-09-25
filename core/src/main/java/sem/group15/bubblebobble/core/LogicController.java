@@ -1,10 +1,8 @@
 package sem.group15.bubblebobble.core;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import sem.group15.bubblebobble.core.objects.*;
+import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.PlayerObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,14 +42,14 @@ public class LogicController {
         gameObjects.add(object);
     }
 
-    private void setPlayer(){
-        if(this.player == null) {
+    private void setPlayer() {
+        if (this.player == null) {
             this.player = new PlayerObject(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         }
         gameObjects.add(this.player);
     }
     private void readMap(int level) {
-        levelMap= new Level(level);
+        levelMap = new Level(level);
         gameObjects.addAll(levelMap.getMap());
     }
 
@@ -87,23 +85,23 @@ public class LogicController {
 
 
     /**
-     * updates all objects
+     * updates all objects.
      * @param elapsed time elapsed since latest update
      */
 
     private void update(float elapsed) {
-        for(GameObject object : gameObjects) {
+        for (GameObject object : gameObjects) {
             object.update(elapsed);
         }
     }
 
     /**
-     * check for all collisions and handle them in their respective objects
+     * check for all collisions and handle them in their respective objects.
      */
 
     private void checkCollisions() {
-        for(int i = 0; i < gameObjects.size(); i++) {
-            for(int i2 = i+1; i2 < gameObjects.size(); i2++) {
+        for (int i = 0; i < gameObjects.size(); i++) {
+            for (int i2 = i + 1; i2 < gameObjects.size(); i2++) {
                 gameObjects.get(i).handleCollision(gameObjects.get(i2));
                 gameObjects.get(i2).handleCollision(gameObjects.get(i));
             }
@@ -114,13 +112,14 @@ public class LogicController {
      * Checks all objects for any new objects that should be added to the gameObjects list.
      */
     private void handleNewObjects() {
-        for(int i = 0; i < gameObjects.size(); i++) {
+        for (int i = 0; i < gameObjects.size(); i++) {
             gameObjects.get(i).addNewObjectsTo(gameObjects);
         }
     }
 
     /**
-     * Removes all objects with remove flag set to true. Used as some sort of garbage collection.
+     * Removes all objects with remove flag set to true.
+     * Used as some sort of garbage collection.
      */
     private void removeObjects() {
         Iterator<GameObject> iter = gameObjects.iterator();
@@ -132,12 +131,11 @@ public class LogicController {
     }
 
     /**
-     * draw all sprites
+     * draw all sprites.
      * @param batch spritebatch to be drawn
      */
-
     private void draw(SpriteBatch batch) {
-        for(GameObject object : gameObjects) {
+        for (GameObject object : gameObjects) {
             object.draw(batch);
         }
     }
