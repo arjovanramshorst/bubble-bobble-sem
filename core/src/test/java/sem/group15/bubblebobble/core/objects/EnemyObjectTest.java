@@ -42,11 +42,22 @@ public class EnemyObjectTest {
      */
     @Test
     public void testHandleCollisionWall() {
-        ImmutableObject wall = Mockito.mock(ImmutableObject.class, Mockito.CALLS_REAL_METHODS);
-        wall.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        enemy.update(1f);
+        WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        wall.location = new Rectangle(5, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
-        assertEquals(-100, enemy.currentSpeedX, 1);
+        assertEquals(100, enemy.currentSpeedX, 1);
+    }
+
+    /**
+     * Test if a collision with a wall is handled accordingly.
+     * The speed should change with -1.
+     */
+    @Test
+    public void testHandleCollisionWall2() {
+        WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        wall.location = new Rectangle(60, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        enemy.handleCollision(wall);
+        assertEquals(100, enemy.currentSpeedX, 1);
     }
 
     /**

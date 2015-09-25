@@ -160,6 +160,34 @@ public class PlayerObjectTest {
     }
 
     /**
+     * test collision with wall on right
+     */
+    @Test
+    public void testHandleCollisionWall(){
+        player.location.x = 5;
+        player.location.y = 32;
+        WallObject wall = mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        wall.location = new Rectangle(32,32,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        assertNotEquals(wall.getLeft(), player.getRight(), 0.1f);
+        player.handleCollision(wall);
+        assertEquals(wall.getLeft(), player.getRight(), 0.1f);
+    }
+
+    /**
+     * test collision with wall on left
+     */
+    @Test
+    public void testHandleCollisionWallLeft(){
+        player.location.x = 60;
+        player.location.y = 32;
+        WallObject wall = mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        wall.location = new Rectangle(32,32,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        assertNotEquals(wall.getRight(), player.getLeft(), 0.1f);
+        player.handleCollision(wall);
+        assertEquals(wall.getRight(), player.getLeft(), 0.1f);
+    }
+
+    /**
      * Tests if the player can move to the left.
      */
     @Test
@@ -235,7 +263,4 @@ public class PlayerObjectTest {
         assertFalse(player.canJump);
         verify(player, never()).playJumpSound();
     }
-
-
-
 }

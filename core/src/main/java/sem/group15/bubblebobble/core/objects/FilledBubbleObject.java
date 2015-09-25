@@ -25,19 +25,6 @@ public class FilledBubbleObject extends FloatingObject {
     }
 
     /**
-     * Constructor for testing purposes.
-     * @param xPosition
-     * @param yPosition
-     * @param texture
-     */
-    public FilledBubbleObject(float xPosition, float yPosition, Texture texture) {
-        super(new Rectangle(xPosition, yPosition, 32, 32), texture);
-        ySpeed = 50;
-        xSpeed = 0;
-    }
-
-
-    /**
      * This updates the FilledBubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
      * The initial speed of the FilledBubbleObject is FOR THE MOMENT 50.
@@ -63,7 +50,6 @@ public class FilledBubbleObject extends FloatingObject {
 
             if (collided instanceof PlayerObject) {
                 remove = true;
-
             }
         }
     }
