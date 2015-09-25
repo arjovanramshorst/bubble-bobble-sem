@@ -70,6 +70,7 @@ public class EnemyObjectTest {
         enemy.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE );
         EnemyObject enemy2 = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
         BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        bubble.setLogger(Logger.getLogger(BubbleObject.class.getName()));
         enemy2.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         bubble.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         doNothing().when(bubble).makeFilledBubble();
