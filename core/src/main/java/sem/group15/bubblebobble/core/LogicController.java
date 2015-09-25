@@ -42,14 +42,14 @@ public class LogicController {
         gameObjects.add(object);
     }
 
-    private void setPlayer(){
-        if(this.player == null) {
+    private void setPlayer() {
+        if (this.player == null) {
             this.player = new PlayerObject(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         }
         gameObjects.add(this.player);
     }
     private void readMap(int level) {
-        levelMap= new Level(level);
+        levelMap = new Level(level);
         gameObjects.addAll(levelMap.getMap());
     }
 
@@ -85,7 +85,7 @@ public class LogicController {
 
 
     /**
-     * updates all objects
+     * updates all objects.
      * @param elapsed time elapsed since latest update
      */
 
@@ -96,12 +96,12 @@ public class LogicController {
     }
 
     /**
-     * check for all collisions and handle them in their respective objects
+     * check for all collisions and handle them in their respective objects.
      */
 
     private void checkCollisions() {
         for (int i = 0; i < gameObjects.size(); i++) {
-            for (int i2 = i+1; i2 < gameObjects.size(); i2++) {
+            for (int i2 = i + 1; i2 < gameObjects.size(); i2++) {
                 gameObjects.get(i).handleCollision(gameObjects.get(i2));
                 gameObjects.get(i2).handleCollision(gameObjects.get(i));
             }
@@ -118,7 +118,8 @@ public class LogicController {
     }
 
     /**
-     * Removes all objects with remove flag set to true. Used as some sort of garbage collection.
+     * Removes all objects with remove flag set to true.
+     * Used as some sort of garbage collection.
      */
     private void removeObjects() {
         Iterator<GameObject> iter = gameObjects.iterator();
@@ -130,7 +131,7 @@ public class LogicController {
     }
 
     /**
-     * draw all sprites
+     * draw all sprites.
      * @param batch spritebatch to be drawn
      */
     private void draw(SpriteBatch batch) {

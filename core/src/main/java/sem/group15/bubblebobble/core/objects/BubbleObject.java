@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
 
 /**
@@ -18,14 +19,15 @@ public class BubbleObject extends FloatingObject {
     public float aliveTime;
 
     /**
-     * Creates a new Bubble object and it will start to float
+     * Creates a new Bubble object and it will start to float.
      *
      * @param xPosition x position of player who shoots the bubble.
      * @param yPosition y position of player who shoots the bubble.
      * @param direction Enum, RIGHT or LEFT
      */
     public BubbleObject(float xPosition, float yPosition, Direction direction) {
-        super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("bubble-empty.png")));
+        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
+                new Texture(Gdx.files.internal("bubble-empty.png")));
         switch (direction) {
             case LEFT:
                 xSpeed = -1 * INITIAL_SPEED;
@@ -57,12 +59,14 @@ public class BubbleObject extends FloatingObject {
         location.y += ySpeed * elapsed;
 
         aliveTime += elapsed;
-        if (aliveTime > BUBBLE_LIFESPAN)
+        if (aliveTime > BUBBLE_LIFESPAN) {
             remove = true;
+        }
     }
 
     /**
-     * This method is called if either the bubble lost too much speed or collides with a wall object.
+     * This method is called if either the bubble lost too much speed.
+     * or collides with a wall object.
      */
     public void getOutOfGame() {
         if (Math.abs(xSpeed) > 0) {
@@ -72,8 +76,10 @@ public class BubbleObject extends FloatingObject {
     }
 
     /**
-     * This handles the collision for this bubble. It should only be used to update this object, not the other.
-     * If the bubble collides with an ImmutableObject, the y speed should change to 0 and the x speed should
+     * This handles the collision for this bubble.
+     * It should only be used to update this object, not the other.
+     * If the bubble collides with an ImmutableObject,
+     * the y speed should change to 0 and the x speed should
      * change to either the right or left.
      *
      * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
@@ -90,7 +96,7 @@ public class BubbleObject extends FloatingObject {
     }
 
     /**
-     * Add a filled bubble Object to the newObjects list
+     * Add a filled bubble Object to the newObjects list.
      */
     protected void makeFilledBubble() {
         newObjects.add(new FilledBubbleObject(getLeft(), getBottom()));

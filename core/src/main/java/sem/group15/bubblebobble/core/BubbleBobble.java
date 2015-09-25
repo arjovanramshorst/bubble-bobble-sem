@@ -66,14 +66,14 @@ public class BubbleBobble implements ApplicationListener {
 	}
 
 	/**
-	 * method that is called when the game is paused
+	 * method that is called when the game is paused.
 	 */
 	@Override
 	public void pause() {
 	}
 
 	/**
-	 * method that is called when the game is resumed
+	 * method that is called when the game is resumed.
 	 */
 	@Override
 	public void resume() {
@@ -81,7 +81,7 @@ public class BubbleBobble implements ApplicationListener {
 
 
 	/**
-	 * method that is called when the game is disposed
+	 * method that is called when the game is disposed.
 	 */
 	@Override
 	public void dispose() {

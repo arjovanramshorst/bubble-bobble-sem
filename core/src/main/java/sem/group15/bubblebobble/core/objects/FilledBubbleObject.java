@@ -20,7 +20,8 @@ public class FilledBubbleObject extends FloatingObject {
      * @param yPosition - yPosition of the Rectangle
      */
     public FilledBubbleObject(float xPosition, float yPosition) {
-        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("filled-bubble.png")));
+        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
+                new Texture(Gdx.files.internal("filled-bubble.png")));
         ySpeed = 50;
         xSpeed = 0;
     }
@@ -36,10 +37,13 @@ public class FilledBubbleObject extends FloatingObject {
     }
 
     /**
-     * This handles the collision for this FilledBubbleObject. It should only be used to update this object, not the other.
-     * If the FilledBubbleObject collides with an ImmutableObject, the y speed should change to 0 and the x speed should
+     * This handles the collision for this FilledBubbleObject.
+     * It should only be used to update this object, not the other.
+     * If the FilledBubbleObject collides with an ImmutableObject,
+     * the y speed should change to 0 and the x speed should
      * change to either the right or left.
-     * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
+     * @param collided GameObject that collided with this.
+     *                 (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
     public void handleCollision(GameObject collided) {

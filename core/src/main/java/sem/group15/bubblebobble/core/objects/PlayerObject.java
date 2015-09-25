@@ -44,8 +44,8 @@ public class PlayerObject extends GravityObject {
         textureLeft = new Texture(Gdx.files.internal("playerSprite.png"));
         textureRight = new Texture(Gdx.files.internal("playerSpriteRight.png"));
         textureDead = new Texture(Gdx.files.internal("playerDead.png"));
-        deadSound= Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
-        jumpSound= Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
+        deadSound = Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
+        jumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
         isAlive = true;
         fired = false;
         direction = Direction.RIGHT;
@@ -54,8 +54,8 @@ public class PlayerObject extends GravityObject {
         respawned = 0;
     }
     
-    /**
-     * updates the player parameters
+     /**
+     * updates the player parameters.
      * @param elapsed time elapsed since last gameloop.
      */
 
@@ -84,7 +84,7 @@ public class PlayerObject extends GravityObject {
                 canJump = false;
                 playJumpSound();
             }
-            if (respawned > 0){
+            if (respawned > 0) {
                 respawned = respawned - elapsed;
             }
 
@@ -97,8 +97,8 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * This method handles what happens after the player dies. In the future it might include the logic for
-     * a death animation.
+     * This method handles what happens after the player dies.
+     * In the future it might include the logic for a death animation.
      * @param elapsed time elapsed since last frame.
      */
     private void handleDeath(float elapsed) {
@@ -107,7 +107,7 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * method that is called when the player fires a bubble
+     * method that is called when the player fires a bubble.
      */
     private void fireBubble() {
         BubbleObject bubble = new BubbleObject(0, getBottom(), direction);
@@ -130,7 +130,7 @@ public class PlayerObject extends GravityObject {
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
-        if (location.overlaps(other.getBody())){
+        if (location.overlaps(other.getBody())) {
 
             if (other instanceof EnemyObject && isAlive && respawned <= 0f) {
                 logger.log("Player touched EnemyObject.");
@@ -138,10 +138,12 @@ public class PlayerObject extends GravityObject {
                 respawned = INVULNERABLE_TIME;
                 playDeadSound();
                 //set alive false if ran out of lives.
-                if (lives == 0)
+                if (lives == 0) {
                     isAlive = false;
-                else
+                }
+                else {
                     respawn();
+                }
             }
 
             if (other instanceof WallObject) {
@@ -168,7 +170,7 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * respawn player at starting location
+     * respawn player at starting location.
      */
     public void respawn() {
         location.x = LogicController.PLAYER_XY_SPAWN;
@@ -176,7 +178,7 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * draws the player, checks for flags to select the right texture
+     * draws the player, checks for flags to select the right texture.
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     @Override
@@ -191,8 +193,9 @@ public class PlayerObject extends GravityObject {
                     break;
             }
         }
-        else
+        else {
             spriteBatch.draw(textureDead, getLeft(), getBottom());
+        }
 
     }
 
@@ -202,7 +205,9 @@ public class PlayerObject extends GravityObject {
     public void playDeadSound() {
         deadSound.play(1.0f);
     }
-
+    /**
+     * Plays the jumpSound when the player jumps
+     */
     public void playJumpSound() {
         jumpSound.play(1.0f);
     }

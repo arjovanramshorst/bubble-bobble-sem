@@ -23,7 +23,8 @@ public class EnemyObject extends GravityObject {
      * @param yPosition y coordinate
      */
     public EnemyObject(float xPosition, float yPosition) {
-        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("enemy.png")));
+        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
+                new Texture(Gdx.files.internal("enemy.png")));
         //Generates random integer between 1 and 2.
         int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
         assert (random == 1 || random == 2);
@@ -35,7 +36,8 @@ public class EnemyObject extends GravityObject {
     }
 
     /**
-     * If the enemy collides with a wall, the direction should change in the opposite direction.
+     * If the enemy collides with a wall,
+     * the direction should change in the opposite direction.
      * @param elapsed time elapsed since last gameloop.
      */
     @Override
@@ -47,7 +49,8 @@ public class EnemyObject extends GravityObject {
     }
 
     /**
-     * Handles collisions with other objects. If there is a WallCollision set the attribute wallCollision to true.
+     * Handles collisions with other objects.
+     * If there is a WallCollision set the attribute wallCollision to true.
      * @param other Object that needs to be checked for collision.
      */
     @Override
@@ -82,7 +85,7 @@ public class EnemyObject extends GravityObject {
 
 
     /**
-     * Sets the horizontal speed of the enemy
+     * Sets the horizontal speed of the enemy.
      * @param speed the speed in floats.
      */
     public void setHorizontalSpeed(float speed) {
