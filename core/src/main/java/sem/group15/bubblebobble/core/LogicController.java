@@ -17,6 +17,7 @@ import java.util.List;
 public class LogicController {
     private List<GameObject> gameObjects;
     public PlayerObject player;
+    private Level levelMap;
 
     private int currentLevel;
 
@@ -48,7 +49,8 @@ public class LogicController {
         gameObjects.add(this.player);
     }
     private void readMap(int level) {
-        gameObjects.addAll((new Level(level)).getMap());
+        levelMap= new Level(level);
+        gameObjects.addAll(levelMap.getMap());
     }
 
     /**
@@ -61,7 +63,7 @@ public class LogicController {
             player = null;
             init(1);
         }
-        else if (checkForWin()) {
+        else if (levelMap.levelFinished()) {
             init(Math.min(currentLevel + 1, MAX_LEVEL));
         }
         update(elapsed);
@@ -79,18 +81,7 @@ public class LogicController {
         return !player.isAlive();
     }
 
-    /**
-     * Checks if all enemies are dead.
-     * @return true if all enemies are dead.
-     */
-    private boolean checkForWin() {
-        for(GameObject object : gameObjects) {
-            if(object instanceof EnemyObject || object instanceof FilledBubbleObject) {
-                return false;
-            }
-        }
-        return true;
-    }
+
 
     /**
      * updates all objects
