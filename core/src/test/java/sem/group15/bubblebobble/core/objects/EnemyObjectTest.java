@@ -9,6 +9,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
@@ -58,5 +61,26 @@ public class EnemyObjectTest {
         enemy.update(1 / enemy.currentSpeedX);
         enemy.handleCollision(bubble);
         assertTrue(enemy.remove());
+    }
+
+    @Test
+    public void testHandleDoubleCollisionBubble() {
+        EnemyObject enemy1 = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        EnemyObject enemy2 = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        enemy1.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        enemy2.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        bubble.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        doNothing().when(bubble).makeFilledBubble();
+        enemy1.update(0.01f);
+        enemy2.update(0.01f);
+        bubble.update(0.01f);
+        assertFalse(enemy1.remove() || enemy2.remove() || bubble.remove());
+        enemy1.handleCollision(bubble);
+        bubble.handleCollision(enemy1);
+        enemy2.handleCollision(bubble);
+        bubble.handleCollision(enemy2);
+        assertTrue(enemy1.remove());
+        assertFalse(enemy2.remove());
     }
 }
