@@ -84,7 +84,7 @@ public class PlayerObject extends GravityObject {
                 timeSinceLastFloorContact = 0;
                 currentSpeedY = 300;
                 canJump = false;
-                jumpSound.play(1.0f);
+                playJumpSound();
             }
             if (respawned > 0){
                 respawned = respawned - elapsed;
@@ -92,13 +92,6 @@ public class PlayerObject extends GravityObject {
 
         } else {
             handleDeath(elapsed);
-            if (Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.W) && canJump || floating) {
-                timeSinceLastFloorContact = 0;
-                currentSpeedY = 300;
-                canJump = false;
-                jumpSound.play(1.0f);
-                cannotFloat = false;
-            }
         }
         location.x += currentSpeedX * elapsed;
         location.y += currentSpeedY * elapsed;
@@ -212,8 +205,15 @@ public class PlayerObject extends GravityObject {
         deadSound.play(1.0f);
     }
 
+    public void playJumpSound() {
+        jumpSound.play(1.0f);
+    }
     public boolean isAlive() {
         return isAlive;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 
 }
