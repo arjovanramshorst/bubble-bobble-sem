@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
+import sem.group15.bubblebobble.core.LogicController;
 
 /**
  * Created by arjo on 7-9-15.
@@ -15,6 +16,9 @@ import sem.group15.bubblebobble.core.Logger;
 public class PlayerObject extends GravityObject {
 
     private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
+
+    public static final int PLAYER_LIVES = 3;
+    public static final float INVULNERABLE_TIME = 5f;
 
     private Sound deadSound, jumpSound;
 
@@ -25,7 +29,9 @@ public class PlayerObject extends GravityObject {
     protected boolean cannotFloat;
     protected boolean floating;
     private Direction direction;
-    private Texture textureLeft, textureRight,textureDead;
+    private Texture textureLeft, textureRight, textureDead;
+    public int lives;
+    public float respawned;
 
     /**
      * creates player object with a position
@@ -46,6 +52,8 @@ public class PlayerObject extends GravityObject {
         fired = false;
         direction = Direction.RIGHT;
         score = 0;
+        lives = PLAYER_LIVES;
+        respawned = 0;
     }
     
     /**
@@ -78,6 +86,10 @@ public class PlayerObject extends GravityObject {
                 canJump = false;
                 jumpSound.play(1.0f);
             }
+            if (respawned > 0){
+                respawned = respawned - elapsed;
+            }
+
         } else {
             handleDeath(elapsed);
             if (Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.W) && canJump || floating) {
@@ -127,12 +139,18 @@ public class PlayerObject extends GravityObject {
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
-        if(location.overlaps(other.getBody())){
+        if (location.overlaps(other.getBody())){
 
-            if (other instanceof EnemyObject &&isAlive) {
+            if (other instanceof EnemyObject && isAlive && respawned <= 0f) {
                 logger.log("Player touched EnemyObject.");
-                isAlive = false;
+                lives--;
+                respawned = INVULNERABLE_TIME;
                 playDeadSound();
+                //set alive false if ran out of lives.
+                if (lives == 0)
+                    isAlive = false;
+                else
+                    respawn();
             }
 
             if (other instanceof WallObject) {
@@ -156,6 +174,14 @@ public class PlayerObject extends GravityObject {
                 }
             }
         }
+    }
+
+    /**
+     * respawn player at starting location
+     */
+    public void respawn() {
+        location.x = LogicController.PLAYER_XY_SPAWN;
+        location.y = LogicController.PLAYER_XY_SPAWN;
     }
 
     /**

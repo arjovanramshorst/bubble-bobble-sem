@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import sem.group15.bubblebobble.core.LogicController;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -56,17 +57,60 @@ public class PlayerObjectTest {
     }
 
     /**
+     * Test if respawned timer is updated accordingly
+     */
+    @Test
+    public void testRespawned() {
+        player.respawned = 0;
+        player.isAlive = true;
+        EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        player.handleCollision(enemy);
+        assertEquals(player.INVULNERABLE_TIME, player.respawned, 0.01f);
+
+        player.update(0.5f);
+        assertEquals(player.INVULNERABLE_TIME - 0.5f, player.respawned, 0.01f);
+    }
+
+    /**
      * Tests if the collision with an enemy is handled accordingly.
      */
     @Test
     public void testHandleCollisionEnemy() {
         player.update(0.1f);
         player.isAlive = true;
+        player.lives = player.PLAYER_LIVES;
+        player.respawned = 0f;
+
         EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+
         player.update(0.1f);
         player.handleCollision(enemy);
+        assertEquals(player.PLAYER_LIVES - 1, player.lives, 0);
+        assertTrue(player.isAlive);
+
+        enemy.location.x = LogicController.PLAYER_XY_SPAWN;
+        enemy.location.y = LogicController.PLAYER_XY_SPAWN;
+        player.respawned = 0;
+        player.handleCollision(enemy);
+        player.respawned = 0;
+        player.handleCollision(enemy);
+        assertEquals(0, player.lives, 0);
         assertFalse(player.isAlive);
+    }
+
+    /**
+     * test if respawn works correctly
+     */
+    @Test
+    public void testRespawn() {
+        assertNotEquals(LogicController.PLAYER_XY_SPAWN, player.location.x, 0.1f);
+        assertNotEquals(LogicController.PLAYER_XY_SPAWN, player.location.y, 0.1f);
+        player.respawn();
+        assertEquals(LogicController.PLAYER_XY_SPAWN, player.location.x, 0.1f);
+        assertEquals(LogicController.PLAYER_XY_SPAWN, player.location.y, 0.1f);
+
     }
 
     /**

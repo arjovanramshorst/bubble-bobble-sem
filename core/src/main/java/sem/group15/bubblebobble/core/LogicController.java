@@ -18,6 +18,7 @@ public class LogicController {
     private List<GameObject> gameObjects;
     public PlayerObject player;
 
+    public static final int PLAYER_XY_SPAWN = 64;
 
     public LogicController() {
         gameObjects = new ArrayList<GameObject>();
@@ -35,7 +36,7 @@ public class LogicController {
     public void addGameObject(GameObject object) {
         gameObjects.add(object);}
     private void setPlayer(){
-        this.player = new PlayerObject(200,200);
+        this.player = new PlayerObject(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         gameObjects.add(this.player);
     }
     private void readMap(int level) {
