@@ -67,7 +67,7 @@ public class EnemyObject extends GravityObject {
                     setHorizontalSpeed(currentSpeedX * -1);
                 }
             }
-            if (other instanceof BubbleObject) {
+            if (other instanceof BubbleObject && ! other.remove()) {
                 remove = true;
             }
         }
