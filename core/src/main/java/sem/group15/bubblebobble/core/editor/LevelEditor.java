@@ -64,7 +64,7 @@ public class LevelEditor implements ApplicationListener {
     }
 
     private void checkKeyboardInput() {
-         (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             save();
         } else if (Gdx.input.isKeyPressed(Input.Keys.F)) {
             currentlySelected = Selected.FLOOR;
@@ -114,7 +114,6 @@ public class LevelEditor implements ApplicationListener {
         if (Gdx.input.justTouched()) {
             int x = Gdx.input.getX();
             int y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            checkUIClick(x, y);
         }
     }
 
