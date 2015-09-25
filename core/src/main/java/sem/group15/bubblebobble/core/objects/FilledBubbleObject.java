@@ -23,7 +23,7 @@ public class FilledBubbleObject extends FloatingObject {
         ySpeed = 50;
         xSpeed = 0;
     }
-    
+
     /**
      * This updates the FilledBubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
