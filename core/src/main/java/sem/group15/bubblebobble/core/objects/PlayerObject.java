@@ -17,6 +17,7 @@ public class PlayerObject extends GravityObject {
     private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
 
     public static final int PLAYER_LIVES = 3;
+    public static final float INVULNERABLE_TIME = 5f;
 
     private Sound deadSound, jumpSound;
 
@@ -29,6 +30,7 @@ public class PlayerObject extends GravityObject {
     private Direction direction;
     private Texture textureLeft, textureRight, textureDead;
     public int lives;
+    public float respawned;
 
     /**
      * creates player object with a position
@@ -50,6 +52,7 @@ public class PlayerObject extends GravityObject {
         direction = Direction.RIGHT;
         score = 0;
         lives = PLAYER_LIVES;
+        respawned = 0;
     }
     
     /**
@@ -82,6 +85,10 @@ public class PlayerObject extends GravityObject {
                 canJump = false;
                 jumpSound.play(1.0f);
             }
+            if (respawned > 0){
+                respawned = respawned - elapsed;
+            }
+
         } else {
             handleDeath(elapsed);
             if (Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.W) && canJump || floating) {
@@ -133,9 +140,10 @@ public class PlayerObject extends GravityObject {
 
         if (location.overlaps(other.getBody())){
 
-            if (other instanceof EnemyObject && isAlive) {
+            if (other instanceof EnemyObject && isAlive && respawned <= 0f) {
                 logger.log("Player touched EnemyObject.");
                 lives--;
+                respawned = INVULNERABLE_TIME;
                 playDeadSound();
                 //set alive false if ran out of lives.
                 if (lives == 0)

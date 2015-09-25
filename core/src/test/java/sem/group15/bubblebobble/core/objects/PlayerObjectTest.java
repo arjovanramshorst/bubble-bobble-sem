@@ -55,6 +55,19 @@ public class PlayerObjectTest {
         assertEquals(0, player.currentSpeedX, 0.01);
     }
 
+    @Test
+    public void testRespawned() {
+        player.respawned = 0;
+        player.isAlive = true;
+        EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        player.handleCollision(enemy);
+        assertEquals(player.INVULNERABLE_TIME, player.respawned, 0.01f);
+
+        player.update(0.5f);
+        assertEquals(player.INVULNERABLE_TIME - 0.5f, player.respawned, 0.01f);
+    }
+
     /**
      * Tests if the collision with an enemy is handled accordingly.
      */
@@ -63,6 +76,7 @@ public class PlayerObjectTest {
         player.update(0.1f);
         player.isAlive = true;
         player.lives = player.PLAYER_LIVES;
+        player.respawned = 0f;
 
         EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
@@ -74,7 +88,9 @@ public class PlayerObjectTest {
 
         enemy.location.x = 64;
         enemy.location.y = 64;
+        player.respawned = 0;
         player.handleCollision(enemy);
+        player.respawned = 0;
         player.handleCollision(enemy);
         assertEquals(0, player.lives, 0);
         assertFalse(player.isAlive);
