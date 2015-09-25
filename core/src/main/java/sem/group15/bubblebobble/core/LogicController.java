@@ -23,6 +23,7 @@ public class LogicController {
 
     private static final int MAX_LEVEL = 3;
 
+    public static final int PLAYER_XY_SPAWN = 64;
 
     public LogicController() {
         gameObjects = new ArrayList<GameObject>();
@@ -44,7 +45,7 @@ public class LogicController {
 
     private void setPlayer(){
         if(this.player == null) {
-            this.player = new PlayerObject(200,200);
+            this.player = new PlayerObject(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         }
         gameObjects.add(this.player);
     }

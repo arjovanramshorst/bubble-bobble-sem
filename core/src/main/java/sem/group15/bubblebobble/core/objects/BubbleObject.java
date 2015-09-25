@@ -16,6 +16,10 @@ public class BubbleObject extends FloatingObject {
     private static final int INITIAL_SPEED = 600;
 
     private static final Logger logger = Logger.getLogger(BubbleObject.class.getName());
+
+    public static final float BUBBLE_LIFESPAN = 10;
+
+    public float aliveTime;
     /**
      * Creates a new Bubble object and it will start to float
      *
@@ -34,6 +38,7 @@ public class BubbleObject extends FloatingObject {
                 break;
         }
         ySpeed = 0;
+        aliveTime = 0;
     }
 
     /**
@@ -60,7 +65,7 @@ public class BubbleObject extends FloatingObject {
      * This updates the BubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
      * The initial speed of the BubbleObject is FOR THE MOMENT 50.
-     *
+     * Update the time the bubble is alive, and set remove if it overdue
      * @param elapsed
      */
     public void update(float elapsed) {
@@ -75,6 +80,9 @@ public class BubbleObject extends FloatingObject {
         location.x += xSpeed * elapsed;
         location.y += ySpeed * elapsed;
 
+        aliveTime += elapsed;
+        if (aliveTime > BUBBLE_LIFESPAN)
+            remove = true;
     }
 
     /**
@@ -82,7 +90,7 @@ public class BubbleObject extends FloatingObject {
      */
     public void getOutOfGame() {
 
-        if ( Math.abs(xSpeed) > 0 ) {
+        if (Math.abs(xSpeed) > 0) {
             xSpeed = 0;
             ySpeed = 50;
         }
