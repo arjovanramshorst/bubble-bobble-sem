@@ -18,12 +18,18 @@ public class LogicController {
     private List<GameObject> gameObjects;
     public PlayerObject player;
 
+    private int currentLevel;
+
+    private static final int MAX_LEVEL = 3;
+
 
     public LogicController() {
         gameObjects = new ArrayList<GameObject>();
     }
 
     public void init(int level) {
+        currentLevel = level;
+        gameObjects.clear();
         setPlayer();
         readMap(level);
     }
@@ -34,8 +40,11 @@ public class LogicController {
      */
     public void addGameObject(GameObject object) {
         gameObjects.add(object);}
+
     private void setPlayer(){
-        this.player = new PlayerObject(200,200);
+        if(this.player == null) {
+            this.player = new PlayerObject(200,200);
+        }
         gameObjects.add(this.player);
     }
     private void readMap(int level) {
@@ -48,11 +57,39 @@ public class LogicController {
      * @param batch spriteBatch to be drawn
      */
     public void loop(float elapsed, SpriteBatch batch) {
+        if (checkForLose()) {
+            player = null;
+            init(1);
+        }
+        else if (checkForWin()) {
+            init(Math.min(currentLevel + 1, MAX_LEVEL));
+        }
         update(elapsed);
         checkCollisions();
         handleNewObjects();
         removeObjects();
         draw(batch);
+    }
+
+    /**
+     * Checks if the game is lost.
+     * @return true if the player lost the game.
+     */
+    private boolean checkForLose() {
+        return !player.isAlive();
+    }
+
+    /**
+     * Checks if all enemies are dead.
+     * @return true if all enemies are dead.
+     */
+    private boolean checkForWin() {
+        for(GameObject object : gameObjects) {
+            if(object instanceof EnemyObject || object instanceof FilledBubbleObject) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
