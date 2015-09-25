@@ -65,8 +65,9 @@ public class LogicController {
             player = null;
             init(1);
         }
-        else if (levelMap.levelFinished()) {
+        else if (levelMap.levelFinished(gameObjects)) {
             init(Math.min(currentLevel + 1, MAX_LEVEL));
+            player.respawn();
         }
         update(elapsed);
         checkCollisions();

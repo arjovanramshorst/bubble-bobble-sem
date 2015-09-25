@@ -30,8 +30,8 @@ public class Level {
             * @return true if all enemies are dead.
             */
 
-    public boolean levelFinished(){
-        for(GameObject object : map) {
+    public boolean levelFinished(List<GameObject> objects){
+        for(GameObject object : objects) {
             if(object instanceof EnemyObject || object instanceof FilledBubbleObject) {
                 return false;
             }
