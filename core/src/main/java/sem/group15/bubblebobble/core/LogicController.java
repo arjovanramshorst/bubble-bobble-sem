@@ -18,7 +18,7 @@ public class LogicController {
     private List<GameObject> gameObjects;
     public PlayerObject player;
 
-    public static int PLAYER_XY_SPAWN = 64;
+    public static final int PLAYER_XY_SPAWN = 64;
 
     public LogicController() {
         gameObjects = new ArrayList<GameObject>();
