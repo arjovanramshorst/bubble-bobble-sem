@@ -40,7 +40,8 @@ public class LogicController {
      * @param object object to be drawn
      */
     public void addGameObject(GameObject object) {
-        gameObjects.add(object);}
+        gameObjects.add(object);
+    }
 
     private void setPlayer(){
         if(this.player == null) {
