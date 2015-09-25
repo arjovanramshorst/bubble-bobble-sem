@@ -16,6 +16,8 @@ public class PlayerObject extends GravityObject {
 
     private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
 
+    public static final int PLAYER_LIVES = 3;
+
     private Sound deadSound, jumpSound;
 
     private final float MAX_WALL_OVERLAP = 10f;
@@ -25,7 +27,8 @@ public class PlayerObject extends GravityObject {
     protected boolean cannotFloat;
     protected boolean floating;
     private Direction direction;
-    private Texture textureLeft, textureRight,textureDead;
+    private Texture textureLeft, textureRight, textureDead;
+    public int lives;
 
     /**
      * creates player object with a position
@@ -46,6 +49,7 @@ public class PlayerObject extends GravityObject {
         fired = false;
         direction = Direction.RIGHT;
         score = 0;
+        lives = PLAYER_LIVES;
     }
     
     /**
@@ -127,12 +131,17 @@ public class PlayerObject extends GravityObject {
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
-        if(location.overlaps(other.getBody())){
+        if (location.overlaps(other.getBody())){
 
-            if (other instanceof EnemyObject &&isAlive) {
+            if (other instanceof EnemyObject && isAlive) {
                 logger.log("Player touched EnemyObject.");
-                isAlive = false;
+                lives--;
                 playDeadSound();
+                //set alive false if ran out of lives.
+                if (lives == 0)
+                    isAlive = false;
+                else
+                    respawn();
             }
 
             if (other instanceof WallObject) {
@@ -156,6 +165,11 @@ public class PlayerObject extends GravityObject {
                 }
             }
         }
+    }
+
+    public void respawn() {
+        location.x = 64;
+        location.y = 64;
     }
 
     /**

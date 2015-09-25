@@ -35,7 +35,7 @@ public class LogicController {
     public void addGameObject(GameObject object) {
         gameObjects.add(object);}
     private void setPlayer(){
-        this.player = new PlayerObject(200,200);
+        this.player = new PlayerObject(64,64);
         gameObjects.add(this.player);
     }
     private void readMap(int level) {
