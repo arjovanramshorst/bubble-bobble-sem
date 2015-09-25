@@ -32,6 +32,9 @@ public class BubbleObjectTest {
         bubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
     }
 
+    /**
+     * Test if speeds get updated correctly
+     */
     @Test
     public void testUpdateSpeed() {
         bubble.xSpeed = 40;
@@ -42,6 +45,9 @@ public class BubbleObjectTest {
         verify(bubble).getOutOfGame();
     }
 
+    /**
+     * Test if it gets marked to be removed if its been there too long
+     */
     @Test
     public void testUpdateLifespan() {
         bubble.update(0.1f);

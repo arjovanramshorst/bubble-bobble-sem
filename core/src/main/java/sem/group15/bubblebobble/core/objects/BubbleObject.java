@@ -65,7 +65,7 @@ public class BubbleObject extends FloatingObject {
      * This updates the BubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
      * The initial speed of the BubbleObject is FOR THE MOMENT 50.
-     *
+     * Update the time the bubble is alive, and set remove if it overdue
      * @param elapsed
      */
     public void update(float elapsed) {
