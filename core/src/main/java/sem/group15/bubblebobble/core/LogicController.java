@@ -17,6 +17,11 @@ import java.util.List;
 public class LogicController {
     private List<GameObject> gameObjects;
     public PlayerObject player;
+    private Level levelMap;
+
+    private int currentLevel;
+
+    private static final int MAX_LEVEL = 3;
 
     public static final int PLAYER_XY_SPAWN = 64;
 
@@ -25,6 +30,8 @@ public class LogicController {
     }
 
     public void init(int level) {
+        currentLevel = level;
+        gameObjects.clear();
         setPlayer();
         readMap(level);
     }
@@ -34,13 +41,18 @@ public class LogicController {
      * @param object object to be drawn
      */
     public void addGameObject(GameObject object) {
-        gameObjects.add(object);}
+        gameObjects.add(object);
+    }
+
     private void setPlayer(){
-        this.player = new PlayerObject(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
+        if(this.player == null) {
+            this.player = new PlayerObject(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
+        }
         gameObjects.add(this.player);
     }
     private void readMap(int level) {
-        gameObjects.addAll((new Level(level)).getMap());
+        levelMap= new Level(level);
+        gameObjects.addAll(levelMap.getMap());
     }
 
     /**
@@ -49,12 +61,29 @@ public class LogicController {
      * @param batch spriteBatch to be drawn
      */
     public void loop(float elapsed, SpriteBatch batch) {
+        if (checkForLose()) {
+            player = null;
+            init(1);
+        }
+        else if (levelMap.levelFinished()) {
+            init(Math.min(currentLevel + 1, MAX_LEVEL));
+        }
         update(elapsed);
         checkCollisions();
         handleNewObjects();
         removeObjects();
         draw(batch);
     }
+
+    /**
+     * Checks if the game is lost.
+     * @return true if the player lost the game.
+     */
+    private boolean checkForLose() {
+        return !player.isAlive();
+    }
+
+
 
     /**
      * updates all objects

@@ -212,6 +212,10 @@ public class PlayerObject extends GravityObject {
         deadSound.play(1.0f);
     }
 
+    public boolean isAlive() {
+        return isAlive;
+    }
+
 }
 
 
