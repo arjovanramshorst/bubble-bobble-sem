@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
+import sem.group15.bubblebobble.core.LogicController;
 
 /**
  * Created by arjo on 7-9-15.
@@ -175,9 +176,12 @@ public class PlayerObject extends GravityObject {
         }
     }
 
+    /**
+     * respawn player at starting location
+     */
     public void respawn() {
-        location.x = 64;
-        location.y = 64;
+        location.x = LogicController.PLAYER_XY_SPAWN;
+        location.y = LogicController.PLAYER_XY_SPAWN;
     }
 
     /**
