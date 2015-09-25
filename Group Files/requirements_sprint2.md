@@ -9,31 +9,20 @@
 ###Functional requirements
 
 **Must haves**
-- The test coverage must be 75% meaningfull statement coverage( (statements covered/meaningfull statements)*100).
-- The whole project must be properly documented with java docs.
-- The formatting in the whole project must be fixed.
-- Tools such as checkstyle and pmd must be enabled and working.
-- The player must be able to ride a bubble.
-- The player must be able to warp in a level.
-
+- The player shall jump again, when the player jumps on a bubble and holds the space key.
+- The player or enemy shall reappear at the top of the screen, when they fall off the bottom of the screen.
 
 **Should haves**
-- Objects falling through the floor when losing focus should be fixed.
-- The memory leak caused by bubbles that are not removed in the system should be fixed.
-- The bug that a player continues to move in the current direction while dead should be fixed.
-- The bug that one bubble can catch multiple enemies at once should be fixed.
-- The game should have multiple levels.
-
+- The game's gravity shall not break when the window looses focus.
+- A bubble shall be removed from the game, after a set amount of time.
+- The player shall not move when dead.
+- One bubble shall only be able to catch one enemy.
+- When the player kills all the enemies, there shall appear a new level with new enemies.
 
 **Would/Won't haves**
-- The game shall save the scores of all of its players using a high-score list with the top ten of names and scores of players with the highest scores.
+- The game shall save the scores of all of the ten players with the highest score and show this in a highscores list.
 - The game shall have a level editor which enables the developer to easily create levels.
 
 ####Non-functional requirements
 - The game shall be playable on Windows (7 or higher), Mac OS X (10.8 and higher), and Linux.
-- The game shall be implemented in Java
-- A first fully working version of the game shall be delivered at September 11, 2015
-- For the iterations after the delivery of the first fully working version, the Scrum methodology shall be applied
-- The implementation of the game shall have at least 75% of meaningful line test coverage (where meaningful means that the tests actually test the functionality of the game and for example do not just execute the methods involved)
-- Pull requests shall be used to update and make changes to the game.
-- Every pull request shall receive at least one code review.
+- The requirements above shall be delivered at September 25, 2015
