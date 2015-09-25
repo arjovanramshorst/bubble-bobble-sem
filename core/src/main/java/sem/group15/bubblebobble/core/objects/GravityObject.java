@@ -3,12 +3,12 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
-import sem.group15.bubblebobble.core.BubbleBobble;
 
 /**
  * Created by arjo on 7-9-15.
  */
 public abstract class GravityObject extends GameObject {
+
     private final int GRAVITY_SPEED = 100;
     private final int MAX_GRAVITY_SPEED = -300;
     private final float MAX_DIFF_LANDING = 10f;
@@ -23,7 +23,7 @@ public abstract class GravityObject extends GameObject {
         this.currentSpeedX = 0;
         this.currentSpeedY = 0;
         this.timeSinceLastFloorContact = 0;
-        canJump=false;
+        canJump = false;
     }
 
     /**
@@ -32,9 +32,8 @@ public abstract class GravityObject extends GameObject {
      * @param elapsed time elapsed since last gameloop.
      */
     public void update(float elapsed) {
-
         timeSinceLastFloorContact += elapsed;
-        currentSpeedY = Math.max( currentSpeedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
+        currentSpeedY = Math.max(currentSpeedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
                 MAX_GRAVITY_SPEED
         );
 
@@ -57,6 +56,5 @@ public abstract class GravityObject extends GameObject {
                 canJump = true;
             }
         }
-
     }
 }

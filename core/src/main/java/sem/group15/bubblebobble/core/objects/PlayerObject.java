@@ -16,22 +16,20 @@ import sem.group15.bubblebobble.core.LogicController;
 public class PlayerObject extends GravityObject {
 
     private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
-
     public static final int PLAYER_LIVES = 3;
     public static final float INVULNERABLE_TIME = 5f;
+    private final float MAX_WALL_OVERLAP = 10f;
 
     private Sound deadSound, jumpSound;
-
-    private final float MAX_WALL_OVERLAP = 10f;
     public int score;
     protected boolean isAlive;
     private boolean fired;
     protected boolean cannotFloat;
     protected boolean floating;
-    private Direction direction;
-    private Texture textureLeft, textureRight, textureDead;
     public int lives;
     public float respawned;
+    private Direction direction;
+    private Texture textureLeft, textureRight, textureDead;
 
     /**
      * creates player object with a position
@@ -40,7 +38,7 @@ public class PlayerObject extends GravityObject {
      */
     public PlayerObject(float xPosition, float yPosition) {
         super(
-                new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE),
+                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
                 null
         );
         textureLeft = new Texture(Gdx.files.internal("playerSprite.png"));
@@ -64,7 +62,7 @@ public class PlayerObject extends GravityObject {
     @Override
     public void update(float elapsed) {
         super.update(elapsed);
-        if(isAlive) {
+        if (isAlive) {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 currentSpeedX = -100;
                 direction = Direction.LEFT;
@@ -183,7 +181,7 @@ public class PlayerObject extends GravityObject {
      */
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        if(isAlive) {
+        if (isAlive) {
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(textureLeft, getLeft(), getBottom());

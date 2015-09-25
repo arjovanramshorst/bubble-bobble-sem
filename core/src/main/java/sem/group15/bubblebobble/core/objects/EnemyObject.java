@@ -7,8 +7,6 @@ import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
 
-import java.util.Random;
-
 /**
  * The enemy objects
  * Created by TUDelft SID on 8-9-2015.
@@ -16,8 +14,8 @@ import java.util.Random;
 public class EnemyObject extends GravityObject {
 
     private static final Logger logger = Logger.getLogger(EnemyObject.class.getName());
-
-    private final float MAX_WALL_OVERLAP = 10f;
+    private static final float MAX_WALL_OVERLAP = 10f;
+    private static final int ENEMY_SPEED = 100;
 
     /**
      * Creates an EnemyObject with position (X,Y) on the grid.
@@ -30,9 +28,9 @@ public class EnemyObject extends GravityObject {
         int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
         assert (random == 1 || random == 2);
         if (random == 1) {
-            setHorizontalSpeed(100);
+            setHorizontalSpeed(ENEMY_SPEED);
         } else {
-            setHorizontalSpeed(-100);
+            setHorizontalSpeed(-ENEMY_SPEED);
         }
     }
 
@@ -43,6 +41,7 @@ public class EnemyObject extends GravityObject {
     @Override
     public void update(float elapsed) {
         super.update(elapsed);
+
         location.x += currentSpeedX * elapsed;
         location.y += currentSpeedY * elapsed;
     }
@@ -56,7 +55,6 @@ public class EnemyObject extends GravityObject {
         super.handleCollision(other);
 
         if (location.overlaps(other.getBody())) {
-
             if (other instanceof WallObject) {
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
@@ -67,7 +65,7 @@ public class EnemyObject extends GravityObject {
                     setHorizontalSpeed(currentSpeedX * -1);
                 }
             }
-            if (other instanceof BubbleObject && ! other.remove()) {
+            if (other instanceof BubbleObject && !other.remove()) {
                 remove = true;
             }
         }

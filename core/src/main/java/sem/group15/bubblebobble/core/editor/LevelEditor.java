@@ -28,9 +28,7 @@ import java.util.List;
 public class LevelEditor implements ApplicationListener {
 
     private SpriteBatch batch;
-
     private BitmapFont bitmapFont;
-
     private List<GameObject> objects;
 
     private enum Selected {
@@ -38,6 +36,7 @@ public class LevelEditor implements ApplicationListener {
         FLOOR,
         EMPTY
     }
+
     private Selected currentlySelected;
 
     @Override
@@ -70,11 +69,11 @@ public class LevelEditor implements ApplicationListener {
     private void checkKeyboardInput() {
         if(Gdx.input.isKeyPressed(Input.Keys.S)) {
             save();
-        } else if(Gdx.input.isKeyPressed(Input.Keys.F)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.F)) {
             currentlySelected = Selected.FLOOR;
-        } else if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             currentlySelected = Selected.WALL;
-        } else if(Gdx.input.isKeyPressed(Input.Keys.E)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.E)) {
             currentlySelected = Selected.EMPTY;
         }
     }
@@ -82,39 +81,39 @@ public class LevelEditor implements ApplicationListener {
     private void save() {
         try {
             File file = new File("tmp.lvl");
-            if(!file.exists()) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter writer = new BufferedWriter(fw);
-            for(GameObject o : objects) {
+            for (GameObject o : objects) {
                 writeLineToFile(writer, o);
             }
             writer.close();
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
     private void writeLineToFile(BufferedWriter writer, GameObject o) throws IOException {
         String line = "";
-        if(o instanceof WallObject) {
+        if (o instanceof WallObject) {
             line += "Wall";
         } else if (o instanceof FloorObject) {
             line += "Floor";
         }
-        line += ", " + (int)(o.getLeft()/BubbleBobble.SPRITE_SIZE) + ", " + (int)(o.getBottom()/BubbleBobble.SPRITE_SIZE);
+        line += ", " + (int) (o.getLeft() / BubbleBobble.SPRITE_SIZE) + ", " + (int) (o.getBottom() / BubbleBobble.SPRITE_SIZE);
         writer.write(line + "\n");
     }
 
     private void renderObjects() {
-        for(GameObject object : objects) {
+        for (GameObject object : objects) {
             object.draw(batch);
         }
     }
 
     private void checkMouseInput() {
-        if(Gdx.input.justTouched()) {
+        if (Gdx.input.justTouched()) {
             int x = Gdx.input.getX();
             int y = Gdx.graphics.getHeight() - Gdx.input.getY();
             checkUIClick(x,y);
@@ -125,7 +124,7 @@ public class LevelEditor implements ApplicationListener {
         float xPosition = ((int) (x / BubbleBobble.SPRITE_SIZE)) * BubbleBobble.SPRITE_SIZE;
         float yPosition = ((int) (y / BubbleBobble.SPRITE_SIZE)) * BubbleBobble.SPRITE_SIZE;
         GameObject newObject = null;
-        if(currentlySelected == Selected.FLOOR) {
+        if (currentlySelected == Selected.FLOOR) {
             newObject = new FloorObject(xPosition, yPosition);
         } else if (currentlySelected == Selected.WALL) {
             newObject = new WallObject(xPosition, yPosition);
@@ -133,21 +132,21 @@ public class LevelEditor implements ApplicationListener {
             newObject = new FloorObject(xPosition, yPosition);
         }
         GameObject existingObject = checkCollision(newObject);
-        if( existingObject != null) {
+        if (existingObject != null) {
             objects.remove(existingObject);
         }
-        if(currentlySelected != Selected.EMPTY) {
+        if (currentlySelected != Selected.EMPTY) {
             objects.add(newObject);
         }
     }
 
     private void addSprites() {
-        if(currentlySelected == Selected.FLOOR) {
-            bitmapFont.draw(batch, "currently selected: FLOOR", 0, 32);
+        if (currentlySelected == Selected.FLOOR) {
+            bitmapFont.draw(batch, "currently selected: FLOOR", 0, BubbleBobble.SPRITE_SIZE);
         } else if (currentlySelected == Selected.WALL) {
-            bitmapFont.draw(batch, "currently selected: WALL", 0, 32);
+            bitmapFont.draw(batch, "currently selected: WALL", 0, BubbleBobble.SPRITE_SIZE);
         } else if (currentlySelected == Selected.EMPTY) {
-            bitmapFont.draw(batch, "currently selected: ERASE", 0, 32);
+            bitmapFont.draw(batch, "currently selected: ERASE", 0, BubbleBobble.SPRITE_SIZE);
         }
     }
 
@@ -167,8 +166,8 @@ public class LevelEditor implements ApplicationListener {
     }
 
     private GameObject checkCollision(GameObject object) {
-        for(GameObject o : objects) {
-            if(object.collidesWith(o)) {
+        for (GameObject o : objects) {
+            if (object.collidesWith(o)) {
                 return o;
             }
         }

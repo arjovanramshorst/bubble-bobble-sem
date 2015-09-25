@@ -10,8 +10,6 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public abstract class FloatingObject extends GameObject{
 
-
-
     protected float ySpeed;
     protected float xSpeed;
     protected float timeFromFired;
@@ -19,12 +17,8 @@ public abstract class FloatingObject extends GameObject{
         super(location, texture);
     }
 
-
-
-
-    public void update (float elapsed) {
+    public void update(float elapsed) {
         timeFromFired += elapsed;
-
     }
 
 }

@@ -1,10 +1,8 @@
 package sem.group15.bubblebobble.core;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import sem.group15.bubblebobble.core.objects.*;
+import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.PlayerObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -92,7 +90,7 @@ public class LogicController {
      */
 
     private void update(float elapsed) {
-        for(GameObject object : gameObjects) {
+        for (GameObject object : gameObjects) {
             object.update(elapsed);
         }
     }
@@ -102,8 +100,8 @@ public class LogicController {
      */
 
     private void checkCollisions() {
-        for(int i = 0; i < gameObjects.size(); i++) {
-            for(int i2 = i+1; i2 < gameObjects.size(); i2++) {
+        for (int i = 0; i < gameObjects.size(); i++) {
+            for (int i2 = i+1; i2 < gameObjects.size(); i2++) {
                 gameObjects.get(i).handleCollision(gameObjects.get(i2));
                 gameObjects.get(i2).handleCollision(gameObjects.get(i));
             }
@@ -114,7 +112,7 @@ public class LogicController {
      * Checks all objects for any new objects that should be added to the gameObjects list.
      */
     private void handleNewObjects() {
-        for(int i = 0; i < gameObjects.size(); i++) {
+        for (int i = 0; i < gameObjects.size(); i++) {
             gameObjects.get(i).addNewObjectsTo(gameObjects);
         }
     }
@@ -135,9 +133,8 @@ public class LogicController {
      * draw all sprites
      * @param batch spritebatch to be drawn
      */
-
     private void draw(SpriteBatch batch) {
-        for(GameObject object : gameObjects) {
+        for (GameObject object : gameObjects) {
             object.draw(batch);
         }
     }

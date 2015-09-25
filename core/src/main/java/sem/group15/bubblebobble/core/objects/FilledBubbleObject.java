@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
 
 /**
@@ -15,11 +16,11 @@ public class FilledBubbleObject extends FloatingObject {
 
     /**
      * Constructor for the filledBubbleObject.
-     * @param xPosition
-     * @param yPosition
+     * @param xPosition - xPosition of the Rectangle
+     * @param yPosition - yPosition of the Rectangle
      */
     public FilledBubbleObject(float xPosition, float yPosition) {
-        super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("filled-bubble.png")));
+        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("filled-bubble.png")));
         ySpeed = 50;
         xSpeed = 0;
     }
@@ -28,9 +29,9 @@ public class FilledBubbleObject extends FloatingObject {
      * This updates the FilledBubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
      * The initial speed of the FilledBubbleObject is FOR THE MOMENT 50.
-     * @param elapsed
+     * @param elapsed - time that has passed
      */
-    public  void update(float elapsed) {
+    public void update(float elapsed) {
         location.y += ySpeed * elapsed;
     }
 
@@ -41,7 +42,7 @@ public class FilledBubbleObject extends FloatingObject {
      * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
-    public  void handleCollision(GameObject collided) {
+    public void handleCollision(GameObject collided) {
         if (location.overlaps(collided.getBody())) {
             if (collided instanceof ImmutableObject) {
                 // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
@@ -58,7 +59,7 @@ public class FilledBubbleObject extends FloatingObject {
      * This adds this sprite to the SpriteBatch, supplied by the LogicController.
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
-    public  void draw(SpriteBatch spriteBatch) {
+    public void draw(SpriteBatch spriteBatch) {
         spriteBatch.draw(texture, location.x, location.y);
     }
 

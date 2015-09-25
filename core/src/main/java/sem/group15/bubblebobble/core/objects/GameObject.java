@@ -3,8 +3,6 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import sem.group15.bubblebobble.core.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +99,7 @@ public abstract class GameObject {
 
     public float overlapLeft(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getLeft() < other.getRight()) {
+        if (collidesWith(other) && getLeft() < other.getRight()) {
             overlap = other.getRight() - getLeft();
         }
         return overlap;
@@ -109,21 +107,21 @@ public abstract class GameObject {
 
     public float overlapRight(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getRight() > other.getLeft()) {
+        if (collidesWith(other) && getRight() > other.getLeft()) {
             overlap = getRight() - other.getLeft();
         }
         return overlap;
     }
     public float overlapTop(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getTop() > other.getBottom()) {
+        if (collidesWith(other) && getTop() > other.getBottom()) {
             overlap = getTop() - other.getBottom();
         }
         return overlap;
     }
     public float overlapBottom(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getBottom() < other.getTop()) {
+        if (collidesWith(other) && getBottom() < other.getTop()) {
             overlap = other.getTop() - getBottom();
         }
         return overlap;
@@ -134,8 +132,8 @@ public abstract class GameObject {
     }
 
     public void addNewObjectsTo(List<GameObject> gameObjects) {
-        if(! newObjects.isEmpty()) {
-            for(GameObject object : newObjects) {
+        if (!newObjects.isEmpty()) {
+            for (GameObject object : newObjects) {
                 gameObjects.add(object);
             }
             newObjects.clear();

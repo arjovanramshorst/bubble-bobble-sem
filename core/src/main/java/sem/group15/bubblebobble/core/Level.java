@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import sem.group15.bubblebobble.core.objects.EnemyObject;
 import sem.group15.bubblebobble.core.objects.FilledBubbleObject;
 import sem.group15.bubblebobble.core.objects.GameObject;
-import sem.group15.bubblebobble.core.objects.PlayerObject;
-
 import java.util.List;
 
 
@@ -21,7 +19,7 @@ public class Level {
         LevelParser parser = new LevelParser();
         try {
             map = parser.parse(Gdx.files.internal("levels/" + levelNumber + ".lvl"));
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
             System.out.println("file does not exist");
         }
@@ -31,8 +29,8 @@ public class Level {
             */
 
     public boolean levelFinished(List<GameObject> objects){
-        for(GameObject object : objects) {
-            if(object instanceof EnemyObject || object instanceof FilledBubbleObject) {
+        for (GameObject object : objects) {
+            if (object instanceof EnemyObject || object instanceof FilledBubbleObject) {
                 return false;
             }
         }

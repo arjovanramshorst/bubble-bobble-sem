@@ -12,14 +12,11 @@ import sem.group15.bubblebobble.core.Logger;
 public class BubbleObject extends FloatingObject {
 
     private static final int MINSPEED = 30;
-
     private static final int INITIAL_SPEED = 600;
-
     private static final Logger logger = Logger.getLogger(BubbleObject.class.getName());
-
     public static final float BUBBLE_LIFESPAN = 10;
-
     public float aliveTime;
+
     /**
      * Creates a new Bubble object and it will start to float
      *
@@ -46,7 +43,7 @@ public class BubbleObject extends FloatingObject {
      * This updates the location, speed and lasting-duration.
      * The initial speed of the BubbleObject is FOR THE MOMENT 50.
      * Update the time the bubble is alive, and set remove if it overdue
-     * @param elapsed
+     * @param elapsed time that has elapsed
      */
     public void update(float elapsed) {
         //after shoot
@@ -56,7 +53,6 @@ public class BubbleObject extends FloatingObject {
         } else {
             xSpeed -= xSpeed * (elapsed * 4);
         }
-
         location.x += xSpeed * elapsed;
         location.y += ySpeed * elapsed;
 
@@ -69,13 +65,10 @@ public class BubbleObject extends FloatingObject {
      * This method is called if either the bubble lost too much speed or collides with a wall object.
      */
     public void getOutOfGame() {
-
         if (Math.abs(xSpeed) > 0) {
             xSpeed = 0;
             ySpeed = 50;
         }
-
-
     }
 
     /**
@@ -88,17 +81,17 @@ public class BubbleObject extends FloatingObject {
      */
     public void handleCollision(GameObject collided) {
         if (!remove && location.overlaps(collided.getBody())) {
-
             if (collided instanceof EnemyObject) {
                 logger.log("Bubble touched enemy object.");
                 remove = true;
                 makeFilledBubble();
             }
-
         }
-
     }
 
+    /**
+     * Add a filled bubble Object to the newObjects list
+     */
     protected void makeFilledBubble() {
         newObjects.add(new FilledBubbleObject(getLeft(), getBottom()));
     }

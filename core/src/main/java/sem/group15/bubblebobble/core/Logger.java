@@ -21,12 +21,12 @@ public class Logger {
         this.clazz = clazz;
         try {
             File file = new File("output.log");
-            if(!file.exists()) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
             FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
             writer = new BufferedWriter(fw);
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
@@ -36,7 +36,7 @@ public class Logger {
      * @return the logger instance.
      */
     public static Logger getLogger(String clazz) {
-        if(loggers.get(clazz) == null) {
+        if (loggers.get(clazz) == null) {
             loggers.put(clazz, new Logger(clazz));
         }
         return loggers.get(clazz);
@@ -54,7 +54,7 @@ public class Logger {
             writer.newLine();
             writer.flush();
             System.out.println(logLine);
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             System.out.println("Error trying to write to file.");
             ioe.printStackTrace();
         }
