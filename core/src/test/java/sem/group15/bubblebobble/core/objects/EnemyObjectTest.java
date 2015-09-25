@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import sem.group15.bubblebobble.core.Logger;
 
 import static org.mockito.Mockito.*;
 
@@ -29,6 +30,7 @@ public class EnemyObjectTest {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
         enemy = Mockito.mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        enemy.setLogger(Logger.getLogger(EnemyObject.class.getName()));
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.setHorizontalSpeed(-100);
     }
@@ -51,7 +53,7 @@ public class EnemyObjectTest {
      */
     @Test
     public void testHandleCollisionBubble() {
-        enemy.update((float)(1 / enemy.speedX));
+        enemy.update((float) (1 / enemy.speedX));
         assertFalse(enemy.remove());
         BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
         bubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE-2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
