@@ -15,7 +15,6 @@ public class BubbleObject extends FloatingObject {
 
     private static final int INITIAL_SPEED = 600;
 
-    private static final Logger logger = Logger.getLogger(BubbleObject.class.getName());
     /**
      * Creates a new Bubble object and it will start to float
      *
@@ -25,15 +24,17 @@ public class BubbleObject extends FloatingObject {
      */
     public BubbleObject(float xPosition, float yPosition, Direction direction) {
         super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("bubble-empty.png")));
+        logger= Logger.getLogger(BubbleObject.class.getName());
+
         switch (direction) {
             case LEFT:
-                xSpeed = -1 * INITIAL_SPEED;
+                speedX = -1 * INITIAL_SPEED;
                 break;
             case RIGHT:
-                xSpeed = INITIAL_SPEED;
+                speedX = INITIAL_SPEED;
                 break;
         }
-        ySpeed = 0;
+        speedY = 0;
     }
 
     /**
@@ -47,13 +48,13 @@ public class BubbleObject extends FloatingObject {
         super(new Rectangle(xPosition, yPosition, 32, 32), texture);
         switch (direction) {
             case LEFT:
-                xSpeed = -1 * INITIAL_SPEED;
+                speedX = -1 * INITIAL_SPEED;
                 break;
             case RIGHT:
-                xSpeed = INITIAL_SPEED;
+                speedX = INITIAL_SPEED;
                 break;
         }
-        ySpeed = 0;
+        speedY = 0;
     }
 
     /**
@@ -66,14 +67,14 @@ public class BubbleObject extends FloatingObject {
     public void update(float elapsed) {
         //after shoot
         //slow down bubble until very slow and go up.
-        if (Math.abs(xSpeed) < MINSPEED) {
+        if (Math.abs(speedX) < MINSPEED) {
             getOutOfGame();
         } else {
-            xSpeed -= xSpeed * (elapsed * 4);
+            speedX -= speedX * (elapsed * 4);
         }
 
-        location.x += xSpeed * elapsed;
-        location.y += ySpeed * elapsed;
+        location.x += speedX * elapsed;
+        location.y += speedY* elapsed;
 
     }
 
@@ -82,9 +83,9 @@ public class BubbleObject extends FloatingObject {
      */
     public void getOutOfGame() {
 
-        if ( Math.abs(xSpeed) > 0 ) {
-            xSpeed = 0;
-            ySpeed = 50;
+        if ( Math.abs(speedX) > 0 ) {
+            speedX = 0;
+            speedY = 50;
         }
 
 

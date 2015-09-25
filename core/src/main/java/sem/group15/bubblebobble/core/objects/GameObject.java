@@ -15,6 +15,9 @@ public abstract class GameObject {
 
     protected Rectangle location;
     protected Texture texture;
+    protected double speedX;
+    protected double speedY;
+    protected Logger logger;
 
     protected enum Direction {
         LEFT, RIGHT

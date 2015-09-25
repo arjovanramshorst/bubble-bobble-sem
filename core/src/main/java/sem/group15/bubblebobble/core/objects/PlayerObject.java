@@ -14,7 +14,6 @@ import sem.group15.bubblebobble.core.Logger;
  */
 public class PlayerObject extends GravityObject {
 
-    private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
 
     private Sound deadSound, jumpSound;
 
@@ -37,6 +36,7 @@ public class PlayerObject extends GravityObject {
                 new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE),
                 null
         );
+        logger = Logger.getLogger(PlayerObject.class.getName());
         textureLeft = new Texture(Gdx.files.internal("playerSprite.png"));
         textureRight = new Texture(Gdx.files.internal("playerSpriteRight.png"));
         textureDead = new Texture(Gdx.files.internal("playerDead.png"));
@@ -58,13 +58,13 @@ public class PlayerObject extends GravityObject {
         super.update(elapsed);
         if(isAlive) {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                currentSpeedX = -100;
+                speedX = -100;
                 direction = Direction.LEFT;
             } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                currentSpeedX = 100;
+                speedX = 100;
                 direction = Direction.RIGHT;
             } else {
-                currentSpeedX = 0;
+                speedX = 0;
             }
             if (fired) {
                 fired = Gdx.input.isKeyPressed(Input.Keys.SPACE);
@@ -74,7 +74,7 @@ public class PlayerObject extends GravityObject {
             }
             if (Gdx.input.isKeyPressed(Input.Keys.UP) && canJump || floating) {
                 timeSinceLastFloorContact = 0;
-                currentSpeedY = 300;
+                speedY = 300;
                 canJump = false;
                 jumpSound.play(1.0f);
             }
@@ -82,14 +82,14 @@ public class PlayerObject extends GravityObject {
             handleDeath(elapsed);
             if (Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.W) && canJump || floating) {
                 timeSinceLastFloorContact = 0;
-                currentSpeedY = 300;
+                speedY = 300;
                 canJump = false;
                 jumpSound.play(1.0f);
                 cannotFloat = false;
             }
         }
-        location.x += currentSpeedX * elapsed;
-        location.y += currentSpeedY * elapsed;
+        location.x += speedX * elapsed;
+        location.y += speedY * elapsed;
 
     }
 
@@ -99,7 +99,7 @@ public class PlayerObject extends GravityObject {
      * @param elapsed time elapsed since last frame.
      */
     private void handleDeath(float elapsed) {
-        currentSpeedX = 0;
+        speedX = 0;
 
     }
 

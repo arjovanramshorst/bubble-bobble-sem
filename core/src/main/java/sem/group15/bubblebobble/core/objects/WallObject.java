@@ -12,7 +12,6 @@ import sem.group15.bubblebobble.core.Logger;
  */
 public class WallObject extends ImmutableObject{
 
-    private static final Logger logger = Logger.getLogger(WallObject.class.getName());
 
     /**
      * Create wall object with given x,y coordinates
@@ -25,6 +24,8 @@ public class WallObject extends ImmutableObject{
                 new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
                 new Texture(Gdx.files.internal("sprite_wall_brick.png"))
         );
+        logger = Logger.getLogger(WallObject.class.getName());
+
     }
 
     public WallObject(float x, float y, Texture texture){

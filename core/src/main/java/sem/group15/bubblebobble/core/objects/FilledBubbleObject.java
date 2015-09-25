@@ -11,7 +11,6 @@ import sem.group15.bubblebobble.core.Logger;
  */
 public class FilledBubbleObject extends FloatingObject {
 
-    private static final Logger logger = Logger.getLogger(FilledBubbleObject.class.getName());
 
     /**
      * Constructor for the filledBubbleObject.
@@ -20,8 +19,10 @@ public class FilledBubbleObject extends FloatingObject {
      */
     public FilledBubbleObject(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("filled-bubble.png")));
-        ySpeed = 50;
-        xSpeed = 0;
+        logger = Logger.getLogger(FilledBubbleObject.class.getName());
+
+        speedY = 50;
+        speedX = 0;
     }
 
     /**
@@ -32,8 +33,8 @@ public class FilledBubbleObject extends FloatingObject {
      */
     public FilledBubbleObject(float xPosition, float yPosition, Texture texture) {
         super(new Rectangle(xPosition, yPosition, 32, 32), texture);
-        ySpeed = 50;
-        xSpeed = 0;
+        speedY = 50;
+        speedX = 0;
     }
 
 
@@ -44,7 +45,7 @@ public class FilledBubbleObject extends FloatingObject {
      * @param elapsed
      */
     public  void update(float elapsed) {
-        location.y += ySpeed * elapsed;
+        location.y += speedY * elapsed;
     }
 
     /**
@@ -58,7 +59,7 @@ public class FilledBubbleObject extends FloatingObject {
         if (location.overlaps(collided.getBody())) {
             if (collided instanceof ImmutableObject) {
                 // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
-                ySpeed = 0;
+                speedY = 0;
             }
 
             if (collided instanceof PlayerObject) {

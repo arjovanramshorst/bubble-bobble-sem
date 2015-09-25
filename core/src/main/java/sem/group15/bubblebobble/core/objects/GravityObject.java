@@ -15,13 +15,12 @@ public abstract class GravityObject extends GameObject {
 
     protected float timeSinceLastFloorContact;
     protected boolean canJump;
-    protected float currentSpeedX;
-    protected float currentSpeedY;
+
 
     protected GravityObject(Rectangle location, Texture texture) {
         super(location, texture);
-        this.currentSpeedX = 0;
-        this.currentSpeedY = 0;
+        this.speedX = 0;
+        this.speedY = 0;
         this.timeSinceLastFloorContact = 0;
         canJump=false;
     }
@@ -34,7 +33,7 @@ public abstract class GravityObject extends GameObject {
     public void update(float elapsed) {
 
         timeSinceLastFloorContact += elapsed;
-        currentSpeedY = Math.max( currentSpeedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
+        speedY = Math.max( speedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
                 MAX_GRAVITY_SPEED
         );
 
@@ -50,9 +49,9 @@ public abstract class GravityObject extends GameObject {
      */
     public void handleCollision(GameObject other) {
         if (other instanceof FloorObject) {
-            if (between(overlapBottom(other), 0, MAX_DIFF_LANDING) && currentSpeedY < 0) {
+            if (between(overlapBottom(other), 0, MAX_DIFF_LANDING) && speedY < 0) {
                 setBottom(other.getTop());
-                currentSpeedY = 0;
+                speedY = 0;
                 timeSinceLastFloorContact = 0;
                 canJump = true;
             }

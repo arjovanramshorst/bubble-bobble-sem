@@ -43,7 +43,7 @@ public class EnemyObjectTest {
         wall.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.update(1f);
         enemy.handleCollision(wall);
-        assertEquals(-100, enemy.currentSpeedX, 1);
+        assertEquals(-100, enemy.speedX, 1);
     }
 
     /**
@@ -51,11 +51,11 @@ public class EnemyObjectTest {
      */
     @Test
     public void testHandleCollisionBubble() {
-        enemy.update(1 / enemy.currentSpeedX);
+        enemy.update((float)(1 / enemy.speedX));
         assertFalse(enemy.remove());
         BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
         bubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE-2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        enemy.update(1 / enemy.currentSpeedX);
+        enemy.update((float) (1 / enemy.speedX));
         enemy.handleCollision(bubble);
         assertTrue(enemy.remove());
     }

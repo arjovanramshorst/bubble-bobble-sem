@@ -38,7 +38,7 @@ public class PlayerObjectTest {
         player = mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
         Mockito.doNothing().when(player).playDeadSound();
         player.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        player.currentSpeedX = speed;
+        player.speedX = speed;
     }
 
     /**
@@ -52,7 +52,7 @@ public class PlayerObjectTest {
         player.handleCollision(enemy);
         assertFalse(player.isAlive);
         player.update(1 / speed);
-        assertEquals(0, player.currentSpeedX, 0.01);
+        assertEquals(0, player.speedX, 0.01);
     }
 
     /**
