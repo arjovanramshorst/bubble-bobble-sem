@@ -9,9 +9,10 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by woute on 9/25/2015.
@@ -55,8 +56,5 @@ public class BubbleObjectTest {
         bubble.update(BubbleObject.BUBBLE_LIFESPAN);
         assertTrue(bubble.remove);
     }
-
-
-
 
 }

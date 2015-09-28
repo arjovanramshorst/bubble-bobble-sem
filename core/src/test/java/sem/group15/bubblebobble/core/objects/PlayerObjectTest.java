@@ -54,7 +54,7 @@ public class PlayerObjectTest {
         EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.handleCollision(enemy);
-        assertFalse(player.isAlive);
+        assertFalse(player.isAlive());
         player.update(1 / speed);
         assertEquals(0, player.currentSpeedX, 0.01);
     }
@@ -263,4 +263,5 @@ public class PlayerObjectTest {
         assertFalse(player.canJump);
         verify(player, never()).playJumpSound();
     }
+
 }
