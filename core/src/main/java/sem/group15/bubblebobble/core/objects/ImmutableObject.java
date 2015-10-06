@@ -10,6 +10,8 @@ public abstract class ImmutableObject extends GameObject {
 
     protected ImmutableObject(Rectangle size, Texture texture) {
         super(size, texture);
+        speedX = 0;
+        speedY = 0;
     }
 
 }

@@ -13,13 +13,10 @@ import sem.group15.bubblebobble.core.Logger;
  */
 public class FloorObject extends ImmutableObject {
 
-    private static final Logger logger = Logger.getLogger(FloorObject.class.getName());
-
     public FloorObject(float locationX, float locationY) {
-        super(new Rectangle(locationX, locationY, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
-                new Texture(Gdx.files.internal("sprite_wall_brick.png")));
+        super(new Rectangle(locationX, locationY, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("sprite_wall_brick.png")));
     }
-
+   
     @Override
     public void update(float elapsed) {
 

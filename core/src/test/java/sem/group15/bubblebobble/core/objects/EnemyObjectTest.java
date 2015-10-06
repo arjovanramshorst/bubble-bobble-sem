@@ -8,6 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import sem.group15.bubblebobble.core.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +36,7 @@ public class EnemyObjectTest {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
         enemy = Mockito.mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        enemy.setLogger(Logger.getLogger(EnemyObject.class.getName()));
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.setHorizontalSpeed(-100);
     }
@@ -45,7 +50,7 @@ public class EnemyObjectTest {
         WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(5, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
-        assertEquals(100, enemy.currentSpeedX, 1);
+        assertEquals(100, enemy.speedX, 1);
     }
 
     /**
@@ -57,7 +62,7 @@ public class EnemyObjectTest {
         WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(60, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
-        assertEquals(100, enemy.currentSpeedX, 1);
+        assertEquals(100, enemy.speedX, 1);
     }
 
     /**
@@ -65,11 +70,11 @@ public class EnemyObjectTest {
      */
     @Test
     public void testHandleCollisionBubble() {
-        enemy.update(1 / enemy.currentSpeedX);
+        enemy.update((float) (1 / enemy.speedX));
         assertFalse(enemy.remove());
         BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
         bubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE-2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        enemy.update(1 / enemy.currentSpeedX);
+        enemy.update((float) (1 / enemy.speedX));
         enemy.handleCollision(bubble);
         assertTrue(enemy.remove());
     }
@@ -79,6 +84,7 @@ public class EnemyObjectTest {
         enemy.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE );
         EnemyObject enemy2 = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
         BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        bubble.setLogger(Logger.getLogger(BubbleObject.class.getName()));
         enemy2.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         bubble.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         doNothing().when(bubble).makeFilledBubble();

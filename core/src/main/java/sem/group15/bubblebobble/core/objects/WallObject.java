@@ -12,7 +12,6 @@ import sem.group15.bubblebobble.core.Logger;
  */
 public class WallObject extends ImmutableObject {
 
-    private static final Logger logger = Logger.getLogger(WallObject.class.getName());
 
     /**
      * Create wall object with given x,y coordinates

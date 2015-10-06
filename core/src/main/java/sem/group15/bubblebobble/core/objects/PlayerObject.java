@@ -15,21 +15,20 @@ import sem.group15.bubblebobble.core.LogicController;
  */
 public class PlayerObject extends GravityObject {
 
-    private static final Logger logger = Logger.getLogger(PlayerObject.class.getName());
+    private Sound deadSound, jumpSound;
+
     public static final int PLAYER_LIVES = 3;
     public static final float INVULNERABLE_TIME = 5f;
     private final float MAX_WALL_OVERLAP = 10f;
-
-    private Sound deadSound, jumpSound;
-    public int score;
+    public int score, lives;
     protected boolean isAlive;
     private boolean fired;
     protected boolean cannotFloat;
     protected boolean floating;
-    public int lives;
-    public float respawned;
     private Direction direction;
-    private Texture textureLeft, textureRight, textureDead;
+    private Texture textureLeft, textureRight,textureDead;
+
+    public float respawned;
 
     /**
      * creates player object with a position
@@ -38,14 +37,14 @@ public class PlayerObject extends GravityObject {
      */
     public PlayerObject(float xPosition, float yPosition) {
         super(
-                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
+                new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE),
                 null
         );
         textureLeft = new Texture(Gdx.files.internal("playerSprite.png"));
         textureRight = new Texture(Gdx.files.internal("playerSpriteRight.png"));
         textureDead = new Texture(Gdx.files.internal("playerDead.png"));
-        deadSound = Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
-        jumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
+        deadSound= Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
+        jumpSound= Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
         isAlive = true;
         fired = false;
         direction = Direction.RIGHT;
@@ -64,13 +63,13 @@ public class PlayerObject extends GravityObject {
         super.update(elapsed);
         if (isAlive) {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                currentSpeedX = -100;
+                speedX = -100;
                 direction = Direction.LEFT;
             } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                currentSpeedX = 100;
+                speedX = 100;
                 direction = Direction.RIGHT;
             } else {
-                currentSpeedX = 0;
+                speedX = 0;
             }
             if (fired) {
                 fired = Gdx.input.isKeyPressed(Input.Keys.SPACE);
@@ -80,7 +79,7 @@ public class PlayerObject extends GravityObject {
             }
             if (Gdx.input.isKeyPressed(Input.Keys.UP) && canJump || floating) {
                 timeSinceLastFloorContact = 0;
-                currentSpeedY = 300;
+                speedY = 300;
                 canJump = false;
                 playJumpSound();
             }
@@ -91,8 +90,8 @@ public class PlayerObject extends GravityObject {
         } else {
             handleDeath(elapsed);
         }
-        location.x += currentSpeedX * elapsed;
-        location.y += currentSpeedY * elapsed;
+        location.x += speedX * elapsed;
+        location.y += speedY * elapsed;
 
     }
 
@@ -102,7 +101,7 @@ public class PlayerObject extends GravityObject {
      * @param elapsed time elapsed since last frame.
      */
     private void handleDeath(float elapsed) {
-        currentSpeedX = 0;
+        speedX = 0;
 
     }
 
@@ -218,7 +217,6 @@ public class PlayerObject extends GravityObject {
     public Direction getDirection() {
         return direction;
     }
-
 }
 
 

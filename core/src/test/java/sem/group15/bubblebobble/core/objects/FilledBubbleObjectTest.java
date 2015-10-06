@@ -16,7 +16,7 @@ public class FilledBubbleObjectTest {
     public void setUp() {
         fbubble = Mockito.mock(FilledBubbleObject.class, Mockito.CALLS_REAL_METHODS);
         fbubble.location = new Rectangle(0,0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        fbubble.ySpeed = 50;
+        fbubble.speedY = 50;
     }
 
     /**
@@ -26,7 +26,7 @@ public class FilledBubbleObjectTest {
     public void testUpdate() {
         assertEquals(0f, fbubble.location.y, 0.1f);
         fbubble.update(1f);
-        assertEquals(fbubble.ySpeed, fbubble.location.y, 0.01f);
+        assertEquals(fbubble.speedY, fbubble.location.y, 0.01f);
     }
 
     /**
@@ -34,11 +34,11 @@ public class FilledBubbleObjectTest {
      */
     @Test
     public void testHandleCollisionImmutable(){
-        assertEquals(50, fbubble.ySpeed, 0.01f);
+        assertEquals(50, fbubble.speedY, 0.01f);
         ImmutableObject obj = Mockito.mock(ImmutableObject.class, Mockito.CALLS_REAL_METHODS);
         obj.location = new Rectangle(10,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         fbubble.handleCollision(obj);
-        assertTrue(fbubble.ySpeed == 0);
+        assertTrue(fbubble.speedY == 0);
     }
 
     /**

@@ -37,10 +37,10 @@ public class BubbleObjectTest {
      */
     @Test
     public void testUpdateSpeed() {
-        bubble.xSpeed = 40;
+        bubble.speedX = 40;
         bubble.update(0.1f);
-        assertTrue(bubble.xSpeed < 40);
-        bubble.xSpeed = 20;
+        assertTrue(bubble.speedX < 40);
+        bubble.speedX = 20;
         bubble.update(0.1f);
         verify(bubble).getOutOfGame();
     }
