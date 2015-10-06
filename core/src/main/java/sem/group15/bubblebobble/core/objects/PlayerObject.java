@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
+import sem.group15.bubblebobble.core.LogicController;
 
 /**
  * Created by arjo on 7-9-15.
@@ -16,14 +17,18 @@ public class PlayerObject extends GravityObject {
 
     private Sound deadSound, jumpSound;
 
+    public static final int PLAYER_LIVES = 3;
+    public static final float INVULNERABLE_TIME = 5f;
     private final float MAX_WALL_OVERLAP = 10f;
-    public int score;
+    public int score, lives;
     protected boolean isAlive;
     private boolean fired;
     protected boolean cannotFloat;
     protected boolean floating;
     private Direction direction;
     private Texture textureLeft, textureRight,textureDead;
+
+    public float respawned;
 
     /**
      * creates player object with a position
@@ -45,6 +50,8 @@ public class PlayerObject extends GravityObject {
         fired = false;
         direction = Direction.RIGHT;
         score = 0;
+        lives = PLAYER_LIVES;
+        respawned = 0;
     }
     
      /**
@@ -83,13 +90,6 @@ public class PlayerObject extends GravityObject {
 
         } else {
             handleDeath(elapsed);
-            if (Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.W) && canJump || floating) {
-                timeSinceLastFloorContact = 0;
-                speedY = 300;
-                canJump = false;
-                jumpSound.play(1.0f);
-                cannotFloat = false;
-            }
         }
         location.x += speedX * elapsed;
         location.y += speedY * elapsed;
@@ -214,11 +214,6 @@ public class PlayerObject extends GravityObject {
     public boolean isAlive() {
         return isAlive;
     }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
 }
 
 

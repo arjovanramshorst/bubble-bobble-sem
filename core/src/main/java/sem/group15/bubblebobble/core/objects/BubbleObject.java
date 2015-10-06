@@ -14,8 +14,10 @@ public class BubbleObject extends FloatingObject {
     private static final int MINSPEED = 30;
 
     private static final int INITIAL_SPEED = 600;
+    public static final float BUBBLE_LIFESPAN = 5;
 
-    private static final Logger logger = Logger.getLogger(BubbleObject.class.getName());
+    private float aliveTime;
+
     /**
      * Creates a new Bubble object and it will start to float
      *
@@ -27,13 +29,13 @@ public class BubbleObject extends FloatingObject {
         super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("bubble-empty.png")));
         switch (direction) {
             case LEFT:
-                xSpeed = -1 * INITIAL_SPEED;
+                speedX = -1 * INITIAL_SPEED;
                 break;
             case RIGHT:
-                xSpeed = INITIAL_SPEED;
+                speedY = INITIAL_SPEED;
                 break;
         }
-        ySpeed = 0;
+        speedY = 0;
         aliveTime = 0;
     }
 
@@ -56,6 +58,10 @@ public class BubbleObject extends FloatingObject {
         location.x += speedX * elapsed;
         location.y += speedY* elapsed;
 
+        aliveTime += elapsed;
+        if (aliveTime > BUBBLE_LIFESPAN) {
+            remove = true;
+        }
     }
 
     /**

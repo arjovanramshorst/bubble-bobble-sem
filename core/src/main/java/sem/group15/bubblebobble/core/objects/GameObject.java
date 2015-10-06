@@ -15,10 +15,14 @@ public abstract class GameObject {
 
     protected Rectangle location;
     protected Texture texture;
-    protected double speedX;
-    protected double speedY;
+    protected float speedX;
+    protected float speedY;
 
     protected Logger logger;
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
 
     protected enum Direction {
         LEFT, RIGHT
@@ -42,6 +46,7 @@ public abstract class GameObject {
         this.texture = texture;
         newObjects = new ArrayList<GameObject>();
         remove = false;
+        logger = Logger.getLogger(this.getClass().getName());
     }
 
     /**

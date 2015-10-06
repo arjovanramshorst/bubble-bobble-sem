@@ -10,9 +10,11 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
+import sem.group15.bubblebobble.core.LogicController;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by TUDelft SID on 22-9-2015.
@@ -40,6 +42,7 @@ public class PlayerObjectTest {
         Mockito.doNothing().when(player).playDeadSound();
         player.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.speedX = INIT_SPEED;
+        player.logger = mock(Logger.class);
     }
 
     /**

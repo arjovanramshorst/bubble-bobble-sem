@@ -62,7 +62,7 @@ public class EnemyObjectTest {
         WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(60, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
-        assertEquals(100, enemy.currentSpeedX, 1);
+        assertEquals(100, enemy.speedX, 1);
     }
 
     /**

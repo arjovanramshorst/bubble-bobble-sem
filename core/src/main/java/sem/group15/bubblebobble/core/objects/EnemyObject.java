@@ -15,7 +15,6 @@ import java.util.Random;
  */
 public class EnemyObject extends GravityObject {
 
-    private static final Logger logger = Logger.getLogger(EnemyObject.class.getName());
     private static final float MAX_WALL_OVERLAP = 10f;
     private static final int ENEMY_SPEED = 100;
 
