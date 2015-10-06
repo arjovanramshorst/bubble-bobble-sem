@@ -10,7 +10,7 @@ import sem.group15.bubblebobble.core.Logger;
 /**
  * Created by woute on 9/8/2015.
  */
-public class WallObject extends ImmutableObject{
+public class WallObject extends ImmutableObject {
 
 
     /**
@@ -19,7 +19,7 @@ public class WallObject extends ImmutableObject{
      * @param x x coordinate from the bottom left corner
      * @param y y coordinate from the bottom left corner
      */
-    public WallObject(float x, float y){
+    public WallObject(float x, float y) {
         super(
                 new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
                 new Texture(Gdx.files.internal("sprite_wall_brick.png"))
@@ -28,24 +28,17 @@ public class WallObject extends ImmutableObject{
 
     }
 
-    public WallObject(float x, float y, Texture texture){
-        super(
-                new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),texture
-        );
-    }
-
     /**
-     * Necessary method, since every not abstract subclass of GameObject needs this method. Might be needed in the
-     * future.
+     * Necessary method, since every not abstract subclass of GameObject needs this method.
+     * Might be needed in the future.
      * @param elapsed time elapsed since last gameloop.
      */
-    public void update(float elapsed){
-
+    public void update(float elapsed) {
     }
 
 
 
-    public void handleCollision(GameObject collided){
+    public void handleCollision(GameObject collided) {
 
     }
 
@@ -53,7 +46,7 @@ public class WallObject extends ImmutableObject{
      * Draw sprite for wallobject
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
-    public void draw(SpriteBatch spriteBatch){
+    public void draw(SpriteBatch spriteBatch) {
         spriteBatch.draw(texture, location.x, location.y);
     }
 

@@ -15,8 +15,9 @@ import java.util.Random;
  */
 public class EnemyObject extends GravityObject {
 
-
-    private final float MAX_WALL_OVERLAP = 10f;
+    private static final Logger logger = Logger.getLogger(EnemyObject.class.getName());
+    private static final float MAX_WALL_OVERLAP = 10f;
+    private static final int ENEMY_SPEED = 100;
 
     /**
      * Creates an EnemyObject with position (X,Y) on the grid.
@@ -31,9 +32,9 @@ public class EnemyObject extends GravityObject {
         int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
         assert (random == 1 || random == 2);
         if (random == 1) {
-            setHorizontalSpeed(100);
+            setHorizontalSpeed(ENEMY_SPEED);
         } else {
-            setHorizontalSpeed(-100);
+            setHorizontalSpeed(-ENEMY_SPEED);
         }
     }
 
@@ -88,7 +89,7 @@ public class EnemyObject extends GravityObject {
      * Sets the horizontal speed of the enemy
      * @param speed the speed in floats.
      */
-    public void setHorizontalSpeed(double speed) {
+    public void setHorizontalSpeed(float speed) {
         this.speedX = speed;
     }
 

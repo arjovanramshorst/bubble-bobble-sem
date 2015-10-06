@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
 
 /**
@@ -11,11 +12,11 @@ import sem.group15.bubblebobble.core.Logger;
  */
 public class FilledBubbleObject extends FloatingObject {
 
-
+    
     /**
      * Constructor for the filledBubbleObject.
-     * @param xPosition
-     * @param yPosition
+     * @param xPosition - xPosition of the Rectangle
+     * @param yPosition - yPosition of the Rectangle
      */
     public FilledBubbleObject(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("filled-bubble.png")));
@@ -25,24 +26,12 @@ public class FilledBubbleObject extends FloatingObject {
         speedX = 0;
     }
 
-    /**
-     * Constructor for testing purposes.
-     * @param xPosition
-     * @param yPosition
-     * @param texture
-     */
-    public FilledBubbleObject(float xPosition, float yPosition, Texture texture) {
-        super(new Rectangle(xPosition, yPosition, 32, 32), texture);
-        speedY = 50;
-        speedX = 0;
-    }
-
 
     /**
      * This updates the FilledBubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
      * The initial speed of the FilledBubbleObject is FOR THE MOMENT 50.
-     * @param elapsed
+     * @param elapsed - time that has passed
      */
     public  void update(float elapsed) {
         location.y += speedY * elapsed;
@@ -64,7 +53,6 @@ public class FilledBubbleObject extends FloatingObject {
 
             if (collided instanceof PlayerObject) {
                 remove = true;
-
             }
         }
     }

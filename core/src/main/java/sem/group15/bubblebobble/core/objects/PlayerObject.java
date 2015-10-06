@@ -14,7 +14,6 @@ import sem.group15.bubblebobble.core.Logger;
  */
 public class PlayerObject extends GravityObject {
 
-
     private Sound deadSound, jumpSound;
 
     private final float MAX_WALL_OVERLAP = 10f;
@@ -48,15 +47,15 @@ public class PlayerObject extends GravityObject {
         score = 0;
     }
     
-    /**
-     * updates the player parameters
+     /**
+     * updates the player parameters.
      * @param elapsed time elapsed since last gameloop.
      */
 
     @Override
     public void update(float elapsed) {
         super.update(elapsed);
-        if(isAlive) {
+        if (isAlive) {
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
                 speedX = -100;
                 direction = Direction.LEFT;
@@ -76,8 +75,12 @@ public class PlayerObject extends GravityObject {
                 timeSinceLastFloorContact = 0;
                 speedY = 300;
                 canJump = false;
-                jumpSound.play(1.0f);
+                playJumpSound();
             }
+            if (respawned > 0) {
+                respawned = respawned - elapsed;
+            }
+
         } else {
             handleDeath(elapsed);
             if (Gdx.input.isKeyPressed(Input.Keys.UP) && Gdx.input.isKeyPressed(Input.Keys.W) && canJump || floating) {
@@ -94,8 +97,8 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * This method handles what happens after the player dies. In the future it might include the logic for
-     * a death animation.
+     * This method handles what happens after the player dies.
+     * In the future it might include the logic for a death animation.
      * @param elapsed time elapsed since last frame.
      */
     private void handleDeath(float elapsed) {
@@ -104,7 +107,7 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * method that is called when the player fires a bubble
+     * method that is called when the player fires a bubble.
      */
     private void fireBubble() {
         BubbleObject bubble = new BubbleObject(0, getBottom(), direction);
@@ -127,12 +130,20 @@ public class PlayerObject extends GravityObject {
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
-        if(location.overlaps(other.getBody())){
+        if (location.overlaps(other.getBody())) {
 
-            if (other instanceof EnemyObject &&isAlive) {
+            if (other instanceof EnemyObject && isAlive && respawned <= 0f) {
                 logger.log("Player touched EnemyObject.");
-                isAlive = false;
+                lives--;
+                respawned = INVULNERABLE_TIME;
                 playDeadSound();
+                //set alive false if ran out of lives.
+                if (lives == 0) {
+                    isAlive = false;
+                }
+                else {
+                    respawn();
+                }
             }
 
             if (other instanceof WallObject) {
@@ -159,12 +170,20 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * draws the player, checks for flags to select the right texture
+     * respawn player at starting location.
+     */
+    public void respawn() {
+        location.x = LogicController.PLAYER_XY_SPAWN;
+        location.y = LogicController.PLAYER_XY_SPAWN;
+    }
+
+    /**
+     * draws the player, checks for flags to select the right texture.
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        if(isAlive) {
+        if (isAlive) {
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(textureLeft, getLeft(), getBottom());
@@ -174,8 +193,9 @@ public class PlayerObject extends GravityObject {
                     break;
             }
         }
-        else
+        else {
             spriteBatch.draw(textureDead, getLeft(), getBottom());
+        }
 
     }
 
@@ -184,6 +204,19 @@ public class PlayerObject extends GravityObject {
      */
     public void playDeadSound() {
         deadSound.play(1.0f);
+    }
+    /**
+     * Plays the jumpSound when the player jumps
+     */
+    public void playJumpSound() {
+        jumpSound.play(1.0f);
+    }
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 
 }

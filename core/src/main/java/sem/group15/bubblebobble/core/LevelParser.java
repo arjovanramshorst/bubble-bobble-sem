@@ -5,11 +5,7 @@ import sem.group15.bubblebobble.core.objects.EnemyObject;
 import sem.group15.bubblebobble.core.objects.FloorObject;
 import sem.group15.bubblebobble.core.objects.GameObject;
 import sem.group15.bubblebobble.core.objects.WallObject;
-
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -34,21 +30,21 @@ public class LevelParser {
      Floor (object type), 200(x location), 100(y location)
      */
 
-    public static List<GameObject> parse(FileHandle file) throws IOException{
+    public static List<GameObject> parse(FileHandle file) throws IOException {
         List<GameObject> result = new ArrayList<GameObject>();
         Scanner sc = new Scanner(file.read());
-        while (sc.hasNext()){
+        while (sc.hasNext()) {
             String object =  sc.nextLine();
             try {
                 result.add(getObject(object));
-            } catch(IOException ioe) {
+            } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
         }
         return result;
     }
 
-    private static GameObject getObject(String line) throws IOException{
+    private static GameObject getObject(String line) throws IOException {
         String[] enemyArray = line.split(",");
         String objectType = enemyArray[0];
         float xPos = BubbleBobble.SPRITE_SIZE * Float.parseFloat(enemyArray[1]);
@@ -56,11 +52,11 @@ public class LevelParser {
 
         switch (objectType) {
             case "Enemy":
-                return new EnemyObject(xPos,yPos);
+                return new EnemyObject(xPos, yPos);
             case "Floor":
-                return new FloorObject(xPos,yPos);
+                return new FloorObject(xPos, yPos);
             case "Wall":
-                return new WallObject(xPos,yPos);
+                return new WallObject(xPos, yPos);
         }
         throw new IOException("String: " + line + " is not a valid object!");
     }

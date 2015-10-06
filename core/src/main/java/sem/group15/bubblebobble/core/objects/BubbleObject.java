@@ -15,6 +15,7 @@ public class BubbleObject extends FloatingObject {
 
     private static final int INITIAL_SPEED = 600;
 
+    private static final Logger logger = Logger.getLogger(BubbleObject.class.getName());
     /**
      * Creates a new Bubble object and it will start to float
      *
@@ -24,37 +25,16 @@ public class BubbleObject extends FloatingObject {
      */
     public BubbleObject(float xPosition, float yPosition, Direction direction) {
         super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("bubble-empty.png")));
-        logger= Logger.getLogger(BubbleObject.class.getName());
-
         switch (direction) {
             case LEFT:
-                speedX = -1 * INITIAL_SPEED;
+                xSpeed = -1 * INITIAL_SPEED;
                 break;
             case RIGHT:
-                speedX = INITIAL_SPEED;
+                xSpeed = INITIAL_SPEED;
                 break;
         }
-        speedY = 0;
-    }
-
-    /**
-     * For Testing purposes
-     * @param xPosition
-     * @param yPosition
-     * @param direction
-     * @param texture
-     */
-    public BubbleObject(float xPosition, float yPosition, Direction direction, Texture texture) {
-        super(new Rectangle(xPosition, yPosition, 32, 32), texture);
-        switch (direction) {
-            case LEFT:
-                speedX = -1 * INITIAL_SPEED;
-                break;
-            case RIGHT:
-                speedX = INITIAL_SPEED;
-                break;
-        }
-        speedY = 0;
+        ySpeed = 0;
+        aliveTime = 0;
     }
 
     /**

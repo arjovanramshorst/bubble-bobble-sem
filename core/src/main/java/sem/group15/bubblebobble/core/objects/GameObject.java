@@ -18,10 +18,6 @@ public abstract class GameObject {
     protected double speedX;
     protected double speedY;
 
-    public void setLogger(Logger logger) {
-        this.logger = logger;
-    }
-
     protected Logger logger;
 
     protected enum Direction {
@@ -29,13 +25,15 @@ public abstract class GameObject {
     }
 
     /**
-     * List that contains items that need to be added to the game. After each cycle this list is cleared.
+     * List that contains items that need to be added to the game.
+     * After each cycle this list is cleared.
      */
     protected List<GameObject> newObjects;
 
     /**
-     * If this boolean is set to true, this item will be removed from the List. This is not the same as is alive
-     * or something, it only means that this item can be picked up by the garbage collector.
+     * If this boolean is set to true, this item will be removed from the List.
+     * This is not the same as is alive or something,
+     * it only means that this item can be picked up by the garbage collector.
      */
     protected boolean remove;
 
@@ -47,15 +45,18 @@ public abstract class GameObject {
     }
 
     /**
-     * This updates this object after a game loop has passed. This updates all the variables, like location or speed,
+     * This updates this object after a game loop has passed.
+     * This updates all the variables, like location or speed,
      * depending on the kind of subclass this is.
      * @param elapsed time elapsed since last gameloop.
      */
     public abstract void update(float elapsed);
 
     /**
-     * This handles the collision for this object. It should only be used to update this object, not the other.
-     * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
+     * This handles the collision for this object.
+     * It should only be used to update this object, not the other.
+     * @param collided GameObject that collided with this.
+     *                 (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
     public abstract void handleCollision(GameObject collided);
@@ -153,6 +154,4 @@ public abstract class GameObject {
     public final boolean remove() {
         return remove;
     }
-
-
 }
