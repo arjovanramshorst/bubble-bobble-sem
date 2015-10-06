@@ -14,10 +14,11 @@ import sem.group15.bubblebobble.core.LogicController;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 /**
- * Created by TUDelft SID on 22-9-2015.
+ * Created by TUDelft SID on 22015.
  */
 public class PlayerObjectTest {
 
@@ -40,6 +41,7 @@ public class PlayerObjectTest {
         Gdx.input = mock(Input.class);
         player = mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
         Mockito.doNothing().when(player).playDeadSound();
+        Mockito.doNothing().when(player).playJumpSound();
         player.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.speedX = INIT_SPEED;
         player.logger = mock(Logger.class);
@@ -159,4 +161,101 @@ public class PlayerObjectTest {
         assertTrue(player.canJump);
     }
 
+    /**
+     * test collision with wall on right
+     */
+    @Test
+    public void testHandleCollisionWall(){
+        player.location.x = 5;
+        player.location.y = 32;
+        WallObject wall = mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        wall.location = new Rectangle(32,32,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        assertNotEquals(wall.getLeft(), player.getRight(), 0.1f);
+        player.handleCollision(wall);
+        assertEquals(wall.getLeft(), player.getRight(), 0.1f);
+    }
+    /**
+     * test collision with wall on left
+     */
+    @Test
+    public void testHandleCollisionWallLeft(){
+        player.location.x = 60;
+        player.location.y = 32;
+        WallObject wall = mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        wall.location = new Rectangle(32,32,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        assertNotEquals(wall.getRight(), player.getLeft(), 0.1f);
+        player.handleCollision(wall);
+        assertEquals(wall.getRight(), player.getLeft(), 0.1f);
+    }
+    /**
+     * Tests if the player can move to the left.
+     */
+    @Test
+    public void testMovementLeft() {
+        Mockito.when(Gdx.input.isKeyPressed(Input.Keys.LEFT)).thenReturn(true);
+        player.isAlive = true;
+        player.update(0.1f);
+        assertTrue(player.speedX == -100f);
+        assertTrue(player.getDirection() == GameObject.Direction.LEFT);
+    }
+    /**
+     * Tests if the player can move to the right.
+     */
+    @Test
+    public void testMovementRight() {
+        Mockito.when(Gdx.input.isKeyPressed(Input.Keys.RIGHT)).thenReturn(true);
+        player.isAlive = true;
+        player.update(0.1f);
+        assertTrue(player.speedX == 100f);
+        assertTrue(player.getDirection() == GameObject.Direction.RIGHT);
+    }
+    /**
+     * Tests if the player interacts properly when there is no movement key pressed.
+     */
+    @Test
+    public void noMovement() {
+        player.isAlive = true;
+        player.update(0.1f);
+        assertTrue(player.speedX == 0);
+    }
+    /**
+     * test if the player can jump.
+     */
+    @Test
+    public void testJump1() {
+        Mockito.when(Gdx.input.isKeyPressed(Input.Keys.UP)).thenReturn(true);
+        player.canJump = true;
+        player.isAlive = true;
+        player.update(0.1f);
+        assertFalse(player.canJump);
+        assertTrue(player.speedY == 300f);
+        verify(player).playJumpSound();
+    }
+    /**
+     * test if the player can jump when standing on a bubble.
+     */
+    @Test
+    public void testJump2() {
+        Mockito.when(Gdx.input.isKeyPressed(Input.Keys.UP)).thenReturn(true);
+        player.canJump = false;
+        player.floating = true;
+        player.isAlive = true;
+        player.update(0.1f);
+        assertFalse(player.canJump);
+        assertTrue(player.speedY == 300f);
+        verify(player).playJumpSound();
+    }
+    /**
+     * test if the player cannot jump when it is already jumping.
+     */
+    @Test
+    public void testJump3() {
+        Mockito.when(Gdx.input.isKeyPressed(Input.Keys.UP)).thenReturn(true);
+        player.canJump = false;
+        player.floating = false;
+        player.isAlive = true;
+        player.update(0.1f);
+        assertFalse(player.canJump);
+        verify(player, never()).playJumpSound();
+    }
 }

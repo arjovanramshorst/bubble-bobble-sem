@@ -213,6 +213,10 @@ public class PlayerObject extends GravityObject {
     public boolean isAlive() {
         return isAlive;
     }
+
+    public Direction getDirection() {
+        return direction;
+    }
 }
 
 
