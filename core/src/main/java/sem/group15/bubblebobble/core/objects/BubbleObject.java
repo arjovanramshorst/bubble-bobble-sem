@@ -32,7 +32,7 @@ public class BubbleObject extends FloatingObject {
                 speedX = -1 * INITIAL_SPEED;
                 break;
             case RIGHT:
-                speedY = INITIAL_SPEED;
+                speedX = INITIAL_SPEED;
                 break;
         }
         speedY = 0;
