@@ -40,7 +40,6 @@ public class PlayerObject extends GravityObject {
                 new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE),
                 null
         );
-        logger = Logger.getLogger(PlayerObject.class.getName());
         textureLeft = new Texture(Gdx.files.internal("playerSprite.png"));
         textureRight = new Texture(Gdx.files.internal("playerSpriteRight.png"));
         textureDead = new Texture(Gdx.files.internal("playerDead.png"));

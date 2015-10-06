@@ -24,8 +24,6 @@ public class WallObject extends ImmutableObject {
                 new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE),
                 new Texture(Gdx.files.internal("sprite_wall_brick.png"))
         );
-        logger = Logger.getLogger(WallObject.class.getName());
-
     }
 
     /**

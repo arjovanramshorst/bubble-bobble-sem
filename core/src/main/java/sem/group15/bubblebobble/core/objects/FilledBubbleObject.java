@@ -20,7 +20,6 @@ public class FilledBubbleObject extends FloatingObject {
      */
     public FilledBubbleObject(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("filled-bubble.png")));
-        logger = Logger.getLogger(FilledBubbleObject.class.getName());
 
         speedY = 50;
         speedX = 0;
