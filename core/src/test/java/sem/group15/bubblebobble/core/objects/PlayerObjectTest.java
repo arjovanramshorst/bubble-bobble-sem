@@ -21,15 +21,16 @@ public class PlayerObjectTest {
 
 
     /**
-     * Used for setting the speed of the player object.
+     * Used for setting the INIT_SPEED of the player object.
      */
-    final float speed = 100;
+    private static final float INIT_SPEED = 100;
+
+
     private PlayerObject player;
 
     /**
-     * Set up the player, the player's location and speed.
+     * Set up the player, the player's location and initial speed.
      */
-
     @Before
     public void setUp() {
         Gdx.app = mock(Application.class);
@@ -38,7 +39,7 @@ public class PlayerObjectTest {
         player.setLogger(Logger.getLogger(PlayerObject.class.getName()));
         Mockito.doNothing().when(player).playDeadSound();
         player.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        player.speedX = speed;
+        player.speedX = INIT_SPEED;
     }
 
     /**
@@ -51,7 +52,7 @@ public class PlayerObjectTest {
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.handleCollision(enemy);
         assertFalse(player.isAlive);
-        player.update(1 / speed);
+        player.update(1 / INIT_SPEED);
         assertEquals(0, player.speedX, 0.01);
     }
 
