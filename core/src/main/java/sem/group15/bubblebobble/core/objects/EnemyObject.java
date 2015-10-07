@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
-
 import java.util.Random;
 
 /**
@@ -17,9 +16,7 @@ public class EnemyObject extends GravityObject {
 
     private static final float MAX_WALL_OVERLAP = 10f;
     public static final int ENEMY_SPEED = 100;
-
     private Direction direction;
-
     private Texture textureLeft, textureRight;
 
     /**
@@ -94,7 +91,6 @@ public class EnemyObject extends GravityObject {
                 break;
         }
     }
-
 
     /**
      * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
