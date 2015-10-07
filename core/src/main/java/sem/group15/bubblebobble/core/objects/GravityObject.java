@@ -18,8 +18,8 @@ public abstract class GravityObject extends GameObject {
     protected boolean canJump;
 
 
-    protected GravityObject(Rectangle location, Texture texture) {
-        super(location, texture);
+    protected GravityObject(Rectangle location) {
+        super(location);
         this.speedX = 0;
         this.speedY = 0;
         this.timeSinceLastFloorContact = 0;
