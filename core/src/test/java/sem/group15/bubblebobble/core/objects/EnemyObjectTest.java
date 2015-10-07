@@ -38,7 +38,7 @@ public class EnemyObjectTest {
         enemy = Mockito.mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
         enemy.setLogger(Logger.getLogger(EnemyObject.class.getName()));
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        enemy.setHorizontalSpeed(-100);
+        enemy.setDirection(GameObject.Direction.LEFT);
     }
 
     /**
@@ -98,5 +98,13 @@ public class EnemyObjectTest {
         bubble.handleCollision(enemy2);
         assertTrue(enemy.remove());
         assertFalse(enemy2.remove());
+    }
+
+    @Test
+    public void testDirectionAndSpeedIsSetAccordingly() {
+        enemy.setDirection(GameObject.Direction.LEFT);
+        assertEquals(-EnemyObject.ENEMY_SPEED, enemy.speedX, 0.01f);
+        enemy.setDirection(GameObject.Direction.RIGHT);
+        assertEquals(EnemyObject.ENEMY_SPEED, enemy.speedX, 0.01f);
     }
 }
