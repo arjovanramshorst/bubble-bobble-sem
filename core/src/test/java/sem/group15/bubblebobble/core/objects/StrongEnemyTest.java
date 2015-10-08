@@ -12,6 +12,7 @@ import sem.group15.bubblebobble.core.Logger;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class StrongEnemyTest {
 
@@ -93,6 +94,11 @@ public class StrongEnemyTest {
      */
     @Test
     public void testHandleCollisionPlayer() {
+        PlayerObject player = Mockito.mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
+        player.location = new Rectangle(BubbleBobble.SPRITE_SIZE-2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        enemy.update(1.1f);
+        enemy.handleCollision(player);
+        verify(enemy).updatePath(player.location.x);
     }
 
     /**
