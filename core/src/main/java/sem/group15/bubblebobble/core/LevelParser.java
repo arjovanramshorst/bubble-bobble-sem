@@ -50,7 +50,7 @@ public class LevelParser {
 
         switch (objectType) {
             case "Enemy":
-                return new StrongEnemy(xPos, yPos);
+                return new SimpleEnemy(xPos, yPos);
             case "Floor":
                 return new FloorObject(xPos, yPos);
             case "Wall":
