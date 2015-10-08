@@ -16,6 +16,8 @@ public class BubbleObject extends FloatingObject {
     private static final int INITIAL_SPEED = 600;
     public static final float BUBBLE_LIFESPAN = 5;
 
+    public static final float PERCENTAGE_OVERLAP_COLLISION = 0.8f;
+
     private float aliveTime;
 
     /**
@@ -82,13 +84,13 @@ public class BubbleObject extends FloatingObject {
      * If the bubble collides with an ImmutableObject, the y speed should change to 0 and the x speed should
      * change to either the right or left.
      *
-     * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
+     * @param other GameObject that collided with this. (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
-    public void handleCollision(GameObject collided) {
-        if (!remove && location.overlaps(collided.getBody())) {
+    public void handleCollision(GameObject other) {
+        if (!remove && location.overlaps(other.getBody())) {
 
-            if (collided instanceof EnemyObject) {
+            if (other instanceof EnemyObject && overlapPercentage(other) > PERCENTAGE_OVERLAP_COLLISION) {
                 logger.log("Bubble touched enemy object.");
                 remove = true;
                 makeFilledBubble();

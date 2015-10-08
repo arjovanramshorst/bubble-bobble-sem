@@ -3,6 +3,7 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
 
 import java.util.ArrayList;
@@ -154,6 +155,17 @@ public abstract class GameObject {
             }
             newObjects.clear();
         }
+    }
+
+    /**
+     * Returns the smallest of either the horizontal or vertical overlap.
+     * @param other GameObject to compare to.
+     * @return percentage overlap.
+     */
+    public final float overlapPercentage(GameObject other) {
+        float maxVerticalOverlap = Math.max(overlapTop(other), overlapBottom(other));
+        float maxHorizontalOverlap = Math.max(overlapLeft(other), overlapRight(other));
+        return Math.min(maxHorizontalOverlap, maxVerticalOverlap) / BubbleBobble.SPRITE_SIZE;
     }
 
     public final boolean remove() {

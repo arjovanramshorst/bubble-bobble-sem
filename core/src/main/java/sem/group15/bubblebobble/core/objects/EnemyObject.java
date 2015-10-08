@@ -64,10 +64,10 @@ public class EnemyObject extends GravityObject {
                 }
                 if (between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
                     setRight(other.getLeft());
-                    setHorizontalSpeed(speedX* -1);
+                    setHorizontalSpeed(speedX * -1);
                 }
             }
-            if (other instanceof BubbleObject && ! other.remove()) {
+            if (other instanceof BubbleObject && ! other.remove() && overlapPercentage(other) > BubbleObject.PERCENTAGE_OVERLAP_COLLISION) {
                 remove = true;
             }
         }
