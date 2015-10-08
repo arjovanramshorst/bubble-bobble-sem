@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
+
 import java.util.Random;
 
 /**
@@ -17,7 +18,6 @@ public class EnemyObject extends GravityObject {
     private static final float MAX_WALL_OVERLAP = 10f;
     public static final int ENEMY_SPEED = 100;
     private Direction direction;
-    private Texture textureLeft, textureRight;
 
     /**
      * Creates an EnemyObject with position (X,Y) on the grid.
@@ -28,8 +28,6 @@ public class EnemyObject extends GravityObject {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("enemy.png")));
 
         //Generates random integer between 1 and 2.
-        textureLeft = new Texture(Gdx.files.internal("enemyLeft.png"));
-        textureRight = new Texture(Gdx.files.internal("enemy.png"));
         int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
         assert (random == 1 || random == 2);
         if (random == 1) {
@@ -84,13 +82,14 @@ public class EnemyObject extends GravityObject {
     public void draw(SpriteBatch spriteBatch) {
         switch (direction) {
             case LEFT:
-                spriteBatch.draw(textureLeft, getLeft(), getBottom());
+                spriteBatch.draw(assets.enemyLeft, getLeft(), getBottom());
                 break;
             case RIGHT:
-                spriteBatch.draw(textureRight, getLeft(), getBottom());
+                spriteBatch.draw(assets.enemyRight, getLeft(), getBottom());
                 break;
         }
     }
+
 
     /**
      * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
@@ -107,4 +106,5 @@ public class EnemyObject extends GravityObject {
         }
         this.direction = direction;
     }
+
 }

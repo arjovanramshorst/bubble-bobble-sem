@@ -3,6 +3,7 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.Assets;
 import sem.group15.bubblebobble.core.Logger;
 
 import java.util.ArrayList;
@@ -13,8 +14,9 @@ import java.util.List;
  */
 public abstract class GameObject {
 
+    protected Assets assets;
+
     protected Rectangle location;
-    protected Texture texture;
     protected float speedX;
     protected float speedY;
 
@@ -41,12 +43,12 @@ public abstract class GameObject {
      */
     protected boolean remove;
 
-    protected GameObject(Rectangle location, Texture texture) {
+    protected GameObject(Rectangle location) {
         this.location = location;
-        this.texture = texture;
         newObjects = new ArrayList<GameObject>();
         remove = false;
         logger = Logger.getLogger(this.getClass().getName());
+        assets = Assets.getAssets();
     }
 
     /**

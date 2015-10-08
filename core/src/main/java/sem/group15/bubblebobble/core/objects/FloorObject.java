@@ -14,7 +14,7 @@ import sem.group15.bubblebobble.core.Logger;
 public class FloorObject extends ImmutableObject {
 
     public FloorObject(float locationX, float locationY) {
-        super(new Rectangle(locationX, locationY, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("sprite_wall_brick.png")));
+        super(new Rectangle(locationX, locationY, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
     }
    
     @Override
@@ -29,6 +29,6 @@ public class FloorObject extends ImmutableObject {
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        spriteBatch.draw(texture, location.x, location.y);
+        spriteBatch.draw(assets.wall, location.x, location.y);
     }
 }
