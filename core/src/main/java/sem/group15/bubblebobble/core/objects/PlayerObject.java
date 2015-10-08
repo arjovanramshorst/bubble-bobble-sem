@@ -2,12 +2,9 @@ package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
-import sem.group15.bubblebobble.core.Logger;
 import sem.group15.bubblebobble.core.LogicController;
 
 /**
@@ -119,8 +116,8 @@ public class PlayerObject extends GravityObject {
 
         if (location.overlaps(other.getBody())) {
 
-            if (other instanceof EnemyObject && isAlive && respawned <= 0f) {
-                logger.log("Player touched EnemyObject.");
+            if (other instanceof Enemy && isAlive && respawned <= 0f) {
+                logger.log("Player touched Enemy.");
                 lives--;
                 respawned = INVULNERABLE_TIME;
                 playDeadSound();
