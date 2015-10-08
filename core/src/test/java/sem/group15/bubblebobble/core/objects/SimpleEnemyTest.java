@@ -1,7 +1,6 @@
 package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
@@ -11,12 +10,6 @@ import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
@@ -24,10 +17,10 @@ import static org.junit.Assert.*;
 /**
  * Test class for enemy object.
  */
-public class EnemyObjectTest {
+public class SimpleEnemyTest {
 
 
-    private EnemyObject enemy;
+    private SimpleEnemy enemy;
 
     /**
      * Set up mockito
@@ -36,8 +29,8 @@ public class EnemyObjectTest {
     public void setUp() {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
-        enemy = Mockito.mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
-        enemy.setLogger(Logger.getLogger(EnemyObject.class.getName()));
+        enemy = Mockito.mock(SimpleEnemy.class, Mockito.CALLS_REAL_METHODS);
+        enemy.setLogger(Logger.getLogger(Enemy.class.getName()));
         enemy.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.setDirection(GameObject.Direction.LEFT);
     }
@@ -50,7 +43,7 @@ public class EnemyObjectTest {
         WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle( 2 - BubbleBobble.SPRITE_SIZE, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
-        assertEquals(EnemyObject.ENEMY_SPEED, enemy.speedX, 0.01f);
+        assertEquals(Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
     }
 
     /**
@@ -61,7 +54,7 @@ public class EnemyObjectTest {
         WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(2 - BubbleBobble.SPRITE_SIZE, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
-        assertEquals(EnemyObject.ENEMY_SPEED, enemy.speedX, 0.01f);
+        assertEquals(Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
     }
 
     /**
@@ -72,7 +65,7 @@ public class EnemyObjectTest {
         WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
-        assertEquals( - EnemyObject.ENEMY_SPEED, enemy.speedX, 0.01f);
+        assertEquals(-Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
     }
 
     /**
@@ -83,7 +76,7 @@ public class EnemyObjectTest {
         WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
-        assertEquals( - EnemyObject.ENEMY_SPEED, enemy.speedX, 0.01f);
+        assertEquals( - Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
     }
 
     /**
@@ -103,7 +96,7 @@ public class EnemyObjectTest {
     @Test
     public void testHandleDoubleCollisionBubble() {
         enemy.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE );
-        EnemyObject enemy2 = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        Enemy enemy2 = mock(Enemy.class, Mockito.CALLS_REAL_METHODS);
         BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
         bubble.setLogger(Logger.getLogger(BubbleObject.class.getName()));
         enemy2.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
@@ -124,8 +117,8 @@ public class EnemyObjectTest {
     @Test
     public void testDirectionAndSpeedIsSetAccordingly() {
         enemy.setDirection(GameObject.Direction.LEFT);
-        assertEquals(-EnemyObject.ENEMY_SPEED, enemy.speedX, 0.01f);
+        assertEquals(-Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
         enemy.setDirection(GameObject.Direction.RIGHT);
-        assertEquals(EnemyObject.ENEMY_SPEED, enemy.speedX, 0.01f);
+        assertEquals(Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
     }
 }

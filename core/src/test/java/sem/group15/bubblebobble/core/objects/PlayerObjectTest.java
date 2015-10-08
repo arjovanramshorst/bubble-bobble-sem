@@ -54,7 +54,7 @@ public class PlayerObjectTest {
     public void collisionEnemyNoLives() {
         player.isAlive = true;
         player.lives = 1;
-        EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        Enemy enemy = mock(Enemy.class, Mockito.CALLS_REAL_METHODS);
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.handleCollision(enemy);
         assertFalse(player.isAlive);
@@ -69,7 +69,7 @@ public class PlayerObjectTest {
     public void collisionEnemyMultipleLives() {
         player.lives = 2;
         player.isAlive = true;
-        EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        Enemy enemy = mock(Enemy.class, Mockito.CALLS_REAL_METHODS);
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.handleCollision(enemy);
         assertTrue(player.isAlive);
@@ -84,7 +84,7 @@ public class PlayerObjectTest {
     public void testRespawned() {
         player.respawned = 0;
         player.isAlive = true;
-        EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        Enemy enemy = mock(Enemy.class, Mockito.CALLS_REAL_METHODS);
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.handleCollision(enemy);
         assertEquals(player.INVULNERABLE_TIME, player.respawned, 0.01f);
@@ -103,7 +103,7 @@ public class PlayerObjectTest {
         player.lives = player.PLAYER_LIVES;
         player.respawned = 0f;
 
-        EnemyObject enemy = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        Enemy enemy = mock(Enemy.class, Mockito.CALLS_REAL_METHODS);
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.update(0.1f);
         player.handleCollision(enemy);
