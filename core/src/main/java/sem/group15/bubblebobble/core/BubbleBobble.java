@@ -28,7 +28,8 @@ public class BubbleBobble implements ApplicationListener {
 	//@Override
 	public void create() {
 		batch = new SpriteBatch();
-
+		// Loads and initializes the assets used in the game.
+		Assets.getAssets();
 		controller = new LogicController();
 		controller.init(1);
 

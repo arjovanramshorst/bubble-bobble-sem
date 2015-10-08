@@ -32,6 +32,7 @@ public class LogicController {
         gameObjects.clear();
         setPlayer();
         readMap(level);
+
     }
 
     /**

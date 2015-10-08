@@ -24,7 +24,7 @@ public class EnemyObject extends GravityObject {
      * @param yPosition y coordinate
      */
     public EnemyObject(float xPosition, float yPosition) {
-        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE), new Texture(Gdx.files.internal("enemy.png")));
+        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
 
         //Generates random integer between 1 and 2.
         int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
@@ -79,7 +79,7 @@ public class EnemyObject extends GravityObject {
      */
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        spriteBatch.draw(texture, location.x, location.y);
+        spriteBatch.draw(assets.enemyLeft, location.x, location.y);
     }
 
 

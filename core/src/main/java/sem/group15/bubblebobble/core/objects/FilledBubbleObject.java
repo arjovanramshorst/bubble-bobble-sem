@@ -1,11 +1,7 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import sem.group15.bubblebobble.core.BubbleBobble;
-import sem.group15.bubblebobble.core.Logger;
 
 /**
  * Created by TUDelft SID on 7-9-2015.
@@ -19,7 +15,7 @@ public class FilledBubbleObject extends FloatingObject {
      * @param yPosition - yPosition of the Rectangle
      */
     public FilledBubbleObject(float xPosition, float yPosition) {
-        super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("filled-bubble.png")));
+        super(new Rectangle(xPosition, yPosition, 32, 32));
 
         speedY = 50;
         speedX = 0;
@@ -61,7 +57,7 @@ public class FilledBubbleObject extends FloatingObject {
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     public  void draw(SpriteBatch spriteBatch) {
-        spriteBatch.draw(texture, location.x, location.y);
+        spriteBatch.draw(assets.filledBubble, location.x, location.y);
     }
 
 }
