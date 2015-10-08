@@ -16,7 +16,8 @@ import java.util.Random;
 public class EnemyObject extends GravityObject {
 
     private static final float MAX_WALL_OVERLAP = 10f;
-    private static final int ENEMY_SPEED = 100;
+    public static final int ENEMY_SPEED = 100;
+    private Direction direction;
 
     /**
      * Creates an EnemyObject with position (X,Y) on the grid.
@@ -30,9 +31,9 @@ public class EnemyObject extends GravityObject {
         int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
         assert (random == 1 || random == 2);
         if (random == 1) {
-            setHorizontalSpeed(ENEMY_SPEED);
+            setDirection(Direction.RIGHT);
         } else {
-            setHorizontalSpeed(-ENEMY_SPEED);
+            setDirection(Direction.LEFT);
         }
     }
 
@@ -60,11 +61,11 @@ public class EnemyObject extends GravityObject {
             if (other instanceof WallObject) {
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
-                    setHorizontalSpeed(-1 * speedX);
+                    setDirection(Direction.RIGHT);
                 }
                 if (between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
                     setRight(other.getLeft());
-                    setHorizontalSpeed(speedX* -1);
+                    setDirection(Direction.LEFT);
                 }
             }
             if (other instanceof BubbleObject && ! other.remove()) {
@@ -79,16 +80,31 @@ public class EnemyObject extends GravityObject {
      */
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        spriteBatch.draw(assets.enemyLeft, location.x, location.y);
+        switch (direction) {
+            case LEFT:
+                spriteBatch.draw(assets.enemyLeft, getLeft(), getBottom());
+                break;
+            case RIGHT:
+                spriteBatch.draw(assets.enemyRight, getLeft(), getBottom());
+                break;
+        }
     }
 
 
     /**
-     * Sets the horizontal speed of the enemy
-     * @param speed the speed in floats.
+     * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
+     * @param direction the direction in which the enemy is going.
      */
-    public void setHorizontalSpeed(float speed) {
-        this.speedX = speed;
+    public void setDirection(Direction direction) {
+        switch(direction) {
+            case LEFT:
+                this.speedX = -ENEMY_SPEED;
+                break;
+            case RIGHT:
+                this.speedX = ENEMY_SPEED;
+                break;
+        }
+        this.direction = direction;
     }
 
 }
