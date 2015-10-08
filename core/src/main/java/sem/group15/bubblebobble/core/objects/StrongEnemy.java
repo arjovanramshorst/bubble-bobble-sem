@@ -20,8 +20,6 @@ public class StrongEnemy extends Enemy {
         super(xPosition, yPosition);
     }
 
-
-
     /**
      * Draws the sprite at the correct location.
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
@@ -41,7 +39,7 @@ public class StrongEnemy extends Enemy {
     @Override
     public void update(float elapsed){
         super.update(elapsed);
-        switchDelay-=elapsed;
+        switchDelay -= elapsed;
     }
 
     /**
@@ -49,29 +47,29 @@ public class StrongEnemy extends Enemy {
      * @param direction the direction in which the enemy is going.
      */
     public void setDirection(Direction direction) {
-        switch(direction) {
+        switch (direction) {
             case LEFT:
-                this.speedX = -ENEMY_SPEED*2;
+                this.speedX = -ENEMY_SPEED * 2;
                 break;
             case RIGHT:
-                this.speedX = ENEMY_SPEED*2;
+                this.speedX = ENEMY_SPEED * 2;
                 break;
         }
         this.direction = direction;
-        switchDelay=1;
+        switchDelay = 1;
     }
 
     /**
      * updated the direction of the enemy based on the player's position
+     * @param playerX x coordinate of the player
      */
-
     public void updatePath(float playerX){
-        if (playerX>location.x)
+        if (playerX > location.x)
             setDirection(Direction.RIGHT);
         else
             setDirection(Direction.LEFT);
 
-        speedY+=300;
+        speedY += 300;
     }
 
 
@@ -83,7 +81,7 @@ public class StrongEnemy extends Enemy {
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
-        if(other instanceof PlayerObject&&switchDelay<0){
+        if (other instanceof PlayerObject && switchDelay < 0){
             updatePath(other.location.x);
         }
 
@@ -99,7 +97,7 @@ public class StrongEnemy extends Enemy {
                     setDirection(Direction.LEFT);
                 }
             }
-            if (other instanceof BubbleObject && ! other.remove()) {
+            if (other instanceof BubbleObject && !other.remove()) {
                 remove = true;
             }
         }
