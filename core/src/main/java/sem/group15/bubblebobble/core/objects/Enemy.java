@@ -29,7 +29,7 @@ public abstract class Enemy extends GravityObject {
      */
     public Enemy(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
-        state = State.NORMAL;
+
     }
 
     /**
@@ -38,6 +38,7 @@ public abstract class Enemy extends GravityObject {
      */
     public void setState(State state) {
         this.state = state;
+
     }
 
     /**
