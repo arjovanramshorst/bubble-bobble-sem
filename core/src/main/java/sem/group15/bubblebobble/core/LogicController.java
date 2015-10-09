@@ -2,7 +2,7 @@ package sem.group15.bubblebobble.core;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.objects.GameObject;
-import sem.group15.bubblebobble.core.objects.PlayerObject;
+import sem.group15.bubblebobble.core.objects.Player;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class LogicController {
     protected List<GameObject> gameObjects;
-    public PlayerObject player;
+    public Player player;
     protected Level levelMap;
 
     protected int currentLevel;
@@ -48,7 +48,7 @@ public class LogicController {
 
     protected void setPlayer() {
         if (this.player == null) {
-            this.player = new PlayerObject(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
+            this.player = new Player(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         }
         gameObjects.add(this.player);
     }

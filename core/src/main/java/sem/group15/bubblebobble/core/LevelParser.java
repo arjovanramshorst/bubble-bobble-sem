@@ -4,9 +4,9 @@ import com.badlogic.gdx.files.FileHandle;
 import sem.group15.bubblebobble.core.factories.EnemyFactory;
 import sem.group15.bubblebobble.core.factories.SimpleEnemyFactory;
 import sem.group15.bubblebobble.core.factories.StrongEnemyFactory;
-import sem.group15.bubblebobble.core.objects.FloorObject;
+import sem.group15.bubblebobble.core.objects.Floor;
 import sem.group15.bubblebobble.core.objects.GameObject;
-import sem.group15.bubblebobble.core.objects.WallObject;
+import sem.group15.bubblebobble.core.objects.Wall;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,9 +82,9 @@ public class LevelParser {
             case "Enemy":
                 return enemyFactory.createObject(xPos, yPos);
             case "Floor":
-                return new FloorObject(xPos, yPos);
+                return new Floor(xPos, yPos);
             case "Wall":
-                return new WallObject(xPos, yPos);
+                return new Wall(xPos, yPos);
             default:
                 throw new IOException("String: " + line + " is not a valid object!");
         }

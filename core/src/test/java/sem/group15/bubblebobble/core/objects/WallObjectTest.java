@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  */
 public class WallObjectTest {
 
-    private WallObject wall;
+    private Wall wall;
 
     /**
      * Set up wall for testing.
@@ -26,7 +26,7 @@ public class WallObjectTest {
     public void setUp() {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
-        wall = mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        wall = mock(Wall.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
 
     }

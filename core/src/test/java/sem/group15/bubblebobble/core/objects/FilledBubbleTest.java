@@ -5,16 +5,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-public class FilledBubbleObjectTest {
+public class FilledBubbleTest {
 
-    private FilledBubbleObject fbubble;
+    private FilledBubble fbubble;
 
     @Before
     public void setUp() {
-        fbubble = Mockito.mock(FilledBubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        fbubble = Mockito.mock(FilledBubble.class, Mockito.CALLS_REAL_METHODS);
         fbubble.location = new Rectangle(0,0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         fbubble.speedY = 50;
     }
@@ -35,7 +35,7 @@ public class FilledBubbleObjectTest {
     @Test
     public void testHandleCollisionImmutable(){
         assertEquals(50, fbubble.speedY, 0.01f);
-        ImmutableObject obj = Mockito.mock(ImmutableObject.class, Mockito.CALLS_REAL_METHODS);
+        Immutable obj = Mockito.mock(Immutable.class, Mockito.CALLS_REAL_METHODS);
         obj.location = new Rectangle(10,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         fbubble.handleCollision(obj);
         assertTrue(fbubble.speedY == 0);
@@ -47,7 +47,7 @@ public class FilledBubbleObjectTest {
     @Test
     public void testHandleCollisionPlayer(){
         fbubble.remove = false;
-        PlayerObject obj = Mockito.mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
+        Player obj = Mockito.mock(Player.class, Mockito.CALLS_REAL_METHODS);
         obj.location = new Rectangle(10,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         fbubble.handleCollision(obj);
         assertTrue(fbubble.remove);

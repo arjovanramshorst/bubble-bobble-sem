@@ -23,7 +23,7 @@ import static org.mockito.Mockito.verify;
 public class PlayerObjectTest {
 
 
-    private PlayerObject player;
+    private Player player;
 
 
     /**
@@ -39,7 +39,7 @@ public class PlayerObjectTest {
     public void setUp() {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
-        player = mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
+        player = mock(Player.class, Mockito.CALLS_REAL_METHODS);
         Mockito.doNothing().when(player).playDeadSound();
         Mockito.doNothing().when(player).playJumpSound();
         player.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
@@ -141,7 +141,7 @@ public class PlayerObjectTest {
     public void testHandleCollisionFilledBubble() {
         player.update(0.1f);
         assertTrue(player.score == 0);
-        FilledBubbleObject filledBubble = mock(FilledBubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        FilledBubble filledBubble = mock(FilledBubble.class, Mockito.CALLS_REAL_METHODS);
         filledBubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.update(0.1f);
         player.handleCollision(filledBubble);
@@ -155,7 +155,7 @@ public class PlayerObjectTest {
     @Test
     public void testHandleCollisionBubble() {
         player.canJump = false;
-        BubbleObject bubble = mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        Bubble bubble = mock(Bubble.class, Mockito.CALLS_REAL_METHODS);
         bubble.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, 1);
         player.update(0.01f);
         player.handleCollision(bubble);
@@ -169,7 +169,7 @@ public class PlayerObjectTest {
     public void testHandleCollisionWall(){
         player.location.x = 5;
         player.location.y = 32;
-        WallObject wall = mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        Wall wall = mock(Wall.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(32,32,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         assertNotEquals(wall.getLeft(), player.getRight(), 0.1f);
         player.handleCollision(wall);
@@ -182,7 +182,7 @@ public class PlayerObjectTest {
     public void testHandleCollisionWallLeft(){
         player.location.x = 60;
         player.location.y = 32;
-        WallObject wall = mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        Wall wall = mock(Wall.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(32,32,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         assertNotEquals(wall.getRight(), player.getLeft(), 0.1f);
         player.handleCollision(wall);

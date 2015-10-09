@@ -1,27 +1,40 @@
 package sem.group15.bubblebobble.core.objects;
 
-
+import sem.group15.bubblebobble.core.BubbleBobble;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import sem.group15.bubblebobble.core.BubbleBobble;
-
 
 /**
  * The enemy objects
  * Created by TUDelft SID on 8-9-2015.
  */
-public abstract class Enemy extends GravityObject {
+public abstract class Enemy extends Gravity {
 
-    protected static final float ANGRY_MULTIPLIER = 1.5f;
-    protected static final float ANGRY_TIME = 10f;
+    /**
+     * Maximum overlap with a wall.
+     */
     protected static final float MAX_WALL_OVERLAP = 10f;
+    /**
+     * Basic speed of an enemy.
+     */
+    public static final int ENEMY_SPEED = 100;
+    /**
+     * Multiplier when an enemy is angry.
+     */
+    protected static final float ANGRY_MULTIPLIER = 1.5f;
+    /**
+     * Amount of time an enemy stays angry.
+     */
+    protected static final float ANGRY_TIME = 10f;
     protected static  Texture normalLeftTexture;
     protected static  Texture normalRightTexture;
     protected static  Texture angryLeftTexture;
     protected static  Texture angryRightTexture;
 
-    public static final int ENEMY_SPEED = 100;
+    /**
+     * The Direction the enemy is moving.
+     */
     public Direction direction;
     public State state;
     protected float timeAngry;
@@ -31,7 +44,7 @@ public abstract class Enemy extends GravityObject {
      * @param xPosition x coordinate
      * @param yPosition y coordinate
      */
-    public Enemy(float xPosition, float yPosition) {
+    public Enemy(final float xPosition, final float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         setTextures();
     }
@@ -46,22 +59,22 @@ public abstract class Enemy extends GravityObject {
     }
 
     /**
-     * If the enemy collides with a wall, the direction should change in the opposite direction.
+     * Update the location of the enemy.
      * @param elapsed time elapsed since last gameloop.
      */
     @Override
-    public void update(float elapsed) {
+    public void update(final float elapsed) {
         super.update(elapsed);
         float multiplier = 1;
-        if(state == State.ANGRY) {
+        if (state == State.ANGRY) {
             multiplier = ANGRY_MULTIPLIER;
         }
         location.x += speedX * elapsed * multiplier;
         location.y += speedY * elapsed * multiplier;
-        timeAngry+=elapsed;
-        if (timeAngry>ANGRY_TIME){
+        timeAngry += elapsed;
+        if (timeAngry > ANGRY_TIME){
             setState(State.NORMAL);
-            timeAngry=0;
+            timeAngry = 0;
         }
 
 
@@ -74,7 +87,7 @@ public abstract class Enemy extends GravityObject {
      */
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        if(state==State.NORMAL) {
+        if (state == State.NORMAL) {
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(normalLeftTexture, getLeft(), getBottom());
@@ -84,7 +97,7 @@ public abstract class Enemy extends GravityObject {
                     break;
             }
         }
-        else if(state==State.ANGRY){
+        else if (state == State.ANGRY){
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(angryLeftTexture, getLeft(), getBottom());
@@ -98,7 +111,8 @@ public abstract class Enemy extends GravityObject {
 
 
     /**
-     * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
+     * Sets the horizontal direction of the enemy.
+     * And Adjusts its horizontal speed accordingly.
      * @param direction the direction in which the enemy is going.
      */
     public abstract void setDirection(Direction direction);

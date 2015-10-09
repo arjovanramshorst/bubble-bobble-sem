@@ -38,12 +38,12 @@ public class LevelTest {
         ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
         gameObjects.add(mock(Enemy.class));
-        gameObjects.add(mock(FloorObject.class));
-        gameObjects.add(mock(FilledBubbleObject.class));
+        gameObjects.add(mock(Floor.class));
+        gameObjects.add(mock(FilledBubble.class));
         gameObjects.add(mock(Enemy.class));
-        gameObjects.add(mock(WallObject.class));
-        gameObjects.add(mock(WallObject.class));
-        gameObjects.add(mock(FloorObject.class));
+        gameObjects.add(mock(Wall.class));
+        gameObjects.add(mock(Wall.class));
+        gameObjects.add(mock(Floor.class));
 
 
         assertFalse(level.levelFinished(gameObjects));
@@ -53,13 +53,13 @@ public class LevelTest {
     public void testLevelFinishedMultipleObjects() {
         ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
-        gameObjects.add(mock(FloorObject.class));
-        gameObjects.add(mock(FloorObject.class));
-        gameObjects.add(mock(FloorObject.class));
-        gameObjects.add(mock(FloorObject.class));
-        gameObjects.add(mock(WallObject.class));
-        gameObjects.add(mock(WallObject.class));
-        gameObjects.add(mock(FloorObject.class));
+        gameObjects.add(mock(Floor.class));
+        gameObjects.add(mock(Floor.class));
+        gameObjects.add(mock(Floor.class));
+        gameObjects.add(mock(Floor.class));
+        gameObjects.add(mock(Wall.class));
+        gameObjects.add(mock(Wall.class));
+        gameObjects.add(mock(Floor.class));
 
 
         assertTrue(level.levelFinished(gameObjects));
