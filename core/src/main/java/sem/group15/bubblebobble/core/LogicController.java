@@ -27,7 +27,11 @@ public class LogicController {
         gameObjects = new ArrayList<GameObject>();
     }
 
-    public void init(int level) {
+    /**
+     * Initiates all objects the game needs.
+     * @param level, level number.
+     */
+    public final void init(final int level) {
         currentLevel = level;
         gameObjects.clear();
         setPlayer();
@@ -35,10 +39,10 @@ public class LogicController {
     }
 
     /**
-     * add an object to be drawn to the controller
-     * @param object object to be drawn
+     * add an object to be drawn to the controller.
+     * @param object object to be drawn.
      */
-    public void addGameObject(GameObject object) {
+    public final void addGameObject(final GameObject object) {
         gameObjects.add(object);
     }
 
@@ -48,22 +52,26 @@ public class LogicController {
         }
         gameObjects.add(this.player);
     }
-    protected void readMap(int level) {
+
+    /**
+     * Adds the level to the game.
+     * @param level, the levelnumber.
+     */
+    protected void readMap(final int level) {
         levelMap = new Level(level);
         gameObjects.addAll(levelMap.getMap());
     }
 
     /**
-     * MAIN GAME LOOP
+     * MAIN GAME LOOP.
      * @param elapsed time elapsed since last update
      * @param batch spriteBatch to be drawn
      */
-    public void loop(float elapsed, SpriteBatch batch) {
+    public final void loop(final float elapsed, final SpriteBatch batch) {
         if (checkForLose()) {
             player = null;
             init(1);
-        }
-        else if (levelMap.levelFinished(gameObjects)) {
+        } else if (levelMap.levelFinished(gameObjects)) {
             init(Math.min(currentLevel + 1, MAX_LEVEL));
             player.respawn();
         }
@@ -89,7 +97,7 @@ public class LogicController {
      * @param elapsed time elapsed since latest update
      */
 
-    protected void update(float elapsed) {
+    protected final void update(final float elapsed) {
         for (GameObject object : gameObjects) {
             object.update(elapsed);
         }
@@ -134,7 +142,7 @@ public class LogicController {
      * draw all sprites.
      * @param batch spritebatch to be drawn
      */
-    private void draw(SpriteBatch batch) {
+    private void draw(final SpriteBatch batch) {
         for (GameObject object : gameObjects) {
             object.draw(batch);
         }

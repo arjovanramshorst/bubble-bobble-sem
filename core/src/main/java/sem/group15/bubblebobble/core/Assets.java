@@ -7,27 +7,73 @@ import com.badlogic.gdx.graphics.Texture;
 /**
  * Created by arjo on 7-10-15.
  */
-public class Assets {
+public final class Assets {
 
     private static Assets singleton;
 
+    /**
+     * The texture for a bubble.
+     */
     public Texture bubble;
+    /**
+     * The texture for a simpleEnemyLeft.
+     */
     public Texture simpleEnemyLeft;
+    /**
+     * The texture for a simpleEnemyRight.
+     */
     public Texture simpleEnemyRight;
+    /**
+     * The texture for a simpleAngryEnemyRight.
+     */
     public Texture simpleAngryEnemyRight;
+    /**
+     * The texture for a simpleAngryEnemyLeft.
+     */
     public Texture simpleAngryEnemyLeft;
+    /**
+     * The texture for a strongEnemyLeft.
+     */
     public Texture strongEnemyLeft;
+    /**
+     * The texture for a strongEnemyRight.
+     */
     public Texture strongEnemyRight;
+    /**
+     * The texture for a filledBubble.
+     */
     public Texture filledBubble;
+    /**
+     * The texture for a playerLeft.
+     */
     public Texture playerLeft;
+    /**
+     * The texture for a playerRight.
+     */
     public Texture playerRight;
+    /**
+     * The texture for a playerDead.
+     */
     public Texture playerDead;
+    /**
+     * The texture for a wall.
+     */
     public Texture wall;
 
+    /**
+     * The sound for a playerDeathSound.
+     */
     public Sound playerDeathSound;
+    /**
+     * The sound for a playerJumpSound.
+     */
     public Sound playerJumpSound;
 
 
+    /**
+     * A getter for all Assets.
+     * @return Assets.
+     */
     public static Assets getAssets() {
         if (singleton == null) {
             singleton = new Assets();
@@ -56,7 +102,7 @@ public class Assets {
         playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
     }
 
-    private static Texture loadTexture (String file) {
+    private static Texture loadTexture(final String file) {
         return new Texture(Gdx.files.internal(file));
     }
 }
