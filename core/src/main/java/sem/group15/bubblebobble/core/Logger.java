@@ -11,7 +11,7 @@ import java.util.HashMap;
  * class that used for logging events
  * Created by arjo on 18-9-15.
  */
-public class Logger {
+public final class Logger {
 
     private static HashMap<String, Logger> loggers = new HashMap<String, Logger>();
     private BufferedWriter writer;
@@ -35,7 +35,7 @@ public class Logger {
      * Returns the logger instance.
      * @return the logger instance.
      */
-    public static Logger getLogger(String clazz) {
+    public static Logger getLogger(final String clazz) {
         if (loggers.get(clazz) == null) {
             loggers.put(clazz, new Logger(clazz));
         }
@@ -46,7 +46,7 @@ public class Logger {
      * Logs the message to the output file, and also to the System.out.println stream.
      * @param message The message to be logged.
      */
-    public void log(String message) {
+    public void log(final String message) {
         String logLine = clazz + " - " + (new Date()).toString();
         logLine += " - " + message;
         try {

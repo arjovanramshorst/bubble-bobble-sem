@@ -14,7 +14,12 @@ public class Level {
 
     private List<GameObject> map;
 
-    public Level(int levelNumber) {
+    /**
+     * Constructor for a new level, finds the level file using levelNumber.
+     * Calls the Parser and generates a list of all GameObjects.
+     * @param levelNumber, the number of the level to be loaded.
+     */
+    public Level(final int levelNumber) {
         //parse level and get map.
         LevelParser parser = new LevelParser();
         try {
@@ -25,10 +30,12 @@ public class Level {
         }
     }
 
-  /** Checks if all enemies are dead.
-   * @return true if all enemies are dead.
-   */
-    public boolean levelFinished(List<GameObject> objects) {
+    /**
+     * Checks if all enemies are dead.
+     * @param objects, a List including all current GameObjects in the game.
+     * @return true if all enemies are dead.
+     */
+    public final boolean levelFinished(final List<GameObject> objects) {
         for (GameObject object : objects) {
             if (object instanceof Enemy || object instanceof FilledBubbleObject) {
                 return false;
@@ -37,7 +44,11 @@ public class Level {
         return true;
     }
 
-    public List<GameObject> getMap() {
+    /**
+     * Getter for the list of all gameObjects.
+     * @return map, a List with all GameObjects of a level.
+     */
+    public final List<GameObject> getMap() {
         return map;
     }
 
