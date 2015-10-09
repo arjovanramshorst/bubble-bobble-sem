@@ -1,12 +1,12 @@
 package sem.group15.bubblebobble.core.objects;
 
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Created by Matthijs on 10/8/15.
  */
 public class SimpleEnemy extends Enemy{
-
 
     /**
      * Creates an Enemy with position (X,Y) on the grid.
@@ -17,6 +17,7 @@ public class SimpleEnemy extends Enemy{
     public SimpleEnemy(final float xPosition, final float yPosition) {
         super(xPosition, yPosition);
     }
+
 
 
     /**
@@ -45,6 +46,7 @@ public class SimpleEnemy extends Enemy{
             }
         }
     }
+
     /**
      * Draws the sprite at the correct location.
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
@@ -75,6 +77,17 @@ public class SimpleEnemy extends Enemy{
                 break;
         }
         this.direction = direction;
+    }
+
+    /**
+     * sets the appropriate textures
+     */
+    @Override
+    public void setTextures() {
+        angryLeftTexture = assets.simpleAngryEnemyLeft;
+        angryRightTexture = assets.simpleAngryEnemyRight;
+        normalLeftTexture = assets.simpleEnemyLeft;
+        normalRightTexture = assets.simpleEnemyRight;
     }
 
 }

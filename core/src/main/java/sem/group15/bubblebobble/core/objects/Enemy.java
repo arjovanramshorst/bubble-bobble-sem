@@ -1,7 +1,9 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * The enemy objects
@@ -18,9 +20,24 @@ public abstract class Enemy extends Gravity {
      */
     public static final int ENEMY_SPEED = 100;
     /**
+     * Multiplier when an enemy is angry.
+     */
+    protected static final float ANGRY_MULTIPLIER = 1.5f;
+    /**
+     * Amount of time an enemy stays angry.
+     */
+    protected static final float ANGRY_TIME = 10f;
+    protected static  Texture normalLeftTexture;
+    protected static  Texture normalRightTexture;
+    protected static  Texture angryLeftTexture;
+    protected static  Texture angryRightTexture;
+
+    /**
      * The Direction the enemy is moving.
      */
     public Direction direction;
+    public State state;
+    protected float timeAngry;
 
     /**
      * Creates an Enemy with position (X,Y) on the grid.
@@ -29,6 +46,16 @@ public abstract class Enemy extends Gravity {
      */
     public Enemy(final float xPosition, final float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
+        setTextures();
+    }
+
+    /**
+     * Sets the state of this object.
+     * @param state declares if angry or not
+     */
+    public void setState(State state) {
+        this.state = state;
+
     }
 
     /**
@@ -38,10 +65,48 @@ public abstract class Enemy extends Gravity {
     @Override
     public void update(final float elapsed) {
         super.update(elapsed);
-        location.x += speedX * elapsed;
-        location.y += speedY * elapsed;
+        float multiplier = 1;
+        if (state == State.ANGRY) {
+            multiplier = ANGRY_MULTIPLIER;
+        }
+        location.x += speedX * elapsed * multiplier;
+        location.y += speedY * elapsed * multiplier;
+        timeAngry += elapsed;
+        if (timeAngry > ANGRY_TIME){
+            setState(State.NORMAL);
+            timeAngry = 0;
+        }
 
 
+
+    }
+
+    /**
+     * Draws the sprite at the correct location.
+     * @param spriteBatch SpriteBatch that the sprites need to be added to.
+     */
+    @Override
+    public void draw(SpriteBatch spriteBatch) {
+        if (state == State.NORMAL) {
+            switch (direction) {
+                case LEFT:
+                    spriteBatch.draw(normalLeftTexture, getLeft(), getBottom());
+                    break;
+                case RIGHT:
+                    spriteBatch.draw(normalRightTexture, getLeft(), getBottom());
+                    break;
+            }
+        }
+        else if (state == State.ANGRY){
+            switch (direction) {
+                case LEFT:
+                    spriteBatch.draw(angryLeftTexture, getLeft(), getBottom());
+                    break;
+                case RIGHT:
+                    spriteBatch.draw(angryRightTexture, getLeft(), getBottom());
+                    break;
+            }
+        }
     }
 
 
@@ -52,4 +117,13 @@ public abstract class Enemy extends Gravity {
      */
     public abstract void setDirection(Direction direction);
 
+    /**
+     * Sets the required textures normal left/right and angry left/right
+     */
+    public abstract void setTextures();
+
+    public enum State {
+        NORMAL,
+        ANGRY
+    }
 }

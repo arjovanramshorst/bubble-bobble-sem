@@ -24,7 +24,7 @@ public class Bubble extends Floating {
     /**
      * Maximum allowed overlap percentage.
      */
-    public static final float PERCENTAGE_OVERLAP_COLLISION = 0.6f;
+    public static final float PERCENTAGE_OVERLAP_COLLISION = 0.01f;
     /**
      * Time a bubble has been alive.
      */
@@ -101,9 +101,11 @@ public class Bubble extends Floating {
     public final void handleCollision(final GameObject other) {
         if (!remove && location.overlaps(other.getBody())) {
             if (other instanceof Enemy && overlapPercentage(other) > PERCENTAGE_OVERLAP_COLLISION) {
+
                 logger.log("Bubble touched enemy object.");
                 remove = true;
-                makeFilledBubble();
+                makeFilledBubble((Enemy) other);
+
             }
         }
     }
@@ -111,8 +113,8 @@ public class Bubble extends Floating {
     /**
      * Add a new filled bubble to list with new Objects.
      */
-    protected void makeFilledBubble() {
-        newObjects.add(new FilledBubble(getLeft(), getBottom()));
+    protected void makeFilledBubble(Enemy enemy) {
+        newObjects.add(new FilledBubble(getLeft(), getBottom(), enemy));
     }
 
     /**

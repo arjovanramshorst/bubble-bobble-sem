@@ -3,24 +3,34 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import sem.group15.bubblebobble.core.factories.EnemyFactory;
+import sem.group15.bubblebobble.core.factories.SimpleEnemyFactory;
+import sem.group15.bubblebobble.core.factories.StrongEnemyFactory;
 
 /**
  * Created by TUDelft SID on 7-9-2015.
  */
 public class FilledBubble extends Floating {
 
-    
+    public static final float FILLED_LIFESPAN = 5;
+    private EnemyFactory factory;
+
     /**
      * Constructor for the filledBubbleObject.
      * @param xPosition - xPosition of the Rectangle
      * @param yPosition - yPosition of the Rectangle
+     * @param enemy - enemy to be in the bubble
      */
-    public FilledBubble(final float xPosition, final float yPosition) {
+    public FilledBubble(final float xPosition, final float yPosition, final Enemy enemy) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
+        if (enemy instanceof SimpleEnemy)
+            factory = new SimpleEnemyFactory();
+        else if (enemy instanceof StrongEnemy)
+            factory = new StrongEnemyFactory();
+
         speedY = 50;
         speedX = 0;
     }
-
 
     /**
      * This updates the FilledBubbleObject after a game loop has passed.
@@ -28,8 +38,18 @@ public class FilledBubble extends Floating {
      * The initial speed of the FilledBubbleObject is FOR THE MOMENT 50.
      * @param elapsed - time that has passed
      */
-    public final void update(final float elapsed) {
+    public void update(float elapsed) {
+        super.update(elapsed);
         location.y += speedY * elapsed;
+
+        if (timeFromFired > FILLED_LIFESPAN) {
+            remove = true;
+            Enemy enemy = factory.createObject(location.x, location.y);
+            enemy.state = Enemy.State.ANGRY;
+            newObjects.add(enemy);
+
+        }
+
     }
 
     /**
