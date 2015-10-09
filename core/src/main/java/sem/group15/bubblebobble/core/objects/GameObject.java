@@ -3,6 +3,9 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.Assets;
+import sem.group15.bubblebobble.core.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +14,17 @@ import java.util.List;
  */
 public abstract class GameObject {
 
+    protected Assets assets;
+
     protected Rectangle location;
-    protected Texture texture;
+    protected float speedX;
+    protected float speedY;
+
+    protected Logger logger;
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
+    }
 
     protected enum Direction {
         LEFT, RIGHT
@@ -31,11 +43,12 @@ public abstract class GameObject {
      */
     protected boolean remove;
 
-    protected GameObject(Rectangle location, Texture texture) {
+    protected GameObject(Rectangle location) {
         this.location = location;
-        this.texture = texture;
         newObjects = new ArrayList<GameObject>();
         remove = false;
+        logger = Logger.getLogger(this.getClass().getName());
+        assets = Assets.getAssets();
     }
 
     /**
@@ -61,91 +74,91 @@ public abstract class GameObject {
      */
     public abstract void draw(SpriteBatch spriteBatch);
 
-    public Rectangle getBody() {
+    public final Rectangle getBody() {
         return location;
     }
 
-    public float getLeft() {
+    public final float getLeft() {
         return location.getX();
     }
 
-    public float getRight() {
+    public final float getRight() {
         return location.getX() + location.getWidth();
     }
 
-    public float getTop() {
+    public final float getTop() {
         return location.getY() + location.getHeight();
     }
 
-    public float getBottom() {
+    public final float getBottom() {
         return location.getY();
     }
 
-    public void setLeft(float x) {
+    public final void setLeft(float x) {
         location.x = x;
     }
 
-    public void setRight(float x) {
+    public final void setRight(float x) {
         location.x = x - location.getWidth();
     }
 
-    public void setTop(float y) {
+    public final void setTop(float y) {
         location.y = y - location.getHeight();
     }
 
-    public void setBottom(float y) {
+    public final void setBottom(float y) {
         location.y = y;
     }
 
-    public boolean collidesWith(GameObject other)
+    public final boolean collidesWith(GameObject other)
     {
         return getBody().overlaps(other.getBody());
     }
 
-    public float overlapLeft(GameObject other) {
+    public final float overlapLeft(GameObject other) {
         float overlap = 0;
-        if (collidesWith(other) && getLeft() < other.getRight()) {
+        if(collidesWith(other) && getLeft() < other.getRight()) {
             overlap = other.getRight() - getLeft();
         }
         return overlap;
     }
 
-    public float overlapRight(GameObject other) {
+    public final float overlapRight(GameObject other) {
         float overlap = 0;
-        if (collidesWith(other) && getRight() > other.getLeft()) {
+        if(collidesWith(other) && getRight() > other.getLeft()) {
             overlap = getRight() - other.getLeft();
         }
         return overlap;
     }
-    public float overlapTop(GameObject other) {
+    public final float overlapTop(GameObject other) {
         float overlap = 0;
-        if (collidesWith(other) && getTop() > other.getBottom()) {
+        if(collidesWith(other) && getTop() > other.getBottom()) {
             overlap = getTop() - other.getBottom();
         }
         return overlap;
     }
-    public float overlapBottom(GameObject other) {
+    public final float overlapBottom(GameObject other) {
         float overlap = 0;
-        if (collidesWith(other) && getBottom() < other.getTop()) {
+        if(collidesWith(other) && getBottom() < other.getTop()) {
             overlap = other.getTop() - getBottom();
         }
         return overlap;
     }
 
-    public boolean between(float value, float low, float high) {
+    public final boolean between(float value, float low, float high) {
         return (value > low && value < high);
     }
 
-    public void addNewObjectsTo(List<GameObject> gameObjects) {
-        if (!newObjects.isEmpty()) {
-            for (GameObject object : newObjects) {
+    public final void addNewObjectsTo(List<GameObject> gameObjects) {
+        if(! newObjects.isEmpty()) {
+            for(GameObject object : newObjects) {
                 gameObjects.add(object);
             }
             newObjects.clear();
         }
     }
 
-    public boolean remove() {
+    public final boolean remove() {
         return remove;
     }
 }

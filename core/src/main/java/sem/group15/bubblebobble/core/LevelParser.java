@@ -1,10 +1,8 @@
 package sem.group15.bubblebobble.core;
 
 import com.badlogic.gdx.files.FileHandle;
-import sem.group15.bubblebobble.core.objects.EnemyObject;
-import sem.group15.bubblebobble.core.objects.FloorObject;
-import sem.group15.bubblebobble.core.objects.GameObject;
-import sem.group15.bubblebobble.core.objects.WallObject;
+import sem.group15.bubblebobble.core.objects.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +50,7 @@ public class LevelParser {
 
         switch (objectType) {
             case "Enemy":
-                return new EnemyObject(xPos, yPos);
+                return new SimpleEnemy(xPos, yPos);
             case "Floor":
                 return new FloorObject(xPos, yPos);
             case "Wall":

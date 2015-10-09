@@ -3,6 +3,7 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.BubbleBobble;
 
 /**
  * Created by arjo on 7-9-15.
@@ -15,13 +16,12 @@ public abstract class GravityObject extends GameObject {
 
     protected float timeSinceLastFloorContact;
     protected boolean canJump;
-    protected float currentSpeedX;
-    protected float currentSpeedY;
 
-    protected GravityObject(Rectangle location, Texture texture) {
-        super(location, texture);
-        this.currentSpeedX = 0;
-        this.currentSpeedY = 0;
+
+    protected GravityObject(Rectangle location) {
+        super(location);
+        this.speedX = 0;
+        this.speedY = 0;
         this.timeSinceLastFloorContact = 0;
         canJump = false;
     }
@@ -34,8 +34,9 @@ public abstract class GravityObject extends GameObject {
      * @param elapsed time elapsed since last gameloop.
      */
     public void update(float elapsed) {
+
         timeSinceLastFloorContact += elapsed;
-        currentSpeedY = Math.max(currentSpeedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
+        speedY = Math.max( speedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
                 MAX_GRAVITY_SPEED
         );
 
@@ -52,12 +53,13 @@ public abstract class GravityObject extends GameObject {
      */
     public void handleCollision(GameObject other) {
         if (other instanceof FloorObject) {
-            if (between(overlapBottom(other), 0, MAX_DIFF_LANDING) && currentSpeedY < 0) {
+            if (between(overlapBottom(other), 0, MAX_DIFF_LANDING) && speedY < 0) {
                 setBottom(other.getTop());
-                currentSpeedY = 0;
+                speedY = 0;
                 timeSinceLastFloorContact = 0;
                 canJump = true;
             }
         }
+
     }
 }

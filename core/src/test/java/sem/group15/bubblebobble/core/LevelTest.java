@@ -29,7 +29,7 @@ public class LevelTest {
     @Test
     public void testLevelNotFinished(){
         ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-        gameObjects.add(mock(EnemyObject.class));
+        gameObjects.add(mock(Enemy.class));
         assertFalse(level.levelFinished(gameObjects));
     }
 
@@ -37,10 +37,10 @@ public class LevelTest {
     public void testLevelNotFinishedMultipleObjects() {
         ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
-        gameObjects.add(mock(EnemyObject.class));
+        gameObjects.add(mock(Enemy.class));
         gameObjects.add(mock(FloorObject.class));
         gameObjects.add(mock(FilledBubbleObject.class));
-        gameObjects.add(mock(EnemyObject.class));
+        gameObjects.add(mock(Enemy.class));
         gameObjects.add(mock(WallObject.class));
         gameObjects.add(mock(WallObject.class));
         gameObjects.add(mock(FloorObject.class));
