@@ -48,15 +48,12 @@ public class LevelParser {
                 default:
                     enemyFactory = new SimpleEnemyFactory(); // default to simple enemies, if there is no line present.
                     result.add(getObject(enemyType)); // Get first line as object anyway.
+                    break;
             }
         }
         while (sc.hasNext()) {
             String object =  sc.nextLine();
-            try {
-                result.add(getObject(object));
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
+            result.add(getObject(object));
         }
         return result;
     }
