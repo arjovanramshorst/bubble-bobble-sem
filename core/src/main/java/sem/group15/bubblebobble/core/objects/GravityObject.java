@@ -60,6 +60,5 @@ public abstract class GravityObject extends GameObject {
                 canJump = true;
             }
         }
-
     }
 }

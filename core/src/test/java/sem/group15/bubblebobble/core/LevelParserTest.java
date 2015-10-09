@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import sem.group15.bubblebobble.core.objects.GameObject;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
 import java.io.ByteArrayInputStream;
@@ -24,15 +26,17 @@ public class LevelParserTest {
     public void setUp(){
         file = mock(FileHandle.class);
     }
+
     @Test
-    public void testEmptyParse(){
+    public void testIOExceptionIsThrownFailingInput(){
         String str = "Floors, 200, 100";
         try {
             when(file.read()).thenReturn(new ByteArrayInputStream(str.getBytes("UTF-8")));
-            List<GameObject> gameObjectList = new LevelParser().parse(file);
+            List<GameObject> gameObjectList = LevelParser.parse(file);
             assertTrue(gameObjectList.isEmpty());
+            fail();
         }catch (IOException e){
-            assertTrue(false);
+            assertEquals("String: " + str + " is not a valid object!", e.getMessage());
         }
 
     }
