@@ -81,14 +81,11 @@ public class Bubble extends Floating {
      * This method is called when:
      * either the bubble lost too much speed or collides with a wall object.
      */
-    public final void getOutOfGame() {
-
+    public void getOutOfGame() {
         if (Math.abs(speedX) > 0) {
             speedX = 0;
             speedY = 50;
         }
-
-
     }
 
     /**
