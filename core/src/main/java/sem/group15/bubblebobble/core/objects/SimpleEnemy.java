@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class SimpleEnemy extends Enemy{
 
-
     /**
      * Creates an Enemy with position (X,Y) on the grid.
      *
@@ -44,6 +43,7 @@ public class SimpleEnemy extends Enemy{
             }
         }
     }
+
     /**
      * Draws the sprite at the correct location.
      * @param spriteBatch SpriteBatch that the sprites need to be added to.

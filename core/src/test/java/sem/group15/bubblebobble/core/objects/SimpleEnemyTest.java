@@ -101,7 +101,7 @@ public class SimpleEnemyTest {
         bubble.setLogger(Logger.getLogger(BubbleObject.class.getName()));
         enemy2.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         bubble.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        doNothing().when(bubble).makeFilledBubble();
+        doNothing().when(bubble).makeFilledBubble(enemy);
         enemy.update(0.01f);
         enemy2.update(0.01f);
         bubble.update(0.01f);

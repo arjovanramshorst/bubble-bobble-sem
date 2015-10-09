@@ -2,6 +2,9 @@ package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.factories.EnemyFactory;
+import sem.group15.bubblebobble.core.factories.SimpleEnemyFactory;
+import sem.group15.bubblebobble.core.factories.StrongEnemyFactory;
 
 /**
  * Created by TUDelft SID on 7-9-2015.
@@ -9,18 +12,30 @@ import com.badlogic.gdx.math.Rectangle;
 public class FilledBubbleObject extends FloatingObject {
 
     public static final float FILLED_LIFESPAN = 5;
+    private EnemyFactory factory;
 
     /**
      * Constructor for the filledBubbleObject.
      * @param xPosition - xPosition of the Rectangle
      * @param yPosition - yPosition of the Rectangle
      */
-    public FilledBubbleObject(float xPosition, float yPosition) {
+    public FilledBubbleObject(float xPosition, float yPosition, Enemy enemy) {
         super(new Rectangle(xPosition, yPosition, 32, 32));
+
+        if(enemy instanceof SimpleEnemy)
+            factory=new SimpleEnemyFactory();
+        else if (enemy instanceof StrongEnemy)
+            factory= new StrongEnemyFactory();
+
+
 
         speedY = 50;
         speedX = 0;
     }
+
+
+
+
 
 
     /**
@@ -30,10 +45,14 @@ public class FilledBubbleObject extends FloatingObject {
      * @param elapsed - time that has passed
      */
     public  void update(float elapsed) {
+        super.update(elapsed);
         location.y += speedY * elapsed;
 
         if (timeFromFired>FILLED_LIFESPAN) {
             remove = true;
+            Enemy enemy=factory.createObject(location.x, location.y);
+            enemy.state= Enemy.State.ANGRY;
+            newObjects.add(enemy);
 
         }
 

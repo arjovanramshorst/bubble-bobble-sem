@@ -16,11 +16,13 @@ import java.util.Random;
 public abstract class Enemy extends GravityObject {
 
     protected static final float ANGRY_MULTIPLIER = 1.5f;
+    protected static final float ANGRY_TIME = 10f;
     protected static final float MAX_WALL_OVERLAP = 10f;
     public static final int ENEMY_SPEED = 100;
     public Direction direction;
 
     public State state;
+    protected float timeAngry;
 
     /**
      * Creates an Enemy with position (X,Y) on the grid.
@@ -54,6 +56,12 @@ public abstract class Enemy extends GravityObject {
         }
         location.x += speedX * elapsed * multiplier;
         location.y += speedY * elapsed * multiplier;
+        timeAngry+=elapsed;
+        if (timeAngry>ANGRY_TIME){
+            setState(State.NORMAL);
+            timeAngry=0;
+        }
+
 
 
     }
