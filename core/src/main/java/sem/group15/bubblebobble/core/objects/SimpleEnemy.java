@@ -1,6 +1,5 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * Created by Matthijs on 10/8/15.
@@ -16,6 +15,7 @@ public class SimpleEnemy extends Enemy{
     public SimpleEnemy(float xPosition, float yPosition) {
         super(xPosition, yPosition);
     }
+
 
 
     /**
@@ -44,33 +44,7 @@ public class SimpleEnemy extends Enemy{
         }
     }
 
-    /**
-     * Draws the sprite at the correct location.
-     * @param spriteBatch SpriteBatch that the sprites need to be added to.
-     */
-    @Override
-    public void draw(SpriteBatch spriteBatch) {
-        if(state==State.NORMAL) {
-            switch (direction) {
-                case LEFT:
-                    spriteBatch.draw(assets.simpleEnemyLeft, getLeft(), getBottom());
-                    break;
-                case RIGHT:
-                    spriteBatch.draw(assets.simpleEnemyRight, getLeft(), getBottom());
-                    break;
-            }
-        }
-        else if(state==State.ANGRY){
-            switch (direction) {
-                case LEFT:
-                    spriteBatch.draw(assets.simpleAngryEnemyLeft, getLeft(), getBottom());
-                    break;
-                case RIGHT:
-                    spriteBatch.draw(assets.simpleAngryEnemyRight, getLeft(), getBottom());
-                    break;
-            }
-        }
-    }
+
 
     /**
      * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
@@ -86,6 +60,17 @@ public class SimpleEnemy extends Enemy{
                 break;
         }
         this.direction = direction;
+    }
+
+    /**
+     * sets the appropriate textures
+     */
+    @Override
+    public void setTextures() {
+        angryLeftTexture=assets.simpleAngryEnemyLeft;
+        angryRightTexture= assets.simpleAngryEnemyRight;
+        normalLeftTexture=assets.simpleEnemyLeft;
+        normalRightTexture=assets.simpleEnemyRight;
     }
 
 }
