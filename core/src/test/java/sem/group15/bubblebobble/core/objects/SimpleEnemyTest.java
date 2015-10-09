@@ -10,12 +10,6 @@ import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
@@ -23,10 +17,10 @@ import static org.junit.Assert.*;
 /**
  * Test class for enemy object.
  */
-public class EnemyObjectTest {
+public class SimpleEnemyTest {
 
 
-    private EnemyObject enemy;
+    private SimpleEnemy enemy;
 
     /**
      * Set up mockito
@@ -35,34 +29,54 @@ public class EnemyObjectTest {
     public void setUp() {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
-        enemy = Mockito.mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
-        enemy.setLogger(Logger.getLogger(EnemyObject.class.getName()));
-        enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        enemy.setHorizontalSpeed(-100);
+        enemy = Mockito.mock(SimpleEnemy.class, Mockito.CALLS_REAL_METHODS);
+        enemy.setLogger(Logger.getLogger(Enemy.class.getName()));
+        enemy.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        enemy.setDirection(GameObject.Direction.LEFT);
     }
 
     /**
-     * Test if a collision with a wall is handled accordingly.
-     * The speed should change with -1.
+     * If enemy facing Left hits a wall on the left, direction and speed should be set to right.
      */
     @Test
-    public void testHandleCollisionWall() {
+    public void testHandleCollisionWallLeftFacingLeft() {
         WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
-        wall.location = new Rectangle(5, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        wall.location = new Rectangle( 2 - BubbleBobble.SPRITE_SIZE, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
-        assertEquals(100, enemy.speedX, 1);
+        assertEquals(Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
     }
 
     /**
-     * Test if a collision with a wall is handled accordingly.
-     * The speed should change with -1.
+     * If enemy facing right hits a wall on the left, direction and speed should be kept to right.
      */
     @Test
-    public void testHandleCollisionWall2() {
+    public void testHandleCollisionWallLeftFacingRight() {
         WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
-        wall.location = new Rectangle(60, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        wall.location = new Rectangle(2 - BubbleBobble.SPRITE_SIZE, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
-        assertEquals(100, enemy.speedX, 1);
+        assertEquals(Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
+    }
+
+    /**
+     * If enemy facing right hits a wall on the right, direction and speed should be kept to left.
+     */
+    @Test
+    public void testHandleCollisionWallRightFacingLeft() {
+        WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        wall.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        enemy.handleCollision(wall);
+        assertEquals(-Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
+    }
+
+    /**
+     * If enemy facing right hits a wall on the right, direction and speed should be set to left.
+     */
+    @Test
+    public void testHandleCollisionWallRightFacingRight() {
+        WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        wall.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        enemy.handleCollision(wall);
+        assertEquals( - Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
     }
 
     /**
@@ -82,7 +96,7 @@ public class EnemyObjectTest {
     @Test
     public void testHandleDoubleCollisionBubble() {
         enemy.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE );
-        EnemyObject enemy2 = mock(EnemyObject.class, Mockito.CALLS_REAL_METHODS);
+        Enemy enemy2 = mock(Enemy.class, Mockito.CALLS_REAL_METHODS);
         BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
         bubble.setLogger(Logger.getLogger(BubbleObject.class.getName()));
         enemy2.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
@@ -98,5 +112,13 @@ public class EnemyObjectTest {
         bubble.handleCollision(enemy2);
         assertTrue(enemy.remove());
         assertFalse(enemy2.remove());
+    }
+
+    @Test
+    public void testDirectionAndSpeedIsSetAccordingly() {
+        enemy.setDirection(GameObject.Direction.LEFT);
+        assertEquals(-Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
+        enemy.setDirection(GameObject.Direction.RIGHT);
+        assertEquals(Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
     }
 }

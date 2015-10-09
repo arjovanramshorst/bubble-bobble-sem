@@ -28,7 +28,7 @@ public class BubbleObject extends FloatingObject {
      * @param direction Enum, RIGHT or LEFT
      */
     public BubbleObject(float xPosition, float yPosition, Direction direction) {
-        super(new Rectangle(xPosition, yPosition, 32, 32), new Texture(Gdx.files.internal("bubble-empty.png")));
+        super(new Rectangle(xPosition, yPosition, 32, 32));
         switch (direction) {
             case LEFT:
                 speedX = -1 * INITIAL_SPEED;
