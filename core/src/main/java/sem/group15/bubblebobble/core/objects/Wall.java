@@ -7,7 +7,7 @@ import sem.group15.bubblebobble.core.BubbleBobble;
 /**
  * Created by woute on 9/8/2015.
  */
-public class WallObject extends ImmutableObject {
+public class Wall extends Immutable {
 
 
     /**
@@ -16,7 +16,7 @@ public class WallObject extends ImmutableObject {
      * @param x x coordinate from the bottom left corner
      * @param y y coordinate from the bottom left corner
      */
-    public WallObject(float x, float y) {
+    public Wall(float x, float y) {
         super(
                 new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE)
         );
@@ -31,8 +31,12 @@ public class WallObject extends ImmutableObject {
     }
 
 
-
-    public void handleCollision(GameObject collided) {
+    /**
+     * Check for collisions.
+     * @param collided GameObject that collided with this.
+     *                 (only to be used to handle the collision correctly for this
+     */
+    public final void handleCollision(GameObject collided) {
 
     }
 
@@ -40,7 +44,7 @@ public class WallObject extends ImmutableObject {
      * Draw sprite for wallobject
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
-    public void draw(SpriteBatch spriteBatch) {
+    public final void draw(SpriteBatch spriteBatch) {
         spriteBatch.draw(assets.wall, location.x, location.y);
     }
 

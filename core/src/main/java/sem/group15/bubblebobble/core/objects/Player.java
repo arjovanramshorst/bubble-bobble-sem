@@ -10,16 +10,25 @@ import sem.group15.bubblebobble.core.LogicController;
 /**
  * Created by arjo on 7-9-15.
  */
-public class PlayerObject extends GravityObject {
+public class Player extends Gravity {
 
+    /**
+     * Amount of lives the player has.
+     */
     public static final int PLAYER_LIVES = 3;
+    /**
+     * Time the player is invulnerable after death.
+     */
     public static final float INVULNERABLE_TIME = 5f;
+    /**
+     * Maximum amount a player can overlap with a wall.
+     */
+    private final float MAX_WALL_OVERLAP = 10f;
     public int score, lives;
     protected boolean isAlive;
     private boolean fired;
     protected boolean floating;
     private Direction direction;
-
     public float respawned;
 
     /**
@@ -27,9 +36,9 @@ public class PlayerObject extends GravityObject {
      * @param xPosition x coordinate
      * @param yPosition y coordinate
      */
-    public PlayerObject(float xPosition, float yPosition) {
+    public Player(float xPosition, float yPosition) {
         super(
-                new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE)
+                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE)
         );
         isAlive = true;
         fired = false;
@@ -93,7 +102,7 @@ public class PlayerObject extends GravityObject {
      * method that is called when the player fires a bubble.
      */
     private void fireBubble() {
-        BubbleObject bubble = new BubbleObject(0, getBottom(), direction);
+        Bubble bubble = new Bubble(0, getBottom(), direction);
         switch (direction) {
             case LEFT:
                 bubble.setRight(getLeft());
@@ -106,11 +115,12 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * If the player collides with an enemyObject, set the attribute isAliv e to false.
+     * If the player collides with an enemyObject.
+     * Set the attribute isAlive to false.
      * @param other Object that needs to be checked for collision.
      */
     @Override
-    public void handleCollision(GameObject other) {
+    public void handleCollision(final GameObject other) {
         super.handleCollision(other);
 
         if (location.overlaps(other.getBody())) {
@@ -129,8 +139,8 @@ public class PlayerObject extends GravityObject {
                 }
             }
 
-            if (other instanceof WallObject) {
-                float MAX_WALL_OVERLAP = 10f;
+            if (other instanceof Wall) {
+//                float MAX_WALL_OVERLAP = 10f;
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
                     logger.log("Player touched wall on left.");
@@ -140,11 +150,11 @@ public class PlayerObject extends GravityObject {
                     logger.log("Player touched wall on right.");
                 }
             }
-            if (other instanceof  FilledBubbleObject) {
+            if (other instanceof FilledBubble) {
                 score += 100;
                 logger.log("Player touched filled bubble");
             }
-            if (other instanceof BubbleObject) {
+            if (other instanceof Bubble) {
                 if (between(other.overlapTop(this), 0, 5)) {
                     canJump = true;
                     logger.log("Player touched bubble");
@@ -154,7 +164,7 @@ public class PlayerObject extends GravityObject {
     }
 
     /**
-     * respawn player at starting location.
+     * Respawn player at starting location.
      */
     public void respawn() {
         location.x = LogicController.PLAYER_XY_SPAWN;
@@ -166,7 +176,7 @@ public class PlayerObject extends GravityObject {
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     @Override
-    public void draw(SpriteBatch spriteBatch) {
+    public final void draw(final SpriteBatch spriteBatch) {
         if (isAlive) {
             switch (direction) {
                 case LEFT:
@@ -176,8 +186,7 @@ public class PlayerObject extends GravityObject {
                     spriteBatch.draw(assets.playerRight, getLeft(), getBottom());
                     break;
             }
-        }
-        else {
+        } else {
             spriteBatch.draw(assets.playerDead, getLeft(), getBottom());
         }
 
@@ -195,10 +204,19 @@ public class PlayerObject extends GravityObject {
     public void playJumpSound() {
         assets.playerJumpSound.play(1.0f);
     }
+
+    /**
+     * Check if the player is still alive.
+     * @return alive boolean.
+     */
     public boolean isAlive() {
         return isAlive;
     }
 
+    /**
+     * Get the direction the player is moving.
+     * @return direction
+     */
     public Direction getDirection() {
         return direction;
     }

@@ -15,9 +15,9 @@ import static org.mockito.Mockito.mock;
 /**
  * Created by Marketing Lorre on 28-9-2015.
  */
-public class FloorObjectTest {
+public class FloorTest {
 
-    private FloorObject floorObject;
+    private Floor floor;
 
     /**
      * Set up wall for testing.
@@ -26,8 +26,8 @@ public class FloorObjectTest {
     public void setUp() {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
-        floorObject = mock(FloorObject.class, Mockito.CALLS_REAL_METHODS);
-        floorObject.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        floor = mock(Floor.class, Mockito.CALLS_REAL_METHODS);
+        floor.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
 
     }
 
@@ -36,11 +36,11 @@ public class FloorObjectTest {
      */
     @Test
     public void testUpdate(){
-        float x = floorObject.location.x;
-        float y = floorObject.location.y;
-        floorObject.update(1f);
-        assertTrue(x == floorObject.location.x);
-        assertTrue(y == floorObject.location.y);
+        float x = floor.location.x;
+        float y = floor.location.y;
+        floor.update(1f);
+        assertTrue(x == floor.location.x);
+        assertTrue(y == floor.location.y);
     }
 
 }

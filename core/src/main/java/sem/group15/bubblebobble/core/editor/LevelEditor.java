@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.BubbleBobble;
-import sem.group15.bubblebobble.core.objects.FloorObject;
+import sem.group15.bubblebobble.core.objects.Floor;
 import sem.group15.bubblebobble.core.objects.GameObject;
-import sem.group15.bubblebobble.core.objects.WallObject;
+import sem.group15.bubblebobble.core.objects.Wall;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -94,9 +94,9 @@ public class LevelEditor implements ApplicationListener {
 
     private void writeLineToFile(BufferedWriter writer, GameObject o) throws IOException {
         String line = "";
-        if (o instanceof WallObject) {
+        if (o instanceof Wall) {
             line += "Wall";
-        } else if (o instanceof FloorObject) {
+        } else if (o instanceof Floor) {
             line += "Floor";
         }
         line += ", " + (int) (o.getLeft() / BubbleBobble.SPRITE_SIZE) + ", " +
@@ -122,11 +122,11 @@ public class LevelEditor implements ApplicationListener {
         float yPosition = ((int) (y / BubbleBobble.SPRITE_SIZE)) * BubbleBobble.SPRITE_SIZE;
         GameObject newObject = null;
         if (currentlySelected == Selected.FLOOR) {
-            newObject = new FloorObject(xPosition, yPosition);
+            newObject = new Floor(xPosition, yPosition);
         } else if (currentlySelected == Selected.WALL) {
-            newObject = new WallObject(xPosition, yPosition);
+            newObject = new Wall(xPosition, yPosition);
         } else if (currentlySelected == Selected.EMPTY) {
-            newObject = new FloorObject(xPosition, yPosition);
+            newObject = new Floor(xPosition, yPosition);
         }
         GameObject existingObject = checkCollision(newObject);
         if (existingObject != null) {

@@ -1,12 +1,10 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.Assets;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +14,19 @@ import java.util.List;
 public abstract class GameObject {
 
     protected Assets assets;
-
     protected Rectangle location;
     protected float speedX;
     protected float speedY;
-
     protected Logger logger;
 
+    /**
+     * Set the Logger.
+     * @param logger what you want the logger to be.
+     */
     public void setLogger(Logger logger) {
         this.logger = logger;
     }
+
 
     public enum Direction {
         LEFT, RIGHT
@@ -44,6 +45,10 @@ public abstract class GameObject {
      */
     protected boolean remove;
 
+    /**
+     * Abstract GameObject constructor.
+     * @param location of the GameObject
+     */
     protected GameObject(Rectangle location) {
         this.location = location;
         newObjects = new ArrayList<GameObject>();
@@ -75,84 +80,158 @@ public abstract class GameObject {
      */
     public abstract void draw(SpriteBatch spriteBatch);
 
+    /**
+     * Get the location.
+     * @return location: Rectangle.
+     */
     public final Rectangle getBody() {
         return location;
     }
 
+    /**
+     * Get the X value of the left side.
+     * @return value of left side.
+     */
     public final float getLeft() {
         return location.getX();
     }
 
+    /**
+     * Value of right X location.
+     * @return Right X location.
+     */
     public final float getRight() {
         return location.getX() + location.getWidth();
     }
 
+    /**
+     * Get Y value of the top.
+     * @return Top Y Value
+     */
     public final float getTop() {
         return location.getY() + location.getHeight();
     }
 
+    /**
+     * Get X value of the bottom.
+     * @return Bottom Y value.
+     */
     public final float getBottom() {
         return location.getY();
     }
 
+    /**
+     * Set left x value.
+     * @param x value for left side of the rectangle.
+     */
     public final void setLeft(float x) {
         location.x = x;
     }
 
+    /**
+     * Set right x value.
+     * @param x value for right side of the rectangle.
+     */
     public final void setRight(float x) {
         location.x = x - location.getWidth();
     }
 
+    /**
+     * Set top y value.
+     * @param y value for top side of the rectangle.
+     */
     public final void setTop(float y) {
         location.y = y - location.getHeight();
     }
 
+    /**
+     * Set bottom y value.
+     * @param y value for bottom side of the rectangle.
+     */
     public final void setBottom(float y) {
         location.y = y;
     }
 
+    /**
+     * Check if there is overlap of rectangles.
+     * @param other rectangle of other object.
+     * @return true if overlap, else false.
+     */
     public final boolean collidesWith(GameObject other)
     {
         return getBody().overlaps(other.getBody());
     }
 
+    /**
+     * Check how much overlap there is on the left side of the rectangle.
+     * @param other rectangle of other object.
+     * @return amount of overlap.
+     */
     public final float overlapLeft(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getLeft() >= other.getLeft()) {
+        if (collidesWith(other) && getLeft() >= other.getLeft()) {
             overlap = other.getRight() - getLeft();
         }
         return overlap;
     }
 
+    /**
+     * Check how much overlap there is on the right side of the rectangle.
+     * @param other rectangle of other object.
+     * @return amount of overlap.
+     */
     public final float overlapRight(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getRight() <= other.getRight()) {
+        if (collidesWith(other) && getRight() <= other.getRight()) {
             overlap = getRight() - other.getLeft();
         }
         return overlap;
     }
+
+    /**
+     * Check how much overlap there is on the top side of the rectangle.
+     * @param other rectangle of other object.
+     * @return amount of overlap.
+     */
     public final float overlapTop(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getTop() <= other.getTop()) {
+        if (collidesWith(other) && getTop() <= other.getTop()) {
             overlap = getTop() - other.getBottom();
         }
         return overlap;
     }
+
+    /**
+     * Check how much overlap there is on the bottom side of the rectangle.
+     * @param other rectangle of other object.
+     * @return amount of overlap.
+     */
     public final float overlapBottom(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getBottom() >= other.getBottom()) {
+        if (collidesWith(other) && getBottom() >= other.getBottom()) {
             overlap = other.getTop() - getBottom();
         }
         return overlap;
     }
 
+    /**
+     * Calculate if a value if between two other values.
+     * @param value value you want be be between.
+     * @param low lower bound
+     * @param high upper bound
+     * @return True if value is between low and high
+     */
     public final boolean between(float value, float low, float high) {
         return (value > low && value < high);
     }
 
+    /**
+     * Add new objects to a list.
+     * @param gameObjects list to add the objects to.
+     */
     public final void addNewObjectsTo(List<GameObject> gameObjects) {
-        if(! newObjects.isEmpty()) {
-            for(GameObject object : newObjects) {
+        if (!newObjects.isEmpty()) {
+            for (GameObject object : newObjects) {
                 gameObjects.add(object);
             }
             newObjects.clear();

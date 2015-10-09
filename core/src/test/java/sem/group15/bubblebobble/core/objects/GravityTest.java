@@ -4,28 +4,26 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
-import sem.group15.bubblebobble.core.LogicController;
 import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.*;
 
-public class GravityObjectTest {
+public class GravityTest {
 
     /**
      * The player.
      */
-    private GravityObject player;
+    private Gravity player;
 
     /**
      * The floor.
      */
-    private FloorObject floor;
+    private Floor floor;
 
     /**
      * initialise the mocks.
@@ -36,8 +34,8 @@ public class GravityObjectTest {
         Gdx.input = mock(Input.class);
         Gdx.graphics = mock(Graphics.class);
         Mockito.doReturn(800).when(Gdx.graphics).getHeight();
-        player = mock(PlayerObject.class, Mockito.CALLS_REAL_METHODS);
-        floor = mock(FloorObject.class, Mockito.CALLS_REAL_METHODS);
+        player = mock(Player.class, Mockito.CALLS_REAL_METHODS);
+        floor = mock(Floor.class, Mockito.CALLS_REAL_METHODS);
         player.location = new Rectangle(0, 1, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
     }
 
