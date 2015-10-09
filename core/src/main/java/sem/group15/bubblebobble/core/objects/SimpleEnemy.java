@@ -20,7 +20,8 @@ public class SimpleEnemy extends Enemy{
 
 
     /**
-     *  Handles collisions with other objects. If there is a WallCollision set the attribute wallCollision to true.
+     * Handles collisions with other objects.
+     * If there is a WallCollision set the attribute wallCollision to true.
      * @param other Object that needs to be checked for collision.
     */
     @Override

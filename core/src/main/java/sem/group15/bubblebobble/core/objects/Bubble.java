@@ -109,7 +109,7 @@ public class Bubble extends Floating {
     }
 
     /**
-     * Add a new filled bubble to list with new Objects
+     * Add a new filled bubble to list with new Objects.
      */
     protected void makeFilledBubble() {
         newObjects.add(new FilledBubble(getLeft(), getBottom()));

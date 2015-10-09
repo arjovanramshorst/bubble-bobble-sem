@@ -7,8 +7,12 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public abstract class Immutable extends GameObject {
 
-    protected Immutable(Rectangle size) {
-        super(size);
+    /**
+     * Constructor Immutable
+     * @param location location of the rectangle
+     */
+    protected Immutable(Rectangle location) {
+        super(location);
         speedX = 0;
         speedY = 0;
     }

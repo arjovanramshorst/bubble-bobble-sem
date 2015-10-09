@@ -18,7 +18,7 @@ public class Floor extends Immutable {
     public Floor(final float locationX, final float locationY) {
         super(new Rectangle(locationX, locationY, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
     }
-   
+
     @Override
     public void update(final float elapsed) {
 

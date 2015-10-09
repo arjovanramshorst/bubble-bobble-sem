@@ -31,8 +31,12 @@ public class Wall extends Immutable {
     }
 
 
-
-    public void handleCollision(GameObject collided) {
+    /**
+     * Check for collisions.
+     * @param collided GameObject that collided with this.
+     *                 (only to be used to handle the collision correctly for this
+     */
+    public final void handleCollision(GameObject collided) {
 
     }
 
@@ -40,7 +44,7 @@ public class Wall extends Immutable {
      * Draw sprite for wallobject
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
-    public void draw(SpriteBatch spriteBatch) {
+    public final void draw(SpriteBatch spriteBatch) {
         spriteBatch.draw(assets.wall, location.x, location.y);
     }
 

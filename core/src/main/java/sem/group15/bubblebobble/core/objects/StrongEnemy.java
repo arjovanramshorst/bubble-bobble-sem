@@ -39,7 +39,7 @@ public class StrongEnemy extends Enemy {
     }
 
     @Override
-    public void update(final float elapsed){
+    public void update(final float elapsed) {
         super.update(elapsed);
         switchDelay -= elapsed;
     }
@@ -65,18 +65,20 @@ public class StrongEnemy extends Enemy {
      * updated the direction of the enemy based on the player's position
      * @param playerX x coordinate of the player
      */
-    public void updatePath(final float playerX){
-        if (playerX > location.x)
+    public void updatePath(final float playerX) {
+        if (playerX > location.x) {
             setDirection(Direction.RIGHT);
-        else
+        } else {
             setDirection(Direction.LEFT);
+        }
 
         speedY += 300;
     }
 
 
     /**
-     *  Handles collisions with other objects. If there is a WallCollision set the attribute wallCollision to true.
+     *  Handles collisions with other objects.
+     *  If there is a WallCollision set the attribute wallCollision to true.
      * @param other Object that needs to be checked for collision.
      */
     @Override
