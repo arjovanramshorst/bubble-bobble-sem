@@ -8,11 +8,11 @@ import com.badlogic.gdx.math.Rectangle;
  * Abstract class for the different kinds of bubbles
  * Created by TUDelft SID on 7-9-2015.
  */
-public abstract class FloatingObject extends GameObject {
+public abstract class Floating extends GameObject {
 
 
     protected float timeFromFired;
-    protected FloatingObject(Rectangle location) {
+    protected Floating(Rectangle location) {
         super(location);
     }
 

@@ -10,7 +10,7 @@ import sem.group15.bubblebobble.core.LogicController;
 /**
  * Created by arjo on 7-9-15.
  */
-public class PlayerObject extends GravityObject {
+public class Player extends Gravity {
 
     public static final int PLAYER_LIVES = 3;
     public static final float INVULNERABLE_TIME = 5f;
@@ -28,7 +28,7 @@ public class PlayerObject extends GravityObject {
      * @param xPosition x coordinate
      * @param yPosition y coordinate
      */
-    public PlayerObject(float xPosition, float yPosition) {
+    public Player(float xPosition, float yPosition) {
         super(
                 new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE)
         );
@@ -94,7 +94,7 @@ public class PlayerObject extends GravityObject {
      * method that is called when the player fires a bubble.
      */
     private void fireBubble() {
-        BubbleObject bubble = new BubbleObject(0, getBottom(), direction);
+        Bubble bubble = new Bubble(0, getBottom(), direction);
         switch (direction) {
             case LEFT:
                 bubble.setRight(getLeft());
@@ -130,7 +130,7 @@ public class PlayerObject extends GravityObject {
                 }
             }
 
-            if (other instanceof WallObject) {
+            if (other instanceof Wall) {
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
                     logger.log("Player touched wall on left.");
@@ -140,11 +140,11 @@ public class PlayerObject extends GravityObject {
                     logger.log("Player touched wall on right.");
                 }
             }
-            if (other instanceof  FilledBubbleObject) {
+            if (other instanceof FilledBubble) {
                 score += 100;
                 logger.log("Player touched filled bubble");
             }
-            if (other instanceof BubbleObject) {
+            if (other instanceof Bubble) {
                 if (between(other.overlapTop(this), 0, 5)) {
                     canJump = true;
                     logger.log("Player touched bubble");

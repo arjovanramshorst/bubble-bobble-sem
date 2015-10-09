@@ -40,7 +40,7 @@ public class SimpleEnemyTest {
      */
     @Test
     public void testHandleCollisionWallLeftFacingLeft() {
-        WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        Wall wall = Mockito.mock(Wall.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle( 2 - BubbleBobble.SPRITE_SIZE, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
         assertEquals(Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
@@ -51,7 +51,7 @@ public class SimpleEnemyTest {
      */
     @Test
     public void testHandleCollisionWallLeftFacingRight() {
-        WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        Wall wall = Mockito.mock(Wall.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(2 - BubbleBobble.SPRITE_SIZE, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
         assertEquals(Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
@@ -62,7 +62,7 @@ public class SimpleEnemyTest {
      */
     @Test
     public void testHandleCollisionWallRightFacingLeft() {
-        WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        Wall wall = Mockito.mock(Wall.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
         assertEquals(-Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
@@ -73,7 +73,7 @@ public class SimpleEnemyTest {
      */
     @Test
     public void testHandleCollisionWallRightFacingRight() {
-        WallObject wall = Mockito.mock(WallObject.class, Mockito.CALLS_REAL_METHODS);
+        Wall wall = Mockito.mock(Wall.class, Mockito.CALLS_REAL_METHODS);
         wall.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.handleCollision(wall);
         assertEquals( - Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
@@ -86,7 +86,7 @@ public class SimpleEnemyTest {
     public void testHandleCollisionBubble() {
         enemy.update((float) (1 / enemy.speedX));
         assertFalse(enemy.remove());
-        BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        Bubble bubble = Mockito.mock(Bubble.class, Mockito.CALLS_REAL_METHODS);
         bubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE-2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.update((float) (1 / enemy.speedX));
         enemy.handleCollision(bubble);
@@ -97,8 +97,8 @@ public class SimpleEnemyTest {
     public void testHandleDoubleCollisionBubble() {
         enemy.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE );
         Enemy enemy2 = mock(Enemy.class, Mockito.CALLS_REAL_METHODS);
-        BubbleObject bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
-        bubble.setLogger(Logger.getLogger(BubbleObject.class.getName()));
+        Bubble bubble = Mockito.mock(Bubble.class, Mockito.CALLS_REAL_METHODS);
+        bubble.setLogger(Logger.getLogger(Bubble.class.getName()));
         enemy2.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         bubble.location = new Rectangle(0,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         doNothing().when(bubble).makeFilledBubble();

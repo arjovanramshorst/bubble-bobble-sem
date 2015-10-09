@@ -29,7 +29,7 @@ public class SimpleEnemy extends Enemy{
 
         if (! remove && location.overlaps(other.getBody())) {
 
-            if (other instanceof WallObject) {
+            if (other instanceof Wall) {
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
                     setDirection(Direction.RIGHT);
@@ -39,7 +39,7 @@ public class SimpleEnemy extends Enemy{
                     setDirection(Direction.LEFT);
                 }
             }
-            if (other instanceof BubbleObject && ! other.remove()) {
+            if (other instanceof Bubble && ! other.remove()) {
                 remove = true;
             }
         }

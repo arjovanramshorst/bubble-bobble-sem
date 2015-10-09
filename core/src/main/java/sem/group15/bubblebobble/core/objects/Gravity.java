@@ -1,14 +1,12 @@
 package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
-import sem.group15.bubblebobble.core.BubbleBobble;
 
 /**
  * Created by arjo on 7-9-15.
  */
-public abstract class GravityObject extends GameObject {
+public abstract class Gravity extends GameObject {
 
     private final int GRAVITY_SPEED = 100;
     private final int MAX_GRAVITY_SPEED = -300;
@@ -18,7 +16,7 @@ public abstract class GravityObject extends GameObject {
     protected boolean canJump;
 
 
-    protected GravityObject(Rectangle location) {
+    protected Gravity(Rectangle location) {
         super(location);
         this.speedX = 0;
         this.speedY = 0;
@@ -52,7 +50,7 @@ public abstract class GravityObject extends GameObject {
      * @param other Object that needs to be checked for collision.
      */
     public void handleCollision(GameObject other) {
-        if (other instanceof FloorObject) {
+        if (other instanceof Floor) {
             if (between(overlapBottom(other), 0, MAX_DIFF_LANDING) && speedY < 0) {
                 setBottom(other.getTop());
                 speedY = 0;

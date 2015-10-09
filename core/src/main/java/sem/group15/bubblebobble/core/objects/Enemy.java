@@ -1,19 +1,13 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
-import sem.group15.bubblebobble.core.Logger;
-
-import java.util.Random;
 
 /**
  * The enemy objects
  * Created by TUDelft SID on 8-9-2015.
  */
-public abstract class Enemy extends GravityObject {
+public abstract class Enemy extends Gravity {
 
     /**
      * Maximum overlap with a wall.

@@ -83,13 +83,13 @@ public class StrongEnemy extends Enemy {
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
-        if (other instanceof PlayerObject && switchDelay < 0){
+        if (other instanceof Player && switchDelay < 0){
             updatePath(other.location.x);
         }
 
         if (location.overlaps(other.getBody())) {
 
-            if (other instanceof WallObject) {
+            if (other instanceof Wall) {
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
                     setDirection(Direction.RIGHT);
@@ -99,7 +99,7 @@ public class StrongEnemy extends Enemy {
                     setDirection(Direction.LEFT);
                 }
             }
-            if (other instanceof BubbleObject && !other.remove()) {
+            if (other instanceof Bubble && !other.remove()) {
                 remove = true;
             }
         }

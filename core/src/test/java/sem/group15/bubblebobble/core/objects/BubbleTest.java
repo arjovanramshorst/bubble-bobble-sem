@@ -16,9 +16,9 @@ import static org.mockito.Mockito.*;
 /**
  * Created by woute on 9/25/2015.
  */
-public class BubbleObjectTest {
+public class BubbleTest {
 
-    private BubbleObject bubble;
+    private Bubble bubble;
 
     /**
      * setup mokito for mocking
@@ -28,7 +28,7 @@ public class BubbleObjectTest {
     public void setUp() throws Exception {
         Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
-        bubble = Mockito.mock(BubbleObject.class, Mockito.CALLS_REAL_METHODS);
+        bubble = Mockito.mock(Bubble.class, Mockito.CALLS_REAL_METHODS);
         bubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
     }
 
@@ -52,7 +52,7 @@ public class BubbleObjectTest {
     public void testUpdateLifespan() {
         bubble.update(0.1f);
         assertFalse(bubble.remove);
-        bubble.update(BubbleObject.BUBBLE_LIFESPAN);
+        bubble.update(Bubble.BUBBLE_LIFESPAN);
         assertTrue(bubble.remove);
     }
 

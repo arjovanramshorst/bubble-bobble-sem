@@ -5,9 +5,9 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Created by arjo on 7-9-15.
  */
-public abstract class ImmutableObject extends GameObject {
+public abstract class Immutable extends GameObject {
 
-    protected ImmutableObject(Rectangle size) {
+    protected Immutable(Rectangle size) {
         super(size);
         speedX = 0;
         speedY = 0;

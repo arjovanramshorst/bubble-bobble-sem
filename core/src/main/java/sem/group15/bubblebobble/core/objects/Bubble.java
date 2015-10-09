@@ -7,7 +7,7 @@ import sem.group15.bubblebobble.core.BubbleBobble;
 /**
  * Created by TUDelft SID on 7-9-2015.
  */
-public class BubbleObject extends FloatingObject {
+public class Bubble extends Floating {
 
     /**
      * Minimum speed a bubble should have.
@@ -37,7 +37,7 @@ public class BubbleObject extends FloatingObject {
      * @param yPosition y position of player who shoots the bubble.
      * @param direction Enum, RIGHT or LEFT
      */
-    public BubbleObject(float xPosition, float yPosition, Direction direction) {
+    public Bubble(float xPosition, float yPosition, Direction direction) {
         super(new Rectangle(xPosition, yPosition,
                 BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         switch (direction) {
@@ -112,7 +112,7 @@ public class BubbleObject extends FloatingObject {
     }
 
     protected void makeFilledBubble() {
-        newObjects.add(new FilledBubbleObject(getLeft(), getBottom()));
+        newObjects.add(new FilledBubble(getLeft(), getBottom()));
     }
 
     /**

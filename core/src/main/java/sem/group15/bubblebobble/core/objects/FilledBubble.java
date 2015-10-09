@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 /**
  * Created by TUDelft SID on 7-9-2015.
  */
-public class FilledBubbleObject extends FloatingObject {
+public class FilledBubble extends Floating {
 
     
     /**
@@ -14,7 +14,7 @@ public class FilledBubbleObject extends FloatingObject {
      * @param xPosition - xPosition of the Rectangle
      * @param yPosition - yPosition of the Rectangle
      */
-    public FilledBubbleObject(float xPosition, float yPosition) {
+    public FilledBubble(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, 32, 32));
 
         speedY = 50;
@@ -41,12 +41,12 @@ public class FilledBubbleObject extends FloatingObject {
      */
     public  void handleCollision(GameObject collided) {
         if (location.overlaps(collided.getBody())) {
-            if (collided instanceof ImmutableObject) {
+            if (collided instanceof Immutable) {
                 // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
                 speedY = 0;
             }
 
-            if (collided instanceof PlayerObject) {
+            if (collided instanceof Player) {
                 remove = true;
             }
         }

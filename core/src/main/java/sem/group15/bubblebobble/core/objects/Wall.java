@@ -7,7 +7,7 @@ import sem.group15.bubblebobble.core.BubbleBobble;
 /**
  * Created by woute on 9/8/2015.
  */
-public class WallObject extends ImmutableObject {
+public class Wall extends Immutable {
 
 
     /**
@@ -16,7 +16,7 @@ public class WallObject extends ImmutableObject {
      * @param x x coordinate from the bottom left corner
      * @param y y coordinate from the bottom left corner
      */
-    public WallObject(float x, float y) {
+    public Wall(float x, float y) {
         super(
                 new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE)
         );

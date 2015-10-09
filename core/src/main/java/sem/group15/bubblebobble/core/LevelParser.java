@@ -68,9 +68,9 @@ public class LevelParser {
             case "Enemy":
                 return enemyFactory.createObject(xPos, yPos);
             case "Floor":
-                return new FloorObject(xPos, yPos);
+                return new Floor(xPos, yPos);
             case "Wall":
-                return new WallObject(xPos, yPos);
+                return new Wall(xPos, yPos);
         }
         throw new IOException("String: " + line + " is not a valid object!");
     }
