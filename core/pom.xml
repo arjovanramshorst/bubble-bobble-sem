@@ -121,6 +121,8 @@
                     <instrumentation>
                         <excludes>
                             <exclude>sem/group15/bubblebobble/core/editor/*.class</exclude>
+                            <exclude>sem/group15/bubblebobble/core/Assets.class</exclude>
+                            <exclude>sem/group15/bubblebobble/core/BubbleBobble.class</exclude>
                         </excludes>
                     </instrumentation>
                 </configuration>
