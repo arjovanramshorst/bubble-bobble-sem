@@ -116,7 +116,8 @@ public class Player extends Gravity {
     }
 
     /**
-     * If the player collides with an enemyObject, set the attribute isAliv e to false.
+     * If the player collides with an enemyObject.
+     * Set the attribute isAlive to false.
      * @param other Object that needs to be checked for collision.
      */
     @Override
@@ -175,7 +176,7 @@ public class Player extends Gravity {
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     @Override
-    public void draw(final SpriteBatch spriteBatch) {
+    public final void draw(final SpriteBatch spriteBatch) {
         if (isAlive) {
             switch (direction) {
                 case LEFT:
@@ -185,8 +186,7 @@ public class Player extends Gravity {
                     spriteBatch.draw(assets.playerRight, getLeft(), getBottom());
                     break;
             }
-        }
-        else {
+        } else {
             spriteBatch.draw(assets.playerDead, getLeft(), getBottom());
         }
 

@@ -14,7 +14,7 @@ public class SimpleEnemy extends Enemy{
      * @param xPosition x coordinate
      * @param yPosition y coordinate
      */
-    public SimpleEnemy(float xPosition, float yPosition) {
+    public SimpleEnemy(final float xPosition, final float yPosition) {
         super(xPosition, yPosition);
     }
 
@@ -27,7 +27,7 @@ public class SimpleEnemy extends Enemy{
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
-        if (! remove && location.overlaps(other.getBody())) {
+        if (!remove && location.overlaps(other.getBody())) {
 
             if (other instanceof Wall) {
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
@@ -39,7 +39,7 @@ public class SimpleEnemy extends Enemy{
                     setDirection(Direction.LEFT);
                 }
             }
-            if (other instanceof Bubble && ! other.remove()) {
+            if (other instanceof Bubble && !other.remove()) {
                 remove = true;
             }
         }
@@ -49,7 +49,7 @@ public class SimpleEnemy extends Enemy{
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     @Override
-    public void draw(SpriteBatch spriteBatch) {
+    public final void draw(final SpriteBatch spriteBatch) {
         switch (direction) {
             case LEFT:
                 spriteBatch.draw(assets.simpleEnemyLeft, getLeft(), getBottom());
@@ -64,8 +64,8 @@ public class SimpleEnemy extends Enemy{
      * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
      * @param direction the direction in which the enemy is going.
      */
-    public void setDirection(Direction direction) {
-        switch(direction) {
+    public void setDirection(final Direction direction) {
+        switch (direction) {
             case LEFT:
                 this.speedX = -ENEMY_SPEED;
                 break;

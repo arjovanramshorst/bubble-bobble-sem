@@ -120,7 +120,7 @@ public class Bubble extends Floating {
      *
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
-    public void draw(final SpriteBatch spriteBatch) {
+    public final void draw(final SpriteBatch spriteBatch) {
         spriteBatch.draw(assets.bubble, location.x, location.y);
     }
 

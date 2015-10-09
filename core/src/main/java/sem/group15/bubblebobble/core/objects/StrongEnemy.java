@@ -18,7 +18,7 @@ public class StrongEnemy extends Enemy {
      * @param xPosition x coordinate
      * @param yPosition y coordinate
      */
-    public StrongEnemy(float xPosition, float yPosition) {
+    public StrongEnemy(final float xPosition, final float yPosition) {
         super(xPosition, yPosition);
     }
 
@@ -27,7 +27,7 @@ public class StrongEnemy extends Enemy {
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     @Override
-    public void draw(SpriteBatch spriteBatch) {
+    public final void draw(final SpriteBatch spriteBatch) {
         switch (direction) {
             case LEFT:
                 spriteBatch.draw(assets.strongEnemyLeft, getLeft(), getBottom());
@@ -39,7 +39,7 @@ public class StrongEnemy extends Enemy {
     }
 
     @Override
-    public void update(float elapsed){
+    public void update(final float elapsed){
         super.update(elapsed);
         switchDelay -= elapsed;
     }
@@ -48,7 +48,7 @@ public class StrongEnemy extends Enemy {
      * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
      * @param direction the direction in which the enemy is going.
      */
-    public void setDirection(Direction direction) {
+    public void setDirection(final Direction direction) {
         switch (direction) {
             case LEFT:
                 this.speedX = -ENEMY_SPEED * 2;
@@ -65,7 +65,7 @@ public class StrongEnemy extends Enemy {
      * updated the direction of the enemy based on the player's position
      * @param playerX x coordinate of the player
      */
-    public void updatePath(float playerX){
+    public void updatePath(final float playerX){
         if (playerX > location.x)
             setDirection(Direction.RIGHT);
         else
@@ -80,7 +80,7 @@ public class StrongEnemy extends Enemy {
      * @param other Object that needs to be checked for collision.
      */
     @Override
-    public void handleCollision(GameObject other) {
+    public void handleCollision(final GameObject other) {
         super.handleCollision(other);
 
         if (other instanceof Player && switchDelay < 0){
