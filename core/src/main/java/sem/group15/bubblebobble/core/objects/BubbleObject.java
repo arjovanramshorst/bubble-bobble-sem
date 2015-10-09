@@ -1,10 +1,7 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import sem.group15.bubblebobble.core.Logger;
 
 /**
  * Created by TUDelft SID on 7-9-2015.
@@ -88,7 +85,7 @@ public class BubbleObject extends FloatingObject {
     public void handleCollision(GameObject collided) {
         if (!remove && location.overlaps(collided.getBody())) {
 
-            if (collided instanceof EnemyObject) {
+            if (collided instanceof Enemy) {
                 logger.log("Bubble touched enemy object.");
                 remove = true;
                 makeFilledBubble();

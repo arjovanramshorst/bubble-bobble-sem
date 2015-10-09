@@ -12,8 +12,10 @@ public class Assets {
     private static Assets singleton;
 
     public Texture bubble;
-    public Texture enemyLeft;
-    public Texture enemyRight;
+    public Texture simpleEnemyLeft;
+    public Texture simpleEnemyRight;
+    public Texture strongEnemyLeft;
+    public Texture strongEnemyRight;
     public Texture filledBubble;
     public Texture playerLeft;
     public Texture playerRight;
@@ -37,8 +39,10 @@ public class Assets {
 
     private void initialize() {
         bubble = loadTexture("bubble-empty.png");
-        enemyLeft = loadTexture("enemyLeft.png");
-        enemyRight = loadTexture("enemy.png");
+        simpleEnemyLeft = loadTexture("enemyLeft.png");
+        simpleEnemyRight = loadTexture("enemy.png");
+        strongEnemyLeft = loadTexture("strongEnemyLeft.png");
+        strongEnemyRight = loadTexture("strongEnemyRight.png");
         filledBubble = loadTexture("filled-bubble.png");
         playerLeft = loadTexture("playerSprite.png");
         playerRight = loadTexture("playerSpriteRight.png");
