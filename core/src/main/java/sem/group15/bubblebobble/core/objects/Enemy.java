@@ -15,9 +15,12 @@ import java.util.Random;
  */
 public abstract class Enemy extends GravityObject {
 
+    protected static final float ANGRY_MULTIPLIER = 1.5f;
     protected static final float MAX_WALL_OVERLAP = 10f;
     public static final int ENEMY_SPEED = 100;
     public Direction direction;
+
+    public State state;
 
     /**
      * Creates an Enemy with position (X,Y) on the grid.
@@ -26,14 +29,15 @@ public abstract class Enemy extends GravityObject {
      */
     public Enemy(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
-        //Generates random integer between 1 and 2.
-        int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
-        assert (random == 1 || random == 2);
-        if (random == 1) {
-            setDirection(Direction.RIGHT);
-        } else {
-            setDirection(Direction.LEFT);
-        }
+        state = State.NORMAL;
+    }
+
+    /**
+     * Sets the state of this object.
+     * @param state
+     */
+    public void setState(State state) {
+        this.state = state;
     }
 
     /**
@@ -43,8 +47,12 @@ public abstract class Enemy extends GravityObject {
     @Override
     public void update(float elapsed) {
         super.update(elapsed);
-        location.x += speedX * elapsed;
-        location.y += speedY * elapsed;
+        float multiplier = 1;
+        if(state == State.ANGRY) {
+            multiplier = ANGRY_MULTIPLIER;
+        }
+        location.x += speedX * elapsed * multiplier;
+        location.y += speedY * elapsed * multiplier;
 
 
     }
@@ -56,4 +64,8 @@ public abstract class Enemy extends GravityObject {
      */
     public abstract void setDirection(Direction direction);
 
+    public enum State {
+        NORMAL,
+        ANGRY
+    }
 }
