@@ -1,34 +1,44 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import sem.group15.bubblebobble.core.Logger;
+import sem.group15.bubblebobble.core.BubbleBobble;
 
 /**
  * Created by TUDelft SID on 7-9-2015.
  */
 public class BubbleObject extends FloatingObject {
 
+    /**
+     * Minimum speed a bubble should have.
+     */
     private static final int MINSPEED = 30;
-
+    /**
+     * Initial speed of a bubble.
+     */
     private static final int INITIAL_SPEED = 600;
+    /**
+     * Lifespan of a bubble in seconds.
+     */
     public static final float BUBBLE_LIFESPAN = 5;
-
+    /**
+     * Maximum allowed overlap percentage.
+     */
     public static final float PERCENTAGE_OVERLAP_COLLISION = 0.6f;
-
+    /**
+     * Time a bubble has been alive
+     */
     private float aliveTime;
 
     /**
-     * Creates a new Bubble object and it will start to float
+     * Creates a new Bubble object and it will start to float.
      *
      * @param xPosition x position of player who shoots the bubble.
      * @param yPosition y position of player who shoots the bubble.
      * @param direction Enum, RIGHT or LEFT
      */
     public BubbleObject(float xPosition, float yPosition, Direction direction) {
-        super(new Rectangle(xPosition, yPosition, 32, 32));
+        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         switch (direction) {
             case LEFT:
                 speedX = -1 * INITIAL_SPEED;
@@ -46,7 +56,7 @@ public class BubbleObject extends FloatingObject {
      * This updates the location, speed and lasting-duration.
      * The initial speed of the BubbleObject is FOR THE MOMENT 50.
      *
-     * @param elapsed
+     * @param elapsed Time that has elapsed
      */
     public void update(float elapsed) {
         //after shoot
@@ -71,7 +81,7 @@ public class BubbleObject extends FloatingObject {
      */
     public void getOutOfGame() {
 
-        if ( Math.abs(speedX) > 0 ) {
+        if (Math.abs(speedX) > 0) {
             speedX = 0;
             speedY = 50;
         }
