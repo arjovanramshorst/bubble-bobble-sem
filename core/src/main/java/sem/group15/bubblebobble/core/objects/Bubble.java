@@ -37,7 +37,7 @@ public class Bubble extends Floating {
      * @param yPosition y position of player who shoots the bubble.
      * @param direction Enum, RIGHT or LEFT
      */
-    public Bubble(float xPosition, float yPosition, Direction direction) {
+    public Bubble(final float xPosition, final float yPosition, final Direction direction) {
         super(new Rectangle(xPosition, yPosition,
                 BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         switch (direction) {
@@ -59,7 +59,7 @@ public class Bubble extends Floating {
      *
      * @param elapsed Time that has elapsed
      */
-    public void update(float elapsed) {
+    public void update(final float elapsed) {
         //after shoot
         //slow down bubble until very slow and go up.
         if (Math.abs(speedX) < MINSPEED) {
@@ -81,7 +81,7 @@ public class Bubble extends Floating {
      * This method is called when:
      * either the bubble lost too much speed or collides with a wall object.
      */
-    public void getOutOfGame() {
+    public final void getOutOfGame() {
 
         if (Math.abs(speedX) > 0) {
             speedX = 0;
@@ -98,10 +98,10 @@ public class Bubble extends Floating {
      * The y speed should change to 0 and the x speed should
      * change to either the right or left.
      *
-     * @param other GameObject that collided with this. (only to be used to handle the collision correctly for this
-     *                 GameObject.)
+     * @param other GameObject that collided with this.
+     * (only to be used to handle the collision correctly for this GameObject.)
      */
-    public void handleCollision(GameObject other) {
+    public final void handleCollision(final GameObject other) {
         if (!remove && location.overlaps(other.getBody())) {
             if (other instanceof Enemy && overlapPercentage(other) > PERCENTAGE_OVERLAP_COLLISION) {
                 logger.log("Bubble touched enemy object.");
@@ -111,6 +111,9 @@ public class Bubble extends Floating {
         }
     }
 
+    /**
+     * Add a new filled bubble to list with new Objects
+     */
     protected void makeFilledBubble() {
         newObjects.add(new FilledBubble(getLeft(), getBottom()));
     }
@@ -120,7 +123,7 @@ public class Bubble extends Floating {
      *
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
-    public void draw(SpriteBatch spriteBatch) {
+    public void draw(final SpriteBatch spriteBatch) {
         spriteBatch.draw(assets.bubble, location.x, location.y);
     }
 

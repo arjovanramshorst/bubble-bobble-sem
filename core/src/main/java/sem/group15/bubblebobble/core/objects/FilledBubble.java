@@ -2,6 +2,7 @@ package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.BubbleBobble;
 
 /**
  * Created by TUDelft SID on 7-9-2015.
@@ -14,9 +15,8 @@ public class FilledBubble extends Floating {
      * @param xPosition - xPosition of the Rectangle
      * @param yPosition - yPosition of the Rectangle
      */
-    public FilledBubble(float xPosition, float yPosition) {
-        super(new Rectangle(xPosition, yPosition, 32, 32));
-
+    public FilledBubble(final float xPosition, final float yPosition) {
+        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         speedY = 50;
         speedX = 0;
     }
@@ -28,7 +28,7 @@ public class FilledBubble extends Floating {
      * The initial speed of the FilledBubbleObject is FOR THE MOMENT 50.
      * @param elapsed - time that has passed
      */
-    public  void update(float elapsed) {
+    public final void update(final float elapsed) {
         location.y += speedY * elapsed;
     }
 
@@ -39,7 +39,7 @@ public class FilledBubble extends Floating {
      * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
-    public  void handleCollision(GameObject collided) {
+    public final void handleCollision(final GameObject collided) {
         if (location.overlaps(collided.getBody())) {
             if (collided instanceof Immutable) {
                 // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
@@ -56,7 +56,7 @@ public class FilledBubble extends Floating {
      * This adds this sprite to the SpriteBatch, supplied by the LogicController.
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
-    public  void draw(SpriteBatch spriteBatch) {
+    public final void draw(final SpriteBatch spriteBatch) {
         spriteBatch.draw(assets.filledBubble, location.x, location.y);
     }
 

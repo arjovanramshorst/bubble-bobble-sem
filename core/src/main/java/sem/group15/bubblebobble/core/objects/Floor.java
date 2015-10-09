@@ -10,22 +10,27 @@ import sem.group15.bubblebobble.core.BubbleBobble;
  */
 public class Floor extends Immutable {
 
-    public Floor(float locationX, float locationY) {
+    /**
+     * Create a floor object.
+     * @param locationX X location of the object.
+     * @param locationY Y location of the object.
+     */
+    public Floor(final float locationX, final float locationY) {
         super(new Rectangle(locationX, locationY, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
     }
    
     @Override
-    public void update(float elapsed) {
+    public void update(final float elapsed) {
 
     }
 
     @Override
-    public void handleCollision(GameObject collided) {
+    public void handleCollision(final GameObject collided) {
 
     }
 
     @Override
-    public void draw(SpriteBatch spriteBatch) {
+    public void draw(final SpriteBatch spriteBatch) {
         spriteBatch.draw(assets.wall, location.x, location.y);
     }
 }

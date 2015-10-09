@@ -12,15 +12,24 @@ import sem.group15.bubblebobble.core.LogicController;
  */
 public class Player extends Gravity {
 
+    /**
+     * Amount of lives the player has.
+     */
     public static final int PLAYER_LIVES = 3;
+    /**
+     * Time the player is invulnerable after death.
+     */
     public static final float INVULNERABLE_TIME = 5f;
+    /**
+     * Maximum amount a player can overlap with a wall.
+     */
     private final float MAX_WALL_OVERLAP = 10f;
+
     public int score, lives;
     protected boolean isAlive;
     private boolean fired;
     protected boolean floating;
     private Direction direction;
-
     public float respawned;
 
     /**
@@ -30,7 +39,7 @@ public class Player extends Gravity {
      */
     public Player(float xPosition, float yPosition) {
         super(
-                new Rectangle(xPosition,yPosition, BubbleBobble.SPRITE_SIZE,BubbleBobble.SPRITE_SIZE)
+                new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE)
         );
         isAlive = true;
         fired = false;
@@ -111,7 +120,7 @@ public class Player extends Gravity {
      * @param other Object that needs to be checked for collision.
      */
     @Override
-    public void handleCollision(GameObject other) {
+    public void handleCollision(final GameObject other) {
         super.handleCollision(other);
 
         if (location.overlaps(other.getBody())) {
@@ -154,7 +163,7 @@ public class Player extends Gravity {
     }
 
     /**
-     * respawn player at starting location.
+     * Respawn player at starting location.
      */
     public void respawn() {
         location.x = LogicController.PLAYER_XY_SPAWN;
@@ -166,7 +175,7 @@ public class Player extends Gravity {
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     @Override
-    public void draw(SpriteBatch spriteBatch) {
+    public void draw(final SpriteBatch spriteBatch) {
         if (isAlive) {
             switch (direction) {
                 case LEFT:
@@ -195,10 +204,19 @@ public class Player extends Gravity {
     public void playJumpSound() {
         assets.playerJumpSound.play(1.0f);
     }
+
+    /**
+     * Check if the player is still alive.
+     * @return alive boolean.
+     */
     public boolean isAlive() {
         return isAlive;
     }
 
+    /**
+     * Get the direction the player is moving.
+     * @return direction
+     */
     public Direction getDirection() {
         return direction;
     }

@@ -27,7 +27,7 @@ public abstract class Enemy extends Gravity {
      * @param xPosition x coordinate
      * @param yPosition y coordinate
      */
-    public Enemy(float xPosition, float yPosition) {
+    public Enemy(final float xPosition, final float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
     }
 
@@ -36,7 +36,7 @@ public abstract class Enemy extends Gravity {
      * @param elapsed time elapsed since last gameloop.
      */
     @Override
-    public void update(float elapsed) {
+    public void update(final float elapsed) {
         super.update(elapsed);
         location.x += speedX * elapsed;
         location.y += speedY * elapsed;
