@@ -16,7 +16,7 @@ public class BubbleObject extends FloatingObject {
     private static final int INITIAL_SPEED = 600;
     public static final float BUBBLE_LIFESPAN = 5;
 
-    public static final float PERCENTAGE_OVERLAP_COLLISION = 0.8f;
+    public static final float PERCENTAGE_OVERLAP_COLLISION = 0.6f;
 
     private float aliveTime;
 

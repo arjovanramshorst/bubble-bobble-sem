@@ -11,7 +11,7 @@ import com.badlogic.gdx.Gdx;
  * ApplicationListener implementation that renders the objects on the screen.
  */
 public class BubbleBobble implements ApplicationListener {
-	public static final int SPRITE_SIZE = 32;
+	public static final float SPRITE_SIZE = 32;
 
 
 	LogicController controller;

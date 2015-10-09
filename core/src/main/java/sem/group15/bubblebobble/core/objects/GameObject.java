@@ -116,7 +116,7 @@ public abstract class GameObject {
 
     public final float overlapLeft(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getLeft() < other.getRight()) {
+        if(collidesWith(other) && getLeft() >= other.getLeft()) {
             overlap = other.getRight() - getLeft();
         }
         return overlap;
@@ -124,21 +124,21 @@ public abstract class GameObject {
 
     public final float overlapRight(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getRight() > other.getLeft()) {
+        if(collidesWith(other) && getRight() <= other.getRight()) {
             overlap = getRight() - other.getLeft();
         }
         return overlap;
     }
     public final float overlapTop(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getTop() > other.getBottom()) {
+        if(collidesWith(other) && getTop() <= other.getTop()) {
             overlap = getTop() - other.getBottom();
         }
         return overlap;
     }
     public final float overlapBottom(GameObject other) {
         float overlap = 0;
-        if(collidesWith(other) && getBottom() < other.getTop()) {
+        if(collidesWith(other) && getBottom() >= other.getBottom()) {
             overlap = other.getTop() - getBottom();
         }
         return overlap;
