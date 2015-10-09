@@ -46,7 +46,7 @@ public class LogicController {
         gameObjects.add(object);
     }
 
-    protected final void setPlayer() {
+    protected void setPlayer() {
         if (this.player == null) {
             this.player = new PlayerObject(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         }
@@ -57,7 +57,7 @@ public class LogicController {
      * Adds the level to the game.
      * @param level, the levelnumber.
      */
-    protected final void readMap(final int level) {
+    protected void readMap(final int level) {
         levelMap = new Level(level);
         gameObjects.addAll(levelMap.getMap());
     }
