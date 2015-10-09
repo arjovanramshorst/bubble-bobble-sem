@@ -89,15 +89,12 @@ public class BubbleObject extends FloatingObject {
      */
     public void handleCollision(GameObject other) {
         if (!remove && location.overlaps(other.getBody())) {
-
-            if (other instanceof EnemyObject && overlapPercentage(other) > PERCENTAGE_OVERLAP_COLLISION) {
+            if (other instanceof Enemy && overlapPercentage(other) > PERCENTAGE_OVERLAP_COLLISION) {
                 logger.log("Bubble touched enemy object.");
                 remove = true;
                 makeFilledBubble();
             }
-
         }
-
     }
 
     protected void makeFilledBubble() {
@@ -110,7 +107,7 @@ public class BubbleObject extends FloatingObject {
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     public void draw(SpriteBatch spriteBatch) {
-        spriteBatch.draw(texture, location.x, location.y);
+        spriteBatch.draw(assets.bubble, location.x, location.y);
     }
 
 }

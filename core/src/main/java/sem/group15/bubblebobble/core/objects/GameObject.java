@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.Assets;
+import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
 
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ public abstract class GameObject {
 
     protected GameObject(Rectangle location) {
         this.location = location;
-        this.texture = texture;
         newObjects = new ArrayList<GameObject>();
         remove = false;
         logger = Logger.getLogger(this.getClass().getName());
