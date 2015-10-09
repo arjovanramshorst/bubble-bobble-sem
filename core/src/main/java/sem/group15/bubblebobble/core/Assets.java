@@ -24,6 +24,14 @@ public final class Assets {
      */
     public Texture simpleEnemyRight;
     /**
+     * The texture for a simpleAngryEnemyRight.
+     */
+    public Texture simpleAngryEnemyRight;
+    /**
+     * The texture for a simpleAngryEnemyLeft.
+     */
+    public Texture simpleAngryEnemyLeft;
+    /**
      * The texture for a strongEnemyLeft.
      */
     public Texture strongEnemyLeft;
@@ -81,6 +89,8 @@ public final class Assets {
         bubble = loadTexture("bubble-empty.png");
         simpleEnemyLeft = loadTexture("enemyLeft.png");
         simpleEnemyRight = loadTexture("enemy.png");
+        simpleAngryEnemyLeft = loadTexture("enemyAngryleft.png");
+        simpleAngryEnemyRight = loadTexture("enemyAngry.png");
         strongEnemyLeft = loadTexture("strongEnemyLeft.png");
         strongEnemyRight = loadTexture("strongEnemyRight.png");
         filledBubble = loadTexture("filled-bubble.png");

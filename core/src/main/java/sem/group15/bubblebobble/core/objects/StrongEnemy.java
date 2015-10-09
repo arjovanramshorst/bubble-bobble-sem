@@ -103,4 +103,16 @@ public class StrongEnemy extends Enemy {
         }
     }
 
+
+    /**
+     * sets the appropriate textures
+     */
+    @Override
+    public void setTextures() {
+        angryLeftTexture=assets.strongEnemyLeft;
+        angryRightTexture= assets.strongEnemyRight;
+        normalLeftTexture=assets.strongEnemyLeft;
+        normalRightTexture=assets.strongEnemyRight;
+    }
+
 }

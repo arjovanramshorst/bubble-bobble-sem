@@ -14,7 +14,6 @@ public class PlayerObject extends GravityObject {
 
     public static final int PLAYER_LIVES = 3;
     public static final float INVULNERABLE_TIME = 5f;
-    private final float MAX_WALL_OVERLAP = 10f;
     public int score, lives;
     protected boolean isAlive;
     private boolean fired;
@@ -131,6 +130,7 @@ public class PlayerObject extends GravityObject {
             }
 
             if (other instanceof WallObject) {
+                float MAX_WALL_OVERLAP = 10f;
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
                     logger.log("Player touched wall on left.");
