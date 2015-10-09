@@ -4,7 +4,9 @@ import com.badlogic.gdx.files.FileHandle;
 import sem.group15.bubblebobble.core.factories.EnemyFactory;
 import sem.group15.bubblebobble.core.factories.SimpleEnemyFactory;
 import sem.group15.bubblebobble.core.factories.StrongEnemyFactory;
-import sem.group15.bubblebobble.core.objects.*;
+import sem.group15.bubblebobble.core.objects.Floor;
+import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.Wall;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,14 +33,26 @@ public class LevelParser {
      Floor (object type), 200(x location), 100(y location)
      */
 
+    protected LevelParser() {
+    }
+
+    /**
+     * The enemy factory depending on which enemy is created.
+     */
     private static EnemyFactory enemyFactory;
 
-    public static List<GameObject> parse(FileHandle file) throws IOException {
+    /**
+     * The parse function parses a file from the assets folder.
+     * @param file, a file which should be selected from the assetsfolder.
+     * @return returns a List including all GameObjects declared in the levelFile
+     * @throws IOException, is thrown if an unknown GameObject is declared in the levelFile.
+     */
+    public static List<GameObject> parse(final FileHandle file) throws IOException {
         List<GameObject> result = new ArrayList<GameObject>();
         Scanner sc = new Scanner(file.read());
-        if(sc.hasNext()) {
+        if (sc.hasNext()) {
             String enemyType = sc.nextLine();
-            switch(enemyType) {
+            switch (enemyType) {
                 case "SimpleEnemy":
                     enemyFactory = new SimpleEnemyFactory();
                     break;
@@ -58,7 +72,7 @@ public class LevelParser {
         return result;
     }
 
-    private static GameObject getObject(String line) throws IOException {
+    private static GameObject getObject(final String line) throws IOException {
         String[] enemyArray = line.split(",");
         String objectType = enemyArray[0];
         float xPos = BubbleBobble.SPRITE_SIZE * Float.parseFloat(enemyArray[1]);
@@ -71,7 +85,9 @@ public class LevelParser {
                 return new Floor(xPos, yPos);
             case "Wall":
                 return new Wall(xPos, yPos);
+            default:
+                throw new IOException("String: " + line + " is not a valid object!");
         }
-        throw new IOException("String: " + line + " is not a valid object!");
+
     }
 }
