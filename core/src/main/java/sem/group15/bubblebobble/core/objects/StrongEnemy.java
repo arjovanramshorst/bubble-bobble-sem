@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class StrongEnemy extends Enemy {
 
+    /**
+     *
+     */
     private float switchDelay;
-
 
     /**
      * Creates an StrongEnemy with position (X,Y) on the grid.

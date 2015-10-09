@@ -26,7 +26,7 @@ public class BubbleObject extends FloatingObject {
      */
     public static final float PERCENTAGE_OVERLAP_COLLISION = 0.6f;
     /**
-     * Time a bubble has been alive
+     * Time a bubble has been alive.
      */
     private float aliveTime;
 
@@ -38,7 +38,8 @@ public class BubbleObject extends FloatingObject {
      * @param direction Enum, RIGHT or LEFT
      */
     public BubbleObject(float xPosition, float yPosition, Direction direction) {
-        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
+        super(new Rectangle(xPosition, yPosition,
+                BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         switch (direction) {
             case LEFT:
                 speedX = -1 * INITIAL_SPEED;
@@ -68,7 +69,7 @@ public class BubbleObject extends FloatingObject {
         }
 
         location.x += speedX * elapsed;
-        location.y += speedY* elapsed;
+        location.y += speedY * elapsed;
 
         aliveTime += elapsed;
         if (aliveTime > BUBBLE_LIFESPAN) {
@@ -77,7 +78,8 @@ public class BubbleObject extends FloatingObject {
     }
 
     /**
-     * This method is called if either the bubble lost too much speed or collides with a wall object.
+     * This method is called when:
+     * either the bubble lost too much speed or collides with a wall object.
      */
     public void getOutOfGame() {
 
@@ -90,8 +92,10 @@ public class BubbleObject extends FloatingObject {
     }
 
     /**
-     * This handles the collision for this bubble. It should only be used to update this object, not the other.
-     * If the bubble collides with an ImmutableObject, the y speed should change to 0 and the x speed should
+     * This handles the collision for this bubble.
+     * It should only be used to update this object, not the other.
+     * If the bubble collides with an ImmutableObject.
+     * The y speed should change to 0 and the x speed should
      * change to either the right or left.
      *
      * @param other GameObject that collided with this. (only to be used to handle the collision correctly for this

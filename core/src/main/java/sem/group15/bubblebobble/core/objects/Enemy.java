@@ -15,8 +15,17 @@ import java.util.Random;
  */
 public abstract class Enemy extends GravityObject {
 
+    /**
+     * Maximum overlap with a wall.
+     */
     protected static final float MAX_WALL_OVERLAP = 10f;
+    /**
+     * Basic speed of an enemy.
+     */
     public static final int ENEMY_SPEED = 100;
+    /**
+     * The Direction the enemy is moving.
+     */
     public Direction direction;
 
     /**
@@ -29,7 +38,7 @@ public abstract class Enemy extends GravityObject {
     }
 
     /**
-     * If the enemy collides with a wall, the direction should change in the opposite direction.
+     * Update the location of the enemy.
      * @param elapsed time elapsed since last gameloop.
      */
     @Override
@@ -43,7 +52,8 @@ public abstract class Enemy extends GravityObject {
 
 
     /**
-     * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
+     * Sets the horizontal direction of the enemy.
+     * And Adjusts its horizontal speed accordingly.
      * @param direction the direction in which the enemy is going.
      */
     public abstract void setDirection(Direction direction);

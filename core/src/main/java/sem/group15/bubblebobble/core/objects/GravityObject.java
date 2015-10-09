@@ -36,7 +36,7 @@ public abstract class GravityObject extends GameObject {
     public void update(float elapsed) {
 
         timeSinceLastFloorContact += elapsed;
-        speedY = Math.max( speedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
+        speedY = Math.max(speedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
                 MAX_GRAVITY_SPEED
         );
 
