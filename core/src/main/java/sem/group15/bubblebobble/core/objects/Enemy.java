@@ -27,14 +27,7 @@ public abstract class Enemy extends GravityObject {
     public Enemy(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
 
-        //Generates random integer between 1 and 2.
-        int random = 1 + (int) (Math.random() * ((2 - 1) + 1));
-        assert (random == 1 || random == 2);
-        if (random == 1) {
-            setDirection(Direction.RIGHT);
-        } else {
-            setDirection(Direction.LEFT);
-        }
+
     }
 
     /**

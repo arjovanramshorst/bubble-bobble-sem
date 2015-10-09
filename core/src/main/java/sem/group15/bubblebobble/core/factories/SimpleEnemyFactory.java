@@ -1,14 +1,18 @@
 package sem.group15.bubblebobble.core.factories;
 
-import sem.group15.bubblebobble.core.objects.EnemyObject;
+import sem.group15.bubblebobble.core.objects.Enemy;
+import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.SimpleEnemy;
 
 /**
  * Created by arjo on 8-10-15.
  */
-public class SimpleEnemyFactory implements EnemyFactory {
+public class SimpleEnemyFactory extends EnemyFactory {
 
     @Override
-    public EnemyObject createObject() {
-        return null;
+    public Enemy createObject(float x, float y) {
+        Enemy enemy = new SimpleEnemy(x,y);
+        setRandomDirection(enemy);
+        return enemy;
     }
 }
