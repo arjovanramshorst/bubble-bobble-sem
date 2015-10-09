@@ -17,7 +17,7 @@ public abstract class Enemy extends GravityObject {
 
     protected static final float MAX_WALL_OVERLAP = 10f;
     public static final int ENEMY_SPEED = 100;
-    protected Direction direction;
+    public Direction direction;
 
     /**
      * Creates an Enemy with position (X,Y) on the grid.
@@ -26,8 +26,6 @@ public abstract class Enemy extends GravityObject {
      */
     public Enemy(float xPosition, float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
-
-
     }
 
     /**

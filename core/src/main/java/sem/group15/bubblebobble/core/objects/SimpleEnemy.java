@@ -27,7 +27,7 @@ public class SimpleEnemy extends Enemy{
     public void handleCollision(GameObject other) {
         super.handleCollision(other);
 
-        if (location.overlaps(other.getBody())) {
+        if (! remove && location.overlaps(other.getBody())) {
 
             if (other instanceof WallObject) {
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {

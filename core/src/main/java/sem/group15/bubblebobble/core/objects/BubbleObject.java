@@ -1,7 +1,10 @@
 package sem.group15.bubblebobble.core.objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.Logger;
 
 /**
  * Created by TUDelft SID on 7-9-2015.
@@ -12,6 +15,8 @@ public class BubbleObject extends FloatingObject {
 
     private static final int INITIAL_SPEED = 600;
     public static final float BUBBLE_LIFESPAN = 5;
+
+    public static final float PERCENTAGE_OVERLAP_COLLISION = 0.6f;
 
     private float aliveTime;
 
@@ -79,20 +84,17 @@ public class BubbleObject extends FloatingObject {
      * If the bubble collides with an ImmutableObject, the y speed should change to 0 and the x speed should
      * change to either the right or left.
      *
-     * @param collided GameObject that collided with this. (only to be used to handle the collision correctly for this
+     * @param other GameObject that collided with this. (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
-    public void handleCollision(GameObject collided) {
-        if (!remove && location.overlaps(collided.getBody())) {
-
-            if (collided instanceof Enemy) {
+    public void handleCollision(GameObject other) {
+        if (!remove && location.overlaps(other.getBody())) {
+            if (other instanceof Enemy && overlapPercentage(other) > PERCENTAGE_OVERLAP_COLLISION) {
                 logger.log("Bubble touched enemy object.");
                 remove = true;
                 makeFilledBubble();
             }
-
         }
-
     }
 
     protected void makeFilledBubble() {
