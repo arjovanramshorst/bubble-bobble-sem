@@ -8,7 +8,8 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class FilledBubbleObject extends FloatingObject {
 
-    
+    public static final float FILLED_LIFESPAN = 5;
+
     /**
      * Constructor for the filledBubbleObject.
      * @param xPosition - xPosition of the Rectangle
@@ -30,6 +31,12 @@ public class FilledBubbleObject extends FloatingObject {
      */
     public  void update(float elapsed) {
         location.y += speedY * elapsed;
+
+        if (timeFromFired>FILLED_LIFESPAN) {
+            remove = true;
+
+        }
+
     }
 
     /**

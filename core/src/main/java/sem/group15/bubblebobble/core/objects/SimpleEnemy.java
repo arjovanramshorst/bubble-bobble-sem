@@ -50,13 +50,25 @@ public class SimpleEnemy extends Enemy{
      */
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        switch (direction) {
-            case LEFT:
-                spriteBatch.draw(assets.simpleEnemyLeft, getLeft(), getBottom());
-                break;
-            case RIGHT:
-                spriteBatch.draw(assets.simpleEnemyRight, getLeft(), getBottom());
-                break;
+        if(state==State.NORMAL) {
+            switch (direction) {
+                case LEFT:
+                    spriteBatch.draw(assets.simpleEnemyLeft, getLeft(), getBottom());
+                    break;
+                case RIGHT:
+                    spriteBatch.draw(assets.simpleEnemyRight, getLeft(), getBottom());
+                    break;
+            }
+        }
+        else if(state==State.ANGRY){
+            switch (direction) {
+                case LEFT:
+                    spriteBatch.draw(assets.simpleAngryEnemyLeft, getLeft(), getBottom());
+                    break;
+                case RIGHT:
+                    spriteBatch.draw(assets.simpleAngryEnemyRight, getLeft(), getBottom());
+                    break;
+            }
         }
     }
 
