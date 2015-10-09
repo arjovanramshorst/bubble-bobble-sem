@@ -60,7 +60,7 @@ public class GameObjectTest {
      * Create new GameObject mock.
      * @param posX float x position.
      * @param posY float y position.
-     * @return
+     * @return returns gameobject moch
      */
     private GameObject create(float posX, float posY) {
         GameObject object = Mockito.mock(GameObject.class, Mockito.CALLS_REAL_METHODS);

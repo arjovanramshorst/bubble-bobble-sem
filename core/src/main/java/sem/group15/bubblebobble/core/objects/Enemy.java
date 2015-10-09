@@ -1,13 +1,9 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
-import sem.group15.bubblebobble.core.Logger;
 
-import java.util.Random;
 
 /**
  * The enemy objects
@@ -20,7 +16,6 @@ public abstract class Enemy extends GravityObject {
     protected static final float MAX_WALL_OVERLAP = 10f;
     public static final int ENEMY_SPEED = 100;
     public Direction direction;
-
     public State state;
     protected float timeAngry;
 
@@ -36,7 +31,7 @@ public abstract class Enemy extends GravityObject {
 
     /**
      * Sets the state of this object.
-     * @param state
+     * @param state declares if angry or not
      */
     public void setState(State state) {
         this.state = state;
