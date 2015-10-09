@@ -13,11 +13,11 @@ import java.util.List;
  * Created by arjo on 7-9-15.
  */
 public class LogicController {
-    private List<GameObject> gameObjects;
+    protected List<GameObject> gameObjects;
     public PlayerObject player;
-    private Level levelMap;
+    protected Level levelMap;
 
-    private int currentLevel;
+    protected int currentLevel;
 
     private static final int MAX_LEVEL = 3;
 
@@ -32,7 +32,6 @@ public class LogicController {
         gameObjects.clear();
         setPlayer();
         readMap(level);
-
     }
 
     /**
@@ -43,13 +42,13 @@ public class LogicController {
         gameObjects.add(object);
     }
 
-    private void setPlayer() {
+    protected void setPlayer() {
         if (this.player == null) {
             this.player = new PlayerObject(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         }
         gameObjects.add(this.player);
     }
-    private void readMap(int level) {
+    protected void readMap(int level) {
         levelMap = new Level(level);
         gameObjects.addAll(levelMap.getMap());
     }
@@ -90,7 +89,7 @@ public class LogicController {
      * @param elapsed time elapsed since latest update
      */
 
-    private void update(float elapsed) {
+    protected void update(float elapsed) {
         for (GameObject object : gameObjects) {
             object.update(elapsed);
         }
