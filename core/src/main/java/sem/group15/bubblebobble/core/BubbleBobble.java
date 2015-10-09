@@ -17,8 +17,7 @@ public class BubbleBobble implements ApplicationListener {
 	LogicController controller;
 	SpriteBatch batch;
 	Level level;
-    private String scoreString;
-    BitmapFont bitmapFont;
+	BitmapFont bitmapFont;
 	private static final Logger logger = Logger.getLogger(BubbleBobble.class.getName());
 
 
@@ -59,7 +58,7 @@ public class BubbleBobble implements ApplicationListener {
 		controller.loop(Gdx.graphics.getDeltaTime(), batch);
         // draw score on screen
         bitmapFont.setColor(1, 1, 1, 1);
-        scoreString = "score: " + controller.player.score;
+		String scoreString = "score: " + controller.player.score;
         bitmapFont.draw(batch, scoreString, 50, Gdx.graphics.getHeight() - 30);
 
         batch.end();

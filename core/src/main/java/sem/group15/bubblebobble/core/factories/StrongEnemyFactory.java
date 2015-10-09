@@ -13,6 +13,7 @@ public class StrongEnemyFactory extends EnemyFactory {
     public Enemy createObject(float x, float y) {
         Enemy enemy = new StrongEnemy(x,y);
         setRandomDirection(enemy);
+        enemy.setState(Enemy.State.NORMAL);
         return enemy;
     }
 }

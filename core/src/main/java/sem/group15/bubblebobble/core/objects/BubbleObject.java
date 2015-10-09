@@ -16,7 +16,7 @@ public class BubbleObject extends FloatingObject {
     private static final int INITIAL_SPEED = 600;
     public static final float BUBBLE_LIFESPAN = 5;
 
-    public static final float PERCENTAGE_OVERLAP_COLLISION = 0.6f;
+    public static final float PERCENTAGE_OVERLAP_COLLISION = 0.01f;
 
     private float aliveTime;
 
@@ -90,15 +90,17 @@ public class BubbleObject extends FloatingObject {
     public void handleCollision(GameObject other) {
         if (!remove && location.overlaps(other.getBody())) {
             if (other instanceof Enemy && overlapPercentage(other) > PERCENTAGE_OVERLAP_COLLISION) {
+
                 logger.log("Bubble touched enemy object.");
-                remove = true;
-                makeFilledBubble();
+                remove=true;
+                makeFilledBubble((Enemy) other);
+
             }
         }
     }
 
-    protected void makeFilledBubble() {
-        newObjects.add(new FilledBubbleObject(getLeft(), getBottom()));
+    protected void makeFilledBubble(Enemy enemy) {
+        newObjects.add(new FilledBubbleObject(getLeft(), getBottom(), enemy));
     }
 
     /**
