@@ -75,7 +75,7 @@ public class GameController {
         }
         if(currentLevel.levelFinished()) {
             currentLevelNumber++;
-            startLevel(currentLevelNumber);
+            startLevel(Math.min(currentLevelNumber, MAX_LEVEL));
         }
         if(checkForPauseKey()) {
             state = GameState.PAUSE;
