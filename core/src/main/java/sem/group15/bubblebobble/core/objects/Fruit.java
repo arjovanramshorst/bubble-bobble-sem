@@ -31,6 +31,7 @@ public class Fruit extends Gravity {
     @Override
     public void update(float elapsed) {
         super.update(elapsed);
+        location.y += 2 * speedY * elapsed;
         aliveTime += elapsed;
         if (aliveTime > 5) {
             remove = true;
@@ -41,10 +42,19 @@ public class Fruit extends Gravity {
     public void handleCollision(final GameObject other) {
         super.handleCollision(other);
         if (location.overlaps(other.getBody())) {
-            if (other instanceof Player) {
+            if (other instanceof Player && aliveTime > 0.5) {
                 remove = true;
             }
         }
+    }
+
+
+    /**
+     * Get time bubble is alive.
+     * @return aliveTime
+     */
+    public float getAliveTime() {
+        return aliveTime;
     }
 
     @Override
