@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
-import sem.group15.bubblebobble.core.LogicController;
+import sem.group15.bubblebobble.core.GameController;
 
 /**
  * Created by arjo on 7-9-15.
@@ -167,8 +167,8 @@ public class Player extends Gravity {
      * Respawn player at starting location.
      */
     public void respawn() {
-        location.x = LogicController.PLAYER_XY_SPAWN;
-        location.y = LogicController.PLAYER_XY_SPAWN;
+        location.x = GameController.PLAYER_XY_SPAWN;
+        location.y = GameController.PLAYER_XY_SPAWN;
     }
 
     /**

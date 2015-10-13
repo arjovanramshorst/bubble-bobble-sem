@@ -33,8 +33,6 @@ public class LevelParser {
      Floor (object type), 200(x location), 100(y location)
      */
 
-    protected LevelParser() {
-    }
 
     /**
      * The enemy factory depending on which enemy is created.
@@ -47,7 +45,7 @@ public class LevelParser {
      * @return returns a List including all GameObjects declared in the levelFile
      * @throws IOException, is thrown if an unknown GameObject is declared in the levelFile.
      */
-    public static List<GameObject> parse(final FileHandle file) throws IOException {
+    public static Level parse(final FileHandle file) throws IOException {
         List<GameObject> result = new ArrayList<GameObject>();
         Scanner sc = new Scanner(file.read());
         if (sc.hasNext()) {
@@ -69,7 +67,7 @@ public class LevelParser {
             String object =  sc.nextLine();
             result.add(getObject(object));
         }
-        return result;
+        return new Level(result);
     }
 
     private static GameObject getObject(final String line) throws IOException {

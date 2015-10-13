@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-public class LogicControllerTest {
+public class GameControllerTest {
 
-    LogicController controller;
+    GameController controller;
 
     /**
      * setup mokito for mocking
@@ -19,7 +19,7 @@ public class LogicControllerTest {
      */
     @Before
     public void setUp() throws Exception {
-        controller = Mockito.mock(LogicController.class, Mockito.CALLS_REAL_METHODS);
+        controller = Mockito.mock(GameController.class, Mockito.CALLS_REAL_METHODS);
         controller.gameObjects = new ArrayList<GameObject>();
     }
 
@@ -31,7 +31,7 @@ public class LogicControllerTest {
         Mockito.doNothing().when(controller).readMap(1);
         Player player = Mockito.mock(Player.class, Mockito.CALLS_REAL_METHODS);
         controller.player = player;
-        controller.init(1);
+        controller.initializeLevel(1);
         verify(controller).setPlayer();
     }
     

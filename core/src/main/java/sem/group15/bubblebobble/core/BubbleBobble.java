@@ -13,7 +13,7 @@ import com.badlogic.gdx.Gdx;
 public class BubbleBobble implements ApplicationListener {
 
 	public static final float SPRITE_SIZE = 32;
-	LogicController controller;
+	GameController controller;
 	SpriteBatch batch;
 	Level level;
 	BitmapFont bitmapFont;
@@ -25,15 +25,9 @@ public class BubbleBobble implements ApplicationListener {
 	 */
 	//@Override
 	public void create() {
-		batch = new SpriteBatch();
 		// Loads and initializes the assets used in the game.
 		Assets.getAssets();
-		controller = new LogicController();
-		controller.init(1);
-
-		logger.log("Finished adding objects.");
-
-        bitmapFont = new BitmapFont();
+		controller = new GameController();
 	}
 
 	/**
@@ -51,17 +45,7 @@ public class BubbleBobble implements ApplicationListener {
 	 */
 	@Override
 	public void render() {
-		Gdx.gl.glClearColor(0, 0, 0, 0);
-		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		controller.loop(Gdx.graphics.getDeltaTime(), batch);
-        // draw score on screen
-        bitmapFont.setColor(1, 1, 1, 1);
-		String scoreString = "score: " + controller.player.score;
-        bitmapFont.draw(batch, scoreString, 50, Gdx.graphics.getHeight() - 30);
-
-        batch.end();
-
+		controller.run(Gdx.graphics.getDeltaTime());
 	}
 
 	/**
