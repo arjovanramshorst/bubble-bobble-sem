@@ -14,23 +14,19 @@ import static org.junit.Assert.*;
  * Created by Marketing Lorre on 28-9-2015.
  */
 public class LevelTest {
-    public Level level;
-
-    @Before
-    public void setUp(){
-        level = mock(Level.class, Mockito.CALLS_REAL_METHODS);
-    }
 
     @Test
     public void testLevelFinishedEmptyList(){
-        assertTrue(level.levelFinished(new ArrayList<GameObject>()));
+        Level level = new Level(new ArrayList<GameObject>());
+        assertTrue(level.levelFinished());
     }
 
     @Test
     public void testLevelNotFinished(){
         ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
         gameObjects.add(mock(Enemy.class));
-        assertFalse(level.levelFinished(gameObjects));
+        Level level = new Level(gameObjects);
+        assertFalse(level.levelFinished());
     }
 
     @Test
@@ -44,9 +40,9 @@ public class LevelTest {
         gameObjects.add(mock(Wall.class));
         gameObjects.add(mock(Wall.class));
         gameObjects.add(mock(Floor.class));
+        Level level = new Level(gameObjects);
 
-
-        assertFalse(level.levelFinished(gameObjects));
+        assertFalse(level.levelFinished());
     }
 
     @Test
@@ -60,9 +56,9 @@ public class LevelTest {
         gameObjects.add(mock(Wall.class));
         gameObjects.add(mock(Wall.class));
         gameObjects.add(mock(Floor.class));
+        Level level = new Level(gameObjects);
 
-
-        assertTrue(level.levelFinished(gameObjects));
+        assertTrue(level.levelFinished());
     }
 
 }

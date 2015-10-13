@@ -36,7 +36,7 @@ public class GameController {
     public GameController() {
         player = new Player(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         levelRenderer = new LevelRenderer();
-        state = GameState.PLAY;
+        state = GameState.NEW;
         currentLevelNumber = 1;
     }
 
@@ -69,7 +69,7 @@ public class GameController {
      * @param elapsed elapsed time since last frame.
      */
     private void handleStatePlay(float elapsed) {
-        currentLevel.update(elapsed);
+        currentLevel.run(elapsed);
         if(checkForLose()) {
             state = GameState.LOST;
         }
@@ -122,6 +122,7 @@ public class GameController {
         }
         currentLevel.setPlayer(player);
         player.respawn();
+        levelRenderer.setLevel(currentLevel);
     }
 
     /**

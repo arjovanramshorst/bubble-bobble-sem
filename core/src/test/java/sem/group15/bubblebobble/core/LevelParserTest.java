@@ -32,8 +32,8 @@ public class LevelParserTest {
         String str = "Floors, 200, 100";
         try {
             when(file.read()).thenReturn(new ByteArrayInputStream(str.getBytes("UTF-8")));
-            List<GameObject> gameObjectList = LevelParser.parse(file);
-            assertTrue(gameObjectList.isEmpty());
+            Level level = LevelParser.parse(file);
+            assertTrue(level.getObjects().isEmpty());
             fail();
         }catch (IOException e){
             assertEquals("String: " + str + " is not a valid object!", e.getMessage());
