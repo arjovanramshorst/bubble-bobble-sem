@@ -3,6 +3,7 @@ package sem.group15.bubblebobble.core;
 import com.badlogic.gdx.Gdx;
 import sem.group15.bubblebobble.core.objects.Enemy;
 import sem.group15.bubblebobble.core.objects.FilledBubble;
+import sem.group15.bubblebobble.core.objects.Fruit;
 import sem.group15.bubblebobble.core.objects.GameObject;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class Level {
      */
     public final boolean levelFinished(final List<GameObject> objects) {
         for (GameObject object : objects) {
-            if (object instanceof Enemy || object instanceof FilledBubble) {
+            if (object instanceof Enemy || object instanceof FilledBubble || object instanceof Fruit) {
                 return false;
             }
         }
