@@ -57,8 +57,8 @@ public class BubbleBobble implements ApplicationListener {
 		controller.loop(Gdx.graphics.getDeltaTime(), batch);
         // draw score on screen
         bitmapFont.setColor(1, 1, 1, 1);
-		String scoreString = "score: " + controller.player.score;
-        bitmapFont.draw(batch, scoreString, 50, Gdx.graphics.getHeight() - 30);
+		String infoString = "score: " + controller.player.score + "    " + "Lives left: " + controller.player.lives;
+        bitmapFont.draw(batch, infoString, 50, Gdx.graphics.getHeight() - 40);
 
         batch.end();
 
