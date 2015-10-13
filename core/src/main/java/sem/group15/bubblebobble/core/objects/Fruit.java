@@ -49,7 +49,7 @@ public class Fruit extends Gravity {
 
     @Override
     public void draw(final SpriteBatch batch) {
-
+        batch.draw(assets.banana, getLeft(), getBottom());
     }
 
 }
