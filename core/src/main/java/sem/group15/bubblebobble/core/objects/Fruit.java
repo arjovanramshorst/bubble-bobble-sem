@@ -48,7 +48,6 @@ public class Fruit extends Gravity {
         }
     }
 
-
     /**
      * Get time bubble is alive.
      * @return aliveTime
