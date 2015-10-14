@@ -49,21 +49,21 @@ public class GameController {
     public final void run(final float elapsed) {
         switch(state) {
             case NEW:
-                handleStateNew(elapsed);
+                handleStateNew();
                 break;
             case PLAY:
                 handleStatePlay(elapsed);
                 break;
             case PAUSE:
-                handleStatePause(elapsed);
+                handleStatePause();
                 break;
             case LOST:
-                handleStateLost(elapsed);
+                handleStateLost();
                 break;
         }
     }
 
-    private void handleStateNew(float elapsed) {
+    private void handleStateNew() {
         levelRenderer.renderNew();
         if(checkForStartKey()) {
             state = GameState.PLAY;
@@ -90,14 +90,14 @@ public class GameController {
         levelRenderer.render();
     }
 
-    private void handleStatePause(float elapsed) {
+    private void handleStatePause() {
         levelRenderer.renderPause();
         if(checkForStartKey()) {
             state = GameState.PLAY;
         }
     }
 
-    private void handleStateLost(float elapsed) {
+    private void handleStateLost() {
         levelRenderer.renderLost(currentLevelNumber);
         if(checkForStartKey()) {
             resetController();
