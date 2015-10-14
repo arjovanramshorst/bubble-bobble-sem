@@ -7,47 +7,48 @@ import sem.group15.bubblebobble.core.BubbleBobble;
 /**
  * Created by daan on 14-10-15.
  */
-public class Powerup extends Gravity{
+public class Powerup extends Gravity {
 
 
     private float aliveTime;
     private static final float SPEED_BOOST = 2;
-    public Powerup(final float xPosition, final float yPosition){
+    
+    public Powerup(final float xPosition, final float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         aliveTime = 0;
     }
 
     @Override
-    public void update(float elapsed) {
+    public final void update(final float elapsed) {
         super.update(elapsed);
         aliveTime += elapsed;
-        if(aliveTime > 10){
+        if (aliveTime > 10) {
             remove = true;
         }
     }
 
     @Override
-    public void handleCollision(GameObject other) {
+    public final void handleCollision(final GameObject other) {
         super.handleCollision(other);
         if (location.overlaps(other.getBody())) {
             if (other instanceof Player) {
                 remove = true;
-            }else if(other instanceof Immutable){
+            } else if (other instanceof Immutable) {
                 remove = true;
             }
         }
     }
 
     @Override
-    public void draw(SpriteBatch spriteBatch) {
+    public void draw(final SpriteBatch spriteBatch) {
         spriteBatch.draw(assets.powerup, getLeft(), getBottom());
     }
 
-    public float getAliveTime(){
+    public final float getAliveTime() {
         return aliveTime;
     }
 
-    public float getSpeedBoost(){
+    public final float getSpeedBoost() {
         return SPEED_BOOST;
     }
 }

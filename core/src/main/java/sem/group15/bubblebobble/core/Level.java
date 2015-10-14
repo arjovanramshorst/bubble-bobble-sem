@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import sem.group15.bubblebobble.core.objects.Enemy;
 import sem.group15.bubblebobble.core.objects.FilledBubble;
 import sem.group15.bubblebobble.core.objects.GameObject;
-import sem.group15.bubblebobble.core.objects.Powerup;
 
 import java.util.List;
 
@@ -56,12 +55,16 @@ public class Level {
         return map;
     }
 
-    public GameObject getPowerup() {
-        if(!possiblePowerups.isEmpty()) {
+    /**
+     * Returns a powerup if there is one available for the current level.
+     * @return powerup, a powerup for the current level.
+     */
+    public final GameObject getPowerup() {
+        if (!possiblePowerups.isEmpty()) {
             GameObject powerup = possiblePowerups.get(0);
             possiblePowerups.remove(0);
             return powerup;
-        }else{
+        } else {
             return null;
         }
     }

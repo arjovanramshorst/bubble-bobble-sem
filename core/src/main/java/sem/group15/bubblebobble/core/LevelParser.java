@@ -76,10 +76,16 @@ public class LevelParser {
         return result;
     }
 
-    public List<GameObject> parsePowerups(final FileHandle file) throws IOException{
+    /**
+     * Parses just the powerups in a level.
+     * @param file, the levelfile.
+     * @return a List of all powerups in the levelfile.
+     * @throws IOException, is thrown if an unknown GameObject is declared in the levelFile.
+     */
+    public final List<GameObject> parsePowerups(final FileHandle file) throws IOException{
         List<GameObject> result = new ArrayList<GameObject>();
         Scanner sc = new Scanner(file.read());
-        while (sc.hasNext() && !sc.nextLine().equals("Powerups")){
+        while (sc.hasNext() && !sc.nextLine().equals("Powerups")) {
         }
 
         while (sc.hasNext()) {

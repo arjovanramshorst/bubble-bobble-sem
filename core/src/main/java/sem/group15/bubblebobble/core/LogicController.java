@@ -84,11 +84,15 @@ public class LogicController {
         draw(batch);
     }
 
+    /**
+     * Adds a powerup to the game if declared in level file.
+     * Does this whit a chance of .1 percent.
+     */
     private void addPossiblePowerup() {
         double rand = Math.random();
         if(rand < 0.001){
             GameObject powerup = levelMap.getPowerup();
-            if(powerup != null) {
+            if (powerup != null) {
                 gameObjects.add(powerup);
             }
         }
