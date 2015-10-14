@@ -87,7 +87,7 @@ public class SimpleEnemyTest {
         enemy.update((float) (1 / enemy.speedX));
         assertFalse(enemy.remove());
         Bubble bubble = Mockito.mock(Bubble.class, Mockito.CALLS_REAL_METHODS);
-        bubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE-2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        bubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE/2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         enemy.update((float) (1 / enemy.speedX));
         enemy.handleCollision(bubble);
         assertTrue(enemy.remove());
