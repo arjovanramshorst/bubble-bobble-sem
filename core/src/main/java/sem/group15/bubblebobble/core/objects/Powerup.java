@@ -12,7 +12,7 @@ public class Powerup extends Gravity {
 
     private float aliveTime;
     private static final float SPEED_BOOST = 2;
-    
+
     public Powerup(final float xPosition, final float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         aliveTime = 0;
