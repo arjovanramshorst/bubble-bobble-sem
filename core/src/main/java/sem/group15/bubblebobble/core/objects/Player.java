@@ -177,7 +177,7 @@ public class Player extends Gravity {
      */
     @Override
     public final void draw(final SpriteBatch spriteBatch) {
-        if (isAlive) {
+        if (isAlive() && (respawned <= 0f || (3*respawned - (int) (3*respawned) > 0.5f))) {
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(assets.playerLeft, getLeft(), getBottom());
@@ -186,7 +186,7 @@ public class Player extends Gravity {
                     spriteBatch.draw(assets.playerRight, getLeft(), getBottom());
                     break;
             }
-        } else {
+        } else if( ! isAlive()) {
             spriteBatch.draw(assets.playerDead, getLeft(), getBottom());
         }
 
