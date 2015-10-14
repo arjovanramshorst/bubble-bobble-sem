@@ -22,7 +22,10 @@ public class LevelRenderer {
         font.setColor(Color.WHITE);
     }
 
-
+    /**
+     * Set level to render.
+     * @param level
+     */
     public void setLevel(Level level) {
         this.level = level;
     }
@@ -68,6 +71,9 @@ public class LevelRenderer {
         }
     }
 
+    /**
+     * Render the "new game" screen.
+     */
     public void renderNew() {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
@@ -76,6 +82,9 @@ public class LevelRenderer {
         batch.end();
     }
 
+    /**
+     * Render the pause screen.
+     */
     public void renderPause() {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
@@ -88,6 +97,10 @@ public class LevelRenderer {
         batch.end();
     }
 
+    /**
+     * Render the "lost" screen.
+     * @param currentLevelNumber Level that was achieved in the game.
+     */
     public void renderLost(int currentLevelNumber) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);

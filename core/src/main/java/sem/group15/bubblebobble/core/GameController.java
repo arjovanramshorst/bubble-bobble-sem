@@ -2,24 +2,19 @@ package sem.group15.bubblebobble.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import sem.group15.bubblebobble.core.objects.GameObject;
 import sem.group15.bubblebobble.core.objects.Player;
-
 import java.io.IOException;
-import java.util.Iterator;
+
 
 /**
  * Overlooking logic class that controls and draws the game objects
  * Created by arjo on 7-9-15.
  */
 public class GameController {
-    public Player player;
+    private Player player;
     private Level currentLevel;
     private LevelRenderer levelRenderer;
     private int currentLevelNumber;
-
-
     private static final int MAX_LEVEL = 3;
 
     public static final int PLAYER_XY_SPAWN = 64;
@@ -33,6 +28,9 @@ public class GameController {
 
     private GameState state;
 
+    /**
+     * Creates a new GameController object.
+     */
     public GameController() {
         player = new Player(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         levelRenderer = new LevelRenderer();
@@ -40,14 +38,22 @@ public class GameController {
         currentLevelNumber = 1;
     }
 
-    public void resetController() {
+    /**
+     * Resets the GameController so a new game can be started.
+     */
+    private void resetController() {
         player = new Player(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         state = GameState.PLAY;
         currentLevelNumber = 1;
     }
 
+    /**
+     * Main game loop. Calls the appropriate method to handle the current game
+     * state.
+     * @param elapsed time elapsed since last frame.
+     */
     public final void run(final float elapsed) {
-        switch(state) {
+        switch (state) {
             case NEW:
                 handleStateNew();
                 break;
@@ -63,9 +69,12 @@ public class GameController {
         }
     }
 
+    /**
+     * Is called when the gamestate is new.
+     */
     private void handleStateNew() {
         levelRenderer.renderNew();
-        if(checkForStartKey()) {
+        if (checkForStartKey()) {
             state = GameState.PLAY;
             startLevel(currentLevelNumber);
         }
@@ -77,29 +86,35 @@ public class GameController {
      */
     private void handleStatePlay(float elapsed) {
         currentLevel.run(elapsed);
-        if(checkForLose()) {
+        if (checkForLose()) {
             state = GameState.LOST;
         }
-        if(currentLevel.levelFinished()) {
+        if (currentLevel.levelFinished()) {
             currentLevelNumber++;
             startLevel(Math.min(currentLevelNumber, MAX_LEVEL));
         }
-        if(checkForPauseKey()) {
+        if (checkForPauseKey()) {
             state = GameState.PAUSE;
         }
         levelRenderer.render();
     }
 
+    /**
+     * Is called when the gamestate is paused.
+     */
     private void handleStatePause() {
         levelRenderer.renderPause();
-        if(checkForStartKey()) {
+        if (checkForStartKey()) {
             state = GameState.PLAY;
         }
     }
 
+    /**
+     * Is called when the gamestate is Lost.
+     */
     private void handleStateLost() {
         levelRenderer.renderLost(currentLevelNumber);
-        if(checkForStartKey()) {
+        if (checkForStartKey()) {
             resetController();
             startLevel(1);
         }
@@ -123,7 +138,7 @@ public class GameController {
 
     /**
      * Initiates all objects the game needs.
-     * @param levelNumber, level number.
+     * @param levelNumber level number.
      */
     public final void startLevel(final int levelNumber) {
         try {
@@ -141,6 +156,6 @@ public class GameController {
      * @return true if the player lost the game.
      */
     private boolean checkForLose() {
-        return ! player.isAlive();
+        return !player.isAlive();
     }
 }

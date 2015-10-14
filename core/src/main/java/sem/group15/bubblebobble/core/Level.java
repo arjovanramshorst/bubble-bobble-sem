@@ -25,7 +25,10 @@ public class Level {
         this.gameObjects = gameObjects;
     }
 
-
+    /**
+     * Run the main game loop (update, collision, objects)
+     * @param elapsed time elapsed since last frame.
+     */
     public final void run(final float elapsed) {
         update(elapsed);
         checkCollisions();
@@ -90,10 +93,18 @@ public class Level {
         return true;
     }
 
+    /**
+     * Get the list of objects in game.
+     * @return
+     */
     public List<GameObject> getObjects() {
         return gameObjects;
     }
 
+    /**
+     * Get the player object.
+     * @return
+     */
     public Player getPlayer() {
         return player;
     }

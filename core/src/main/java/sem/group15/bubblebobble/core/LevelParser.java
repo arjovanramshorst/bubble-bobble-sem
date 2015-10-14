@@ -41,9 +41,9 @@ public class LevelParser {
 
     /**
      * The parse function parses a file from the assets folder.
-     * @param file, a file which should be selected from the assetsfolder.
+     * @param file a file which should be selected from the assetsfolder.
      * @return returns a List including all GameObjects declared in the levelFile
-     * @throws IOException, is thrown if an unknown GameObject is declared in the levelFile.
+     * @throws IOException is thrown if an unknown GameObject is declared in the levelFile.
      */
     public static Level parse(final FileHandle file) throws IOException {
         List<GameObject> result = new ArrayList<GameObject>();
@@ -70,6 +70,12 @@ public class LevelParser {
         return new Level(result);
     }
 
+    /**
+     * Get object from string.
+     * @param line String containing the object details.
+     * @return the Object.
+     * @throws IOException if string is not valid.
+     */
     private static GameObject getObject(final String line) throws IOException {
         String[] enemyArray = line.split(",");
         String objectType = enemyArray[0];

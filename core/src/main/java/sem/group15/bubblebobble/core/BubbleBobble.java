@@ -1,8 +1,5 @@
 package sem.group15.bubblebobble.core;
 
-import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 
@@ -13,17 +10,12 @@ import com.badlogic.gdx.Gdx;
 public class BubbleBobble implements ApplicationListener {
 
 	public static final float SPRITE_SIZE = 32;
-	GameController controller;
-	SpriteBatch batch;
-	Level level;
-	BitmapFont bitmapFont;
-	private static final Logger logger = Logger.getLogger(BubbleBobble.class.getName());
-
+	private GameController controller;
 
 	/**
-	 * creates the map and loads the game objects
+	 * creates the map and loads the game objects.
 	 */
-	//@Override
+	@Override
 	public void create() {
 		// Loads and initializes the assets used in the game.
 		Assets.getAssets();
@@ -41,7 +33,7 @@ public class BubbleBobble implements ApplicationListener {
 	}
 
 	/**
-	 * render the score on the screen
+	 * Main game loop.
 	 */
 	@Override
 	public void render() {
