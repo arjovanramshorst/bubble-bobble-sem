@@ -3,6 +3,7 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.LogicController;
@@ -30,6 +31,8 @@ public class Player extends Gravity {
     protected boolean floating;
     private Direction direction;
     public float respawned;
+    private float speedXPowerup;
+    private float powerUpTime;
 
     /**
      * creates player object with a position
@@ -46,6 +49,8 @@ public class Player extends Gravity {
         score = 0;
         lives = PLAYER_LIVES;
         respawned = 0;
+        speedXPowerup = 1;
+        powerUpTime = 0;
     }
     
      /**
@@ -81,11 +86,16 @@ public class Player extends Gravity {
             if (respawned > 0) {
                 respawned = respawned - elapsed;
             }
+            if (powerUpTime < 0){
+                speedXPowerup = 1;
+            }else{
+                powerUpTime -= elapsed;
+            }
 
         } else {
             handleDeath();
         }
-        location.x += speedX * elapsed;
+        location.x += speedX * elapsed * speedXPowerup;
         location.y += speedY * elapsed;
 
     }
@@ -159,6 +169,12 @@ public class Player extends Gravity {
                     canJump = true;
                     logger.log("Player touched bubble");
                 }
+            }
+            if (other instanceof Powerup){
+                Powerup powerup = (Powerup) other;
+                speedXPowerup = powerup.getSpeedBoost();
+                powerUpTime = 5;
+                logger.log("Player touched powerup");
             }
         }
     }

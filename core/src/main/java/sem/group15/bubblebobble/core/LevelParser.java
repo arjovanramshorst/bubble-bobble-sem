@@ -6,6 +6,7 @@ import sem.group15.bubblebobble.core.factories.SimpleEnemyFactory;
 import sem.group15.bubblebobble.core.factories.StrongEnemyFactory;
 import sem.group15.bubblebobble.core.objects.Floor;
 import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.Powerup;
 import sem.group15.bubblebobble.core.objects.Wall;
 
 import java.io.IOException;
@@ -67,6 +68,28 @@ public class LevelParser {
         }
         while (sc.hasNext()) {
             String object =  sc.nextLine();
+            if (object.equals("Powerups")){
+                return result;
+            }
+            result.add(getObject(object));
+        }
+        return result;
+    }
+
+    /**
+     * Parses just the powerups in a level.
+     * @param file, the levelfile.
+     * @return a List of all powerups in the levelfile.
+     * @throws IOException, is thrown if an unknown GameObject is declared in the levelFile.
+     */
+    public final List<GameObject> parsePowerups(final FileHandle file) throws IOException{
+        List<GameObject> result = new ArrayList<GameObject>();
+        Scanner sc = new Scanner(file.read());
+        while (sc.hasNext() && !sc.nextLine().equals("Powerups")) {
+        }
+
+        while (sc.hasNext()) {
+            String object =  sc.nextLine();
             result.add(getObject(object));
         }
         return result;
@@ -85,6 +108,8 @@ public class LevelParser {
                 return new Floor(xPos, yPos);
             case "Wall":
                 return new Wall(xPos, yPos);
+            case "Powerup":
+                return new Powerup(xPos, yPos);
             default:
                 throw new IOException("String: " + line + " is not a valid object!");
         }
