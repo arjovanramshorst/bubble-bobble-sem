@@ -3,6 +3,7 @@ package sem.group15.bubblebobble.core;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.objects.GameObject;
 import sem.group15.bubblebobble.core.objects.Player;
+import sem.group15.bubblebobble.core.objects.Powerup;
 
 import java.util.ArrayList;
 import java.util.Iterator;
