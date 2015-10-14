@@ -63,4 +63,24 @@ public class LevelRenderer {
     private void renderLives() {
 
     }
+
+    public void renderNew() {
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        font.draw(batch, "Press enter to begin", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        batch.end();
+    }
+
+    public void renderPause() {
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        renderWorld();
+        renderScore();
+        renderLives();
+        Gdx.gl.glBlendColor(0,0,0,0.5f);
+        font.draw(batch, "Press enter to continue", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        batch.end();
+    }
 }

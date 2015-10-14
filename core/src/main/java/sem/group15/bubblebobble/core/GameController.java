@@ -58,6 +58,7 @@ public class GameController {
     }
 
     private void handleStateNew(float elapsed) {
+        levelRenderer.renderNew();
         if(checkForStartKey()) {
             state = GameState.PLAY;
             startLevel(currentLevelNumber);
@@ -84,7 +85,7 @@ public class GameController {
     }
 
     private void handleStatePause(float elapsed) {
-        // Draw pause screen.
+        levelRenderer.renderPause();
         if(checkForStartKey()) {
             state = GameState.PLAY;
         }
