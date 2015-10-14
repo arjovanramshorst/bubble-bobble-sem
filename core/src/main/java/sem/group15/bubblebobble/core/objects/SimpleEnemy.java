@@ -41,7 +41,7 @@ public class SimpleEnemy extends Enemy{
                     setDirection(Direction.LEFT);
                 }
             }
-            if (other instanceof Bubble && !other.remove()) {
+            if (other instanceof Bubble && !other.remove() && overlapPercentage(other) >= Bubble.PERCENTAGE_OVERLAP_COLLISION) {
                 remove = true;
             }
         }
