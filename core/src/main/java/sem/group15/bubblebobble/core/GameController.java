@@ -40,6 +40,12 @@ public class GameController {
         currentLevelNumber = 1;
     }
 
+    public void resetController() {
+        player = new Player(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
+        state = GameState.PLAY;
+        currentLevelNumber = 1;
+    }
+
     public final void run(final float elapsed) {
         switch(state) {
             case NEW:
@@ -92,7 +98,11 @@ public class GameController {
     }
 
     private void handleStateLost(float elapsed) {
-        // Draw score on screen or whatever.
+        levelRenderer.renderLost(currentLevelNumber);
+        if(checkForStartKey()) {
+            resetController();
+            startLevel(1);
+        }
     }
 
     /**

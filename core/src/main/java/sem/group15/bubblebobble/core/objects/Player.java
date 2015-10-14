@@ -19,7 +19,7 @@ public class Player extends Gravity {
     /**
      * Time the player is invulnerable after death.
      */
-    public static final float INVULNERABLE_TIME = 5f;
+    public static final float INVULNERABLE_TIME = 3f;
     /**
      * Maximum amount a player can overlap with a wall.
      */

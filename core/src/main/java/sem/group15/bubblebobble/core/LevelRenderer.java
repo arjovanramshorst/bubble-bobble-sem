@@ -83,4 +83,17 @@ public class LevelRenderer {
         font.draw(batch, "Press enter to continue", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
         batch.end();
     }
+
+    public void renderLost(int currentLevelNumber) {
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        renderWorld();
+        Gdx.gl.glBlendColor(1,1,1,0.5f);
+        String str = "You made it to level " + currentLevelNumber +
+                "\nScore: " + level.getPlayer().score +
+                "\n\nPress enter to start a new game!";
+        font.drawMultiLine(batch, str, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        batch.end();
+    }
 }
