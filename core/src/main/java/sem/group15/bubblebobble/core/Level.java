@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import sem.group15.bubblebobble.core.objects.Enemy;
 import sem.group15.bubblebobble.core.objects.FilledBubble;
 import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.Powerup;
+
 import java.util.List;
 
 
@@ -13,6 +15,7 @@ import java.util.List;
 public class Level {
 
     private List<GameObject> map;
+    private List<GameObject> possiblePowerups;
 
     /**
      * Constructor for a new level, finds the level file using levelNumber.
@@ -24,6 +27,7 @@ public class Level {
         LevelParser parser = new LevelParser();
         try {
             map = parser.parse(Gdx.files.internal("levels/" + levelNumber + ".lvl"));
+            possiblePowerups = parser.parsePowerups(Gdx.files.internal("levels/" + levelNumber + ".lvl"));
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("file does not exist");
@@ -51,6 +55,17 @@ public class Level {
     public final List<GameObject> getMap() {
         return map;
     }
+
+    public GameObject getPowerup() {
+        if(!possiblePowerups.isEmpty()) {
+            GameObject powerup = possiblePowerups.get(0);
+            possiblePowerups.remove(0);
+            return powerup;
+        }else{
+            return null;
+        }
+    }
+
 
 
 }

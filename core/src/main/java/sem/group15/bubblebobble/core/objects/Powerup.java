@@ -32,7 +32,7 @@ public class Powerup extends Gravity{
         if (location.overlaps(other.getBody())) {
             if (other instanceof Player) {
                 remove = true;
-            }else {
+            }else if(other instanceof Immutable){
                 remove = true;
             }
         }

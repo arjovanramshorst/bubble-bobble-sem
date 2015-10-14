@@ -76,11 +76,22 @@ public class LogicController {
             init(Math.min(currentLevel + 1, MAX_LEVEL));
             player.respawn();
         }
+        addPossiblePowerup();
         update(elapsed);
         checkCollisions();
         handleNewObjects();
         removeObjects();
         draw(batch);
+    }
+
+    private void addPossiblePowerup() {
+        double rand = Math.random();
+        if(rand < 0.001){
+            GameObject powerup = levelMap.getPowerup();
+            if(powerup != null) {
+                gameObjects.add(powerup);
+            }
+        }
     }
 
     /**
