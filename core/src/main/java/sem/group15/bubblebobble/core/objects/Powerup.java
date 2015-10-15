@@ -9,7 +9,6 @@ import sem.group15.bubblebobble.core.BubbleBobble;
  */
 public class Powerup extends GameObject {
 
-
     private float aliveTime;
     private float activeTime;
     private static final float SPEED_BOOST = 2;
@@ -58,5 +57,13 @@ public class Powerup extends GameObject {
      */
     public final float getSpeedBoost() {
         return SPEED_BOOST;
+    }
+
+    /**
+     * Getter for aliveTime
+     * @return aliveTime, a float which represents the time the powerup is alive.
+     */
+    public final float getAliveTime() {
+        return aliveTime;
     }
 }
