@@ -85,10 +85,16 @@ public final class Assets {
         return singleton;
     }
 
+    /**
+     * Private constructor, can only be called from getAssets method.
+     */
     private Assets() {
         initialize();
     }
 
+    /**
+     * Initialize all textures.
+     */
     private void initialize() {
         bubble = loadTexture("bubble-empty.png");
         simpleEnemyLeft = loadTexture("enemyLeft.png");
@@ -107,6 +113,11 @@ public final class Assets {
         playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
     }
 
+    /**
+     * Loads a texture with filename file.
+     * @param file filename.
+     * @return Texture containing the file.
+     */
     private static Texture loadTexture(final String file) {
         return new Texture(Gdx.files.internal(file));
     }

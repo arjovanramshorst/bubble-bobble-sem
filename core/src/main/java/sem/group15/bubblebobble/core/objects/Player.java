@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
-import sem.group15.bubblebobble.core.LogicController;
+import sem.group15.bubblebobble.core.GameController;
 
 /**
  * Created by arjo on 7-9-15.
@@ -19,7 +19,7 @@ public class Player extends Gravity {
     /**
      * Time the player is invulnerable after death.
      */
-    public static final float INVULNERABLE_TIME = 5f;
+    public static final float INVULNERABLE_TIME = 3f;
     /**
      * Maximum amount a player can overlap with a wall.
      */
@@ -174,8 +174,8 @@ public class Player extends Gravity {
      * Respawn player at starting location.
      */
     public void respawn() {
-        location.x = LogicController.PLAYER_XY_SPAWN;
-        location.y = LogicController.PLAYER_XY_SPAWN;
+        location.x = GameController.PLAYER_XY_SPAWN;
+        location.y = GameController.PLAYER_XY_SPAWN;
     }
 
     /**
@@ -184,7 +184,7 @@ public class Player extends Gravity {
      */
     @Override
     public final void draw(final SpriteBatch spriteBatch) {
-        if (isAlive) {
+        if (isAlive() && (respawned <= 0f || (3*respawned - (int) (3*respawned) > 0.5f))) {
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(assets.playerLeft, getLeft(), getBottom());
@@ -193,7 +193,7 @@ public class Player extends Gravity {
                     spriteBatch.draw(assets.playerRight, getLeft(), getBottom());
                     break;
             }
-        } else {
+        } else if( ! isAlive()) {
             spriteBatch.draw(assets.playerDead, getLeft(), getBottom());
         }
 

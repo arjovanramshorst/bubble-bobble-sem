@@ -1,10 +1,12 @@
 package sem.group15.bubblebobble.core;
 
-import com.badlogic.gdx.Gdx;
 import sem.group15.bubblebobble.core.objects.Enemy;
 import sem.group15.bubblebobble.core.objects.FilledBubble;
 import sem.group15.bubblebobble.core.objects.Fruit;
 import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.Player;
+
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -13,31 +15,77 @@ import java.util.List;
  */
 public class Level {
 
-    private List<GameObject> map;
+    private List<GameObject> gameObjects;
+    private Player player;
 
     /**
-     * Constructor for a new level, finds the level file using levelNumber.
-     * Calls the Parser and generates a list of all GameObjects.
-     * @param levelNumber, the number of the level to be loaded.
+     * Creates a new Level containing the gameObjects send to it by the parser.
      */
-    public Level(final int levelNumber) {
-        //parse level and get map.
-        LevelParser parser = new LevelParser();
-        try {
-            map = parser.parse(Gdx.files.internal("levels/" + levelNumber + ".lvl"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("file does not exist");
+    public Level(final List<GameObject> gameObjects) {
+        this.gameObjects = gameObjects;
+    }
+
+    /**
+     * Run the main game loop (update, collision, objects)
+     * @param elapsed time elapsed since last frame.
+     */
+    public final void run(final float elapsed) {
+        update(elapsed);
+        checkCollisions();
+        handleNewObjects();
+        removeObjects();
+    }
+
+    /**
+     * updates all objects.
+     * @param elapsed time elapsed since latest update
+     */
+    public final void update(final float elapsed) {
+        for (GameObject object : gameObjects) {
+            object.update(elapsed);
+        }
+    }
+
+    /**
+     * check for all collisions and handle them in their respective objects.
+     */
+    private void checkCollisions() {
+        for (int i = 0; i < gameObjects.size(); i++) {
+            for (int i2 = i + 1; i2 < gameObjects.size(); i2++) {
+                gameObjects.get(i).handleCollision(gameObjects.get(i2));
+                gameObjects.get(i2).handleCollision(gameObjects.get(i));
+            }
+        }
+    }
+
+    /**
+     * Checks all objects for any new objects that should be added to the gameObjects list.
+     */
+    private void handleNewObjects() {
+        for (int i = 0; i < gameObjects.size(); i++) {
+            gameObjects.get(i).addNewObjectsTo(gameObjects);
+        }
+    }
+
+    /**
+     * Removes all objects with remove flag set to true.
+     * Used as some sort of garbage collection.
+     */
+    private void removeObjects() {
+        Iterator<GameObject> iter = gameObjects.iterator();
+        while (iter.hasNext()) {
+            if (iter.next().remove()) {
+                iter.remove();
+            }
         }
     }
 
     /**
      * Checks if all enemies are dead.
-     * @param objects, a List including all current GameObjects in the game.
      * @return true if all enemies are dead.
      */
-    public final boolean levelFinished(final List<GameObject> objects) {
-        for (GameObject object : objects) {
+    public final boolean levelFinished() {
+        for (GameObject object : gameObjects) {
             if (object instanceof Enemy || object instanceof FilledBubble || object instanceof Fruit) {
                 return false;
             }
@@ -46,12 +94,27 @@ public class Level {
     }
 
     /**
-     * Getter for the list of all gameObjects.
-     * @return map, a List with all GameObjects of a level.
+     * Get the list of objects in game.
+     * @return
      */
-    public final List<GameObject> getMap() {
-        return map;
+    public List<GameObject> getObjects() {
+        return gameObjects;
     }
 
+    /**
+     * Get the player object.
+     * @return
+     */
+    public Player getPlayer() {
+        return player;
+    }
 
+    /**
+     * Sets the player, and adds it to the list of GameObjects.
+     * @param player
+     */
+    public void setPlayer(Player player) {
+        gameObjects.add(0, player);
+        this.player = player;
+    }
 }
