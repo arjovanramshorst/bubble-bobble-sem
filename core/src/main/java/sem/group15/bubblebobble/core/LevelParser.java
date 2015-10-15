@@ -6,6 +6,7 @@ import sem.group15.bubblebobble.core.factories.SimpleEnemyFactory;
 import sem.group15.bubblebobble.core.factories.StrongEnemyFactory;
 import sem.group15.bubblebobble.core.objects.Floor;
 import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.Powerup;
 import sem.group15.bubblebobble.core.objects.Wall;
 
 import java.io.IOException;
@@ -89,6 +90,8 @@ public class LevelParser {
                 return new Floor(xPos, yPos);
             case "Wall":
                 return new Wall(xPos, yPos);
+            case "Powerup":
+                return new Powerup(xPos, yPos);
             default:
                 throw new IOException("String: " + line + " is not a valid object!");
         }

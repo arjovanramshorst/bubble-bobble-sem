@@ -30,6 +30,8 @@ public class Player extends Gravity {
     protected boolean floating;
     private Direction direction;
     public float respawned;
+    private float xSpeedPowerup;
+    private float powerUpTime;
 
     /**
      * creates player object with a position
@@ -46,6 +48,8 @@ public class Player extends Gravity {
         score = 0;
         lives = PLAYER_LIVES;
         respawned = 0;
+        xSpeedPowerup = 0;
+        powerUpTime = 0;
     }
     
      /**
@@ -81,11 +85,16 @@ public class Player extends Gravity {
             if (respawned > 0) {
                 respawned = respawned - elapsed;
             }
+            if (powerUpTime > 0) {
+                powerUpTime -= elapsed;
+            } else {
+                xSpeedPowerup = 1;
+            }
 
         } else {
             handleDeath();
         }
-        location.x += speedX * elapsed;
+        location.x += speedX * elapsed * xSpeedPowerup;
         location.y += speedY * elapsed;
 
     }
@@ -159,6 +168,10 @@ public class Player extends Gravity {
                     canJump = true;
                     logger.log("Player touched bubble");
                 }
+            }
+            if (other instanceof Powerup) {
+                xSpeedPowerup = 2;
+                powerUpTime = 5;
             }
         }
     }
