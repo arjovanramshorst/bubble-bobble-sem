@@ -160,6 +160,13 @@ public class Player extends Gravity {
                     logger.log("Player touched bubble");
                 }
             }
+            if (other instanceof Fruit) {
+                Fruit fruit = (Fruit) other;
+                if (fruit.getAliveTime() > 0.5) {
+                    score += Fruit.FRUIT_SCORE;
+                    logger.log("Player touched fruit");
+                }
+            }
         }
     }
 
