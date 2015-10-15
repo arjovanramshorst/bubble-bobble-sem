@@ -56,7 +56,6 @@ public class Player extends Gravity {
      * updates the player parameters.
      * @param elapsed time elapsed since last gameloop.
      */
-
     @Override
     public void update(float elapsed) {
         super.update(elapsed);
@@ -170,8 +169,9 @@ public class Player extends Gravity {
                 }
             }
             if (other instanceof Powerup) {
-                xSpeedPowerup = 2;
-                powerUpTime = 5;
+                Powerup powerup = (Powerup) other;
+                xSpeedPowerup = powerup.getSpeedBoost();
+                powerUpTime = powerup.getActiveTime();
             }
         }
     }

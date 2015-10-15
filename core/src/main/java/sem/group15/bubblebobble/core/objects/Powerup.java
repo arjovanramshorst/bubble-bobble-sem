@@ -11,11 +11,13 @@ public class Powerup extends GameObject {
 
 
     private float aliveTime;
+    private float activeTime;
     private static final float SPEED_BOOST = 2;
 
     public Powerup(final float xPosition, final float yPosition) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         aliveTime = 0;
+        activeTime = 5;
     }
 
     @Override
@@ -38,14 +40,22 @@ public class Powerup extends GameObject {
     }
 
     @Override
-    public void draw(final SpriteBatch spriteBatch) {
+    public final void draw(final SpriteBatch spriteBatch) {
         spriteBatch.draw(assets.powerup, getLeft(), getBottom());
     }
 
-    public final float getAliveTime() {
-        return aliveTime;
+    /**
+     * Getter for activeTime.
+     * @return activeTime, a float which describes the time the powerup will be active.
+     */
+    public final float getActiveTime() {
+        return activeTime;
     }
 
+    /**
+     * Getter for activeTime.
+     * @return activeTime, a float which describes the boost the powerup gives.
+     */
     public final float getSpeedBoost() {
         return SPEED_BOOST;
     }
