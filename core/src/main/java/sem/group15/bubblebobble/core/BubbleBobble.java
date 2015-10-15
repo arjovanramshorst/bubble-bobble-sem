@@ -1,8 +1,5 @@
 package sem.group15.bubblebobble.core;
 
-import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 
@@ -13,27 +10,16 @@ import com.badlogic.gdx.Gdx;
 public class BubbleBobble implements ApplicationListener {
 
 	public static final float SPRITE_SIZE = 32;
-	LogicController controller;
-	SpriteBatch batch;
-	Level level;
-	BitmapFont bitmapFont;
-	private static final Logger logger = Logger.getLogger(BubbleBobble.class.getName());
-
+	private GameController controller;
 
 	/**
-	 * creates the map and loads the game objects
+	 * creates the map and loads the game objects.
 	 */
-	//@Override
+	@Override
 	public void create() {
-		batch = new SpriteBatch();
 		// Loads and initializes the assets used in the game.
 		Assets.getAssets();
-		controller = new LogicController();
-		controller.init(1);
-
-		logger.log("Finished adding objects.");
-
-        bitmapFont = new BitmapFont();
+		controller = new GameController();
 	}
 
 	/**
@@ -47,21 +33,11 @@ public class BubbleBobble implements ApplicationListener {
 	}
 
 	/**
-	 * render the score on the screen
+	 * Main game loop.
 	 */
 	@Override
 	public void render() {
-		Gdx.gl.glClearColor(0, 0, 0, 0);
-		Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		controller.loop(Gdx.graphics.getDeltaTime(), batch);
-        // draw score on screen
-        bitmapFont.setColor(1, 1, 1, 1);
-		String infoString = "score: " + controller.player.score + "    " + "Lives left: " + controller.player.lives;
-        bitmapFont.draw(batch, infoString, 50, Gdx.graphics.getHeight() - 40);
-
-        batch.end();
-
+		controller.run(Gdx.graphics.getDeltaTime());
 	}
 
 	/**

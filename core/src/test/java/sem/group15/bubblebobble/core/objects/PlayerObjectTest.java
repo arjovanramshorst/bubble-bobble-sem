@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
-import sem.group15.bubblebobble.core.LogicController;
+import sem.group15.bubblebobble.core.GameController;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -111,8 +111,8 @@ public class PlayerObjectTest {
         assertEquals(player.PLAYER_LIVES - 1, player.lives, 0);
         assertTrue(player.isAlive);
 
-        enemy.location.x = LogicController.PLAYER_XY_SPAWN;
-        enemy.location.y = LogicController.PLAYER_XY_SPAWN;
+        enemy.location.x = GameController.PLAYER_XY_SPAWN;
+        enemy.location.y = GameController.PLAYER_XY_SPAWN;
         player.respawned = 0;
         player.handleCollision(enemy);
         player.respawned = 0;
@@ -126,11 +126,11 @@ public class PlayerObjectTest {
      */
     @Test
     public void testRespawn() {
-        assertNotEquals(LogicController.PLAYER_XY_SPAWN, player.location.x, 0.1f);
-        assertNotEquals(LogicController.PLAYER_XY_SPAWN, player.location.y, 0.1f);
+        assertNotEquals(GameController.PLAYER_XY_SPAWN, player.location.x, 0.1f);
+        assertNotEquals(GameController.PLAYER_XY_SPAWN, player.location.y, 0.1f);
         player.respawn();
-        assertEquals(LogicController.PLAYER_XY_SPAWN, player.location.x, 0.1f);
-        assertEquals(LogicController.PLAYER_XY_SPAWN, player.location.y, 0.1f);
+        assertEquals(GameController.PLAYER_XY_SPAWN, player.location.x, 0.1f);
+        assertEquals(GameController.PLAYER_XY_SPAWN, player.location.y, 0.1f);
 
     }
 

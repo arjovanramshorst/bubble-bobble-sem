@@ -24,7 +24,7 @@ public class Bubble extends Floating {
     /**
      * Maximum allowed overlap percentage.
      */
-    public static final float PERCENTAGE_OVERLAP_COLLISION = 0.01f;
+    public static final float PERCENTAGE_OVERLAP_COLLISION = 0.5f;
     /**
      * Time a bubble has been alive.
      */
