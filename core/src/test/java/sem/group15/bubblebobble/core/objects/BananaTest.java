@@ -20,13 +20,16 @@ public class BananaTest {
         banana = new Banana(0,0);
     }
 
+    /**
+     * Test constructor.
+     */
     @Test
     public void testConstructor() {
         assertEquals(1, banana.multiplier, 0.1);
     }
 
     /**
-     * Test the draw function
+     * Test the draw function.
      */
     @Test
     public void testDraw() {

@@ -15,11 +15,23 @@ import static org.junit.Assert.*;
 public class GameObjectTest {
 
     /**
+     * Create new GameObject mock.
+     * @param posX float x position.
+     * @param posY float y position.
+     * @return returns gameobject moch
+     */
+    private GameObject create(float posX, float posY) {
+        GameObject object = Mockito.mock(GameObject.class, Mockito.CALLS_REAL_METHODS);
+        object.location = new Rectangle(posX,posY, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        return object;
+    }
+
+    /**
      * Test horizontal overlap
      * @throws Exception
      */
     @Test
-    public void testHorizontalOverlap() throws Exception {
+    public void testHorizontalOverlap() {
         GameObject object = create(0,0);
         GameObject object2 = create(BubbleBobble.SPRITE_SIZE - 2, 0);
         assertEquals(2, object2.overlapLeft(object), 0.1);
@@ -31,7 +43,7 @@ public class GameObjectTest {
      * @throws Exception
      */
     @Test
-    public void testVerticalOverlap() throws Exception {
+    public void testVerticalOverlap() {
         GameObject object = create(0, 0);
         GameObject object2 = create(0, BubbleBobble.SPRITE_SIZE - 2);
         assertEquals(2, object2.overlapBottom(object), 0.1);
@@ -39,7 +51,7 @@ public class GameObjectTest {
     }
 
     @Test
-    public void testVerticalOverlapWhenNotTouching() throws Exception {
+    public void testVerticalOverlapWhenNotTouching() {
         GameObject object = create(0,0);
         GameObject object2 = create(BubbleBobble.SPRITE_SIZE + 2, 0);
         assertEquals(0, object.overlapTop(object2), 0.01f);
@@ -51,7 +63,7 @@ public class GameObjectTest {
      * @throws Exception
      */
     @Test
-    public void testOverlapPercentage() throws Exception {
+    public void testOverlapPercentage() {
         GameObject object = create(0,0);
         GameObject object2 = create(0, BubbleBobble.SPRITE_SIZE / 2);
         assertEquals(BubbleBobble.SPRITE_SIZE / 2, object.overlapTop(object2), 0.01f);
@@ -75,15 +87,4 @@ public class GameObjectTest {
         assertEquals(floor, result.get(0));
     }
 
-    /**
-     * Create new GameObject mock.
-     * @param posX float x position.
-     * @param posY float y position.
-     * @return returns gameobject moch
-     */
-    private GameObject create(float posX, float posY) {
-        GameObject object = Mockito.mock(GameObject.class, Mockito.CALLS_REAL_METHODS);
-        object.location = new Rectangle(posX,posY, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        return object;
-    }
 }

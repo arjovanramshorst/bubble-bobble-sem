@@ -28,13 +28,12 @@ public class BubbleTest {
      */
     @Before
     public void setUp() throws Exception {
-//        Gdx.app = mock(Application.class);
-//        Gdx.input = mock(Input.class);
-//        bubble = Mockito.mock(Bubble.class, Mockito.CALLS_REAL_METHODS);
-//        bubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         bubble = new Bubble(0,0, GameObject.Direction.LEFT);
     }
 
+    /**
+     * Test if speedX matches direction.
+     */
     @Test
     public void testConstructorDirection() {
         assertEquals(-600, bubble.speedX, 0);
@@ -66,12 +65,16 @@ public class BubbleTest {
         assertTrue(bubble.remove);
     }
 
+    /**
+     * Test if making a filled bubble adds a bubble to new objects.
+     */
     @Test
     public void testMakeFilledBubble() {
         Enemy enemy = Mockito.mock(Enemy.class);
         assertEquals(0, bubble.newObjects.size(), 0);
         bubble.makeFilledBubble(enemy);
         assertEquals(1, bubble.newObjects.size(), 0);
+        assertTrue(bubble.newObjects.get(0) instanceof FilledBubble);
     }
 
     /**

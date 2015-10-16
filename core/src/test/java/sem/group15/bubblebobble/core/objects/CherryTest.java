@@ -20,6 +20,9 @@ public class CherryTest {
         cherry = new Cherry(0,0);
     }
 
+    /**
+     * Test if constructor sets multiplier correct.
+     */
     @Test
     public void testConstructor() {
         assertEquals(2, cherry.multiplier, 0.1);

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
@@ -39,14 +40,7 @@ public class PlayerObjectTest {
 
     @Before
     public void setUp() {
-//        Gdx.app = mock(Application.class);
         Gdx.input = mock(Input.class);
-//        player = mock(Player.class, Mockito.CALLS_REAL_METHODS);
-//        Mockito.doNothing().when(player).playDeadSound();
-//        Mockito.doNothing().when(player).playJumpSound();
-//        player.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-//        player.speedX = INIT_SPEED;
-//        player.logger = mock(Logger.class);
         player = new Player(0,0);
     }
 
@@ -214,16 +208,6 @@ public class PlayerObjectTest {
         assertTrue(player.getDirection() == GameObject.Direction.RIGHT);
     }
 
-//    /**
-//     * Tests if the player interacts properly when there is no movement key pressed.
-//     */
-//    @Test
-//    public void noMovement() {
-//        player.isAlive = true;
-//        player.update(0.1f);
-//        assertTrue(player.speedX == 0);
-//    }
-
     /**
      * test if the player can jump.
      */
@@ -235,7 +219,6 @@ public class PlayerObjectTest {
         player.update(0.1f);
         assertFalse(player.canJump);
         assertTrue(player.speedY == 300f);
-//        verify(player).playJumpSound();
     }
     /**
      * test if the player can jump when standing on a bubble.
@@ -249,7 +232,6 @@ public class PlayerObjectTest {
         player.update(0.1f);
         assertFalse(player.canJump);
         assertTrue(player.speedY == 300f);
-//        verify(player).playJumpSound();
     }
     /**
      * test if the player cannot jump when it is already jumping.
@@ -262,7 +244,6 @@ public class PlayerObjectTest {
         player.isAlive = true;
         player.update(0.1f);
         assertFalse(player.canJump);
-//        verify(player, never()).playJumpSound();
     }
 
     /**
@@ -304,5 +285,56 @@ public class PlayerObjectTest {
         verify(batch).draw(texture, 0, 0);
     }
 
+    /**
+     * Test if collision with fruit is handled correctly.
+     */
+    @Test
+    public void testHandlecollisionFruit() {
+        Banana fruit = new Banana(30, 0);
+        fruit.update(0.6f);
+        assertTrue(fruit.getAliveTime() > 0.5);
+        fruit.location.y = 0;
+        assertEquals(0, player.score, 0.1f);
+        player.handleCollision(fruit);
+
+        assertEquals(Fruit.FRUIT_SCORE * fruit.multiplier, player.score, 0.1f);
+    }
+
+    /**
+     * Test if collision with powerup works
+     */
+    @Test
+    public void testHandleCollisionPowerup() {
+        Powerup powerup = new Powerup(30, 0);
+        assertEquals(0, player.xSpeedPowerup, 0.1f);
+        assertEquals(0, player.powerUpTime, 0.1f);
+        player.handleCollision(powerup);
+        assertEquals(powerup.getSpeedBoost(), player.xSpeedPowerup, 0.1f);
+        assertEquals(powerup.getActiveTime(), player.powerUpTime, 0.1f);
+    }
+
+    /**
+     * Test if firebubble adds bubble to newObjects
+     */
+    @Test
+    public void testFireBubbleRight() {
+        assertEquals(0, player.newObjects.size());
+        player.setDirection(GameObject.Direction.RIGHT);
+        player.fireBubble();
+        assertEquals(1, player.newObjects.size());
+        assertTrue(player.newObjects.get(0) instanceof Bubble);
+    }
+
+    /**
+     * Test if firebubble adds bubble to newObjects
+     */
+    @Test
+    public void testFireBubbleLeft() {
+        assertEquals(0, player.newObjects.size());
+        player.setDirection(GameObject.Direction.LEFT);
+        player.fireBubble();
+        assertEquals(1, player.newObjects.size());
+        assertTrue(player.newObjects.get(0) instanceof Bubble);
+    }
 
 }

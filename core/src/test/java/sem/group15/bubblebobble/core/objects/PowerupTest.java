@@ -23,13 +23,12 @@ public class PowerupTest {
 
     @Before
     public void setup(){
-//        Gdx.app = mock(Application.class);
-//        Gdx.input = mock(Input.class);
-//        powerup = mock(Powerup.class, CALLS_REAL_METHODS);
-//        powerup.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         powerup = new Powerup(0,0);
     }
 
+    /**
+     * Test if updating alivetime works.
+     */
     @Test
     public void testUpdate(){
         float aliveTime1 = powerup.getAliveTime();
@@ -38,6 +37,9 @@ public class PowerupTest {
         assertTrue(aliveTime1 == powerup.getAliveTime());
     }
 
+    /**
+     * Test if removing by exceeding lifetime works.
+     */
     @Test
     public void testRemove(){
         assertFalse(powerup.remove);
@@ -45,6 +47,9 @@ public class PowerupTest {
         assertTrue(powerup.remove);
     }
 
+    /**
+     * Test if collision with player works.
+     */
     @Test
     public void testhandleCollisionPlayer() {
         Player player = Mockito.mock(Player.class);
@@ -54,6 +59,9 @@ public class PowerupTest {
         assertTrue(powerup.remove);
     }
 
+    /**
+     * Test if collision with immutable works.
+     */
     @Test
     public void testhandleCollisionImmutable() {
         Immutable immutable = Mockito.mock(Immutable.class);

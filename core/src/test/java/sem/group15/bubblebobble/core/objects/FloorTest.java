@@ -27,10 +27,6 @@ public class FloorTest {
      */
     @Before
     public void setUp() {
-//        Gdx.app = mock(Application.class);
-//        Gdx.input = mock(Input.class);
-//        floor = mock(Floor.class, Mockito.CALLS_REAL_METHODS);
-//        floor.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         floor = new Floor(0,0);
     }
 

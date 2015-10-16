@@ -29,12 +29,6 @@ public class SimpleEnemyTest {
      */
     @Before
     public void setUp() {
-//        Gdx.app = mock(Application.class);
-//        Gdx.input = mock(Input.class);
-//        enemy = Mockito.mock(SimpleEnemy.class, Mockito.CALLS_REAL_METHODS);
-//        enemy.setLogger(Logger.getLogger(Enemy.class.getName()));
-//        enemy.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-//        enemy.setDirection(GameObject.Direction.LEFT);
         enemy = new SimpleEnemy(0,0);
     }
 

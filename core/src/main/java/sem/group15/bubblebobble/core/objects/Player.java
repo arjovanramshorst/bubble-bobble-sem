@@ -30,8 +30,8 @@ public class Player extends Gravity {
     protected boolean floating;
     private Direction direction;
     public float respawned;
-    private float xSpeedPowerup;
-    private float powerUpTime;
+    protected float xSpeedPowerup;
+    protected float powerUpTime;
 
     /**
      * creates player object with a position
@@ -109,7 +109,7 @@ public class Player extends Gravity {
     /**
      * method that is called when the player fires a bubble.
      */
-    private void fireBubble() {
+    protected void fireBubble() {
         Bubble bubble = new Bubble(0, getBottom(), direction);
         switch (direction) {
             case LEFT:
