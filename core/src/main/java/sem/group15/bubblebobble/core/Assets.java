@@ -3,6 +3,9 @@ package sem.group15.bubblebobble.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import org.junit.Test;
+
+import javax.xml.soap.Text;
 
 /**
  * Created by arjo on 7-10-15.
@@ -68,7 +71,10 @@ public final class Assets {
      * The texture for a banana
      */
     public Texture banana;
-
+    /**
+     * The texture for a cherry
+     */
+    public Texture cherry;
     /**
      * The sound for a playerDeathSound.
      */
@@ -115,6 +121,7 @@ public final class Assets {
         wall = loadTexture("sprite_wall_brick.png");
         powerup = loadTexture("powerup.png");
         banana = loadTexture("banana-icon.png");
+        cherry = loadTexture("cherry-icon.png");
         playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
         playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
     }

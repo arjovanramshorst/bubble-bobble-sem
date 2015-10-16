@@ -176,7 +176,7 @@ public class Player extends Gravity {
             if (other instanceof Fruit) {
                 Fruit fruit = (Fruit) other;
                 if (fruit.getAliveTime() > 0.5) {
-                    score += Fruit.FRUIT_SCORE;
+                    score += Fruit.FRUIT_SCORE * fruit.multiplier;
                     logger.log("Player touched fruit");
                 }
             }
