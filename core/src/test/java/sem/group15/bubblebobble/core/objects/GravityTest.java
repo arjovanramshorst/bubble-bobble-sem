@@ -30,8 +30,8 @@ public class GravityTest {
      */
     @Before
     public void setUp() {
-        Gdx.app = mock(Application.class);
-        Gdx.input = mock(Input.class);
+//        Gdx.app = mock(Application.class);
+//        Gdx.input = mock(Input.class);
         Gdx.graphics = mock(Graphics.class);
         Mockito.doReturn(800).when(Gdx.graphics).getHeight();
         player = mock(Player.class, Mockito.CALLS_REAL_METHODS);

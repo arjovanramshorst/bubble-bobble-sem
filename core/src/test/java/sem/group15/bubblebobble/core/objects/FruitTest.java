@@ -14,8 +14,6 @@ public class FruitTest {
     public void setUp() throws Exception {
         fruit = Mockito.mock(Fruit.class, Mockito.CALLS_REAL_METHODS);
         fruit.location = new Rectangle(0, 0, 32, 32);
-//      fruit = new Fruit(0,0);
-//      fruit.assets = null;
     }
 
     @Test

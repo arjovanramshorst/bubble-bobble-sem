@@ -21,8 +21,8 @@ public class FloatingTest {
 
     @Before
     public void setUp(){
-        Gdx.app = mock(Application.class);
-        Gdx.input = mock(Input.class);
+//        Gdx.app = mock(Application.class);
+//        Gdx.input = mock(Input.class);
         floating = mock(Floating.class, Mockito.CALLS_REAL_METHODS);
         floating.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
     }

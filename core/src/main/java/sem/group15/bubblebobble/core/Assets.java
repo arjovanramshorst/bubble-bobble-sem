@@ -107,23 +107,29 @@ public final class Assets {
      * Initialize all textures.
      */
     private void initialize() {
-        bubble = loadTexture("bubble-empty.png");
-        simpleEnemyLeft = loadTexture("enemyLeft.png");
-        simpleEnemyRight = loadTexture("enemy.png");
-        simpleAngryEnemyLeft = loadTexture("enemyAngryleft.png");
-        simpleAngryEnemyRight = loadTexture("enemyAngry.png");
-        strongEnemyLeft = loadTexture("strongEnemyLeft.png");
-        strongEnemyRight = loadTexture("strongEnemyRight.png");
-        filledBubble = loadTexture("filled-bubble.png");
-        playerLeft = loadTexture("playerSprite.png");
-        playerRight = loadTexture("playerSpriteRight.png");
-        playerDead = loadTexture("playerDead.png");
-        wall = loadTexture("sprite_wall_brick.png");
-        powerup = loadTexture("powerup.png");
-        banana = loadTexture("banana-icon.png");
-        cherry = loadTexture("cherry-icon.png");
-        playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
-        playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
+        try {
+            bubble = loadTexture("bubble-empty.png");
+            simpleEnemyLeft = loadTexture("enemyLeft.png");
+            simpleEnemyRight = loadTexture("enemy.png");
+            simpleAngryEnemyLeft = loadTexture("enemyAngryleft.png");
+            simpleAngryEnemyRight = loadTexture("enemyAngry.png");
+            strongEnemyLeft = loadTexture("strongEnemyLeft.png");
+            strongEnemyRight = loadTexture("strongEnemyRight.png");
+            filledBubble = loadTexture("filled-bubble.png");
+            playerLeft = loadTexture("playerSprite.png");
+            playerRight = loadTexture("playerSpriteRight.png");
+            playerDead = loadTexture("playerDead.png");
+            wall = loadTexture("sprite_wall_brick.png");
+            powerup = loadTexture("powerup.png");
+            banana = loadTexture("banana-icon.png");
+            cherry = loadTexture("cherry-icon.png");
+            playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
+            playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
+        }
+        catch (NullPointerException e) {
+
+        }
+
     }
 
     /**

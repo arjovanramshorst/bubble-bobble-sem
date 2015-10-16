@@ -216,13 +216,23 @@ public class Player extends Gravity {
      * Plays the deadSound when a player dies.
      */
     public void playDeadSound() {
-        assets.playerDeathSound.play(1.0f);
+        try {
+            assets.playerDeathSound.play(1.0f);
+        }
+        catch (NullPointerException e) {
+
+        }
     }
     /**
      * Plays the jumpSound when the player jumps
      */
     public void playJumpSound() {
-        assets.playerJumpSound.play(1.0f);
+        try {
+            assets.playerJumpSound.play(1.0f);
+        }
+        catch (NullPointerException e) {
+
+        }
     }
 
     /**

@@ -1,5 +1,7 @@
 package sem.group15.bubblebobble.core.objects;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +11,7 @@ import sem.group15.bubblebobble.core.BubbleBobble;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 
 public class FilledBubbleTest {
 
@@ -16,9 +19,11 @@ public class FilledBubbleTest {
 
     @Before
     public void setUp() {
-        fbubble = Mockito.mock(FilledBubble.class, Mockito.CALLS_REAL_METHODS);
-        fbubble.location = new Rectangle(0,0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        fbubble.speedY = 50;
+//        fbubble = Mockito.mock(FilledBubble.class, Mockito.CALLS_REAL_METHODS);
+//        fbubble.location = new Rectangle(0,0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+//        fbubble.speedY = 50;
+        Enemy enemey = Mockito.mock(Enemy.class);
+        fbubble = new FilledBubble(0, 0, enemey);
     }
 
     /**
@@ -54,4 +59,16 @@ public class FilledBubbleTest {
 //        fbubble.handleCollision(obj);
 //        assertTrue(fbubble.remove);
 //    }
+
+    /**
+     * Test the draw function
+     */
+    @Test
+    public void testDraw() {
+        SpriteBatch batch = Mockito.mock(SpriteBatch.class);
+        Texture texture = null;
+        Mockito.doNothing().when(batch).draw(texture, 0, 0);
+        fbubble.draw(batch);
+        verify(batch).draw(texture, 0, 0);
+    }
 }
