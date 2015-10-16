@@ -3,8 +3,10 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -41,15 +43,15 @@ public class FilledBubbleTest {
         assertTrue(fbubble.speedY == 0);
     }
 
-    /**
-     * test handle collision with player
-     */
-    @Test
-    public void testHandleCollisionPlayer(){
-        fbubble.remove = false;
-        Player obj = Mockito.mock(Player.class, Mockito.CALLS_REAL_METHODS);
-        obj.location = new Rectangle(10,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
-        fbubble.handleCollision(obj);
-        assertTrue(fbubble.remove);
-    }
+//    /**
+//     * test handle collision with player
+//     */
+//    @Test
+//    public void testHandleCollisionPlayer(){
+//        fbubble.remove = false;
+//        Player obj = Mockito.mock(Player.class, Mockito.CALLS_REAL_METHODS);
+//        obj.location = new Rectangle(10,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+//        fbubble.handleCollision(obj);
+//        assertTrue(fbubble.remove);
+//    }
 }

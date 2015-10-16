@@ -141,14 +141,12 @@ public class Player extends Gravity {
                 //set alive false if ran out of lives.
                 if (lives == 0) {
                     isAlive = false;
-                }
-                else {
+                } else {
                     respawn();
                 }
             }
 
             if (other instanceof Wall) {
-//                float MAX_WALL_OVERLAP = 10f;
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
                     logger.log("Player touched wall on left.");
@@ -168,10 +166,19 @@ public class Player extends Gravity {
                     logger.log("Player touched bubble");
                 }
             }
+
             if (other instanceof Powerup) {
                 Powerup powerup = (Powerup) other;
                 xSpeedPowerup = powerup.getSpeedBoost();
                 powerUpTime = powerup.getActiveTime();
+            }
+
+            if (other instanceof Fruit) {
+                Fruit fruit = (Fruit) other;
+                if (fruit.getAliveTime() > 0.5) {
+                    score += Fruit.FRUIT_SCORE;
+                    logger.log("Player touched fruit");
+                }
             }
         }
     }

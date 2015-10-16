@@ -3,6 +3,7 @@ package sem.group15.bubblebobble.core;
 
 import sem.group15.bubblebobble.core.objects.Enemy;
 import sem.group15.bubblebobble.core.objects.FilledBubble;
+import sem.group15.bubblebobble.core.objects.Fruit;
 import sem.group15.bubblebobble.core.objects.GameObject;
 import sem.group15.bubblebobble.core.objects.Player;
 
@@ -86,7 +87,7 @@ public class Level {
      */
     public final boolean levelFinished() {
         for (GameObject object : gameObjects) {
-            if (object instanceof Enemy || object instanceof FilledBubble) {
+            if (object instanceof Enemy || object instanceof FilledBubble || object instanceof Fruit) {
                 return false;
             }
         }

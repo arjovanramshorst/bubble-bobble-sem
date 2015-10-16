@@ -71,6 +71,7 @@ public class FilledBubble extends Floating {
 
             if (collided instanceof Player) {
                 remove = true;
+                newObjects.add(new Fruit(getLeft(), getBottom()));
             }
         }
     }

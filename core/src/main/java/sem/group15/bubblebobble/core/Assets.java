@@ -65,6 +65,11 @@ public final class Assets {
     public Texture powerup;
 
     /**
+     * The texture for a banana
+     */
+    public Texture banana;
+
+    /**
      * The sound for a playerDeathSound.
      */
     public Sound playerDeathSound;
@@ -109,6 +114,7 @@ public final class Assets {
         playerDead = loadTexture("playerDead.png");
         wall = loadTexture("sprite_wall_brick.png");
         powerup = loadTexture("powerup.png");
+        banana = loadTexture("banana-icon.png");
         playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
         playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
     }
