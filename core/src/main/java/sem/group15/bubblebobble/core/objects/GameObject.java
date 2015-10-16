@@ -249,7 +249,23 @@ public abstract class GameObject {
         return Math.min(maxHorizontalOverlap, maxVerticalOverlap) / BubbleBobble.SPRITE_SIZE;
     }
 
+    /**
+     * Setter for remove.
+     * @param remove
+     */
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
+
     public final boolean remove() {
         return remove;
+    }
+
+    /**
+     * Set the new objects list.
+     * @param newObjects
+     */
+    public void setNewObjects(List<GameObject> newObjects) {
+        this.newObjects = newObjects;
     }
 }
