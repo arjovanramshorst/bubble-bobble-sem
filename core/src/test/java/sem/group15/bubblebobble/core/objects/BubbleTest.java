@@ -28,11 +28,18 @@ public class BubbleTest {
      */
     @Before
     public void setUp() throws Exception {
-        Gdx.app = mock(Application.class);
-        Gdx.input = mock(Input.class);
+//        Gdx.app = mock(Application.class);
+//        Gdx.input = mock(Input.class);
 //        bubble = Mockito.mock(Bubble.class, Mockito.CALLS_REAL_METHODS);
 //        bubble.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         bubble = new Bubble(0,0, GameObject.Direction.LEFT);
+    }
+
+    @Test
+    public void testConstructorDirection() {
+        assertEquals(-600, bubble.speedX, 0);
+        Bubble bubble1 = new Bubble(0,0, GameObject.Direction.RIGHT);
+        assertEquals(600, bubble1.speedX, 0);
     }
 
     /**
@@ -57,6 +64,14 @@ public class BubbleTest {
         assertFalse(bubble.remove);
         bubble.update(Bubble.BUBBLE_LIFESPAN);
         assertTrue(bubble.remove);
+    }
+
+    @Test
+    public void testMakeFilledBubble() {
+        Enemy enemy = Mockito.mock(Enemy.class);
+        assertEquals(0, bubble.newObjects.size(), 0);
+        bubble.makeFilledBubble(enemy);
+        assertEquals(1, bubble.newObjects.size(), 0);
     }
 
     /**

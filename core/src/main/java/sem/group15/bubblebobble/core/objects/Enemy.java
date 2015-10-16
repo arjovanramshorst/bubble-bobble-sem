@@ -108,33 +108,33 @@ public abstract class Enemy extends Gravity {
 
     }
 
-    /**
-     * Draws the sprite at the correct location.
-     * @param spriteBatch SpriteBatch that the sprites need to be added to.
-     */
-    @Override
-    public void draw(SpriteBatch spriteBatch) {
-        if (state == State.NORMAL) {
-            switch (direction) {
-                case LEFT:
-                    spriteBatch.draw(normalLeftTexture, getLeft(), getBottom());
-                    break;
-                case RIGHT:
-                    spriteBatch.draw(normalRightTexture, getLeft(), getBottom());
-                    break;
-            }
-        }
-        else if (state == State.ANGRY){
-            switch (direction) {
-                case LEFT:
-                    spriteBatch.draw(angryLeftTexture, getLeft(), getBottom());
-                    break;
-                case RIGHT:
-                    spriteBatch.draw(angryRightTexture, getLeft(), getBottom());
-                    break;
-            }
-        }
-    }
+//    /**
+//     * Draws the sprite at the correct location.
+//     * @param spriteBatch SpriteBatch that the sprites need to be added to.
+//     */
+//    @Override
+//    public void draw(SpriteBatch spriteBatch) {
+//        if (state == State.NORMAL) {
+//            switch (direction) {
+//                case LEFT:
+//                    spriteBatch.draw(normalLeftTexture, getLeft(), getBottom());
+//                    break;
+//                case RIGHT:
+//                    spriteBatch.draw(normalRightTexture, getLeft(), getBottom());
+//                    break;
+//            }
+//        }
+//        else if (state == State.ANGRY){
+//            switch (direction) {
+//                case LEFT:
+//                    spriteBatch.draw(angryLeftTexture, getLeft(), getBottom());
+//                    break;
+//                case RIGHT:
+//                    spriteBatch.draw(angryRightTexture, getLeft(), getBottom());
+//                    break;
+//            }
+//        }
+//    }
 
 
     /**

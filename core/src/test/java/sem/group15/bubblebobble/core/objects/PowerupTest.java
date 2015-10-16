@@ -46,6 +46,24 @@ public class PowerupTest {
     }
 
     @Test
+    public void testhandleCollisionPlayer() {
+        Player player = Mockito.mock(Player.class);
+        player.location = new Rectangle(30,0, 32, 32);
+        assertFalse(powerup.remove);
+        powerup.handleCollision(player);
+        assertTrue(powerup.remove);
+    }
+
+    @Test
+    public void testhandleCollisionImmutable() {
+        Immutable immutable = Mockito.mock(Immutable.class);
+        immutable.location = new Rectangle(30,0, 32, 32);
+        assertFalse(powerup.remove);
+        powerup.handleCollision(immutable);
+        assertTrue(powerup.remove);
+    }
+
+    @Test
     public void testGetters(){
         assertTrue(powerup.getSpeedBoost() == 2);
     }

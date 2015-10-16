@@ -4,6 +4,9 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -54,6 +57,22 @@ public class GameObjectTest {
         assertEquals(BubbleBobble.SPRITE_SIZE / 2, object.overlapTop(object2), 0.01f);
         assertEquals(0, object.overlapBottom(object2), 0.01f);
         assertEquals(0.5, object.overlapPercentage(object2), 0.01f);
+    }
+
+    /**
+     * Test adding new objects to a list.
+     */
+    @Test
+    public void testAddNewObjectsTo() {
+        GameObject object = Mockito.mock(GameObject.class, Mockito.CALLS_REAL_METHODS);
+        List<GameObject> newOb = new ArrayList<GameObject>();
+        object.newObjects = newOb;
+        Floor floor = Mockito.mock(Floor.class);
+        newOb.add(floor);
+        List<GameObject> result = new ArrayList<GameObject>();
+        assertEquals(0, result.size());
+        object.addNewObjectsTo(result);
+        assertEquals(floor, result.get(0));
     }
 
     /**

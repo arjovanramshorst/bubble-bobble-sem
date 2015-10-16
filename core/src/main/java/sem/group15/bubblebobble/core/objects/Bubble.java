@@ -16,7 +16,7 @@ public class Bubble extends Floating {
     /**
      * Initial speed of a bubble.
      */
-    private static final int INITIAL_SPEED = 600;
+    public static final int INITIAL_SPEED = 600;
     /**
      * Lifespan of a bubble in seconds.
      */
