@@ -71,7 +71,13 @@ public class FilledBubble extends Floating {
 
             if (collided instanceof Player) {
                 remove = true;
-                newObjects.add(new Fruit(getLeft(), getBottom()));
+                if (timeFromFired < Bubble.BUBBLE_LIFESPAN/2) {
+                    newObjects.add(new Cherry(getLeft(), getBottom()));
+                }
+                else {
+                    newObjects.add(new Banana(getLeft(), getBottom()));
+                }
+
             }
         }
     }

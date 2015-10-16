@@ -7,7 +7,7 @@ import sem.group15.bubblebobble.core.BubbleBobble;
 /**
  * Created by woute on 10/13/2015.
  */
-public class Fruit extends Gravity {
+public abstract class Fruit extends Gravity {
 
     /**
      * Time fruit has been in the game.
@@ -17,14 +17,17 @@ public class Fruit extends Gravity {
      * Basic score of a fruit.
      */
     public static final int FRUIT_SCORE = 200;
+    /**
+     * Multiplier for the fruit score
+     */
+    protected float multiplier;
 
     /**
-     * Create fruit object at given location.
-     * @param xPosition x coordinate
-     * @param yPosition y coordinate
+     * Abstract fruit object.
+     * @param location Rectangle with the location and size
      */
-    public Fruit(final float xPosition, final float yPosition) {
-        super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
+    public Fruit(final Rectangle location) {
+        super(location);
         aliveTime = 0;
     }
 
@@ -54,11 +57,6 @@ public class Fruit extends Gravity {
      */
     public float getAliveTime() {
         return aliveTime;
-    }
-
-    @Override
-    public void draw(final SpriteBatch batch) {
-        batch.draw(assets.banana, getLeft(), getBottom());
     }
 
 }
