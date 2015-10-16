@@ -1,8 +1,6 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import sem.group15.bubblebobble.core.BubbleBobble;
 
 /**
  * Created by woute on 10/13/2015.
@@ -18,13 +16,13 @@ public abstract class Fruit extends Gravity {
      */
     public static final int FRUIT_SCORE = 200;
     /**
-     * Multiplier for the fruit score
+     * Multiplier for the fruit score.
      */
     protected float multiplier;
 
     /**
      * Abstract fruit object.
-     * @param location Rectangle with the location and size
+     * @param location Rectangle with the location and size.
      */
     public Fruit(final Rectangle location) {
         super(location);
@@ -55,7 +53,7 @@ public abstract class Fruit extends Gravity {
      * Get time bubble is alive.
      * @return aliveTime
      */
-    public float getAliveTime() {
+    public final float getAliveTime() {
         return aliveTime;
     }
 

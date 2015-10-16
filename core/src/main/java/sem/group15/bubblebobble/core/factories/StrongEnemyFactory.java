@@ -10,8 +10,8 @@ import sem.group15.bubblebobble.core.objects.StrongEnemy;
 public class StrongEnemyFactory extends EnemyFactory {
 
     @Override
-    public Enemy createObject(float x, float y) {
-        Enemy enemy = new StrongEnemy(x,y);
+    public Enemy createObject(final float x, final float y) {
+        Enemy enemy = new StrongEnemy(x, y);
         setRandomDirection(enemy);
         enemy.setState(Enemy.State.NORMAL);
         return enemy;

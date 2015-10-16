@@ -16,7 +16,7 @@ public class Bubble extends Floating {
     /**
      * Initial speed of a bubble.
      */
-    private static final int INITIAL_SPEED = 600;
+    public static final int INITIAL_SPEED = 600;
     /**
      * Lifespan of a bubble in seconds.
      */
@@ -33,12 +33,12 @@ public class Bubble extends Floating {
     /**
      * Creates a new Bubble object and it will start to float.
      *
-     * @param xPosition x position of player who shoots the bubble.
-     * @param yPosition y position of player who shoots the bubble.
+     * @param xPos x position of player who shoots the bubble.
+     * @param yPos y position of player who shoots the bubble.
      * @param direction Enum, RIGHT or LEFT
      */
-    public Bubble(final float xPosition, final float yPosition, final Direction direction) {
-        super(new Rectangle(xPosition, yPosition,
+    public Bubble(final float xPos, final float yPos, final Direction direction) {
+        super(new Rectangle(xPos, yPos,
                 BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         switch (direction) {
             case LEFT:
@@ -46,6 +46,8 @@ public class Bubble extends Floating {
                 break;
             case RIGHT:
                 speedX = INITIAL_SPEED;
+                break;
+            default:
                 break;
         }
         speedY = 0;
@@ -81,7 +83,7 @@ public class Bubble extends Floating {
      * This method is called when:
      * either the bubble lost too much speed or collides with a wall object.
      */
-    public void getOutOfGame() {
+    public final void getOutOfGame() {
         if (Math.abs(speedX) > 0) {
             speedX = 0;
             speedY = 50;
@@ -112,6 +114,7 @@ public class Bubble extends Floating {
 
     /**
      * Add a new filled bubble to list with new Objects.
+     * @param enemy the enemy.
      */
     protected void makeFilledBubble(Enemy enemy) {
         newObjects.add(new FilledBubble(getLeft(), getBottom(), enemy));

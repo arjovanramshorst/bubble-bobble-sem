@@ -11,36 +11,47 @@ public class FruitTest {
     Fruit fruit;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruit = Mockito.mock(Fruit.class, Mockito.CALLS_REAL_METHODS);
         fruit.location = new Rectangle(0, 0, 32, 32);
-//      fruit = new Fruit(0,0);
-//      fruit.assets = null;
     }
 
+    /**
+     * Test if the location of a fruit is updated.
+     */
     @Test
-    public void testUpdateLocation() throws Exception {
+    public void testUpdateLocation() {
         assertEquals(0, fruit.getBottom(), 0.1);
         fruit.update(0.5f);
         assertEquals(fruit.speedY, fruit.getBottom(), 0.1);
     }
 
+    /**
+     * Test if the alive time is updated correctly.
+     */
     @Test
-    public void testUpdateAliveTime() throws Exception {
+    public void testUpdateAliveTime() {
         assertEquals(0, fruit.getAliveTime(), 0.1);
         fruit.update(0.5f);
         assertEquals(0.5f, fruit.getAliveTime(), 0.1);
     }
 
+    /**
+     * Test if fruit gets flagged for removal after 5 seconds.
+     */
     @Test
-    public void testUpdateRemoveAfter5s() throws Exception {
+    public void testUpdateRemoveAfter5s() {
         assertFalse(fruit.remove());
         fruit.update(5.1f);
         assertTrue(fruit.remove());
     }
 
+    /**
+     * Test if handle collision
+     * @throws Exception
+     */
     @Test
-    public void testHandleCollisionWithPlayer() throws Exception {
+    public void testHandleCollisionWithPlayer() {
         Player player = Mockito.mock(Player.class, Mockito.CALLS_REAL_METHODS);
         player.location = new Rectangle(0, 0, 32, 32);
         fruit.update(0.51f);
@@ -50,8 +61,12 @@ public class FruitTest {
         assertTrue(fruit.remove());
     }
 
+    /**
+     * Test if getter works.
+     * @throws Exception
+     */
     @Test
-    public void testGetAliveTime() throws Exception {
+    public void testGetAliveTime() {
         assertEquals(0, fruit.getAliveTime(), 0.1f);
         fruit.update(1f);
         assertEquals(1, fruit.getAliveTime(), 0.1f);

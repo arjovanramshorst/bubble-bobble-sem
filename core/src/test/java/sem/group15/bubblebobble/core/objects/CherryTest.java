@@ -1,46 +1,31 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import sem.group15.bubblebobble.core.BubbleBobble;
 
-import static org.mockito.Mockito.mock;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
-/**
- * Created by Marketing Lorre on 28-9-2015.
- */
-public class WallObjectTest {
-
-    private Wall wall;
+public class CherryTest {
+    Cherry cherry;
 
     /**
      * Set up wall for testing.
      */
     @Before
     public void setUp() {
-        wall = new Wall(0,0);
+        cherry = new Cherry(0,0);
     }
 
     /**
-     * Test if wall stays in the same place if update is called.
+     * Test if constructor sets multiplier correct.
      */
     @Test
-    public void testUpdate() {
-        float x = wall.location.x;
-        float y = wall.location.y;
-        wall.update(1f);
-        assertTrue(x == wall.location.x);
-        assertTrue(y == wall.location.y);
+    public void testConstructor() {
+        assertEquals(2, cherry.multiplier, 0.1);
     }
 
     /**
@@ -51,9 +36,7 @@ public class WallObjectTest {
         SpriteBatch batch = Mockito.mock(SpriteBatch.class);
         Texture texture = null;
         Mockito.doNothing().when(batch).draw(texture, 0, 0);
-        wall.draw(batch);
+        cherry.draw(batch);
         verify(batch).draw(texture, 0, 0);
     }
-
-
 }

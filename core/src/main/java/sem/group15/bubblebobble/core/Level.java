@@ -50,7 +50,7 @@ public class Level {
     /**
      * check for all collisions and handle them in their respective objects.
      */
-    private void checkCollisions() {
+    protected void checkCollisions() {
         for (int i = 0; i < gameObjects.size(); i++) {
             for (int i2 = i + 1; i2 < gameObjects.size(); i2++) {
                 gameObjects.get(i).handleCollision(gameObjects.get(i2));
@@ -62,7 +62,7 @@ public class Level {
     /**
      * Checks all objects for any new objects that should be added to the gameObjects list.
      */
-    private void handleNewObjects() {
+    protected void handleNewObjects() {
         for (int i = 0; i < gameObjects.size(); i++) {
             gameObjects.get(i).addNewObjectsTo(gameObjects);
         }
@@ -72,7 +72,7 @@ public class Level {
      * Removes all objects with remove flag set to true.
      * Used as some sort of garbage collection.
      */
-    private void removeObjects() {
+    protected void removeObjects() {
         Iterator<GameObject> iter = gameObjects.iterator();
         while (iter.hasNext()) {
             if (iter.next().remove()) {

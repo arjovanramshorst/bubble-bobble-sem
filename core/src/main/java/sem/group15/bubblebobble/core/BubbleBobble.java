@@ -8,30 +8,33 @@ import com.badlogic.gdx.Gdx;
  * ApplicationListener implementation that renders the objects on the screen.
  */
 public class BubbleBobble implements ApplicationListener {
-
+    /**
+     * the standard sprite size.
+     */
 	public static final float SPRITE_SIZE = 32;
+    /**
+     * the controller.
+     */
 	private GameController controller;
 
 	/**
 	 * creates the map and loads the game objects.
 	 */
 	@Override
-	public void create() {
+	public final void create() {
 		// Loads and initializes the assets used in the game.
 		Assets.getAssets();
 		controller = new GameController();
 	}
 
 	/**
-	 * method for resizing the screen
-	 * @param width
+	 * method for resizing the screen.
+	 * @param  width
 	 * @param height
 	 */
-
 	@Override
-	public void resize(int width, int height) {
+	public final void resize(final int width, final int height) {
 	}
-
 	/**
 	 * Main game loop.
 	 */

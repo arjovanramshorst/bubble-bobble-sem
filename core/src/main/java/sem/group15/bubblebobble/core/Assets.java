@@ -3,15 +3,15 @@ package sem.group15.bubblebobble.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import org.junit.Test;
 
-import javax.xml.soap.Text;
 
 /**
  * Created by arjo on 7-10-15.
  */
 public final class Assets {
-
+    /**
+     * the asset singleton.
+     */
     private static Assets singleton;
 
     /**
@@ -68,11 +68,11 @@ public final class Assets {
     public Texture powerup;
 
     /**
-     * The texture for a banana
+     * The texture for a banana.
      */
     public Texture banana;
     /**
-     * The texture for a cherry
+     * The texture for a cherry.
      */
     public Texture cherry;
     /**
@@ -86,6 +86,13 @@ public final class Assets {
 
 
     /**
+     * Private constructor, can only be called from getAssets method.
+     */
+    private Assets() {
+        initialize();
+    }
+
+    /**
      * A getter for all Assets.
      * @return Assets.
      */
@@ -97,41 +104,39 @@ public final class Assets {
     }
 
     /**
-     * Private constructor, can only be called from getAssets method.
-     */
-    private Assets() {
-        initialize();
-    }
-
-    /**
-     * Initialize all textures.
-     */
-    private void initialize() {
-        bubble = loadTexture("bubble-empty.png");
-        simpleEnemyLeft = loadTexture("enemyLeft.png");
-        simpleEnemyRight = loadTexture("enemy.png");
-        simpleAngryEnemyLeft = loadTexture("enemyAngryleft.png");
-        simpleAngryEnemyRight = loadTexture("enemyAngry.png");
-        strongEnemyLeft = loadTexture("strongEnemyLeft.png");
-        strongEnemyRight = loadTexture("strongEnemyRight.png");
-        filledBubble = loadTexture("filled-bubble.png");
-        playerLeft = loadTexture("playerSprite.png");
-        playerRight = loadTexture("playerSpriteRight.png");
-        playerDead = loadTexture("playerDead.png");
-        wall = loadTexture("sprite_wall_brick.png");
-        powerup = loadTexture("powerup.png");
-        banana = loadTexture("banana-icon.png");
-        cherry = loadTexture("cherry-icon.png");
-        playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
-        playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
-    }
-
-    /**
      * Loads a texture with filename file.
      * @param file filename.
      * @return Texture containing the file.
      */
     private static Texture loadTexture(final String file) {
         return new Texture(Gdx.files.internal(file));
+    }
+
+    /**
+     * Initialize all textures.
+     */
+    private void initialize() {
+        try {
+            bubble = loadTexture("bubble-empty.png");
+            simpleEnemyLeft = loadTexture("enemyLeft.png");
+            simpleEnemyRight = loadTexture("enemy.png");
+            simpleAngryEnemyLeft = loadTexture("enemyAngryleft.png");
+            simpleAngryEnemyRight = loadTexture("enemyAngry.png");
+            strongEnemyLeft = loadTexture("strongEnemyLeft.png");
+            strongEnemyRight = loadTexture("strongEnemyRight.png");
+            filledBubble = loadTexture("filled-bubble.png");
+            playerLeft = loadTexture("playerSprite.png");
+            playerRight = loadTexture("playerSpriteRight.png");
+            playerDead = loadTexture("playerDead.png");
+            wall = loadTexture("sprite_wall_brick.png");
+            powerup = loadTexture("powerup.png");
+            banana = loadTexture("banana-icon.png");
+            cherry = loadTexture("cherry-icon.png");
+            playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
+            playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));}
+        catch (NullPointerException e) {
+        System.out.println("error loading texture");
+        }
+
     }
 }

@@ -7,8 +7,18 @@ import sem.group15.bubblebobble.core.objects.GameObject;
  * Created by arjo on 8-10-15.
  */
 public abstract class EnemyFactory {
+    /**
+     * creates an enemy.
+     * @param x location x.
+     * @param y location y.
+     * @return returns Enemy.
+     */
     public abstract Enemy createObject(float x, float y);
 
+    /**
+     * sets random direction for enemy.
+     * @param enemy Enemy to set.
+     */
     protected void setRandomDirection(Enemy enemy) {
         //Generates random integer between 1 and 2.
         int random = 1 + (int) (Math.random() * ((2 - 1) + 1));

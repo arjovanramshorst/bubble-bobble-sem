@@ -30,8 +30,6 @@ public class GravityTest {
      */
     @Before
     public void setUp() {
-        Gdx.app = mock(Application.class);
-        Gdx.input = mock(Input.class);
         Gdx.graphics = mock(Graphics.class);
         Mockito.doReturn(800).when(Gdx.graphics).getHeight();
         player = mock(Player.class, Mockito.CALLS_REAL_METHODS);
@@ -45,7 +43,7 @@ public class GravityTest {
      * The time since last floor contact should be 0.
      */
     @Test
-    public void testHandleCollision() throws Exception {
+    public void testHandleCollision() {
         player.setBottom(BubbleBobble.SPRITE_SIZE);
         floor.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.update(0.1f);
@@ -55,11 +53,11 @@ public class GravityTest {
     }
 
     /**
-* Tests if the player can't jump when it is not on the floor.
+     * Tests if the player can't jump when it is not on the floor.
      * @throws Exception
      */
     @Test
-    public void testHandleCollisionNoCollision() throws Exception {
+    public void testHandleCollisionNoCollision() {
         player.canJump = false;
         floor.location = new Rectangle(2, 2, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.handleCollision(floor);
@@ -67,7 +65,7 @@ public class GravityTest {
      }
 
     @Test
-    public void testWarping() throws Exception{
+    public void testWarping() {
         player.setTop(0);
         assertTrue(player.getBottom() < 0);
         player.update(0.1f);

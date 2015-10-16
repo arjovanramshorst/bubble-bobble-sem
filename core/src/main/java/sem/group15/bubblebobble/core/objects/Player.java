@@ -30,8 +30,8 @@ public class Player extends Gravity {
     protected boolean floating;
     private Direction direction;
     public float respawned;
-    private float xSpeedPowerup;
-    private float powerUpTime;
+    protected float xSpeedPowerup;
+    protected float powerUpTime;
 
     /**
      * creates player object with a position
@@ -109,7 +109,7 @@ public class Player extends Gravity {
     /**
      * method that is called when the player fires a bubble.
      */
-    private void fireBubble() {
+    protected void fireBubble() {
         Bubble bubble = new Bubble(0, getBottom(), direction);
         switch (direction) {
             case LEFT:
@@ -216,13 +216,23 @@ public class Player extends Gravity {
      * Plays the deadSound when a player dies.
      */
     public void playDeadSound() {
-        assets.playerDeathSound.play(1.0f);
+        try {
+            assets.playerDeathSound.play(1.0f);
+        }
+        catch (NullPointerException e) {
+
+        }
     }
     /**
      * Plays the jumpSound when the player jumps
      */
     public void playJumpSound() {
-        assets.playerJumpSound.play(1.0f);
+        try {
+            assets.playerJumpSound.play(1.0f);
+        }
+        catch (NullPointerException e) {
+
+        }
     }
 
     /**
@@ -240,6 +250,15 @@ public class Player extends Gravity {
     public Direction getDirection() {
         return direction;
     }
+
+    /**
+     * Set direction of the player
+     * @param direction
+     */
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
 }
 
 

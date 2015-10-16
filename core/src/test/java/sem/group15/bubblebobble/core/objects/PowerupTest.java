@@ -3,9 +3,12 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
 
 import static org.junit.Assert.*;
@@ -20,12 +23,12 @@ public class PowerupTest {
 
     @Before
     public void setup(){
-        Gdx.app = mock(Application.class);
-        Gdx.input = mock(Input.class);
-        powerup = mock(Powerup.class, CALLS_REAL_METHODS);
-        powerup.location = new Rectangle(0, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
+        powerup = new Powerup(0,0);
     }
 
+    /**
+     * Test if updating alivetime works.
+     */
     @Test
     public void testUpdate(){
         float aliveTime1 = powerup.getAliveTime();
@@ -34,10 +37,37 @@ public class PowerupTest {
         assertTrue(aliveTime1 == powerup.getAliveTime());
     }
 
+    /**
+     * Test if removing by exceeding lifetime works.
+     */
     @Test
     public void testRemove(){
         assertFalse(powerup.remove);
         powerup.update(11);
+        assertTrue(powerup.remove);
+    }
+
+    /**
+     * Test if collision with player works.
+     */
+    @Test
+    public void testhandleCollisionPlayer() {
+        Player player = Mockito.mock(Player.class);
+        player.location = new Rectangle(30,0, 32, 32);
+        assertFalse(powerup.remove);
+        powerup.handleCollision(player);
+        assertTrue(powerup.remove);
+    }
+
+    /**
+     * Test if collision with immutable works.
+     */
+    @Test
+    public void testhandleCollisionImmutable() {
+        Immutable immutable = Mockito.mock(Immutable.class);
+        immutable.location = new Rectangle(30,0, 32, 32);
+        assertFalse(powerup.remove);
+        powerup.handleCollision(immutable);
         assertTrue(powerup.remove);
     }
 
@@ -46,4 +76,15 @@ public class PowerupTest {
         assertTrue(powerup.getSpeedBoost() == 2);
     }
 
+    /**
+     * Test the draw function
+     */
+    @Test
+    public void testDraw() {
+        SpriteBatch batch = Mockito.mock(SpriteBatch.class);
+        Texture texture = null;
+        Mockito.doNothing().when(batch).draw(texture, 0, 0);
+        powerup.draw(batch);
+        verify(batch).draw(texture, 0, 0);
+    }
 }

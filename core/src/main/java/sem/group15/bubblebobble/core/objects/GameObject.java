@@ -13,10 +13,25 @@ import java.util.List;
  */
 public abstract class GameObject {
 
+    /**
+     * Asset manager.
+     */
     protected Assets assets;
+    /**
+     * location of the object.
+     */
     protected Rectangle location;
+    /**
+     * speed of the object.
+     */
     protected float speedX;
+    /**
+     * speed of the object.
+     */
     protected float speedY;
+    /**
+     * prints the interaction.
+     */
     protected Logger logger;
 
     /**
@@ -249,7 +264,23 @@ public abstract class GameObject {
         return Math.min(maxHorizontalOverlap, maxVerticalOverlap) / BubbleBobble.SPRITE_SIZE;
     }
 
+    /**
+     * Setter for remove.
+     * @param remove
+     */
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
+
     public final boolean remove() {
         return remove;
+    }
+
+    /**
+     * Set the new objects list.
+     * @param newObjects
+     */
+    public void setNewObjects(List<GameObject> newObjects) {
+        this.newObjects = newObjects;
     }
 }
