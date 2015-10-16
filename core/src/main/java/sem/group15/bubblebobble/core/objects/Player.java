@@ -250,6 +250,15 @@ public class Player extends Gravity {
     public Direction getDirection() {
         return direction;
     }
+
+    /**
+     * Set direction of the player
+     * @param direction
+     */
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
 }
 
 

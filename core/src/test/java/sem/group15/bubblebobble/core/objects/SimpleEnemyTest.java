@@ -3,6 +3,8 @@ package sem.group15.bubblebobble.core.objects;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
@@ -121,5 +123,31 @@ public class SimpleEnemyTest {
         assertEquals(-Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
         enemy.setDirection(GameObject.Direction.RIGHT);
         assertEquals(Enemy.ENEMY_SPEED, enemy.speedX, 0.01f);
+    }
+
+    /**
+     * Test the draw function
+     */
+    @Test
+    public void testDrawRight() {
+        enemy.setDirection(GameObject.Direction.RIGHT);
+        SpriteBatch batch = Mockito.mock(SpriteBatch.class);
+        Texture texture = null;
+        Mockito.doNothing().when(batch).draw(texture, 0, 0);
+        enemy.draw(batch);
+        verify(batch).draw(texture, 0, 0);
+    }
+
+    /**
+     * Test the draw function
+     */
+    @Test
+    public void testDrawLeft() {
+        enemy.setDirection(GameObject.Direction.LEFT);
+        SpriteBatch batch = Mockito.mock(SpriteBatch.class);
+        Texture texture = null;
+        Mockito.doNothing().when(batch).draw(texture, 0, 0);
+        enemy.draw(batch);
+        verify(batch).draw(texture, 0, 0);
     }
 }
