@@ -116,7 +116,7 @@ public class Bubble extends Floating {
      * Add a new filled bubble to list with new Objects.
      * @param enemy the enemy.
      */
-    protected final void makeFilledBubble(Enemy enemy) {
+    protected void makeFilledBubble(Enemy enemy) {
         newObjects.add(new FilledBubble(getLeft(), getBottom(), enemy));
     }
 
