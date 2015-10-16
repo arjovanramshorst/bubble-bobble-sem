@@ -18,13 +18,6 @@ public class SimpleEnemy extends Enemy{
         super(xPosition, yPosition);
     }
 
-
-    @Override
-    public void handleCollision(GameObject other) {
-        super.handleCollision(other);
-
-    }
-
     /**
      * Draws the sprite at the correct location.
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
