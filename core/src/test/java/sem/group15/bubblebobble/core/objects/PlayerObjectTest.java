@@ -40,7 +40,7 @@ public class PlayerObjectTest {
     @Before
     public void setUp() {
 //        Gdx.app = mock(Application.class);
-//        Gdx.input = mock(Input.class);
+        Gdx.input = mock(Input.class);
 //        player = mock(Player.class, Mockito.CALLS_REAL_METHODS);
 //        Mockito.doNothing().when(player).playDeadSound();
 //        Mockito.doNothing().when(player).playJumpSound();
