@@ -11,12 +11,29 @@ import java.io.IOException;
  * Created by arjo on 7-9-15.
  */
 public class GameController {
+    /**
+     * Player that is used by the user.
+     */
     private Player player;
+    /**
+     * Level that is played.
+     */
     private Level currentLevel;
+    /**
+     * Levelrenderere that renders the level.
+     */
     private LevelRenderer levelRenderer;
+    /**
+     * the number of the currentLebel.
+     */
     private int currentLevelNumber;
+    /**
+     * the maximum level.
+     */
     private static final int MAX_LEVEL = 3;
-
+    /**
+     * the player XY spawn.
+     */
     public static final int PLAYER_XY_SPAWN = 64;
 
     public enum GameState {
@@ -65,6 +82,8 @@ public class GameController {
                 break;
             case LOST:
                 handleStateLost();
+                break;
+            default:
                 break;
         }
     }

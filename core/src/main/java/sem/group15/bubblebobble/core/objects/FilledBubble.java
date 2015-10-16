@@ -12,7 +12,13 @@ import sem.group15.bubblebobble.core.factories.StrongEnemyFactory;
  */
 public class FilledBubble extends Floating {
 
+    /**
+     * seconds the filledBubble is alive.
+     */
     public static final float FILLED_LIFESPAN = 5;
+    /**
+     * The factory that makes the bubbles.
+     */
     private EnemyFactory factory;
 
     /**
@@ -23,10 +29,10 @@ public class FilledBubble extends Floating {
      */
     public FilledBubble(final float xPosition, final float yPosition, final Enemy enemy) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
-        if (enemy instanceof SimpleEnemy)
-            factory = new SimpleEnemyFactory();
-        else if (enemy instanceof StrongEnemy)
-            factory = new StrongEnemyFactory();
+        if (enemy instanceof SimpleEnemy){
+            factory = new SimpleEnemyFactory();}
+        else if (enemy instanceof StrongEnemy){
+            factory = new StrongEnemyFactory();}
 
         speedY = 50;
         speedX = 0;
@@ -38,7 +44,7 @@ public class FilledBubble extends Floating {
      * The initial speed of the FilledBubbleObject is FOR THE MOMENT 50.
      * @param elapsed - time that has passed
      */
-    public void update(float elapsed) {
+    public final void update(final float elapsed) {
         super.update(elapsed);
         location.y += speedY * elapsed;
 
@@ -59,15 +65,14 @@ public class FilledBubble extends Floating {
      * the y speed should change to 0 and the x speed should
      * change to either the right or left.
      * @param collided GameObject that collided with this.
-     *                 (only to be used to handle the collision correctly for this
+     * (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
     public final void handleCollision(final GameObject collided) {
         if (location.overlaps(collided.getBody())) {
             if (collided instanceof Immutable) {
                 // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
-                speedY = 0;
-            }
+                speedY = 0;}
 
             if (collided instanceof Player) {
                 remove = true;
@@ -77,7 +82,6 @@ public class FilledBubble extends Floating {
                 else {
                     newObjects.add(new Banana(getLeft(), getBottom()));
                 }
-
             }
         }
     }

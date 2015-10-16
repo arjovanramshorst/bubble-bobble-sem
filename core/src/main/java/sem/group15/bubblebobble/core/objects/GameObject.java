@@ -13,10 +13,25 @@ import java.util.List;
  */
 public abstract class GameObject {
 
+    /**
+     * Asset manager.
+     */
     protected Assets assets;
+    /**
+     * location of the object.
+     */
     protected Rectangle location;
+    /**
+     * speed of the object.
+     */
     protected float speedX;
+    /**
+     * speed of the object.
+     */
     protected float speedY;
+    /**
+     * prints the interaction.
+     */
     protected Logger logger;
 
     /**

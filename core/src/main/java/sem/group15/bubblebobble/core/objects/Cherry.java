@@ -7,7 +7,7 @@ import sem.group15.bubblebobble.core.BubbleBobble;
 /**
  * Created by Wouter on 10/16/2015.
  */
-public class Cherry extends Fruit{
+public class Cherry extends Fruit {
 
     /**
      * Create a Cherry object at given location.
@@ -20,7 +20,7 @@ public class Cherry extends Fruit{
     }
 
     @Override
-    public void draw(final SpriteBatch batch) {
+    public final void draw(final SpriteBatch batch) {
         batch.draw(assets.cherry, getLeft(), getBottom());
     }
 }

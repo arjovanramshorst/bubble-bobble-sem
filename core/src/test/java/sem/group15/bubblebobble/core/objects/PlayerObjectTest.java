@@ -85,10 +85,10 @@ public class PlayerObjectTest {
         Enemy enemy = mock(Enemy.class, Mockito.CALLS_REAL_METHODS);
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.handleCollision(enemy);
-        assertEquals(player.INVULNERABLE_TIME, player.respawned, 0.01f);
+        assertEquals(Player.INVULNERABLE_TIME, player.respawned, 0.01f);
 
         player.update(0.5f);
-        assertEquals(player.INVULNERABLE_TIME - 0.5f, player.respawned, 0.01f);
+        assertEquals(Player.INVULNERABLE_TIME - 0.5f, player.respawned, 0.01f);
     }
 
     /**
@@ -98,14 +98,14 @@ public class PlayerObjectTest {
     public void testHandleCollisionEnemy() {
         player.update(0.1f);
         player.isAlive = true;
-        player.lives = player.PLAYER_LIVES;
+        player.lives = Player.PLAYER_LIVES;
         player.respawned = 0f;
 
         Enemy enemy = mock(Enemy.class, Mockito.CALLS_REAL_METHODS);
         enemy.location = new Rectangle(BubbleBobble.SPRITE_SIZE - 2, 0, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         player.update(0.1f);
         player.handleCollision(enemy);
-        assertEquals(player.PLAYER_LIVES - 1, player.lives, 0);
+        assertEquals(Player.PLAYER_LIVES - 1, player.lives, 0);
         assertTrue(player.isAlive);
 
         enemy.location.x = GameController.PLAYER_XY_SPAWN;

@@ -11,12 +11,12 @@ public class Wall extends Immutable {
 
 
     /**
-     * Create wall object with given x,y coordinates
-     * and texture
+     * Create wall object with given x,y coordinates.
+     * and texture.
      * @param x x coordinate from the bottom left corner
      * @param y y coordinate from the bottom left corner
      */
-    public Wall(float x, float y) {
+    public Wall(final float x, final float y) {
         super(
                 new Rectangle(x, y, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE)
         );
@@ -27,24 +27,24 @@ public class Wall extends Immutable {
      * Might be needed in the future.
      * @param elapsed time elapsed since last gameloop.
      */
-    public void update(float elapsed) {
+    public void update(final float elapsed) {
     }
 
 
     /**
      * Check for collisions.
      * @param collided GameObject that collided with this.
-     *                 (only to be used to handle the collision correctly for this
+     * (only to be used to handle the collision correctly for this.
      */
-    public final void handleCollision(GameObject collided) {
+    public final void handleCollision(final GameObject collided) {
 
     }
 
     /**
-     * Draw sprite for wallobject
+     * Draw sprite for wallobject.
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
-    public final void draw(SpriteBatch spriteBatch) {
+    public final void draw(final SpriteBatch spriteBatch) {
         spriteBatch.draw(assets.wall, location.x, location.y);
     }
 

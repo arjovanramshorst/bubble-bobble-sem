@@ -3,7 +3,6 @@ package sem.group15.bubblebobble.core.objects;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * The enemy objects
@@ -27,11 +26,22 @@ public abstract class Enemy extends Gravity {
      * Amount of time an enemy stays angry.
      */
     protected static final float ANGRY_TIME = 10f;
+    /**
+     * normal left texture
+     */
     protected static  Texture normalLeftTexture;
+    /**
+     * normal right texture
+     */
     protected static  Texture normalRightTexture;
+    /**
+     * angry left texture
+     */
     protected static  Texture angryLeftTexture;
+    /**
+     * angryRightTexture
+     */
     protected static  Texture angryRightTexture;
-
     /**
      * The Direction the enemy is moving.
      */
@@ -143,7 +153,6 @@ public abstract class Enemy extends Gravity {
      * @param direction the direction in which the enemy is going.
      */
     public abstract void setDirection(Direction direction);
-
     /**
      * Sets the required textures normal left/right and angry left/right
      */
