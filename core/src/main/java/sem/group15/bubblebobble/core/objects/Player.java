@@ -30,6 +30,8 @@ public class Player extends Gravity {
     protected boolean floating;
     private Direction direction;
     public float respawned;
+    private float xSpeedPowerup;
+    private float powerUpTime;
 
     /**
      * creates player object with a position
@@ -46,13 +48,14 @@ public class Player extends Gravity {
         score = 0;
         lives = PLAYER_LIVES;
         respawned = 0;
+        xSpeedPowerup = 0;
+        powerUpTime = 0;
     }
     
      /**
      * updates the player parameters.
      * @param elapsed time elapsed since last gameloop.
      */
-
     @Override
     public void update(float elapsed) {
         super.update(elapsed);
@@ -81,11 +84,16 @@ public class Player extends Gravity {
             if (respawned > 0) {
                 respawned = respawned - elapsed;
             }
+            if (powerUpTime > 0) {
+                powerUpTime -= elapsed;
+            } else {
+                xSpeedPowerup = 1;
+            }
 
         } else {
             handleDeath();
         }
-        location.x += speedX * elapsed;
+        location.x += speedX * elapsed * xSpeedPowerup;
         location.y += speedY * elapsed;
 
     }
@@ -133,14 +141,12 @@ public class Player extends Gravity {
                 //set alive false if ran out of lives.
                 if (lives == 0) {
                     isAlive = false;
-                }
-                else {
+                } else {
                     respawn();
                 }
             }
 
             if (other instanceof Wall) {
-//                float MAX_WALL_OVERLAP = 10f;
                 if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
                     setLeft(other.getRight());
                     logger.log("Player touched wall on left.");
@@ -160,6 +166,13 @@ public class Player extends Gravity {
                     logger.log("Player touched bubble");
                 }
             }
+
+            if (other instanceof Powerup) {
+                Powerup powerup = (Powerup) other;
+                xSpeedPowerup = powerup.getSpeedBoost();
+                powerUpTime = powerup.getActiveTime();
+            }
+
             if (other instanceof Fruit) {
                 Fruit fruit = (Fruit) other;
                 if (fruit.getAliveTime() > 0.5) {

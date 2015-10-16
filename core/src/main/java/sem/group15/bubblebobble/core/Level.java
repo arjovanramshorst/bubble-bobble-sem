@@ -1,5 +1,6 @@
 package sem.group15.bubblebobble.core;
 
+
 import sem.group15.bubblebobble.core.objects.Enemy;
 import sem.group15.bubblebobble.core.objects.FilledBubble;
 import sem.group15.bubblebobble.core.objects.Fruit;
