@@ -88,23 +88,6 @@ public class StrongEnemy extends Enemy {
         if (other instanceof Player && switchDelay < 0){
             updatePath(other.location.x);
         }
-
-        if (location.overlaps(other.getBody())) {
-
-            if (other instanceof Wall) {
-                if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
-                    setLeft(other.getRight());
-                    setDirection(Direction.RIGHT);
-                }
-                if (between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
-                    setRight(other.getLeft());
-                    setDirection(Direction.LEFT);
-                }
-            }
-            if (other instanceof Bubble && !other.remove() && overlapPercentage(other) >= Bubble.PERCENTAGE_OVERLAP_COLLISION) {
-                remove = true;
-            }
-        }
     }
 
 
