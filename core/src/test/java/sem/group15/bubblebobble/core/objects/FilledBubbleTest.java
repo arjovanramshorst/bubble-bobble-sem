@@ -1,5 +1,6 @@
 package sem.group15.bubblebobble.core.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -10,6 +11,7 @@ import sem.group15.bubblebobble.core.BubbleBobble;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class FilledBubbleTest {
 
@@ -19,6 +21,7 @@ public class FilledBubbleTest {
     public void setUp() {
         Enemy enemey = Mockito.mock(Enemy.class);
         fbubble = new FilledBubble(0, 0, enemey);
+        when(Gdx.graphics.getHeight()).thenReturn(800);
     }
 
     /**
