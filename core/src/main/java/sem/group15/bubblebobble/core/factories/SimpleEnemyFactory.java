@@ -1,7 +1,6 @@
 package sem.group15.bubblebobble.core.factories;
 
 import sem.group15.bubblebobble.core.objects.Enemy;
-import sem.group15.bubblebobble.core.objects.GameObject;
 import sem.group15.bubblebobble.core.objects.SimpleEnemy;
 
 /**
