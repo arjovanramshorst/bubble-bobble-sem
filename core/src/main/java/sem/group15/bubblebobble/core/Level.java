@@ -27,7 +27,7 @@ public class Level {
     }
 
     /**
-     * Run the main game loop (update, collision, objects)
+     * Run the main game loop (update, collision, objects).
      * @param elapsed time elapsed since last frame.
      */
     public final void run(final float elapsed) {

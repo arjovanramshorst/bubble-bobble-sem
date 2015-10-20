@@ -53,7 +53,7 @@ public class SimpleEnemy extends Enemy {
     }
 
     /**
-     * sets the appropriate textures
+     * sets the appropriate textures.
      */
     @Override
     public void setTextures() {

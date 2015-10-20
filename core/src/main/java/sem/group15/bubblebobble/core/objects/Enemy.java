@@ -27,19 +27,19 @@ public abstract class Enemy extends Gravity {
      */
     protected static final float ANGRY_TIME = 10f;
     /**
-     * normal left texture
+     * normal left texture.
      */
     protected static Texture normalLeftTexture;
     /**
-     * normal right texture
+     * normal right texture.
      */
     protected static Texture normalRightTexture;
     /**
-     * angry left texture
+     * angry left texture.
      */
     protected static Texture angryLeftTexture;
     /**
-     * angryRightTexture
+     * angryRightTexture.
      */
     protected static Texture angryRightTexture;
     /**
@@ -160,7 +160,7 @@ public abstract class Enemy extends Gravity {
     public abstract void setDirection(Direction direction);
 
     /**
-     * Sets the required textures normal left/right and angry left/right
+     * Sets the required textures normal left/right and angry left/right.
      */
     public abstract void setTextures();
 

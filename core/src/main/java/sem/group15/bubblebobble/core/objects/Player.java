@@ -34,7 +34,7 @@ public class Player extends Gravity {
     protected float powerUpTime;
 
     /**
-     * creates player object with a position
+     * creates player object with a position.
      *
      * @param xPosition x coordinate
      * @param yPosition y coordinate
@@ -228,7 +228,7 @@ public class Player extends Gravity {
     }
 
     /**
-     * Plays the jumpSound when the player jumps
+     * Plays the jumpSound when the player jumps.
      */
     public void playJumpSound() {
         try {
@@ -257,7 +257,7 @@ public class Player extends Gravity {
     }
 
     /**
-     * Set direction of the player
+     * Set direction of the player.
      *
      * @param direction
      */

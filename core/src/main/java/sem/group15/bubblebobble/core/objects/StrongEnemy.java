@@ -64,7 +64,7 @@ public class StrongEnemy extends Enemy {
     }
 
     /**
-     * updated the direction of the enemy based on the player's position
+     * updated the direction of the enemy based on the player's position.
      *
      * @param playerX x coordinate of the player
      */
@@ -96,7 +96,7 @@ public class StrongEnemy extends Enemy {
 
 
     /**
-     * sets the appropriate textures
+     * sets the appropriate textures.
      */
     @Override
     public void setTextures() {
