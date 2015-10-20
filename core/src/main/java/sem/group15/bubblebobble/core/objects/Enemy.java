@@ -89,7 +89,8 @@ public abstract class Enemy extends Gravity {
                     setDirection(Direction.LEFT);
                 }
             }
-            if (other instanceof Bubble && !other.remove() && overlapPercentage(other) >= Bubble.PERCENTAGE_OVERLAP_COLLISION) {
+            if (other instanceof Bubble && !other.remove()
+                    && overlapPercentage(other) >= Bubble.PERCENTAGE_OVERLAP_COLLISION) {
                 remove = true;
             }
         }
