@@ -49,7 +49,7 @@ public abstract class Gravity extends GameObject {
     public void handleCollision(GameObject other) {
         if (other instanceof Floor) {
             float MAX_DIFF_LANDING = 10f;
-            if (between(overlapBottom(other), 0, MAX_DIFF_LANDING) && speedY < 0) {
+            if (getTop() < Gdx.graphics.getHeight() && between(overlapBottom(other), 0, MAX_DIFF_LANDING) && speedY < 0) {
                 setBottom(other.getTop());
                 speedY = 0;
                 timeSinceLastFloorContact = 0;

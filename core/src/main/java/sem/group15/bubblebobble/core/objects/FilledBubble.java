@@ -1,5 +1,6 @@
 package sem.group15.bubblebobble.core.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
@@ -47,7 +48,7 @@ public class FilledBubble extends Floating {
     public final void update(final float elapsed) {
         super.update(elapsed);
         location.y += speedY * elapsed;
-
+        location.y = Math.min(location.y, Gdx.graphics.getHeight() - BubbleBobble.SPRITE_SIZE);
         if (timeFromFired > FILLED_LIFESPAN) {
             remove = true;
             Enemy enemy = factory.createObject(location.x, location.y);
