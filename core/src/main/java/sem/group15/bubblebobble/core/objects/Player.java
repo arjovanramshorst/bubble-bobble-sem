@@ -35,6 +35,7 @@ public class Player extends Gravity {
 
     /**
      * creates player object with a position
+     *
      * @param xPosition x coordinate
      * @param yPosition y coordinate
      */
@@ -51,9 +52,10 @@ public class Player extends Gravity {
         xSpeedPowerup = 0;
         powerUpTime = 0;
     }
-    
-     /**
+
+    /**
      * updates the player parameters.
+     *
      * @param elapsed time elapsed since last gameloop.
      */
     @Override
@@ -125,6 +127,7 @@ public class Player extends Gravity {
     /**
      * If the player collides with an enemyObject.
      * Set the attribute isAlive to false.
+     *
      * @param other Object that needs to be checked for collision.
      */
     @Override
@@ -193,11 +196,12 @@ public class Player extends Gravity {
 
     /**
      * draws the player, checks for flags to select the right texture.
+     *
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     @Override
     public final void draw(final SpriteBatch spriteBatch) {
-        if (isAlive() && (respawned <= 0f || (3*respawned - (int) (3*respawned) > 0.5f))) {
+        if (isAlive() && (respawned <= 0f || (3 * respawned - (int) (3 * respawned) > 0.5f))) {
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(assets.playerLeft, getLeft(), getBottom());
@@ -206,7 +210,7 @@ public class Player extends Gravity {
                     spriteBatch.draw(assets.playerRight, getLeft(), getBottom());
                     break;
             }
-        } else if( ! isAlive()) {
+        } else if (!isAlive()) {
             spriteBatch.draw(assets.playerDead, getLeft(), getBottom());
         }
 
@@ -218,25 +222,25 @@ public class Player extends Gravity {
     public void playDeadSound() {
         try {
             assets.playerDeathSound.play(1.0f);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
 
         }
     }
+
     /**
      * Plays the jumpSound when the player jumps
      */
     public void playJumpSound() {
         try {
             assets.playerJumpSound.play(1.0f);
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
 
         }
     }
 
     /**
      * Check if the player is still alive.
+     *
      * @return alive boolean.
      */
     public boolean isAlive() {
@@ -245,6 +249,7 @@ public class Player extends Gravity {
 
     /**
      * Get the direction the player is moving.
+     *
      * @return direction
      */
     public Direction getDirection() {
@@ -253,6 +258,7 @@ public class Player extends Gravity {
 
     /**
      * Set direction of the player
+     *
      * @param direction
      */
     public void setDirection(Direction direction) {
