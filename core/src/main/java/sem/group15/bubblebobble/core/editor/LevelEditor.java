@@ -28,6 +28,9 @@ public class LevelEditor implements ApplicationListener {
     private BitmapFont bitmapFont;
     private List<GameObject> objects;
 
+    /**
+     * @Type Enum.
+     */
     private enum Selected {
         WALL,
         FLOOR,
@@ -99,8 +102,8 @@ public class LevelEditor implements ApplicationListener {
         } else if (o instanceof Floor) {
             line += "Floor";
         }
-        line += ", " + (int) (o.getLeft() / BubbleBobble.SPRITE_SIZE) + ", " +
-                (int) (o.getBottom() / BubbleBobble.SPRITE_SIZE);
+        line += ", " + (int) (o.getLeft() / BubbleBobble.SPRITE_SIZE) + ", "
+                + (int) (o.getBottom() / BubbleBobble.SPRITE_SIZE);
         writer.write(line + "\n");
     }
 

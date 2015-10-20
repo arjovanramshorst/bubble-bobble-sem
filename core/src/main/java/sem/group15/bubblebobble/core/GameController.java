@@ -41,6 +41,9 @@ public class GameController {
      */
     public static final int PLAYER_XY_SPAWN = 64;
 
+    /**
+     * @Type enum.
+     */
     public enum GameState {
         NEW,
         PLAY,

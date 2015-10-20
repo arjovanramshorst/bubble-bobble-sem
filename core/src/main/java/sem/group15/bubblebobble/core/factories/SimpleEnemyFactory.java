@@ -1,7 +1,6 @@
 package sem.group15.bubblebobble.core.factories;
 
 import sem.group15.bubblebobble.core.objects.Enemy;
-import sem.group15.bubblebobble.core.objects.GameObject;
 import sem.group15.bubblebobble.core.objects.SimpleEnemy;
 
 /**
@@ -11,7 +10,7 @@ public class SimpleEnemyFactory extends EnemyFactory {
 
     @Override
     public Enemy createObject(float x, float y) {
-        Enemy enemy = new SimpleEnemy(x,y);
+        Enemy enemy = new SimpleEnemy(x, y);
         setRandomDirection(enemy);
         enemy.setState(Enemy.State.NORMAL);
         return enemy;

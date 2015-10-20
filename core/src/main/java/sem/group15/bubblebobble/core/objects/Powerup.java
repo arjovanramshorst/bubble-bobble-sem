@@ -60,7 +60,7 @@ public class Powerup extends GameObject {
     }
 
     /**
-     * Getter for aliveTime
+     * Getter for aliveTime.
      * @return aliveTime, a float which represents the time the powerup is alive.
      */
     public final float getAliveTime() {

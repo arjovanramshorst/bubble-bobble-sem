@@ -24,6 +24,7 @@ public class LevelRenderer {
 
     /**
      * Set level to render.
+     *
      * @param level
      */
     public void setLevel(Level level) {
@@ -64,8 +65,8 @@ public class LevelRenderer {
      * Renders the player's lives.
      */
     private void renderLives() {
-        for(int i = 0; i < level.getPlayer().lives; i++) {
-            batch.draw(Assets.getAssets().playerLeft, 50 + (30*i),
+        for (int i = 0; i < level.getPlayer().lives; i++) {
+            batch.draw(Assets.getAssets().playerLeft, 50 + (30 * i),
                     Gdx.graphics.getHeight() - (BubbleBobble.SPRITE_SIZE / 1.33f),
                     BubbleBobble.SPRITE_SIZE / 1.5f, BubbleBobble.SPRITE_SIZE / 1.5f);
         }
@@ -78,7 +79,7 @@ public class LevelRenderer {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        font.draw(batch, "Press enter to begin", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        font.draw(batch, "Press enter to begin", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         batch.end();
     }
 
@@ -92,13 +93,14 @@ public class LevelRenderer {
         renderWorld();
         renderScore();
         renderLives();
-        Gdx.gl.glBlendColor(0,0,0,0.5f);
-        font.draw(batch, "Press enter to continue", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        Gdx.gl.glBlendColor(0, 0, 0, 0.5f);
+        font.draw(batch, "Press enter to continue", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         batch.end();
     }
 
     /**
      * Render the "lost" screen.
+     *
      * @param currentLevelNumber Level that was achieved in the game.
      */
     public void renderLost(int currentLevelNumber) {
@@ -106,11 +108,11 @@ public class LevelRenderer {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         batch.begin();
         renderWorld();
-        Gdx.gl.glBlendColor(1,1,1,0.5f);
-        String str = "You made it to level " + currentLevelNumber +
-                "\nScore: " + level.getPlayer().score +
-                "\n\nPress enter to start a new game!";
-        font.drawMultiLine(batch, str, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        Gdx.gl.glBlendColor(1, 1, 1, 0.5f);
+        String str = "You made it to level " + currentLevelNumber
+                + "\nScore: " + level.getPlayer().score
+                + "\n\nPress enter to start a new game!";
+        font.drawMultiLine(batch, str, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         batch.end();
     }
 }
