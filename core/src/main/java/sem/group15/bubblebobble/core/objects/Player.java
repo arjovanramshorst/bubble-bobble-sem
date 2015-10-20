@@ -23,7 +23,7 @@ public class Player extends Gravity {
     /**
      * Maximum amount a player can overlap with a wall.
      */
-    private final float MAX_WALL_OVERLAP = 10f;
+    private static final float MAX_WALL_OVERLAP = 10f;
     public int score, lives;
     protected boolean isAlive;
     private boolean fired;

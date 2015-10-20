@@ -29,10 +29,10 @@ public abstract class Gravity extends GameObject {
      */
     public void update(float elapsed) {
         timeSinceLastFloorContact += elapsed;
-        int GRAVITY_SPEED = 100;
-        int MAX_GRAVITY_SPEED = -300;
-        speedY = Math.max(speedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
-                MAX_GRAVITY_SPEED
+        int gravitySpeed = 100;
+        int maxGravitySpeed = -300;
+        speedY = Math.max(speedY - (gravitySpeed * timeSinceLastFloorContact * timeSinceLastFloorContact),
+                maxGravitySpeed
         );
 
         if (getTop() <= 0) {
@@ -48,8 +48,8 @@ public abstract class Gravity extends GameObject {
      */
     public void handleCollision(GameObject other) {
         if (other instanceof Floor) {
-            float MAX_DIFF_LANDING = 10f;
-            if (between(overlapBottom(other), 0, MAX_DIFF_LANDING) && speedY < 0) {
+            float maxDiffLanding = 10f;
+            if (between(overlapBottom(other), 0, maxDiffLanding) && speedY < 0) {
                 setBottom(other.getTop());
                 speedY = 0;
                 timeSinceLastFloorContact = 0;
