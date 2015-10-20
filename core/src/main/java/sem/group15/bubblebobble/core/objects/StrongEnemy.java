@@ -24,6 +24,7 @@ public class StrongEnemy extends Enemy {
 
     /**
      * Draws the sprite at the correct location.
+     *
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     @Override
@@ -46,6 +47,7 @@ public class StrongEnemy extends Enemy {
 
     /**
      * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
+     *
      * @param direction the direction in which the enemy is going.
      */
     public void setDirection(final Direction direction) {
@@ -63,6 +65,7 @@ public class StrongEnemy extends Enemy {
 
     /**
      * updated the direction of the enemy based on the player's position
+     *
      * @param playerX x coordinate of the player
      */
     public void updatePath(final float playerX) {
@@ -77,15 +80,16 @@ public class StrongEnemy extends Enemy {
 
 
     /**
-     *  Handles collisions with other objects.
-     *  If there is a WallCollision set the attribute wallCollision to true.
+     * Handles collisions with other objects.
+     * If there is a WallCollision set the attribute wallCollision to true.
+     *
      * @param other Object that needs to be checked for collision.
      */
     @Override
     public void handleCollision(final GameObject other) {
         super.handleCollision(other);
 
-        if (other instanceof Player && switchDelay < 0){
+        if (other instanceof Player && switchDelay < 0) {
             updatePath(other.location.x);
         }
     }
@@ -96,10 +100,10 @@ public class StrongEnemy extends Enemy {
      */
     @Override
     public void setTextures() {
-        angryLeftTexture=assets.strongEnemyLeft;
-        angryRightTexture= assets.strongEnemyRight;
-        normalLeftTexture=assets.strongEnemyLeft;
-        normalRightTexture=assets.strongEnemyRight;
+        angryLeftTexture = assets.strongEnemyLeft;
+        angryRightTexture = assets.strongEnemyRight;
+        normalLeftTexture = assets.strongEnemyLeft;
+        normalRightTexture = assets.strongEnemyRight;
     }
 
 }

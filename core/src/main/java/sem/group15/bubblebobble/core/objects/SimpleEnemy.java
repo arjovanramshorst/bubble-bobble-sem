@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * Created by Matthijs on 10/8/15.
  */
-public class SimpleEnemy extends Enemy{
+public class SimpleEnemy extends Enemy {
 
     /**
      * Creates an Enemy with position (X,Y) on the grid.
@@ -20,6 +20,7 @@ public class SimpleEnemy extends Enemy{
 
     /**
      * Draws the sprite at the correct location.
+     *
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     @Override
@@ -36,6 +37,7 @@ public class SimpleEnemy extends Enemy{
 
     /**
      * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
+     *
      * @param direction the direction in which the enemy is going.
      */
     public void setDirection(final Direction direction) {

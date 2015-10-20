@@ -29,19 +29,19 @@ public abstract class Enemy extends Gravity {
     /**
      * normal left texture
      */
-    protected static  Texture normalLeftTexture;
+    protected static Texture normalLeftTexture;
     /**
      * normal right texture
      */
-    protected static  Texture normalRightTexture;
+    protected static Texture normalRightTexture;
     /**
      * angry left texture
      */
-    protected static  Texture angryLeftTexture;
+    protected static Texture angryLeftTexture;
     /**
      * angryRightTexture
      */
-    protected static  Texture angryRightTexture;
+    protected static Texture angryRightTexture;
     /**
      * The Direction the enemy is moving.
      */
@@ -51,6 +51,7 @@ public abstract class Enemy extends Gravity {
 
     /**
      * Creates an Enemy with position (X,Y) on the grid.
+     *
      * @param xPosition x coordinate
      * @param yPosition y coordinate
      */
@@ -61,6 +62,7 @@ public abstract class Enemy extends Gravity {
 
     /**
      * Sets the state of this object.
+     *
      * @param state declares if angry or not
      */
     public void setState(State state) {
@@ -71,6 +73,7 @@ public abstract class Enemy extends Gravity {
     /**
      * Handles collisions with other objects.
      * If there is a WallCollision set the attribute wallCollision to true.
+     *
      * @param other Object that needs to be checked for collision.
      */
     @Override
@@ -98,6 +101,7 @@ public abstract class Enemy extends Gravity {
 
     /**
      * Update the location of the enemy.
+     *
      * @param elapsed time elapsed since last gameloop.
      */
     @Override
@@ -110,11 +114,10 @@ public abstract class Enemy extends Gravity {
         location.x += speedX * elapsed * multiplier;
         location.y += speedY * elapsed * multiplier;
         timeAngry += elapsed;
-        if (timeAngry > ANGRY_TIME){
+        if (timeAngry > ANGRY_TIME) {
             setState(State.NORMAL);
             timeAngry = 0;
         }
-
 
 
     }
@@ -151,9 +154,11 @@ public abstract class Enemy extends Gravity {
     /**
      * Sets the horizontal direction of the enemy.
      * And Adjusts its horizontal speed accordingly.
+     *
      * @param direction the direction in which the enemy is going.
      */
     public abstract void setDirection(Direction direction);
+
     /**
      * Sets the required textures normal left/right and angry left/right
      */
