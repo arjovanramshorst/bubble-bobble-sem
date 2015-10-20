@@ -239,7 +239,7 @@ public abstract class GameObject {
     public final boolean between(float value, float low, float high) {
         return (value > low && value < high);
     }
-
+    
     /**
      * Add new objects to a list.
      * @param gameObjects list to add the objects to.
@@ -247,7 +247,11 @@ public abstract class GameObject {
     public final void addNewObjectsTo(List<GameObject> gameObjects) {
         if (!newObjects.isEmpty()) {
             for (GameObject object : newObjects) {
-                gameObjects.add(object);
+                if(object instanceof Enemy) {
+                    gameObjects.add(1, object);
+                } else {
+                    gameObjects.add(object);
+                }
             }
             newObjects.clear();
         }

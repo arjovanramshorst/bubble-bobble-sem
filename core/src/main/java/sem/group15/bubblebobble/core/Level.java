@@ -43,7 +43,9 @@ public class Level {
      */
     public final void update(final float elapsed) {
         for (GameObject object : gameObjects) {
-            object.update(elapsed);
+            if(!object.remove()) {
+                object.update(elapsed);
+            }
         }
     }
 
@@ -53,8 +55,10 @@ public class Level {
     protected void checkCollisions() {
         for (int i = 0; i < gameObjects.size(); i++) {
             for (int i2 = i + 1; i2 < gameObjects.size(); i2++) {
-                gameObjects.get(i).handleCollision(gameObjects.get(i2));
-                gameObjects.get(i2).handleCollision(gameObjects.get(i));
+                if(!gameObjects.get(i).remove() && !gameObjects.get(i2).remove() ) {
+                    gameObjects.get(i).handleCollision(gameObjects.get(i2));
+                    gameObjects.get(i2).handleCollision(gameObjects.get(i));
+                }
             }
         }
     }
