@@ -223,7 +223,7 @@ public class Player extends Gravity {
         try {
             assets.playerDeathSound.play(1.0f);
         } catch (NullPointerException e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -234,7 +234,7 @@ public class Player extends Gravity {
         try {
             assets.playerJumpSound.play(1.0f);
         } catch (NullPointerException e) {
-
+            e.printStackTrace();
         }
     }
 
