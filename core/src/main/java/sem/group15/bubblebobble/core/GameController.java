@@ -2,7 +2,10 @@ package sem.group15.bubblebobble.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import sem.group15.bubblebobble.core.gameStates.GameState;
+import sem.group15.bubblebobble.core.gameStates.NewState;
 import sem.group15.bubblebobble.core.objects.Player;
+
 import java.io.IOException;
 
 
@@ -19,14 +22,15 @@ public class GameController {
      * Level that is played.
      */
     private Level currentLevel;
+
     /**
-     * Levelrenderere that renders the level.
+     * the player XY spawn.
      */
+    public static final int PLAYER_XY_SPAWN = 64;
 
-    public void setLevelRenderer(LevelRenderer levelRenderer) {
-        this.levelRenderer = levelRenderer;
-    }
-
+    /**
+     * Levelrenderer that renders the level.
+     */
     private LevelRenderer levelRenderer;
     /**
      * the number of the currentLebel.
@@ -36,22 +40,9 @@ public class GameController {
      * the maximum level.
      */
     private static final int MAX_LEVEL = 3;
-    /**
-     * the player XY spawn.
-     */
-    public static final int PLAYER_XY_SPAWN = 64;
 
-    /**
-     * @Type enum.
-     */
-    public enum GameState {
-        NEW,
-        PLAY,
-        PAUSE,
-        LOST
-    }
 
-    private GameState state;
+    private GameState gameState;
 
     /**
      * Creates a new GameController object.
@@ -59,16 +50,7 @@ public class GameController {
     public GameController() {
         player = new Player(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         levelRenderer = new LevelRenderer();
-        state = GameState.NEW;
-        currentLevelNumber = 1;
-    }
-
-    /**
-     * Resets the GameController so a new game can be started.
-     */
-    protected void resetController() {
-        player = new Player(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
-        state = GameState.PLAY;
+        gameState = new NewState();
         currentLevelNumber = 1;
     }
 
@@ -79,92 +61,7 @@ public class GameController {
      * @param elapsed time elapsed since last frame.
      */
     public final void run(final float elapsed) {
-        switch (state) {
-            case NEW:
-                handleStateNew();
-                break;
-            case PLAY:
-                handleStatePlay(elapsed);
-                break;
-            case PAUSE:
-                handleStatePause();
-                break;
-            case LOST:
-                handleStateLost();
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     * Is called when the gamestate is new.
-     */
-    protected void handleStateNew() {
-        levelRenderer.renderNew();
-        if (checkForStartKey()) {
-            state = GameState.PLAY;
-            startLevel(currentLevelNumber);
-        }
-    }
-
-    /**
-     * Handles the game when it is in the 'play' state.
-     *
-     * @param elapsed elapsed time since last frame.
-     */
-    private void handleStatePlay(float elapsed) {
-        currentLevel.run(elapsed);
-        if (checkForLose()) {
-            state = GameState.LOST;
-        }
-        if (currentLevel.levelFinished()) {
-            currentLevelNumber++;
-            startLevel(Math.min(currentLevelNumber, MAX_LEVEL));
-        }
-        if (checkForPauseKey()) {
-            state = GameState.PAUSE;
-        }
-        levelRenderer.render();
-    }
-
-    /**
-     * Is called when the gamestate is paused.
-     */
-    protected void handleStatePause() {
-        levelRenderer.renderPause();
-        if (checkForStartKey()) {
-            state = GameState.PLAY;
-        }
-    }
-
-    /**
-     * Is called when the gamestate is Lost.
-     */
-    protected void handleStateLost() {
-        levelRenderer.renderLost(currentLevelNumber);
-        if (checkForStartKey()) {
-            resetController();
-            startLevel(1);
-        }
-    }
-
-    /**
-     * Returns true if the start key is pressed (enter for now).
-     *
-     * @return true if enter is pressed.
-     */
-    protected boolean checkForStartKey() {
-        return Gdx.input.isKeyPressed(Input.Keys.ENTER);
-    }
-
-    /**
-     * Returns true if the pause key is pressed (escape for now).
-     *
-     * @return true if escape is pressed.
-     */
-    private boolean checkForPauseKey() {
-        return Gdx.input.isKeyPressed(Input.Keys.ESCAPE);
+        gameState = gameState.handleState(this, elapsed);
     }
 
     /**
@@ -184,12 +81,13 @@ public class GameController {
     }
 
     /**
-     * Checks if the game is lost.
+     * Returns true if the start key is pressed (enter for now).
      *
-     * @return true if the player lost the game.
+     * @return true if enter is pressed.
      */
-    protected boolean checkForLose() {
-        return !player.isAlive();
+    public boolean checkForStartKey() {
+        System.out.println(Gdx.input.isKeyPressed(Input.Keys.ENTER));
+        return Gdx.input.isKeyPressed(Input.Keys.ENTER);
     }
 
     /**
@@ -229,21 +127,49 @@ public class GameController {
     }
 
     /**
-     * Get state of the controller.
+     * Get current level.
      *
-     * @return state
+     * @return currentLevel
      */
-    public GameState getState() {
-        return state;
+    public Level getCurrentLevel() {
+        return currentLevel;
     }
 
     /**
-     * Set the state of the controller.
+     * Get level renderer.
      *
-     * @param state new state
+     * @return levelRenderer
      */
-    public void setState(GameState state) {
-        this.state = state;
+    public LevelRenderer getLevelRenderer() {
+        return levelRenderer;
+    }
 
+    /**
+     * Get max level;
+     *
+     * @return MAX_LEVEL
+     */
+    public int getMaxLevel() {
+        return MAX_LEVEL;
+    }
+
+    /**
+     * Sets the level renderer.
+     * for testing purposes.
+     *
+     * @Param levelRenderer
+     */
+    public void setLevelRenderer(LevelRenderer levelRenderer){
+        this.levelRenderer = levelRenderer;
+    }
+
+    /**
+     * Sets the game state.
+     * for testing purposes.
+     *
+     * @Param gameState
+    */
+    public void setGameState(GameState gameState){
+        this.gameState = gameState;
     }
 }
