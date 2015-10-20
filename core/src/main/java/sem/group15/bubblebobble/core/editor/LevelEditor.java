@@ -28,6 +28,9 @@ public class LevelEditor implements ApplicationListener {
     private BitmapFont bitmapFont;
     private List<GameObject> objects;
 
+    /**
+     * @Type Enum.
+     */
     private enum Selected {
         WALL,
         FLOOR,

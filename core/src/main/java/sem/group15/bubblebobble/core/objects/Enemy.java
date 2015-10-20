@@ -164,6 +164,9 @@ public abstract class Enemy extends Gravity {
      */
     public abstract void setTextures();
 
+    /**
+     * @Type Enum.
+     */
     public enum State {
         NORMAL,
         ANGRY

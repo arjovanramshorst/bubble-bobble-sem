@@ -44,7 +44,9 @@ public abstract class GameObject {
         this.logger = logger;
     }
 
-
+    /**
+     * @Type Enum.
+     */
     public enum Direction {
         LEFT, RIGHT
     }
