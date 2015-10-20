@@ -145,7 +145,7 @@ public class GameController {
     }
 
     /**
-     * Get max level;
+     * Get max level.
      *
      * @return MAX_LEVEL
      */
@@ -159,7 +159,7 @@ public class GameController {
      *
      * @Param levelRenderer
      */
-    public void setLevelRenderer(LevelRenderer levelRenderer){
+    public void setLevelRenderer(LevelRenderer levelRenderer) {
         this.levelRenderer = levelRenderer;
     }
 
@@ -168,8 +168,8 @@ public class GameController {
      * for testing purposes.
      *
      * @Param gameState
-    */
-    public void setGameState(GameState gameState){
+     */
+    public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
 }
