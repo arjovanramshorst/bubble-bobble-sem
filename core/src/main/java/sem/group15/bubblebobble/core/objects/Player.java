@@ -2,8 +2,10 @@ package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.Assets;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.GameController;
 
@@ -127,7 +129,6 @@ public class Player extends Gravity {
     /**
      * If the player collides with an enemyObject.
      * Set the attribute isAlive to false.
-     *
      * @param other Object that needs to be checked for collision.
      */
     @Override
@@ -144,6 +145,9 @@ public class Player extends Gravity {
                 //set alive false if ran out of lives.
                 if (lives == 0) {
                     isAlive = false;
+                    if (score > Assets.getHighScore()) {
+                        Assets.setHighScore(score);
+                    }
                 } else {
                     respawn();
                 }

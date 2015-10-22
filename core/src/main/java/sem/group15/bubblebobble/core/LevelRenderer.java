@@ -111,6 +111,7 @@ public class LevelRenderer {
         Gdx.gl.glBlendColor(1, 1, 1, 0.5f);
         String str = "You made it to level " + currentLevelNumber
                 + "\nScore: " + level.getPlayer().score
+                + "\nhighScore: " + Assets.getHighScore()
                 + "\n\nPress enter to start a new game!";
         font.drawMultiLine(batch, str, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         batch.end();

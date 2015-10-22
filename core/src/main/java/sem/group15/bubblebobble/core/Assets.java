@@ -1,6 +1,7 @@
 package sem.group15.bubblebobble.core;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -84,6 +85,10 @@ public final class Assets {
      */
     public Sound playerJumpSound;
 
+    /**
+     * Prefence object used for highscores
+     */
+    private static Preferences prefs;
 
     /**
      * Private constructor, can only be called from getAssets method.
@@ -136,9 +141,30 @@ public final class Assets {
             cherry = loadTexture("cherry-icon.png");
             playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
             playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
+            prefs = Gdx.app.getPreferences("highScores");
+
+            if (!prefs.contains("highScore")) {
+                prefs.putInteger("highScore", 0);
+            }
+
         } catch (NullPointerException e) {
             System.out.println("error loading texture");
         }
-
     }
+
+        /**
+         * Setter for highScore
+         */
+        public static void  setHighScore(int val) {
+        prefs.putInteger("highScore", val);
+        prefs.flush();
+    }
+
+    /**
+     * Getter for highScore
+     */
+    public static int getHighScore() {
+        return prefs.getInteger("highScore");
+    }
+
 }
