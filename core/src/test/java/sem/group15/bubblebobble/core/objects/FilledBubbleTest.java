@@ -5,9 +5,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
+import sem.group15.bubblebobble.core.factories.EnemyFactory;
+import sem.group15.bubblebobble.core.factories.SimpleEnemyFactory;
+import sem.group15.bubblebobble.core.factories.StrongEnemyFactory;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 
@@ -22,6 +28,26 @@ public class FilledBubbleTest {
     }
 
     /**
+     * Test constructor with simple enemy.
+     */
+    @Test
+    public void testConstructorSimpleEnemy() {
+        SimpleEnemy simpleEnemy = Mockito.mock(SimpleEnemy.class);
+        fbubble = new FilledBubble(0,0, simpleEnemy);
+        assertTrue(fbubble.getFactory() instanceof SimpleEnemyFactory);
+    }
+
+    /**
+     * Test constructor with simple enemy.
+     */
+    @Test
+    public void testConstructorStrongEnemy() {
+        StrongEnemy strongEnemy = Mockito.mock(StrongEnemy.class);
+        fbubble = new FilledBubble(0,0, strongEnemy);
+        assertTrue(fbubble.getFactory() instanceof StrongEnemyFactory);
+    }
+
+    /**
      *  test update function
      */
     @Test
@@ -29,6 +55,24 @@ public class FilledBubbleTest {
         assertEquals(0f, fbubble.location.y, 0.1f);
         fbubble.update(1f);
         assertEquals(fbubble.speedY, fbubble.location.y, 0.01f);
+    }
+
+    @Test
+    public void testUpdateTimeFromFired(){
+        EnemyFactory factory = Mockito.mock(EnemyFactory.class);
+        Enemy enemy = Mockito.mock(Enemy.class);
+        Mockito.doNothing().when(enemy).setState(Enemy.State.ANGRY);
+//        Mockito.doReturn(enemy).when(factory).createObject(0f, 0f);
+
+        fbubble.setFactory(factory);
+        assertEquals(0, fbubble.timeFromFired, 0.1f);
+        assertFalse(fbubble.remove());
+        fbubble.update(0.1f);
+        assertEquals(0.1f, fbubble.timeFromFired, 0.1f);
+        assertFalse(fbubble.remove());
+        fbubble.update(5f);
+        assertEquals(5.1f, fbubble.timeFromFired, 0.1f);
+        assertTrue(fbubble.remove());
     }
 
     /**

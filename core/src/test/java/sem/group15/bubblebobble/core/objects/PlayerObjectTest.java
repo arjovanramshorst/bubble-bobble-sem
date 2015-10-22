@@ -16,9 +16,7 @@ import sem.group15.bubblebobble.core.Logger;
 import sem.group15.bubblebobble.core.GameController;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by TUDelft SID on 22015.
@@ -335,6 +333,19 @@ public class PlayerObjectTest {
         player.fireBubble();
         assertEquals(1, player.newObjects.size());
         assertTrue(player.newObjects.get(0) instanceof Bubble);
+    }
+
+    /**
+     * Test shooting bubbles bubble.
+     */
+    @Test
+    public void testShootBubble(){
+        Mockito.when(Gdx.input.isKeyPressed(Input.Keys.SPACE)).thenReturn(true);
+        Player spyPlayer = Mockito.spy(player);
+        assertFalse(spyPlayer.getFired());
+        spyPlayer.update(0.1f);
+        verify(spyPlayer).fireBubble();
+        assertTrue(spyPlayer.getFired());
     }
 
 }

@@ -305,12 +305,12 @@ public abstract class GameObject {
         return remove;
     }
 
-    /**
-     * Set the new objects list.
-     *
-     * @param newObjects
-     */
-    public void setNewObjects(List<GameObject> newObjects) {
-        this.newObjects = newObjects;
-    }
+//    /**
+//     * Set the new objects list.
+//     *
+//     * @param newObjects
+//     */
+//    public void setNewObjects(List<GameObject> newObjects) {
+//        this.newObjects = newObjects;
+//    }
 }
