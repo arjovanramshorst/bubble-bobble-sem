@@ -145,9 +145,6 @@ public class Player extends Gravity {
                 //set alive false if ran out of lives.
                 if (lives == 0) {
                     isAlive = false;
-                    if (score > Assets.getHighScore()) {
-                        Assets.setHighScore(score);
-                    }
                 } else {
                     respawn();
                 }

@@ -139,9 +139,19 @@ public class GameController {
     }
 
     /**
+     * Updates highScore
+     */
+    protected void updateHighScore() {
+        if (player.score > Assets.getHighScore()) {
+            Assets.setHighScore(player.score);
+        }
+    }
+
+    /**
      * Is called when the gamestate is Lost.
      */
     protected void handleStateLost() {
+        updateHighScore();
         levelRenderer.renderLost(currentLevelNumber);
         if (checkForStartKey()) {
             resetController();
