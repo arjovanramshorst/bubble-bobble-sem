@@ -2,6 +2,7 @@ package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -49,7 +50,12 @@ public class SimpleEnemyTest {
      * Test if angryTime gets updated when angry.
      */
     @Test
-    public void testUpdatetTimeAngry() {
+    public void testUpdateTimeAngry() {
+        /*
+        prevent warping due to long fall to cause nullpointer
+         */
+        Gdx.graphics = Mockito.mock(Graphics.class);
+        
         assertEquals(0, enemy.timeAngry, 0.1f);
         enemy.setState(Enemy.State.ANGRY);
         enemy.update(1f);
@@ -58,7 +64,6 @@ public class SimpleEnemyTest {
         enemy.update(9.1f);
         assertEquals(0, enemy.timeAngry, 0.1f);
         assertEquals(Enemy.State.NORMAL, enemy.state);
-
     }
 
     /**
