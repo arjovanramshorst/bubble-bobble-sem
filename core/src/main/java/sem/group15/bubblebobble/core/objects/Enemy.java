@@ -4,12 +4,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.Texture;
+import sem.group15.bubblebobble.core.enemybehaviour.JumpBehaviour;
 
 /**
  * The enemy objects
  * Created by TUDelft SID on 8-9-2015.
  */
 public abstract class Enemy extends Gravity {
+
+    protected JumpBehaviour jumpBehaviour;
 
     /**
      * Maximum overlap with a wall.
@@ -50,6 +53,8 @@ public abstract class Enemy extends Gravity {
     public State state;
     protected float timeAngry;
 
+
+
     /**
      * Creates an Enemy with position (X,Y) on the grid.
      *
@@ -69,6 +74,10 @@ public abstract class Enemy extends Gravity {
     public void setState(State state) {
         this.state = state;
 
+    }
+
+    public void jump(){
+        this.speedY=jumpBehaviour.jump();
     }
 
     /**
@@ -99,6 +108,7 @@ public abstract class Enemy extends Gravity {
             }
         }
     }
+
 
     /**
      * Update the location of the enemy.

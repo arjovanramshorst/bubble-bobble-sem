@@ -1,6 +1,7 @@
 package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import sem.group15.bubblebobble.core.enemybehaviour.JumpHigh;
 
 /**
  * Created by Matthijs on 10/8/15.
@@ -20,6 +21,7 @@ public class StrongEnemy extends Enemy {
      */
     public StrongEnemy(final float xPosition, final float yPosition) {
         super(xPosition, yPosition);
+        jumpBehaviour = new JumpHigh();
     }
 
 
@@ -59,7 +61,7 @@ public class StrongEnemy extends Enemy {
             setDirection(Direction.LEFT);
         }
 
-        speedY += 300;
+        jump();
     }
 
 
