@@ -5,8 +5,14 @@ import sem.group15.bubblebobble.core.GameController;
 /**
  * Created by daan on 20-10-15.
  */
-public interface GameState {
+public abstract class GameState {
 
-    GameState handleState(GameController controller, float elapsed);
+    protected GameController controller;
+
+    public GameState(GameController controller) {
+        this.controller = controller;
+    }
+
+    public abstract GameState handleState(float elapsed);
 
 }
