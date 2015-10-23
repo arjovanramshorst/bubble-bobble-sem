@@ -31,6 +31,6 @@ public class Floor extends Immutable {
 
     @Override
     public final void draw(final SpriteBatch spriteBatch) {
-        spriteBatch.draw(assets.wall, location.x, location.y);
+        spriteBatch.draw(assets.getWall(), location.x, location.y);
     }
 }

@@ -1,5 +1,6 @@
 package sem.group15.bubblebobble.core.objects;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.Texture;
@@ -141,5 +142,34 @@ public abstract class Enemy extends Gravity {
     public enum State {
         NORMAL,
         ANGRY
+    }
+
+    /**
+     * Draws the sprite at the correct location.
+     *
+     * @param spriteBatch SpriteBatch that the sprites need to be added to.
+     */
+    @Override
+    public final void draw(final SpriteBatch spriteBatch) {
+        if(state==State.NORMAL) {
+            switch (direction) {
+                case LEFT:
+                    spriteBatch.draw(normalLeftTexture, getLeft(), getBottom());
+                    break;
+                case RIGHT:
+                    spriteBatch.draw(normalRightTexture, getLeft(), getBottom());
+                    break;
+            }
+        }
+        if(state==State.ANGRY) {
+            switch (direction) {
+                case LEFT:
+                    spriteBatch.draw(angryLeftTexture, getLeft(), getBottom());
+                    break;
+                case RIGHT:
+                    spriteBatch.draw(angryRightTexture, getLeft(), getBottom());
+                    break;
+            }
+        }
     }
 }

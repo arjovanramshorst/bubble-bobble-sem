@@ -45,7 +45,7 @@ public class Wall extends Immutable {
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     public final void draw(final SpriteBatch spriteBatch) {
-        spriteBatch.draw(assets.wall, location.x, location.y);
+        spriteBatch.draw(assets.getWall(), location.x, location.y);
     }
 
 }

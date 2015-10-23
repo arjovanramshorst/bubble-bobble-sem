@@ -21,6 +21,6 @@ public class Cherry extends Fruit {
 
     @Override
     public final void draw(final SpriteBatch batch) {
-        batch.draw(assets.cherry, getLeft(), getBottom());
+        batch.draw(assets.getCherry(), getLeft(), getBottom());
     }
 }

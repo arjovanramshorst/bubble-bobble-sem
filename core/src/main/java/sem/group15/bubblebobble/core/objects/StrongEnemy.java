@@ -22,22 +22,6 @@ public class StrongEnemy extends Enemy {
         super(xPosition, yPosition);
     }
 
-    /**
-     * Draws the sprite at the correct location.
-     *
-     * @param spriteBatch SpriteBatch that the sprites need to be added to.
-     */
-    @Override
-    public final void draw(final SpriteBatch spriteBatch) {
-        switch (direction) {
-            case LEFT:
-                spriteBatch.draw(assets.strongEnemyLeft, getLeft(), getBottom());
-                break;
-            case RIGHT:
-                spriteBatch.draw(assets.strongEnemyRight, getLeft(), getBottom());
-                break;
-        }
-    }
 
     @Override
     public void update(final float elapsed) {
@@ -100,10 +84,10 @@ public class StrongEnemy extends Enemy {
      */
     @Override
     public void setTextures() {
-        angryLeftTexture = assets.strongEnemyLeft;
-        angryRightTexture = assets.strongEnemyRight;
-        normalLeftTexture = assets.strongEnemyLeft;
-        normalRightTexture = assets.strongEnemyRight;
+        angryLeftTexture = assets.getStrongEnemyLeft();
+        angryRightTexture = assets.getStrongEnemyRight();
+        normalLeftTexture = assets.getStrongEnemyLeft();
+        normalRightTexture = assets.getStrongEnemyRight();
     }
 
 }
