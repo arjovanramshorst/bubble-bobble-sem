@@ -2,8 +2,8 @@ package sem.group15.bubblebobble.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import sem.group15.bubblebobble.core.gameStates.GameState;
-import sem.group15.bubblebobble.core.gameStates.NewState;
+import sem.group15.bubblebobble.core.gamestates.GameState;
+import sem.group15.bubblebobble.core.gamestates.NewState;
 import sem.group15.bubblebobble.core.objects.Player;
 
 import java.io.IOException;

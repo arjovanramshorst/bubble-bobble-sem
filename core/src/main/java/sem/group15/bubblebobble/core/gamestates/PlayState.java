@@ -1,4 +1,4 @@
-package sem.group15.bubblebobble.core.gameStates;
+package sem.group15.bubblebobble.core.gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
