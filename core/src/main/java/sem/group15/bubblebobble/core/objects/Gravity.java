@@ -8,6 +8,10 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public abstract class Gravity extends GameObject {
 
+    private static final float MAX_DIFF_LANDING = 10f;
+    private static final int GRAVITY_SPEED = 100;
+    private static final int MAX_GRAVITY_SPEED = -300;
+
     protected float timeSinceLastFloorContact;
     protected boolean canJump;
 
@@ -29,12 +33,9 @@ public abstract class Gravity extends GameObject {
      */
     public void update(float elapsed) {
         timeSinceLastFloorContact += elapsed;
-        int GRAVITY_SPEED = 100;
-        int MAX_GRAVITY_SPEED = -300;
         speedY = Math.max(speedY - (GRAVITY_SPEED * timeSinceLastFloorContact * timeSinceLastFloorContact),
                 MAX_GRAVITY_SPEED
         );
-
         if (getTop() <= 0) {
             setBottom(Gdx.graphics.getHeight());
         }
@@ -48,7 +49,6 @@ public abstract class Gravity extends GameObject {
      */
     public void handleCollision(GameObject other) {
         if (other instanceof Floor) {
-            float MAX_DIFF_LANDING = 10f;
             if (getTop() < Gdx.graphics.getHeight() && between(overlapBottom(other), 0, MAX_DIFF_LANDING) && speedY < 0) {
                 setBottom(other.getTop());
                 speedY = 0;
