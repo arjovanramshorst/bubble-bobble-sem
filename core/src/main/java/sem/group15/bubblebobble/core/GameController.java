@@ -81,8 +81,6 @@ public class GameController {
 
     /**
      * Initiates all objects the game needs.
-     *
-     * @param levelNumber level number.
      */
     public final void startLevel(Level level) {
         this.currentLevel = level;
