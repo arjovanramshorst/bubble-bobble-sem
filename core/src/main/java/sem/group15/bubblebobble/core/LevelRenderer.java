@@ -13,6 +13,7 @@ import sem.group15.bubblebobble.core.objects.GameObject;
  */
 public class LevelRenderer {
     private Level level;
+
     private SpriteBatch batch;
 
     private BitmapFont font;
@@ -45,7 +46,7 @@ public class LevelRenderer {
     /**
      * Renders the playing world.
      */
-    private void renderWorld(Level level) {
+    public void renderWorld(Level level) {
         for (GameObject object : level.getObjects()) {
             object.draw(batch);
         }
@@ -54,7 +55,7 @@ public class LevelRenderer {
     /**
      * Renders the player's score.
      */
-    private void renderScore() {
+    public void renderScore() {
         String scoreString = "score: " + level.getPlayer().score;
         font.draw(batch, scoreString, 50, Gdx.graphics.getHeight() - 30);
     }
@@ -62,7 +63,7 @@ public class LevelRenderer {
     /**
      * Renders the player's lives.
      */
-    private void renderLives() {
+    public void renderLives() {
         for (int i = 0; i < level.getPlayer().lives; i++) {
             batch.draw(Assets.getAssets().playerLeft, 50 + (30 * i),
                     Gdx.graphics.getHeight() - (BubbleBobble.SPRITE_SIZE / 1.33f),
@@ -118,9 +119,25 @@ public class LevelRenderer {
         draw(0);
     }
 
-    private void draw(float verticalOffset) {
+    public void draw(float verticalOffset) {
         batch.setTransformMatrix((new Matrix4()).setTranslation(0,verticalOffset, 0));
         batch.end();
+    }
+
+    /**
+     * Set spritebatch for levelrenderer.
+     * @param batch batch to set.
+     */
+    public void setBatch(SpriteBatch batch) {
+        this.batch = batch;
+    }
+
+    /**
+     * Set the bitmapfont for the levelrenderer.
+     * @param font bitmapfont to be set
+     */
+    public void setFont(BitmapFont font) {
+        this.font = font;
     }
 
     public void renderTransition(Level nextLevel, float verticalOffset) {
@@ -136,5 +153,6 @@ public class LevelRenderer {
         renderScore();
         renderLives();
         draw(verticalOffset);
+
     }
 }

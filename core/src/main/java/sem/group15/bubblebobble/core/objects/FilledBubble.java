@@ -17,6 +17,7 @@ public class FilledBubble extends Floating {
      * seconds the filledBubble is alive.
      */
     public static final float FILLED_LIFESPAN = 5;
+
     /**
      * The factory that makes the bubbles.
      */
@@ -54,10 +55,9 @@ public class FilledBubble extends Floating {
         location.y = Math.min(location.y, Gdx.graphics.getHeight() - BubbleBobble.SPRITE_SIZE);
         if (timeFromFired > FILLED_LIFESPAN) {
             remove = true;
-            Enemy enemy = factory.createObject(location.x, location.y);
-            enemy.state = Enemy.State.ANGRY;
+            Enemy enemy = factory.createObject(location.x, location.y, Enemy.State.ANGRY);
+//            enemy.setState(Enemy.State.ANGRY);
             newObjects.add(enemy);
-
         }
 
     }
@@ -99,5 +99,22 @@ public class FilledBubble extends Floating {
     public final void draw(final SpriteBatch spriteBatch) {
         spriteBatch.draw(assets.filledBubble, location.x, location.y);
     }
+
+    /**
+     * Set factory for creating enemies.
+     * @param factory factory to be used.
+     */
+    public void setFactory(EnemyFactory factory) {
+        this.factory = factory;
+    }
+
+    /**
+     * Get factory used by this bubble.
+     * @return factory
+     */
+    public EnemyFactory getFactory() {
+        return factory;
+    }
+
 
 }
