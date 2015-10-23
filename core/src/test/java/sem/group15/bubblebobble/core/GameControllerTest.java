@@ -26,6 +26,7 @@ public class GameControllerTest {
         controller = Mockito.mock(GameController.class, Mockito.CALLS_REAL_METHODS);
         controller.setPlayer(null);
         controller.setState(GameController.GameState.NEW);
+        Mockito.doNothing().when(controller).updateHighScore();
     }
 
     /**
@@ -70,6 +71,7 @@ public class GameControllerTest {
 
     @Test
     public void testHandeStateLost() {
+
         LevelRenderer levelRenderer = Mockito.mock(LevelRenderer.class);
         controller.setLevelRenderer(levelRenderer);
         Gdx.input = Mockito.mock(Input.class);
