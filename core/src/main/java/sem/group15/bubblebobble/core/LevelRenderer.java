@@ -119,7 +119,7 @@ public class LevelRenderer {
         draw(0);
     }
 
-    private void draw(float verticalOffset) {
+    public void draw(float verticalOffset) {
         batch.setTransformMatrix((new Matrix4()).setTranslation(0,verticalOffset, 0));
         batch.end();
     }

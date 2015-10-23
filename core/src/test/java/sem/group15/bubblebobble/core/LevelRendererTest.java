@@ -3,6 +3,7 @@ package sem.group15.bubblebobble.core;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class LevelRendererTest {
@@ -33,11 +35,11 @@ public class LevelRendererTest {
     public void setUp() throws Exception {
         renderer = Mockito.mock(LevelRenderer.class, Mockito.CALLS_REAL_METHODS);
         Gdx.gl = Mockito.mock(GL20.class);
+        Gdx.graphics = Mockito.mock(Graphics.class);
         batch = Mockito.mock(SpriteBatch.class);
         renderer.setBatch(batch);
         font = Mockito.mock(BitmapFont.class);
         renderer.setFont(font);
-        Gdx.graphics = Mockito.mock(Graphics.class);
         ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
         level = new Level(gameObjects);
         renderer.setLevel(level);
@@ -147,6 +149,20 @@ public class LevelRendererTest {
                 "\n" +
                 "Press enter to start a new game!", 0, 0);
         verify(batch).end();
+    }
+
+    @Test
+    public void testRenderTransition() {
+        Level nextLevel = Mockito.mock(Level.class);
+        Mockito.doNothing().when(renderer).renderWorld(nextLevel);
+        Mockito.doNothing().when(renderer).renderScore();
+        Mockito.doNothing().when(renderer).renderLives();
+        Mockito.doNothing().when(renderer).draw(0);
+        renderer.renderTransition(nextLevel, 0);
+        verify(Gdx.gl).glClearColor(0, 0, 0, 0);
+        verify(Gdx.gl).glClear(GL30.GL_COLOR_BUFFER_BIT);
+        verify(renderer).render(level, 0);
+        verify(renderer).render(nextLevel, 0);
     }
 
 }
