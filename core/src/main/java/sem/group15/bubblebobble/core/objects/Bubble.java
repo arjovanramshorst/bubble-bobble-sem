@@ -21,6 +21,12 @@ public class Bubble extends Floating {
      * Lifespan of a bubble in seconds.
      */
     public static final float BUBBLE_LIFESPAN = 5;
+
+    /**
+     * Speed that a bubble collides with another bubble.
+     */
+    private static final float BUBBLE_COLLISION_SPEED = 0.5f;
+
     /**
      * Maximum allowed overlap percentage.
      */
@@ -85,7 +91,7 @@ public class Bubble extends Floating {
      */
     public final void getOutOfGame() {
         if (Math.abs(speedX) > 0) {
-            speedX = 0;
+            speedX = speedX / 2;
             speedY = 50;
         }
     }
@@ -108,6 +114,9 @@ public class Bubble extends Floating {
                 remove = true;
                 makeFilledBubble((Enemy) other);
 
+            }
+            if (other instanceof Bubble) {
+                this.speedX += (getLeft() - other.getLeft()) * BUBBLE_COLLISION_SPEED;
             }
         }
     }
