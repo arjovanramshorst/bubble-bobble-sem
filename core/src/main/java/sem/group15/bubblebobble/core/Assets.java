@@ -94,6 +94,7 @@ public final class Assets {
 
     /**
      * A getter for all Assets.
+     *
      * @return Assets.
      */
     public static Assets getAssets() {
@@ -105,6 +106,7 @@ public final class Assets {
 
     /**
      * Loads a texture with filename file.
+     *
      * @param file filename.
      * @return Texture containing the file.
      */
@@ -133,9 +135,9 @@ public final class Assets {
             banana = loadTexture("banana-icon.png");
             cherry = loadTexture("cherry-icon.png");
             playerDeathSound = Gdx.audio.newSound(Gdx.files.internal("Player Death.wav"));
-            playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));}
-        catch (NullPointerException e) {
-        System.out.println("error loading texture");
+            playerJumpSound = Gdx.audio.newSound(Gdx.files.internal("Jump.wav"));
+        } catch (NullPointerException e) {
+            System.out.println("error loading texture");
         }
 
     }

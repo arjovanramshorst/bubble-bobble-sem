@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.Assets;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,13 +37,16 @@ public abstract class GameObject {
 
     /**
      * Set the Logger.
+     *
      * @param logger what you want the logger to be.
      */
     public void setLogger(Logger logger) {
         this.logger = logger;
     }
 
-
+    /**
+     * @Type Enum.
+     */
     public enum Direction {
         LEFT, RIGHT
     }
@@ -62,6 +66,7 @@ public abstract class GameObject {
 
     /**
      * Abstract GameObject constructor.
+     *
      * @param location of the GameObject
      */
     protected GameObject(Rectangle location) {
@@ -76,6 +81,7 @@ public abstract class GameObject {
      * This updates this object after a game loop has passed.
      * This updates all the variables, like location or speed,
      * depending on the kind of subclass this is.
+     *
      * @param elapsed time elapsed since last gameloop.
      */
     public abstract void update(float elapsed);
@@ -83,6 +89,7 @@ public abstract class GameObject {
     /**
      * This handles the collision for this object.
      * It should only be used to update this object, not the other.
+     *
      * @param collided GameObject that collided with this.
      *                 (only to be used to handle the collision correctly for this
      *                 GameObject.)
@@ -91,12 +98,14 @@ public abstract class GameObject {
 
     /**
      * This adds this sprite to the SpriteBatch, supplied by the LogicController.
+     *
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     public abstract void draw(SpriteBatch spriteBatch);
 
     /**
      * Get the location.
+     *
      * @return location: Rectangle.
      */
     public final Rectangle getBody() {
@@ -105,6 +114,7 @@ public abstract class GameObject {
 
     /**
      * Get the X value of the left side.
+     *
      * @return value of left side.
      */
     public final float getLeft() {
@@ -113,6 +123,7 @@ public abstract class GameObject {
 
     /**
      * Value of right X location.
+     *
      * @return Right X location.
      */
     public final float getRight() {
@@ -121,6 +132,7 @@ public abstract class GameObject {
 
     /**
      * Get Y value of the top.
+     *
      * @return Top Y Value
      */
     public final float getTop() {
@@ -129,6 +141,7 @@ public abstract class GameObject {
 
     /**
      * Get X value of the bottom.
+     *
      * @return Bottom Y value.
      */
     public final float getBottom() {
@@ -137,6 +150,7 @@ public abstract class GameObject {
 
     /**
      * Set left x value.
+     *
      * @param x value for left side of the rectangle.
      */
     public final void setLeft(float x) {
@@ -145,6 +159,7 @@ public abstract class GameObject {
 
     /**
      * Set right x value.
+     *
      * @param x value for right side of the rectangle.
      */
     public final void setRight(float x) {
@@ -153,6 +168,7 @@ public abstract class GameObject {
 
     /**
      * Set top y value.
+     *
      * @param y value for top side of the rectangle.
      */
     public final void setTop(float y) {
@@ -161,6 +177,7 @@ public abstract class GameObject {
 
     /**
      * Set bottom y value.
+     *
      * @param y value for bottom side of the rectangle.
      */
     public final void setBottom(float y) {
@@ -169,16 +186,17 @@ public abstract class GameObject {
 
     /**
      * Check if there is overlap of rectangles.
+     *
      * @param other rectangle of other object.
      * @return true if overlap, else false.
      */
-    public final boolean collidesWith(GameObject other)
-    {
+    public final boolean collidesWith(GameObject other) {
         return getBody().overlaps(other.getBody());
     }
 
     /**
      * Check how much overlap there is on the left side of the rectangle.
+     *
      * @param other rectangle of other object.
      * @return amount of overlap.
      */
@@ -192,6 +210,7 @@ public abstract class GameObject {
 
     /**
      * Check how much overlap there is on the right side of the rectangle.
+     *
      * @param other rectangle of other object.
      * @return amount of overlap.
      */
@@ -205,6 +224,7 @@ public abstract class GameObject {
 
     /**
      * Check how much overlap there is on the top side of the rectangle.
+     *
      * @param other rectangle of other object.
      * @return amount of overlap.
      */
@@ -218,6 +238,7 @@ public abstract class GameObject {
 
     /**
      * Check how much overlap there is on the bottom side of the rectangle.
+     *
      * @param other rectangle of other object.
      * @return amount of overlap.
      */
@@ -231,9 +252,10 @@ public abstract class GameObject {
 
     /**
      * Calculate if a value if between two other values.
+     *
      * @param value value you want be be between.
-     * @param low lower bound
-     * @param high upper bound
+     * @param low   lower bound
+     * @param high  upper bound
      * @return True if value is between low and high
      */
     public final boolean between(float value, float low, float high) {
@@ -242,6 +264,7 @@ public abstract class GameObject {
 
     /**
      * Add new objects to a list.
+     *
      * @param gameObjects list to add the objects to.
      */
     public final void addNewObjectsTo(List<GameObject> gameObjects) {
@@ -259,6 +282,7 @@ public abstract class GameObject {
 
     /**
      * Returns the smallest of either the horizontal or vertical overlap.
+     *
      * @param other GameObject to compare to.
      * @return percentage overlap.
      */
@@ -270,6 +294,7 @@ public abstract class GameObject {
 
     /**
      * Setter for remove.
+     *
      * @param remove
      */
     public void setRemove(boolean remove) {
@@ -282,6 +307,7 @@ public abstract class GameObject {
 
     /**
      * Set the new objects list.
+     *
      * @param newObjects
      */
     public void setNewObjects(List<GameObject> newObjects) {

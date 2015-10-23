@@ -27,6 +27,7 @@ public abstract class Fruit extends Gravity {
     public Fruit(final Rectangle location) {
         super(location);
         aliveTime = 0;
+        speedY = 100;
     }
 
     @Override

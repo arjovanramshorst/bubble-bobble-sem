@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 public abstract class Immutable extends GameObject {
 
     /**
-     * Constructor Immutable
+     * Constructor Immutable.
      * @param location location of the rectangle
      */
     protected Immutable(Rectangle location) {

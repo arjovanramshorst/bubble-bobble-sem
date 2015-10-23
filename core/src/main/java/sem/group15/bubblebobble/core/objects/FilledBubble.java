@@ -24,16 +24,18 @@ public class FilledBubble extends Floating {
 
     /**
      * Constructor for the filledBubbleObject.
+     *
      * @param xPosition - xPosition of the Rectangle
      * @param yPosition - yPosition of the Rectangle
-     * @param enemy - enemy to be in the bubble
+     * @param enemy     - enemy to be in the bubble
      */
     public FilledBubble(final float xPosition, final float yPosition, final Enemy enemy) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
-        if (enemy instanceof SimpleEnemy){
-            factory = new SimpleEnemyFactory();}
-        else if (enemy instanceof StrongEnemy){
-            factory = new StrongEnemyFactory();}
+        if (enemy instanceof SimpleEnemy) {
+            factory = new SimpleEnemyFactory();
+        } else if (enemy instanceof StrongEnemy) {
+            factory = new StrongEnemyFactory();
+        }
 
         speedY = 50;
         speedX = 0;
@@ -43,6 +45,7 @@ public class FilledBubble extends Floating {
      * This updates the FilledBubbleObject after a game loop has passed.
      * This updates the location, speed and lasting-duration.
      * The initial speed of the FilledBubbleObject is FOR THE MOMENT 50.
+     *
      * @param elapsed - time that has passed
      */
     public final void update(final float elapsed) {
@@ -65,22 +68,23 @@ public class FilledBubble extends Floating {
      * If the FilledBubbleObject collides with an ImmutableObject,
      * the y speed should change to 0 and the x speed should
      * change to either the right or left.
+     *
      * @param collided GameObject that collided with this.
-     * (only to be used to handle the collision correctly for this
+     *                 (only to be used to handle the collision correctly for this
      *                 GameObject.)
      */
     public final void handleCollision(final GameObject collided) {
         if (location.overlaps(collided.getBody())) {
             if (collided instanceof Immutable) {
                 // should not go through the immutableObject - stop y speed and go x speed untill objects don't collide.
-                speedY = 0;}
+                speedY = 0;
+            }
 
             if (collided instanceof Player) {
                 remove = true;
-                if (timeFromFired < Bubble.BUBBLE_LIFESPAN/2) {
+                if (timeFromFired < Bubble.BUBBLE_LIFESPAN / 2) {
                     newObjects.add(new Cherry(getLeft(), getBottom()));
-                }
-                else {
+                } else {
                     newObjects.add(new Banana(getLeft(), getBottom()));
                 }
             }
@@ -89,6 +93,7 @@ public class FilledBubble extends Floating {
 
     /**
      * This adds this sprite to the SpriteBatch, supplied by the LogicController.
+     *
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     public final void draw(final SpriteBatch spriteBatch) {
