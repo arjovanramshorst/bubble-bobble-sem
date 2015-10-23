@@ -78,7 +78,7 @@ public final class LevelParser {
      * @return the Object.
      * @throws IOException if string is not valid.
      */
-    private static GameObject getObject(final String line) throws IOException {
+    public static GameObject getObject(final String line) throws IOException {
         String[] enemyArray = line.split(",");
         String objectType = enemyArray[0];
         float xPos = BubbleBobble.SPRITE_SIZE * Float.parseFloat(enemyArray[1]);
