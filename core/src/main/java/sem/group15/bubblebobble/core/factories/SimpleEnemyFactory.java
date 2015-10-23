@@ -11,8 +11,7 @@ public class SimpleEnemyFactory extends EnemyFactory {
     @Override
     public Enemy createObject(float x, float y, Enemy.State state) {
         Enemy enemy = new SimpleEnemy(x, y);
-        setRandomDirection(enemy);
-        enemy.setState(state);
+        instantiateEnemy(enemy);
         return enemy;
     }
 }
