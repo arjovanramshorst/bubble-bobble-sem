@@ -9,7 +9,7 @@ import sem.group15.bubblebobble.core.objects.SimpleEnemy;
 public class SimpleEnemyFactory extends EnemyFactory {
 
     @Override
-    public Enemy createObject(float x, float y) {
+    public Enemy createObject(float x, float y, Enemy.State state) {
         Enemy enemy = new SimpleEnemy(x, y);
         instantiateEnemy(enemy);
         return enemy;

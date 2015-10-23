@@ -13,11 +13,10 @@ public abstract class EnemyFactory {
      * @param y location y.
      * @return returns Enemy.
      */
-    public abstract Enemy createObject(float x, float y);
+    public abstract Enemy createObject(float x, float y, Enemy.State state);
 
     protected void instantiateEnemy(Enemy enemy) {
         setRandomDirection(enemy);
-        enemy.setState(Enemy.State.NORMAL);
     }
 
     /**

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import sem.group15.bubblebobble.core.Assets;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import sem.group15.bubblebobble.core.GameController;
 
@@ -144,6 +145,7 @@ public class Player extends Gravity {
                 //set alive false if ran out of lives.
                 if (lives == 0) {
                     isAlive = false;
+                    updateHighScore();
                 } else {
                     respawn();
                 }
@@ -264,6 +266,28 @@ public class Player extends Gravity {
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
+
+    /**
+     * Updates highScore
+     */
+    protected void updateHighScore() {
+        try {
+            if (score > Assets.getHighScore()) {
+                Assets.setHighScore(score);
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
+
+     /**
+      *   Get if player has fired a bubble or not.
+     * @return fired
+     */
+    public boolean getFired() {
+        return fired;
+    }
+
 
 }
 

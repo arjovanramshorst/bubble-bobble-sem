@@ -8,32 +8,37 @@ import sem.group15.bubblebobble.core.objects.Player;
 /**
  * Created by daan on 20-10-15.
  */
-public class PlayState implements GameState {
+public class PlayState extends GameState {
+
+    public PlayState(GameController controller) {
+        super(controller);
+    }
 
     @Override
-    public GameState handleState(GameController controller, float elapsed) {
+    public GameState handleState(float elapsed) {
         GameState newState = this;
         controller.getCurrentLevel().run(elapsed);
 
         if (checkForLose(controller.getPlayer())) {
-            newState = new LostState();
+            newState = new LostState(controller);
         }
 
         if (controller.getCurrentLevel().levelFinished()) {
             controller.setCurrentLevelNumber(controller.getCurrentLevelNumber() + 1);
-            controller.startLevel(Math.min(controller.getCurrentLevelNumber(), controller.getMaxLevel()));
-        }
-
-        if (checkForLose(controller.getPlayer())) {
-            newState = new LostState();
+            return new TransitionState(controller, this);
         }
 
         if (checkForPauseKey()) {
-            return new PauseState();
+            return new PauseState(controller);
         }
 
-        controller.getLevelRenderer().render();
+        render();
         return newState;
+    }
+
+
+    public void render() {
+        controller.getLevelRenderer().render();
     }
 
     private boolean checkForLose(Player player) {
