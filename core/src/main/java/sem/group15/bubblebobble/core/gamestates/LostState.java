@@ -6,16 +6,25 @@ import sem.group15.bubblebobble.core.objects.Player;
 /**
  * Created by daan on 20-10-15.
  */
-public class LostState implements GameState {
+public class LostState extends GameState {
+
+    public LostState(GameController controller) {
+        super(controller);
+    }
+
     @Override
-    public GameState handleState(GameController controller, float elapsed) {
-        controller.getLevelRenderer().renderLost(controller.getCurrentLevelNumber());
+    public GameState handleState(float elapsed) {
+        render();
         if (controller.checkForStartKey()) {
             resetController(controller);
-            controller.startLevel(1);
-            return new PlayState();
+            controller.startLevel(controller.getLevel(1));
+            return new PlayState(controller);
         }
         return this;
+    }
+
+    public void render() {
+        controller.getLevelRenderer().renderLost(controller.getCurrentLevelNumber());
     }
 
     /**

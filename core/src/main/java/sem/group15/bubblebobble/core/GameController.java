@@ -50,7 +50,7 @@ public class GameController {
     public GameController() {
         player = new Player(PLAYER_XY_SPAWN, PLAYER_XY_SPAWN);
         levelRenderer = new LevelRenderer();
-        gameState = new NewState();
+        gameState = new NewState(this);
         currentLevelNumber = 1;
     }
 
@@ -61,7 +61,22 @@ public class GameController {
      * @param elapsed time elapsed since last frame.
      */
     public final void run(final float elapsed) {
-        gameState = gameState.handleState(this, elapsed);
+        gameState = gameState.handleState(elapsed);
+    }
+
+    /**
+     * initialize the level with number levelNumber.
+     * @param levelNumber Number of the level to retrieve.
+     * @return
+     */
+    public final Level getLevel(final int levelNumber) {
+        int levelToLoad = Math.min(levelNumber, MAX_LEVEL);
+        try {
+            currentLevel = LevelParser.parse(Gdx.files.internal("levels/" + levelToLoad + ".lvl"));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return currentLevel;
     }
 
     /**
@@ -69,12 +84,8 @@ public class GameController {
      *
      * @param levelNumber level number.
      */
-    public final void startLevel(final int levelNumber) {
-        try {
-            currentLevel = LevelParser.parse(Gdx.files.internal("levels/" + levelNumber + ".lvl"));
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+    public final void startLevel(Level level) {
+        this.currentLevel = level;
         currentLevel.setPlayer(player);
         player.respawn();
         levelRenderer.setLevel(currentLevel);
@@ -86,7 +97,6 @@ public class GameController {
      * @return true if enter is pressed.
      */
     public boolean checkForStartKey() {
-        System.out.println(Gdx.input.isKeyPressed(Input.Keys.ENTER));
         return Gdx.input.isKeyPressed(Input.Keys.ENTER);
     }
 
