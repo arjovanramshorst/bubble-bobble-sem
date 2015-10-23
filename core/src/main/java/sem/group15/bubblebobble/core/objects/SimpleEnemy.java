@@ -33,6 +33,8 @@ public class SimpleEnemy extends Enemy {
             case RIGHT:
                 this.speedX = ENEMY_SPEED;
                 break;
+            default:
+                //do nothing
         }
         this.direction = direction;
         jump();

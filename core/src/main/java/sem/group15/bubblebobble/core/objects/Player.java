@@ -121,6 +121,8 @@ public class Player extends Gravity {
             case RIGHT:
                 bubble.setLeft(getRight());
                 break;
+            default:
+                //do nothing
         }
         newObjects.add(bubble);
     }
@@ -211,6 +213,8 @@ public class Player extends Gravity {
                 case RIGHT:
                     spriteBatch.draw(assets.getPlayerRight(), getLeft(), getBottom());
                     break;
+                default:
+                    //do nothing
             }
         } else if (!isAlive()) {
             spriteBatch.draw(assets.getPlayerDead(), getLeft(), getBottom());

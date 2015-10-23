@@ -43,6 +43,8 @@ public class StrongEnemy extends Enemy {
             case RIGHT:
                 this.speedX = ENEMY_SPEED * 2;
                 break;
+            default:
+                //do nothing
         }
         this.direction = direction;
         switchDelay = 1;

@@ -168,6 +168,8 @@ public abstract class Enemy extends Gravity {
                 case RIGHT:
                     spriteBatch.draw(normalRightTexture, getLeft(), getBottom());
                     break;
+                default:
+                    //do nothing
             }
         }
         if (state == State.ANGRY) {
@@ -178,6 +180,8 @@ public abstract class Enemy extends Gravity {
                 case RIGHT:
                     spriteBatch.draw(angryRightTexture, getLeft(), getBottom());
                     break;
+                default:
+                    //do nothing
             }
         }
     }
