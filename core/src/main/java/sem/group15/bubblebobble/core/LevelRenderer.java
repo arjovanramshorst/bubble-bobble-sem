@@ -68,7 +68,7 @@ public class LevelRenderer {
             batch.draw(Assets.getAssets().getPlayerLeft(), 50 + (30 * i),
                     Gdx.graphics.getHeight() - (BubbleBobble.SPRITE_SIZE / 1.33f),
                     BubbleBobble.SPRITE_SIZE / 1.5f, BubbleBobble.SPRITE_SIZE / 1.5f);
-        }
+         }
     }
 
     /**
