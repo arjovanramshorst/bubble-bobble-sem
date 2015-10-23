@@ -1,6 +1,5 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.enemybehaviour.JumpHigh;
 
 /**
@@ -44,6 +43,8 @@ public class StrongEnemy extends Enemy {
             case RIGHT:
                 this.speedX = ENEMY_SPEED * 2;
                 break;
+            default:
+                //do nothing
         }
         this.direction = direction;
         switchDelay = 1;

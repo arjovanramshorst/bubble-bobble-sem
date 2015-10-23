@@ -55,7 +55,7 @@ public class Level {
     protected void checkCollisions() {
         for (int i = 0; i < gameObjects.size(); i++) {
             for (int i2 = i + 1; i2 < gameObjects.size(); i2++) {
-                if (!gameObjects.get(i).remove() && !gameObjects.get(i2).remove() ) {
+                if (!gameObjects.get(i).remove() && !gameObjects.get(i2).remove()) {
                     gameObjects.get(i).handleCollision(gameObjects.get(i2));
                     gameObjects.get(i2).handleCollision(gameObjects.get(i));
                 }

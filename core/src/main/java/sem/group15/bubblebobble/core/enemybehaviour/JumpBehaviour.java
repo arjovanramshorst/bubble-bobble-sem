@@ -10,5 +10,5 @@ public interface JumpBehaviour {
      *
      * @return yspeed float
      */
-    public abstract float jump();
+    float jump();
 }

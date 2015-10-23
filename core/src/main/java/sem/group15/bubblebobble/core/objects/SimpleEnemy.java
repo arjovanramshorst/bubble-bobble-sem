@@ -1,7 +1,6 @@
 package sem.group15.bubblebobble.core.objects;
 
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.enemybehaviour.JumpRandom;
 
 /**
@@ -34,6 +33,8 @@ public class SimpleEnemy extends Enemy {
             case RIGHT:
                 this.speedX = ENEMY_SPEED;
                 break;
+            default:
+                //do nothing
         }
         this.direction = direction;
         jump();

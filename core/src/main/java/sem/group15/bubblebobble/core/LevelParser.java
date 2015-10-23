@@ -4,7 +4,11 @@ import com.badlogic.gdx.files.FileHandle;
 import sem.group15.bubblebobble.core.factories.EnemyFactory;
 import sem.group15.bubblebobble.core.factories.SimpleEnemyFactory;
 import sem.group15.bubblebobble.core.factories.StrongEnemyFactory;
-import sem.group15.bubblebobble.core.objects.*;
+import sem.group15.bubblebobble.core.objects.GameObject;
+import sem.group15.bubblebobble.core.objects.Enemy;
+import sem.group15.bubblebobble.core.objects.Floor;
+import sem.group15.bubblebobble.core.objects.Wall;
+import sem.group15.bubblebobble.core.objects.Powerup;
 
 import java.io.IOException;
 import java.util.ArrayList;
