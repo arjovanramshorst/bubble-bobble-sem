@@ -270,7 +270,7 @@ public abstract class GameObject {
     public final void addNewObjectsTo(List<GameObject> gameObjects) {
         if (!newObjects.isEmpty()) {
             for (GameObject object : newObjects) {
-                if(object instanceof Enemy) {
+                if (object instanceof Enemy) {
                     gameObjects.add(1, object);
                 } else {
                     gameObjects.add(object);

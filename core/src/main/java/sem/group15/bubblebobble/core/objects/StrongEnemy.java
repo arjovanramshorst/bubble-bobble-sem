@@ -1,6 +1,5 @@
 package sem.group15.bubblebobble.core.objects;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.enemybehaviour.JumpHigh;
 
 /**

@@ -85,7 +85,7 @@ public final class Assets {
      */
     private Sound playerJumpSound;
     /**
-     * Prefence object used for highscores
+     * Prefence object used for highscores.
      */
     private static Preferences prefs;
 
@@ -301,7 +301,7 @@ public final class Assets {
     }
 
     /**
-     * Setter for highScore
+     * Setter for highScore.
      */
     public static void setHighScore(int val) {
         prefs.putInteger("highScore", val);
@@ -309,7 +309,7 @@ public final class Assets {
     }
 
     /**
-     * Getter for highScore
+     * Getter for highScore.
      */
     public static int getHighScore() {
         try {

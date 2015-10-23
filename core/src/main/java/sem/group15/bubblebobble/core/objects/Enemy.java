@@ -54,7 +54,6 @@ public abstract class Enemy extends Gravity {
     protected float timeAngry;
 
 
-
     /**
      * Creates an Enemy with position (X,Y) on the grid.
      *
@@ -76,8 +75,8 @@ public abstract class Enemy extends Gravity {
 
     }
 
-    public void jump(){
-        this.speedY=jumpBehaviour.jump();
+    public void jump() {
+        this.speedY = jumpBehaviour.jump();
     }
 
     /**
@@ -161,7 +160,7 @@ public abstract class Enemy extends Gravity {
      */
     @Override
     public final void draw(final SpriteBatch spriteBatch) {
-        if(state==State.NORMAL) {
+        if (state == State.NORMAL) {
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(normalLeftTexture, getLeft(), getBottom());
@@ -171,7 +170,7 @@ public abstract class Enemy extends Gravity {
                     break;
             }
         }
-        if(state==State.ANGRY) {
+        if (state == State.ANGRY) {
             switch (direction) {
                 case LEFT:
                     spriteBatch.draw(angryLeftTexture, getLeft(), getBottom());

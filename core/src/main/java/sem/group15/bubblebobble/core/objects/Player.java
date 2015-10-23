@@ -268,7 +268,7 @@ public class Player extends Gravity {
     }
 
     /**
-     * Updates highScore
+     * Updates highScore.
      */
     protected void updateHighScore() {
         try {

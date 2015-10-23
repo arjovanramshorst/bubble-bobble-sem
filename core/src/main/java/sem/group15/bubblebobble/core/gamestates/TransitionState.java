@@ -38,7 +38,7 @@ public class TransitionState extends GameState {
         updatePlayerPosition(percentageComplete, offset);
         render(offset);
 
-        if(timeSinceStart >= TRANSITION_TIME) {
+        if (timeSinceStart >= TRANSITION_TIME) {
             controller.startLevel(nextLevel);
             return current;
         }
