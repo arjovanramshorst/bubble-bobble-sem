@@ -1,14 +1,18 @@
 package sem.group15.bubblebobble.core.objects;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.graphics.Texture;
+import sem.group15.bubblebobble.core.enemybehaviour.JumpBehaviour;
 
 /**
  * The enemy objects
  * Created by TUDelft SID on 8-9-2015.
  */
 public abstract class Enemy extends Gravity {
+
+    protected JumpBehaviour jumpBehaviour;
 
     /**
      * Maximum overlap with a wall.
@@ -49,6 +53,8 @@ public abstract class Enemy extends Gravity {
     public State state;
     protected float timeAngry;
 
+
+
     /**
      * Creates an Enemy with position (X,Y) on the grid.
      *
@@ -68,6 +74,10 @@ public abstract class Enemy extends Gravity {
     public void setState(State state) {
         this.state = state;
 
+    }
+
+    public void jump(){
+        this.speedY=jumpBehaviour.jump();
     }
 
     /**
@@ -98,6 +108,7 @@ public abstract class Enemy extends Gravity {
             }
         }
     }
+
 
     /**
      * Update the location of the enemy.
@@ -141,5 +152,34 @@ public abstract class Enemy extends Gravity {
     public enum State {
         NORMAL,
         ANGRY
+    }
+
+    /**
+     * Draws the sprite at the correct location.
+     *
+     * @param spriteBatch SpriteBatch that the sprites need to be added to.
+     */
+    @Override
+    public final void draw(final SpriteBatch spriteBatch) {
+        if(state==State.NORMAL) {
+            switch (direction) {
+                case LEFT:
+                    spriteBatch.draw(normalLeftTexture, getLeft(), getBottom());
+                    break;
+                case RIGHT:
+                    spriteBatch.draw(normalRightTexture, getLeft(), getBottom());
+                    break;
+            }
+        }
+        if(state==State.ANGRY) {
+            switch (direction) {
+                case LEFT:
+                    spriteBatch.draw(angryLeftTexture, getLeft(), getBottom());
+                    break;
+                case RIGHT:
+                    spriteBatch.draw(angryRightTexture, getLeft(), getBottom());
+                    break;
+            }
+        }
     }
 }

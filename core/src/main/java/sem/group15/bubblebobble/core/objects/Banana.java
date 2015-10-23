@@ -21,6 +21,6 @@ public class Banana extends Fruit {
 
     @Override
     public final void draw(final SpriteBatch batch) {
-        batch.draw(assets.banana, getLeft(), getBottom());
+        batch.draw(assets.getBanana(), getLeft(), getBottom());
     }
 }

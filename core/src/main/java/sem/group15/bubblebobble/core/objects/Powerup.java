@@ -40,7 +40,7 @@ public class Powerup extends GameObject {
 
     @Override
     public final void draw(final SpriteBatch spriteBatch) {
-        spriteBatch.draw(assets.powerup, getLeft(), getBottom());
+        spriteBatch.draw(assets.getPowerup(), getLeft(), getBottom());
     }
 
     /**

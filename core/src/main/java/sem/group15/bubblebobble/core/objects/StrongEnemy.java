@@ -1,6 +1,7 @@
 package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import sem.group15.bubblebobble.core.enemybehaviour.JumpHigh;
 
 /**
  * Created by Matthijs on 10/8/15.
@@ -20,24 +21,9 @@ public class StrongEnemy extends Enemy {
      */
     public StrongEnemy(final float xPosition, final float yPosition) {
         super(xPosition, yPosition);
+        jumpBehaviour = new JumpHigh();
     }
 
-    /**
-     * Draws the sprite at the correct location.
-     *
-     * @param spriteBatch SpriteBatch that the sprites need to be added to.
-     */
-    @Override
-    public final void draw(final SpriteBatch spriteBatch) {
-        switch (direction) {
-            case LEFT:
-                spriteBatch.draw(assets.strongEnemyLeft, getLeft(), getBottom());
-                break;
-            case RIGHT:
-                spriteBatch.draw(assets.strongEnemyRight, getLeft(), getBottom());
-                break;
-        }
-    }
 
     @Override
     public void update(final float elapsed) {
@@ -75,7 +61,7 @@ public class StrongEnemy extends Enemy {
             setDirection(Direction.LEFT);
         }
 
-        speedY += 300;
+        jump();
     }
 
 
@@ -100,10 +86,10 @@ public class StrongEnemy extends Enemy {
      */
     @Override
     public void setTextures() {
-        angryLeftTexture = assets.strongEnemyLeft;
-        angryRightTexture = assets.strongEnemyRight;
-        normalLeftTexture = assets.strongEnemyLeft;
-        normalRightTexture = assets.strongEnemyRight;
+        angryLeftTexture = assets.getStrongEnemyLeft();
+        angryRightTexture = assets.getStrongEnemyRight();
+        normalLeftTexture = assets.getStrongEnemyLeft();
+        normalRightTexture = assets.getStrongEnemyRight();
     }
 
 }

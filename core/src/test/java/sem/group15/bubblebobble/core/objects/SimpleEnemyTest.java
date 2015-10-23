@@ -159,6 +159,8 @@ public class SimpleEnemyTest {
     @Test
     public void testDrawRight() {
         enemy.setDirection(GameObject.Direction.RIGHT);
+        enemy.setState(Enemy.State.NORMAL);
+
         SpriteBatch batch = Mockito.mock(SpriteBatch.class);
         Texture texture = null;
         Mockito.doNothing().when(batch).draw(texture, 0, 0);
@@ -172,6 +174,7 @@ public class SimpleEnemyTest {
     @Test
     public void testDrawLeft() {
         enemy.setDirection(GameObject.Direction.LEFT);
+        enemy.setState(Enemy.State.NORMAL);
         SpriteBatch batch = Mockito.mock(SpriteBatch.class);
         Texture texture = null;
         Mockito.doNothing().when(batch).draw(texture, 0, 0);

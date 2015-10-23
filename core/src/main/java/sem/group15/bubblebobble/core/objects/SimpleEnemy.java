@@ -2,6 +2,7 @@ package sem.group15.bubblebobble.core.objects;
 
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import sem.group15.bubblebobble.core.enemybehaviour.JumpRandom;
 
 /**
  * Created by Matthijs on 10/8/15.
@@ -16,24 +17,9 @@ public class SimpleEnemy extends Enemy {
      */
     public SimpleEnemy(final float xPosition, final float yPosition) {
         super(xPosition, yPosition);
+        jumpBehaviour = new JumpRandom();
     }
 
-    /**
-     * Draws the sprite at the correct location.
-     *
-     * @param spriteBatch SpriteBatch that the sprites need to be added to.
-     */
-    @Override
-    public final void draw(final SpriteBatch spriteBatch) {
-        switch (direction) {
-            case LEFT:
-                spriteBatch.draw(assets.simpleEnemyLeft, getLeft(), getBottom());
-                break;
-            case RIGHT:
-                spriteBatch.draw(assets.simpleEnemyRight, getLeft(), getBottom());
-                break;
-        }
-    }
 
     /**
      * Sets the horizontal direction of the enemy, and adjusts its horizontal speed accordingly.
@@ -50,6 +36,7 @@ public class SimpleEnemy extends Enemy {
                 break;
         }
         this.direction = direction;
+        jump();
     }
 
     /**
@@ -57,10 +44,10 @@ public class SimpleEnemy extends Enemy {
      */
     @Override
     public void setTextures() {
-        angryLeftTexture = assets.simpleAngryEnemyLeft;
-        angryRightTexture = assets.simpleAngryEnemyRight;
-        normalLeftTexture = assets.simpleEnemyLeft;
-        normalRightTexture = assets.simpleEnemyRight;
+        angryLeftTexture = assets.getSimpleAngryEnemyLeft();
+        angryRightTexture = assets.getSimpleAngryEnemyRight();
+        normalLeftTexture = assets.getSimpleEnemyLeft();
+        normalRightTexture = assets.getSimpleEnemyRight();
     }
 
 }

@@ -206,14 +206,14 @@ public class Player extends Gravity {
         if (isAlive() && (respawned <= 0f || (3 * respawned - (int) (3 * respawned) > 0.5f))) {
             switch (direction) {
                 case LEFT:
-                    spriteBatch.draw(assets.playerLeft, getLeft(), getBottom());
+                    spriteBatch.draw(assets.getPlayerLeft(), getLeft(), getBottom());
                     break;
                 case RIGHT:
-                    spriteBatch.draw(assets.playerRight, getLeft(), getBottom());
+                    spriteBatch.draw(assets.getPlayerRight(), getLeft(), getBottom());
                     break;
             }
         } else if (!isAlive()) {
-            spriteBatch.draw(assets.playerDead, getLeft(), getBottom());
+            spriteBatch.draw(assets.getPlayerDead(), getLeft(), getBottom());
         }
 
     }
@@ -223,7 +223,7 @@ public class Player extends Gravity {
      */
     public void playDeadSound() {
         try {
-            assets.playerDeathSound.play(1.0f);
+            assets.getPlayerDeathSound().play(1.0f);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -234,7 +234,7 @@ public class Player extends Gravity {
      */
     public void playJumpSound() {
         try {
-            assets.playerJumpSound.play(1.0f);
+            assets.getPlayerJumpSound().play(1.0f);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }

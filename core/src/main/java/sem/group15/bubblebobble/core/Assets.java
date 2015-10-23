@@ -18,72 +18,72 @@ public final class Assets {
     /**
      * The texture for a bubble.
      */
-    public Texture bubble;
+    private Texture bubble;
     /**
      * The texture for a simpleEnemyLeft.
      */
-    public Texture simpleEnemyLeft;
+    private Texture simpleEnemyLeft;
     /**
      * The texture for a simpleEnemyRight.
      */
-    public Texture simpleEnemyRight;
+    private Texture simpleEnemyRight;
     /**
      * The texture for a simpleAngryEnemyRight.
      */
-    public Texture simpleAngryEnemyRight;
+    private Texture simpleAngryEnemyRight;
     /**
      * The texture for a simpleAngryEnemyLeft.
      */
-    public Texture simpleAngryEnemyLeft;
+    private Texture simpleAngryEnemyLeft;
     /**
      * The texture for a strongEnemyLeft.
      */
-    public Texture strongEnemyLeft;
+    private Texture strongEnemyLeft;
     /**
      * The texture for a strongEnemyRight.
      */
-    public Texture strongEnemyRight;
+    private Texture strongEnemyRight;
     /**
      * The texture for a filledBubble.
      */
-    public Texture filledBubble;
+    private Texture filledBubble;
     /**
      * The texture for a playerLeft.
      */
-    public Texture playerLeft;
+    private Texture playerLeft;
     /**
      * The texture for a playerRight.
      */
-    public Texture playerRight;
+    private Texture playerRight;
     /**
      * The texture for a playerDead.
      */
-    public Texture playerDead;
+    private Texture playerDead;
     /**
      * The texture for a wall.
      */
-    public Texture wall;
+    private Texture wall;
     /**
      * The texture for a powerup.
      */
-    public Texture powerup;
+    private Texture powerup;
 
     /**
      * The texture for a banana.
      */
-    public Texture banana;
+    private Texture banana;
     /**
      * The texture for a cherry.
      */
-    public Texture cherry;
+    private Texture cherry;
     /**
      * The sound for a playerDeathSound.
      */
-    public Sound playerDeathSound;
+    private Sound playerDeathSound;
     /**
      * The sound for a playerJumpSound.
      */
-    public Sound playerJumpSound;
+    private Sound playerJumpSound;
     /**
      * Prefence object used for highscores
      */
@@ -117,6 +117,154 @@ public final class Assets {
      */
     private static Texture loadTexture(final String file) {
         return new Texture(Gdx.files.internal(file));
+    }
+
+    public Texture getBubble() {
+        return bubble;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getSimpleEnemyLeft() {
+        return simpleEnemyLeft;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getSimpleEnemyRight() {
+        return simpleEnemyRight;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getSimpleAngryEnemyRight() {
+        return simpleAngryEnemyRight;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getSimpleAngryEnemyLeft() {
+        return simpleAngryEnemyLeft;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getStrongEnemyLeft() {
+        return strongEnemyLeft;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getStrongEnemyRight() {
+        return strongEnemyRight;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getFilledBubble() {
+        return filledBubble;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getPlayerLeft() {
+        return playerLeft;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getPlayerRight() {
+        return playerRight;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getPlayerDead() {
+        return playerDead;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getWall() {
+        return wall;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getPowerup() {
+        return powerup;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getBanana() {
+        return banana;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Texture getCherry() {
+        return cherry;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Sound getPlayerDeathSound() {
+        return playerDeathSound;
+    }
+
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
+    public Sound getPlayerJumpSound() {
+        return playerJumpSound;
     }
 
     /**
@@ -155,7 +303,7 @@ public final class Assets {
     /**
      * Setter for highScore
      */
-    public static void  setHighScore(int val) {
+    public static void setHighScore(int val) {
         prefs.putInteger("highScore", val);
         prefs.flush();
     }
