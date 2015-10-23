@@ -125,66 +125,146 @@ public final class Assets {
         return bubble;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getSimpleEnemyLeft() {
         return simpleEnemyLeft;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getSimpleEnemyRight() {
         return simpleEnemyRight;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getSimpleAngryEnemyRight() {
         return simpleAngryEnemyRight;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getSimpleAngryEnemyLeft() {
         return simpleAngryEnemyLeft;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getStrongEnemyLeft() {
         return strongEnemyLeft;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getStrongEnemyRight() {
         return strongEnemyRight;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getFilledBubble() {
         return filledBubble;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getPlayerLeft() {
         return playerLeft;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getPlayerRight() {
         return playerRight;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getPlayerDead() {
         return playerDead;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getWall() {
         return wall;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getPowerup() {
         return powerup;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getBanana() {
         return banana;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Texture getCherry() {
         return cherry;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Sound getPlayerDeathSound() {
         return playerDeathSound;
     }
 
+    /**
+     * Getter for texture.
+     *
+     * @return the texture.
+     */
     public Sound getPlayerJumpSound() {
         return playerJumpSound;
     }
@@ -225,7 +305,7 @@ public final class Assets {
     /**
      * Setter for highScore
      */
-    public static void  setHighScore(int val) {
+    public static void setHighScore(int val) {
         prefs.putInteger("highScore", val);
         prefs.flush();
     }
