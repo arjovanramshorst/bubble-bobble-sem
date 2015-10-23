@@ -4,10 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import sem.group15.bubblebobble.core.factories.EnemyFactory;
 import sem.group15.bubblebobble.core.factories.SimpleEnemyFactory;
 import sem.group15.bubblebobble.core.factories.StrongEnemyFactory;
-import sem.group15.bubblebobble.core.objects.Floor;
-import sem.group15.bubblebobble.core.objects.GameObject;
-import sem.group15.bubblebobble.core.objects.Powerup;
-import sem.group15.bubblebobble.core.objects.Wall;
+import sem.group15.bubblebobble.core.objects.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -81,7 +78,7 @@ public final class LevelParser {
      * @return the Object.
      * @throws IOException if string is not valid.
      */
-    private static GameObject getObject(final String line) throws IOException {
+    public static GameObject getObject(final String line) throws IOException {
         String[] enemyArray = line.split(",");
         String objectType = enemyArray[0];
         float xPos = BubbleBobble.SPRITE_SIZE * Float.parseFloat(enemyArray[1]);
@@ -89,7 +86,7 @@ public final class LevelParser {
 
         switch (objectType) {
             case "Enemy":
-                return enemyFactory.createObject(xPos, yPos);
+                return enemyFactory.createObject(xPos, yPos, Enemy.State.NORMAL);
             case "Floor":
                 return new Floor(xPos, yPos);
             case "Wall":

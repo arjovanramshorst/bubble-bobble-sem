@@ -13,7 +13,7 @@ public abstract class EnemyFactory {
      * @param y location y.
      * @return returns Enemy.
      */
-    public abstract Enemy createObject(float x, float y);
+    public abstract Enemy createObject(float x, float y, Enemy.State state);
 
     /**
      * sets random direction for enemy.

@@ -2,6 +2,7 @@ package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -30,6 +31,39 @@ public class SimpleEnemyTest {
     @Before
     public void setUp() {
         enemy = new SimpleEnemy(0,0);
+    }
+
+    /**
+     * Test if movement speed is faster when angry.
+     */
+    @Test
+    public void testUpdateAngryState() {
+        assertEquals(0, enemy.location.x, 0.1f);
+        enemy.setState(Enemy.State.ANGRY);
+        enemy.setDirection(GameObject.Direction.RIGHT);
+        enemy.speedX = 100;
+        enemy.update(0.1f);
+        assertEquals(enemy.speedX * 0.1f * Enemy.ANGRY_MULTIPLIER, enemy.location.x, 0.1f);
+    }
+
+    /**
+     * Test if angryTime gets updated when angry.
+     */
+    @Test
+    public void testUpdateTimeAngry() {
+        /*
+        prevent warping due to long fall to cause nullpointer
+         */
+        Gdx.graphics = Mockito.mock(Graphics.class);
+        
+        assertEquals(0, enemy.timeAngry, 0.1f);
+        enemy.setState(Enemy.State.ANGRY);
+        enemy.update(1f);
+        assertEquals(1, enemy.timeAngry, 0.1f);
+        assertEquals(Enemy.State.ANGRY, enemy.state);
+        enemy.update(9.1f);
+        assertEquals(0, enemy.timeAngry, 0.1f);
+        assertEquals(Enemy.State.NORMAL, enemy.state);
     }
 
     /**
@@ -144,4 +178,6 @@ public class SimpleEnemyTest {
         enemy.draw(batch);
         verify(batch).draw(texture, 0, 0);
     }
+
+
 }

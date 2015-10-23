@@ -280,6 +280,14 @@ public class Player extends Gravity {
         }
     }
 
+     /**
+      *   Get if player has fired a bubble or not.
+     * @return fired
+     */
+    public boolean getFired() {
+        return fired;
+    }
+
 
 }
 
