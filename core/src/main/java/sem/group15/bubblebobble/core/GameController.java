@@ -18,6 +18,7 @@ public class GameController {
      * Player that is used by the user.
      */
     private Player player;
+
     /**
      * Level that is played.
      */
@@ -153,15 +154,6 @@ public class GameController {
     }
 
     /**
-     * Get max level.
-     *
-     * @return MAX_LEVEL
-     */
-    public int getMaxLevel() {
-        return MAX_LEVEL;
-    }
-
-    /**
      * Sets the level renderer.
      * for testing purposes.
      *
@@ -180,4 +172,5 @@ public class GameController {
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
+
 }
