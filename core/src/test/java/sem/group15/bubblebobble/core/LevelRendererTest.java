@@ -146,6 +146,7 @@ public class LevelRendererTest {
         verify(Gdx.gl).glBlendColor(1, 1, 1, 0.5f);
         verify(font).drawMultiLine(batch, "You made it to level 1\n" +
                 "Score: 0\n" +
+                "HighScore: 0\n" +
                 "\n" +
                 "Press enter to start a new game!", 0, 0);
         verify(batch).end();

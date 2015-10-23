@@ -110,6 +110,7 @@ public class LevelRenderer {
         Gdx.gl.glBlendColor(1, 1, 1, 0.5f);
         String str = "You made it to level " + currentLevelNumber
                 + "\nScore: " + level.getPlayer().score
+                + "\nHighScore: " + Assets.getHighScore()
                 + "\n\nPress enter to start a new game!";
         font.drawMultiLine(batch, str, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         draw();
@@ -120,7 +121,7 @@ public class LevelRenderer {
     }
 
     public void draw(float verticalOffset) {
-        batch.setTransformMatrix((new Matrix4()).setTranslation(0,verticalOffset, 0));
+        batch.setTransformMatrix((new Matrix4()).setTranslation(0, verticalOffset, 0));
         batch.end();
     }
 
@@ -143,7 +144,7 @@ public class LevelRenderer {
     public void renderTransition(Level nextLevel, float verticalOffset) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        render(this.level, - Gdx.graphics.getHeight() + verticalOffset);
+        render(this.level, -Gdx.graphics.getHeight() + verticalOffset);
         render(nextLevel, verticalOffset);
     }
 
