@@ -20,65 +20,65 @@ public class GameControllerTest {
      * setup mokito for mocking
      * @throws Exception
      */
-    @Before
-    public void setUp() throws Exception {
-//        controller = new GameController();
-        controller = Mockito.mock(GameController.class, Mockito.CALLS_REAL_METHODS);
-        controller.setPlayer(null);
-        controller.setState(GameController.GameState.NEW);
-    }
+//    @Before
+//    public void setUp() throws Exception {
+////        controller = new GameController();
+//        controller = Mockito.mock(GameController.class, Mockito.CALLS_REAL_METHODS);
+//        controller.setPlayer(null);
+//        controller.setState(GameController.GameState.NEW);
+//    }
 
     /**
      * Test if reset controller resets vallues
      */
-    @Test
-    public void testResetController() {
-        assertEquals(GameController.GameState.NEW, controller.getState());
-        assertFalse(controller.getPlayer() instanceof Player);
-        controller.setCurrentLevelNumber(2);
-        assertEquals(2, controller.getCurrentLevelNumber());
+//    @Test
+//    public void testResetController() {
+//        assertEquals(GameController.GameState.NEW, controller.getState());
+//        assertFalse(controller.getPlayer() instanceof Player);
+//        controller.setCurrentLevelNumber(2);
+//        assertEquals(2, controller.getCurrentLevelNumber());
+//
+//        controller.resetController();
+//
+//        assertEquals(GameController.GameState.PLAY, controller.getState());
+//        assertTrue(controller.getPlayer() instanceof Player);
+//        assertEquals(1, controller.getCurrentLevelNumber());
+//    }
 
-        controller.resetController();
+//    @Test
+//    public void testHandleStateNew() {
+//        LevelRenderer levelRenderer = Mockito.mock(LevelRenderer.class);
+//        controller.setLevelRenderer(levelRenderer);
+//        Mockito.doReturn(false).when(controller).checkForStartKey();
+//
+//        controller.handleStateNew();
+//        verify(levelRenderer).renderNew();
+//    }
 
-        assertEquals(GameController.GameState.PLAY, controller.getState());
-        assertTrue(controller.getPlayer() instanceof Player);
-        assertEquals(1, controller.getCurrentLevelNumber());
-    }
+//    @Test
+//    public void testHandeStatePause() {
+//        LevelRenderer levelRenderer = Mockito.mock(LevelRenderer.class);
+//        controller.setLevelRenderer(levelRenderer);
+//
+//        Gdx.input = Mockito.mock(Input.class);
+//        Mockito.when(Gdx.input.isKeyPressed(Input.Keys.ENTER)).thenReturn(true);
+//
+//        controller.handleStatePause();
+//        assertEquals(GameController.GameState.PLAY, controller.getState());
+//        verify(levelRenderer).renderPause();
+//    }
 
-    @Test
-    public void testHandleStateNew() {
-        LevelRenderer levelRenderer = Mockito.mock(LevelRenderer.class);
-        controller.setLevelRenderer(levelRenderer);
-        Mockito.doReturn(false).when(controller).checkForStartKey();
-
-        controller.handleStateNew();
-        verify(levelRenderer).renderNew();
-    }
-
-    @Test
-    public void testHandeStatePause() {
-        LevelRenderer levelRenderer = Mockito.mock(LevelRenderer.class);
-        controller.setLevelRenderer(levelRenderer);
-
-        Gdx.input = Mockito.mock(Input.class);
-        Mockito.when(Gdx.input.isKeyPressed(Input.Keys.ENTER)).thenReturn(true);
-
-        controller.handleStatePause();
-        assertEquals(GameController.GameState.PLAY, controller.getState());
-        verify(levelRenderer).renderPause();
-    }
-
-    @Test
-    public void testHandeStateLost() {
-        LevelRenderer levelRenderer = Mockito.mock(LevelRenderer.class);
-        controller.setLevelRenderer(levelRenderer);
-        Gdx.input = Mockito.mock(Input.class);
-        Mockito.when(Gdx.input.isKeyPressed(Input.Keys.ENTER)).thenReturn(false);
-
-        controller.handleStateLost();
-
-        verify(levelRenderer).renderLost(controller.getCurrentLevelNumber());
-    }
+//    @Test
+//    public void testHandeStateLost() {
+//        LevelRenderer levelRenderer = Mockito.mock(LevelRenderer.class);
+//        controller.setLevelRenderer(levelRenderer);
+//        Gdx.input = Mockito.mock(Input.class);
+//        Mockito.when(Gdx.input.isKeyPressed(Input.Keys.ENTER)).thenReturn(false);
+//
+//        controller.handleStateLost();
+//
+//        verify(levelRenderer).renderLost(controller.getCurrentLevelNumber());
+//    }
 
     /**
      * Test if initial method works properly.
@@ -91,7 +91,7 @@ public class GameControllerTest {
 //        controller.initializeLevel(1);
 //        verify(controller).setPlayer();
     }
-    
+
     /**
      * Test if addGameObject actually adds object.
      */
