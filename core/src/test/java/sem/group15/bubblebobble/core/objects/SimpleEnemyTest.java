@@ -182,5 +182,27 @@ public class SimpleEnemyTest {
         verify(batch).draw(texture, 0, 0);
     }
 
+    @Test
+    public void testDrawLeftAngry() {
+        enemy.setDirection(GameObject.Direction.LEFT);
+        enemy.setState(Enemy.State.ANGRY);
+        SpriteBatch batch = Mockito.mock(SpriteBatch.class);
+        Texture texture = null;
+        Mockito.doNothing().when(batch).draw(texture, 0, 0);
+        enemy.draw(batch);
+        verify(batch).draw(texture, 0, 0);
+    }
+
+    @Test
+    public void testDrawRightAngry() {
+        enemy.setDirection(GameObject.Direction.RIGHT);
+        enemy.setState(Enemy.State.ANGRY);
+        SpriteBatch batch = Mockito.mock(SpriteBatch.class);
+        Texture texture = null;
+        Mockito.doNothing().when(batch).draw(texture, 0, 0);
+        enemy.draw(batch);
+        verify(batch).draw(texture, 0, 0);
+    }
+
 
 }
