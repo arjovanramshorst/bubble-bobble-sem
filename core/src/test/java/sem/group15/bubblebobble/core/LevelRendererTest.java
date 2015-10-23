@@ -27,6 +27,7 @@ public class LevelRendererTest {
     LevelRenderer renderer;
     SpriteBatch batch;
     BitmapFont font;
+    Level level;
 
     @Before
     public void setUp() throws Exception {
@@ -37,6 +38,9 @@ public class LevelRendererTest {
         font = Mockito.mock(BitmapFont.class);
         renderer.setFont(font);
         Gdx.graphics = Mockito.mock(Graphics.class);
+        ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+        level = new Level(gameObjects);
+        renderer.setLevel(level);
     }
 
     /**
@@ -44,11 +48,11 @@ public class LevelRendererTest {
      */
     @Test
     public void testRender(){
-        Mockito.doNothing().when(renderer).renderWorld();
+        Mockito.doNothing().when(renderer).renderWorld(level);
         Mockito.doNothing().when(renderer).renderScore();
         Mockito.doNothing().when(renderer).renderLives();
         renderer.render();
-        verify(renderer).renderWorld();
+        verify(renderer).renderWorld(level);
         verify(renderer).renderScore();
         verify(renderer).renderLives();
         verify(batch).begin();
@@ -64,10 +68,10 @@ public class LevelRendererTest {
         Wall wall = new Wall(0, 0);
         Wall spyWall = Mockito.spy(wall);
         gameObjects.add(spyWall);
-        Level level = new Level(gameObjects);
-        Level spyLevel = Mockito.spy(level);
+        Level level2 = new Level(gameObjects);
+        Level spyLevel = Mockito.spy(level2);
         renderer.setLevel(spyLevel);
-        renderer.renderWorld();
+        renderer.renderWorld(spyLevel);
         verify(spyLevel).getObjects();
 //        TODO: cant because method is final, remove final?
 //        Mockito.verify(spyWall).draw(batch);
@@ -110,13 +114,13 @@ public class LevelRendererTest {
 
     @Test
     public void testRenderPause() {
-        Mockito.doNothing().when(renderer).renderWorld();
+        Mockito.doNothing().when(renderer).renderWorld(level);
         Mockito.doNothing().when(renderer).renderScore();
         Mockito.doNothing().when(renderer).renderLives();
         renderer.renderPause();
         verify(Gdx.gl).glClearColor(0, 0, 0, 0);
         verify(batch).begin();
-        verify(renderer).renderWorld();
+        verify(renderer).renderWorld(level);
         verify(renderer).renderScore();
         verify(renderer).renderLives();
         verify(Gdx.gl).glBlendColor(0, 0, 0, 0.5f);
@@ -133,10 +137,10 @@ public class LevelRendererTest {
         level.setPlayer(player);
         renderer.setLevel(level);
 
-        Mockito.doNothing().when(renderer).renderWorld();
+        Mockito.doNothing().when(renderer).renderWorld(level);
         renderer.renderLost(1);
         verify(batch).begin();
-        verify(renderer).renderWorld();
+        verify(renderer).renderWorld(level);
         verify(Gdx.gl).glBlendColor(1, 1, 1, 0.5f);
         verify(font).drawMultiLine(batch, "You made it to level 1\n" +
                 "Score: 0\n" +

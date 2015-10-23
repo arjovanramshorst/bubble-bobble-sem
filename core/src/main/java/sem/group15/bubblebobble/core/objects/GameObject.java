@@ -261,7 +261,7 @@ public abstract class GameObject {
     public final boolean between(float value, float low, float high) {
         return (value > low && value < high);
     }
-    
+
     /**
      * Add new objects to a list.
      *

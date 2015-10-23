@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 import sem.group15.bubblebobble.core.objects.GameObject;
 
 /**
@@ -38,17 +39,14 @@ public class LevelRenderer {
     public void render() {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        renderWorld();
-        renderScore();
-        renderLives();
-        batch.end();
+        render(this.level, 0);
     }
+
 
     /**
      * Renders the playing world.
      */
-    public void renderWorld() {
+    public void renderWorld(Level level) {
         for (GameObject object : level.getObjects()) {
             object.draw(batch);
         }
@@ -81,7 +79,7 @@ public class LevelRenderer {
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         batch.begin();
         font.draw(batch, "Press enter to begin", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-        batch.end();
+        draw();
     }
 
     /**
@@ -91,12 +89,12 @@ public class LevelRenderer {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        renderWorld();
+        renderWorld(this.level);
         renderScore();
         renderLives();
         Gdx.gl.glBlendColor(0, 0, 0, 0.5f);
         font.draw(batch, "Press enter to continue", Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-        batch.end();
+        draw();
     }
 
     /**
@@ -108,12 +106,21 @@ public class LevelRenderer {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        renderWorld();
+        renderWorld(this.level);
         Gdx.gl.glBlendColor(1, 1, 1, 0.5f);
         String str = "You made it to level " + currentLevelNumber
                 + "\nScore: " + level.getPlayer().score
                 + "\n\nPress enter to start a new game!";
         font.drawMultiLine(batch, str, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        draw();
+    }
+
+    private void draw() {
+        draw(0);
+    }
+
+    private void draw(float verticalOffset) {
+        batch.setTransformMatrix((new Matrix4()).setTranslation(0,verticalOffset, 0));
         batch.end();
     }
 
@@ -131,5 +138,21 @@ public class LevelRenderer {
      */
     public void setFont(BitmapFont font) {
         this.font = font;
+    }
+
+    public void renderTransition(Level nextLevel, float verticalOffset) {
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
+        render(this.level, - Gdx.graphics.getHeight() + verticalOffset);
+        render(nextLevel, verticalOffset);
+    }
+
+    public void render(Level level, float verticalOffset) {
+        batch.begin();
+        renderWorld(level);
+        renderScore();
+        renderLives();
+        draw(verticalOffset);
+
     }
 }
