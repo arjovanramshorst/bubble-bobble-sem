@@ -164,6 +164,11 @@ public final class Assets {
      * Getter for highScore
      */
     public static int getHighScore() {
-        return prefs.getInteger("highScore");
+        try {
+            return prefs.getInteger("highScore");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
