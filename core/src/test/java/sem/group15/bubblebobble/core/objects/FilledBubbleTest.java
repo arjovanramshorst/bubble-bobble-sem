@@ -1,5 +1,7 @@
 package sem.group15.bubblebobble.core.objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -9,7 +11,9 @@ import org.mockito.Mockito;
 import sem.group15.bubblebobble.core.BubbleBobble;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class FilledBubbleTest {
 
@@ -17,8 +21,10 @@ public class FilledBubbleTest {
 
     @Before
     public void setUp() {
-        Enemy enemey = Mockito.mock(Enemy.class);
+        Enemy enemey = mock(Enemy.class);
         fbubble = new FilledBubble(0, 0, enemey);
+        Gdx.graphics = mock(Graphics.class);
+        when(Gdx.graphics.getHeight()).thenReturn(800);
     }
 
     /**
@@ -37,7 +43,7 @@ public class FilledBubbleTest {
     @Test
     public void testHandleCollisionImmutable(){
         assertEquals(50, fbubble.speedY, 0.01f);
-        Immutable obj = Mockito.mock(Immutable.class, Mockito.CALLS_REAL_METHODS);
+        Immutable obj = mock(Immutable.class, Mockito.CALLS_REAL_METHODS);
         obj.location = new Rectangle(10,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         fbubble.handleCollision(obj);
         assertTrue(fbubble.speedY == 0);
@@ -49,7 +55,7 @@ public class FilledBubbleTest {
     @Test
     public void testHandleCollisionPlayerFast(){
         fbubble.remove = false;
-        Player obj = Mockito.mock(Player.class, Mockito.CALLS_REAL_METHODS);
+        Player obj = mock(Player.class, Mockito.CALLS_REAL_METHODS);
         obj.location = new Rectangle(10,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         fbubble.handleCollision(obj);
         assertTrue(fbubble.remove);
@@ -62,7 +68,7 @@ public class FilledBubbleTest {
     public void testHandleCollisionPlayerSlow(){
         fbubble.remove = false;
         fbubble.timeFromFired = 3;
-        Player obj = Mockito.mock(Player.class, Mockito.CALLS_REAL_METHODS);
+        Player obj = mock(Player.class, Mockito.CALLS_REAL_METHODS);
         obj.location = new Rectangle(10,0,BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE);
         fbubble.handleCollision(obj);
         assertTrue(fbubble.remove);
@@ -73,7 +79,7 @@ public class FilledBubbleTest {
      */
     @Test
     public void testDraw() {
-        SpriteBatch batch = Mockito.mock(SpriteBatch.class);
+        SpriteBatch batch = mock(SpriteBatch.class);
         Texture texture = null;
         Mockito.doNothing().when(batch).draw(texture, 0, 0);
         fbubble.draw(batch);
