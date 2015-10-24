@@ -11,7 +11,7 @@ public class StrongEnemyFactory extends EnemyFactory {
     @Override
     public Enemy createObject(final float x, final float y, Enemy.State state) {
         Enemy enemy = new StrongEnemy(x, y);
-        instantiateEnemy(enemy);
+        instantiateEnemy(enemy, state);
         return enemy;
     }
 }

@@ -15,8 +15,9 @@ public abstract class EnemyFactory {
      */
     public abstract Enemy createObject(float x, float y, Enemy.State state);
 
-    protected void instantiateEnemy(Enemy enemy) {
+    protected void instantiateEnemy(Enemy enemy, Enemy.State state) {
         setRandomDirection(enemy);
+        enemy.setState(state);
     }
 
     /**
