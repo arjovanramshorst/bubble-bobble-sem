@@ -1,6 +1,7 @@
 package sem.group15.bubblebobble.core.objects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import sem.group15.bubblebobble.core.BubbleBobble;
@@ -23,6 +24,8 @@ public class FilledBubble extends Floating {
      */
     private EnemyFactory factory;
 
+    private Texture texture;
+
     /**
      * Constructor for the filledBubbleObject.
      *
@@ -33,8 +36,10 @@ public class FilledBubble extends Floating {
     public FilledBubble(final float xPosition, final float yPosition, final Enemy enemy) {
         super(new Rectangle(xPosition, yPosition, BubbleBobble.SPRITE_SIZE, BubbleBobble.SPRITE_SIZE));
         if (enemy instanceof SimpleEnemy) {
+            texture = assets.getFilledBubble();
             factory = new SimpleEnemyFactory();
         } else if (enemy instanceof StrongEnemy) {
+            texture = assets.getFilledBubbleStrong();
             factory = new StrongEnemyFactory();
         }
 
@@ -97,7 +102,7 @@ public class FilledBubble extends Floating {
      * @param spriteBatch SpriteBatch that the sprites need to be added to.
      */
     public final void draw(final SpriteBatch spriteBatch) {
-        spriteBatch.draw(assets.getFilledBubble(), location.x, location.y);
+        spriteBatch.draw(texture, location.x, location.y);
     }
 
     /**

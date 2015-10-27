@@ -48,6 +48,10 @@ public final class Assets {
      */
     private Texture filledBubble;
     /**
+     * The texture for a filledbubble from a strong enemy.
+     */
+    private Texture filledBubbleStrong;
+    /**
      * The texture for a playerLeft.
      */
     private Texture playerLeft;
@@ -280,6 +284,7 @@ public final class Assets {
             strongEnemyLeft = loadTexture("strongEnemyLeft.png");
             strongEnemyRight = loadTexture("strongEnemyRight.png");
             filledBubble = loadTexture("filled-bubble.png");
+            filledBubbleStrong = loadTexture("filled-bubble-strong.png");
             playerLeft = loadTexture("playerSprite.png");
             playerRight = loadTexture("playerSpriteRight.png");
             playerDead = loadTexture("playerDead.png");
@@ -318,5 +323,13 @@ public final class Assets {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * Getter for strong filled bubble.
+     * @return the texture.
+     */
+    public Texture getFilledBubbleStrong() {
+        return filledBubbleStrong;
     }
 }
