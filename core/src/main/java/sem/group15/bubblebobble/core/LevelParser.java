@@ -19,31 +19,11 @@ import java.util.Scanner;
  * Created by Marketing Lorre on 16-9-2015.
  */
 public final class LevelParser {
-    //format for parsing
-    /*
-     200(player x), 200(player y)  OPTIONAL
-     3 (number of enemies)
-     0 (enemy type), 200(x location), 100(y location)
-     0 (enemy type), 200(x location), 100(y location)
-     0 (enemy type), 200(x location), 100(y location)
-     Wall (object type), 20(x location), 100(y location)
-     Wall (object type), 200(x location), 100(y location)
-     Wall (object type), 200(x location), 100(y location)
-     Wall (object type), 200(x location), 100(y location)
-     Floor (object type), 200(x location), 100(y location)
-     Floor (object type), 200(x location), 100(y location)
-     Floor (object type), 200(x location), 100(y location)
-     */
-
 
     /**
      * The enemy factory depending on which enemy is created.
      */
     private static EnemyFactory enemyFactory;
-
-    private LevelParser() {
-        //never called.
-    }
 
     /**
      * The parse function parses a file from the assets folder.

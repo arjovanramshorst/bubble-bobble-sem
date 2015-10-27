@@ -16,7 +16,14 @@ import java.util.List;
  */
 public class Level {
 
+    /**
+     * list containing all objects that are currently in game.
+     */
     private List<GameObject> gameObjects;
+
+    /**
+     * Links to the player object (which is also in the gameObjects list). Just for easy access to score.
+     */
     private Player player;
 
     /**

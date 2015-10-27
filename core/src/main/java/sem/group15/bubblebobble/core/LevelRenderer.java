@@ -12,12 +12,25 @@ import sem.group15.bubblebobble.core.objects.GameObject;
  * Created by arjo on 13-10-15.
  */
 public class LevelRenderer {
+
+    /**
+     * The Level to render.
+     */
     private Level level;
 
+    /**
+     * Batch containing all sprites.
+     */
     private SpriteBatch batch;
 
+    /**
+     * Font to draw.
+     */
     private BitmapFont font;
 
+    /**
+     * Constructor for LevelRenderer.
+     */
     public LevelRenderer() {
         this.batch = new SpriteBatch();
         font = new BitmapFont();
@@ -116,10 +129,17 @@ public class LevelRenderer {
         draw();
     }
 
+    /**
+     * Draws the batch to the screen without changing the vertical offset.
+     */
     private void draw() {
         draw(0);
     }
 
+    /**
+     * Draws the batch to the screen, using a certain vertical offset.
+     * @param verticalOffset move window a certain amount of pixels down.
+     */
     public void draw(float verticalOffset) {
         batch.setTransformMatrix((new Matrix4()).setTranslation(0, verticalOffset, 0));
         batch.end();
@@ -141,6 +161,11 @@ public class LevelRenderer {
         this.font = font;
     }
 
+    /**
+     * Render the transition between two levels.
+     * @param nextLevel the level to transition too.
+     * @param verticalOffset offset of the transition.
+     */
     public void renderTransition(Level nextLevel, float verticalOffset) {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
@@ -148,6 +173,11 @@ public class LevelRenderer {
         render(nextLevel, verticalOffset);
     }
 
+    /**
+     * Render a level with a certain vertical offset.
+     * @param level The level to render.
+     * @param verticalOffset The offset to render it with.
+     */
     public void render(Level level, float verticalOffset) {
         batch.begin();
         renderWorld(level);

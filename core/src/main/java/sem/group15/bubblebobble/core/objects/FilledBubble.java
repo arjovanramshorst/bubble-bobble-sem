@@ -24,6 +24,9 @@ public class FilledBubble extends Floating {
      */
     private EnemyFactory factory;
 
+    /**
+     * Texture for this filledbubble.
+     */
     private Texture texture;
 
     /**
