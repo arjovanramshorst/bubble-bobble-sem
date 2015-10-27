@@ -55,6 +55,37 @@ public class Player extends Gravity {
     }
 
     /**
+     * checks for keys pressed by the player, and handles according to their function.
+     */
+    public void checkForKeys() {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            speedX = -100;
+            direction = Direction.LEFT;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            speedX = 100;
+            direction = Direction.RIGHT;
+        } else {
+            speedX = 0;
+        }
+
+        if (fired) {
+            fired = Gdx.input.isKeyPressed(Input.Keys.SPACE);
+        } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            fireBubble();
+            fired = true;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && canJump || floating) {
+            timeSinceLastFloorContact = 0;
+            speedY = 300;
+            canJump = false;
+            playJumpSound();
+        }
+
+
+    }
+
+    /**
      * updates the player parameters.
      *
      * @param elapsed time elapsed since last gameloop.
@@ -63,27 +94,9 @@ public class Player extends Gravity {
     public void update(float elapsed) {
         super.update(elapsed);
         if (isAlive) {
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                speedX = -100;
-                direction = Direction.LEFT;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                speedX = 100;
-                direction = Direction.RIGHT;
-            } else {
-                speedX = 0;
-            }
-            if (fired) {
-                fired = Gdx.input.isKeyPressed(Input.Keys.SPACE);
-            } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-                fireBubble();
-                fired = true;
-            }
-            if (Gdx.input.isKeyPressed(Input.Keys.UP) && canJump || floating) {
-                timeSinceLastFloorContact = 0;
-                speedY = 300;
-                canJump = false;
-                playJumpSound();
-            }
+
+            checkForKeys();
+
             if (respawned > 0) {
                 respawned = respawned - elapsed;
             }
@@ -128,6 +141,57 @@ public class Player extends Gravity {
     }
 
     /**
+     * Handles a collision with an enemy.
+     */
+    public void handleEnemyCollision() {
+        logger.log("Player touched Enemy.");
+        lives--;
+        respawned = INVULNERABLE_TIME;
+        playDeadSound();
+        //set alive false if ran out of lives.
+        if (lives == 0) {
+            isAlive = false;
+            updateHighScore();
+        } else {
+            respawn();
+        }
+
+    }
+
+    /**
+     * Handles a collision with a Wall.
+     */
+    public void handleWallCollision(final GameObject other) {
+
+        if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
+            setLeft(other.getRight());
+            logger.log("Player touched wall on left.");
+        }
+        if (between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
+            setRight(other.getLeft());
+            logger.log("Player touched wall on right.");
+        }
+
+    }
+
+    /**
+     * Handles a collison with a bubble, filled or ohterwise.
+     */
+    public void handleBubbleCollision(final GameObject other) {
+        if (other instanceof FilledBubble) {
+            score += 100;
+            logger.log("Player touched filled bubble");
+        }
+        if (other instanceof Bubble) {
+            if (between(other.overlapTop(this), 0, 5)) {
+                canJump = true;
+                logger.log("Player touched bubble");
+            }
+        }
+
+    }
+
+    /**
      * If the player collides with an enemyObject.
      * Set the attribute isAlive to false.
      *
@@ -140,47 +204,16 @@ public class Player extends Gravity {
         if (location.overlaps(other.getBody())) {
 
             if (other instanceof Enemy && isAlive && respawned <= 0f) {
-                logger.log("Player touched Enemy.");
-                lives--;
-                respawned = INVULNERABLE_TIME;
-                playDeadSound();
-                //set alive false if ran out of lives.
-                if (lives == 0) {
-                    isAlive = false;
-                    updateHighScore();
-                } else {
-                    respawn();
-                }
-            }
-
-            if (other instanceof Wall) {
-                if (between(overlapLeft(other), 0, MAX_WALL_OVERLAP)) {
-                    setLeft(other.getRight());
-                    logger.log("Player touched wall on left.");
-                }
-                if (between(overlapRight(other), 0, MAX_WALL_OVERLAP)) {
-                    setRight(other.getLeft());
-                    logger.log("Player touched wall on right.");
-                }
-            }
-            if (other instanceof FilledBubble) {
-                score += 100;
-                logger.log("Player touched filled bubble");
-            }
-            if (other instanceof Bubble) {
-                if (between(other.overlapTop(this), 0, 5)) {
-                    canJump = true;
-                    logger.log("Player touched bubble");
-                }
-            }
-
-            if (other instanceof Powerup) {
+                handleEnemyCollision();
+            } else if (other instanceof Wall) {
+                handleWallCollision(other);
+            } else if (other instanceof FilledBubble || other instanceof Bubble) {
+                handleBubbleCollision(other);
+            } else if (other instanceof Powerup) {
                 Powerup powerup = (Powerup) other;
                 xSpeedPowerup = powerup.getSpeedBoost();
                 powerUpTime = powerup.getActiveTime();
-            }
-
-            if (other instanceof Fruit) {
+            } else if (other instanceof Fruit) {
                 Fruit fruit = (Fruit) other;
                 if (fruit.getAliveTime() > 0.5) {
                     score += Fruit.FRUIT_SCORE * fruit.multiplier;
@@ -284,8 +317,9 @@ public class Player extends Gravity {
         }
     }
 
-     /**
-      *   Get if player has fired a bubble or not.
+    /**
+     * Get if player has fired a bubble or not.
+     *
      * @return fired
      */
     public boolean getFired() {
