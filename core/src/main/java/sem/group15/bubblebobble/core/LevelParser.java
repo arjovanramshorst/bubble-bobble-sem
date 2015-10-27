@@ -21,18 +21,7 @@ import java.util.Scanner;
 public final class LevelParser {
     //format for parsing
     /*
-     200(player x), 200(player y)  OPTIONAL
-     3 (number of enemies)
-     0 (enemy type), 200(x location), 100(y location)
-     0 (enemy type), 200(x location), 100(y location)
-     0 (enemy type), 200(x location), 100(y location)
-     Wall (object type), 20(x location), 100(y location)
-     Wall (object type), 200(x location), 100(y location)
-     Wall (object type), 200(x location), 100(y location)
-     Wall (object type), 200(x location), 100(y location)
-     Floor (object type), 200(x location), 100(y location)
-     Floor (object type), 200(x location), 100(y location)
-     Floor (object type), 200(x location), 100(y location)
+     (object type, location.x, location.y)
      */
 
 
